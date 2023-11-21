@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .rectangular-button {
+        @apply bg-light-blue p-2 text-center px-4 text-lg w-full rounded-xl text-dark-bg
+            hover:bg-hv-light-blue transition-all duration-300 ease-linear;
+    }
+
+    .ease {
+        @apply transition-all duration-300 ease-linear;
+    }
+
+    .carousel {
+        @apply relative w-[500px] h-[295] py-2 mb-10;
+        perspective: 500px;
+        transform-style: preserve-3d;
+    }
+    
+    .card-container {
+        @apply absolute w-[500px] h-[295] blur-[calc(var(--abs-offset))] transition-all duration-[0.3s] ease-[ease-out];
+        transform: 
+        rotateY(calc(var(--offset) * 15deg))
+        scaleY(calc(1 + var(--abs-offset) * -0.05))
+        scaleX(calc(1 + var(--abs-offset) * 0.05))
+        translateZ(calc(var(--abs-offset) * -20rem))
+        translateY(calc(var(--abs-offset) * 2rem))
+        translateX(calc(var(--direction) * -10rem));
+    }
+    .card {
+        @apply w-[500px] h-[295] bg-[hsl(280deg,40%,calc(100%-var(--abs-offset)*50%))] transition-all duration-[0.3s] ease-[ease-out];
+    }
+
+    .nav.left {
+        transform: translateX(-100%) translatey(-50%);
+      }
+    .nav.right {
+        @apply right-0;
+        transform: translateX(100%) translatey(-50%);
+    }
+}
+
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+

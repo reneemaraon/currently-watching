@@ -1,0 +1,21 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const showSchema = new Schema({
+  title: { type: String, required: true },
+  synopsis: {type: String, default: ""},
+  imdbId: { type: String, required: true, unique: true },
+  tmdbId: { type: String, required: true, unique: true },
+  posterUrl: { type: String },
+  firstAirDate: Date,
+  originCountry: [String],
+  tmdbPoster: String,
+  tmdbBackdrop: String,
+  originalName: String,
+  mediaType: String,
+  cast: [{ name: String, actor: { type: mongoose.SchemaTypes.ObjectId, ref: 'Actor'}, character: String, order: Number}],
+});
+
+const Show = mongoose.model('show', showSchema);
+
+module.exports = Show;
