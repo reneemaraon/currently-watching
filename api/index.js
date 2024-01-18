@@ -2,6 +2,7 @@ require('dotenv').config() // to access environment variables
 require('express-async-errors');
 
 const express = require('express')
+const MongoStore = require('connect-mongo');
 const app = express()
 
 const passport = require('passport')
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(session({ secret: "secretcode",
 resave: true,
 saveUninitialized: true,
+store: MongoStore.create({ mongoUrl: process.env.MONGO_URI}),
 cookie: {
   sameSite: "Lax",
   secure: false,

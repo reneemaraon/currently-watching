@@ -22,7 +22,7 @@ const getAllShows = async (req,res) => {
 
     res.status(StatusCodes.OK).json({
         nbHits: shows.length,
-        totalPages: Math.ceil(count / limit),
+        totalPages: Math.ceil(count / limit) + 1,
         currentPage: parseInt(page),
         shows,
     })

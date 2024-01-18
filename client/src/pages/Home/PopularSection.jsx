@@ -4,9 +4,8 @@ import PopularCarousel from './PopularCarousel'
 import { useShowsContext } from '../../context/ShowContext'
 
 const PopularSection = () => {
-    const [active, setActive] = useState(5);
+    const [active, setActive] = useState(2);
     const { shows: { shows } } = useShowsContext()
-    console.log(shows)
     return (
         <div className="w-full mt-5 flex-col justify-center items-start gap-5 inline-flex">
         <div className="self-stretch justify-between items-start inline-flex">
@@ -14,17 +13,17 @@ const PopularSection = () => {
                 Popular
             </div>
             <div className="h-full w-28 inline-flex justify-between items-start">
-                <div className="h-12 w-12 rounded-2xl inline-flex justify-center items-center hover:bg-white">
+                <div className="h-12 w-12 rounded-3xl inline-flex justify-center items-center">
 
                     <button className='nav-left' onClick={() => setActive(i => i - 1)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                        <svg className="stroke-slate-500 hover:stroke-indigo-400 w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </button>
                 </div>
-                <div className="h-12 w-12 rounded-2xl inline-flex justify-center items-center hover:bg-white">
+                <div className="h-12 w-12 rounded-3xl inline-flex justify-center items-center">
                     <button className='nav-left' onClick={() => setActive(i => i + 1)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 stroke-slate-500 hover:stroke-indigo-400">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </button>
@@ -105,11 +104,12 @@ const PopularSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[412px] h-[130px] flex-col justify-start items-start gap-2.5 inline-flex">
+                <div className="w-[412px] h-[130px] flex-col justify-start items-start gap-2.5 inline-flex overflow-hidden">
                     <div className="text-gray-800 text-2xl font-bold">{shows[active] && shows[active].title}</div>
-                    <div className="self-stretch text-gray-800 text-base font-normal leading-[30.60px]">
+
+                    <p className="text-gray-500 text-sm font-normal leading-[30.60px] ">
                         {shows[active] && shows[active].synopsis}
-                    </div>
+                    </p>
                 </div>
                 <div className="w-60 flex-col justify-start items-start gap-2.5 inline-flex">
                     <div className="text-gray-800 text-lg font-bold leading-[18px]">Cast</div>

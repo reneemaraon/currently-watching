@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { authenticate, authorize } = require('../middlewares/auth_middleware')
 
 const {
     createShow,
@@ -16,7 +17,7 @@ router.route('/').get(getAllShows)
 
 router.route('/').post(createShow)
 
-router.route('/:id').get(getShow).patch(updateShow).delete(deleteShow)
+router.route('/:id').get(getShow).patch(authenticate, authorize, updateShow).delete(deleteShow)
 
 router.route('/tmdb/:id').get(getTmdbShow)
 

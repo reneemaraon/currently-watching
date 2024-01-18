@@ -40,7 +40,7 @@ passport.use(
           name: profile._json.name,
           screenName: profile._json.screen_name,
           twitterId: profile._json.id_str,
-          profilePageUrl: profile._json.profile_image_url
+          profilePhotoUrl: profile._json.profile_image_url
         }).save()
 
         if (newUser) {
