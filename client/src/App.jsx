@@ -4,7 +4,7 @@ import Header from './pages/Home/Header';
 import Home from './pages/Home/HomePage';
 import LoginPage from './pages/Login/LoginPage';
 import SideBar from './pages/Home/SideBar';
-import TopNavBar from './pages/Home/TopNavBar';
+import TopNavBar from './pages/Home/NavBar/TopNavBar';
 // import  from'./assets
 
 import { useAuthContext } from './context/AuthContext';

@@ -11,6 +11,7 @@ module.exports = {
         'main-bg': '#F1F1F5',
         'text-dark': '#242C39',
         'brand-tq': '#00ABD0',
+        'light-stroke': '#E2ECEC',
         'dark-bg': '#09243F',
         'dark-blue': '#1F1E41',
         'dark-box': '#0C2E4E',
