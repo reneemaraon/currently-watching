@@ -25,7 +25,7 @@ cookie: {
 
 app.use(
     cors({
-      origin: "http://127.0.0.1:3000", // allow to server to accept request from different origin
+      origin: process.env.CLIENT_HOME_PAGE_URL, // allow to server to accept request from different origin
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true // allow session cookie from browser to pass through
     })

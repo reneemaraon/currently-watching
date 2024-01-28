@@ -1,13 +1,19 @@
 import React from 'react'
 import { useAuthContext } from '../../../context/AuthContext';
 import ProfileView from './ProfileDropdown';
+import CustomButton from '../../Common/CustomButton';
 
 const LogInButton = ({ login }) => (
-    <button onClick={login} className="px-6 py-[10px] bg-gradient-to-b from-teal-400 to-indigo-400 rounded-[90px] justify-center items-center gap-2.5 inline-flex">
-      <div className="text-white text-base font-medium font-['Inter']">
+    <CustomButton 
+      onClick={login}
+      styleSet="gradient"
+    >
+        <svg className="fill-white w-4 h-4" viewBox="0 0 22 21" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path className="fill-white" d="M17.3263 0.666504H20.6998L13.3297 9.09L22 20.5525H15.2112L9.89404 13.6005L3.80995 20.5525H0.434432L8.31743 11.5426L0 0.666504H6.96111L11.7674 7.02083L17.3263 0.666504ZM16.1423 18.5333H18.0116L5.94539 2.57964H3.93946L16.1423 18.5333Z" fill="#242C39"/>
+        </svg>
+
         Login with Twitter
-      </div>
-    </button>
+    </CustomButton>
 )
 
 

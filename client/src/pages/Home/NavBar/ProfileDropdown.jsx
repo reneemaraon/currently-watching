@@ -26,8 +26,8 @@ const ProfileView = ({ name, profile_photo }) => {
         console.log('hi')
     }
 
-    const onLogout = () => {
-        logoutUser()
+    const onLogout = async () => {
+        await logoutUser()
         window.location.reload()
     }
 
