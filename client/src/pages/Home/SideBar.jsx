@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
-const NavItem = ({ itemName }) => (
-    <button className="
+const NavItem = ({ itemName, path }) => (
+    <Link className="
         w-full
         h-[55px]
         px-10
@@ -10,11 +11,13 @@ const NavItem = ({ itemName }) => (
         items-center
         gap-2.5 inline-flex hover:font-bold
     
-    ">
+    "
+        to={path || '/'}
+    >
         <p className="text-sm">
             {itemName}
         </p>
-    </button>
+    </Link>
 )
 
 
@@ -25,8 +28,8 @@ export default function SideBar() {
             <div className="tracking-wide font-bold">Currently Watching</div>
         </button>
         <NavItem itemName="Home" />
-        <NavItem itemName="Reviews" />
-        <NavItem itemName="My Lists" />
+        <NavItem itemName="Reviews" path="/reviews" />
+        <NavItem itemName="My Lists" path="/my_lists" />
 
     </div>
   )

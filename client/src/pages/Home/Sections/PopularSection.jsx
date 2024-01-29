@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
 
 import PopularCarousel from './PopularCarousel'
-import { useShowsContext } from '../../context/ShowContext'
+import { useShowsContext } from '../../../context/ShowContext'
+import SectionHeader from './SectionHeader';
+
 
 const PopularSection = () => {
     const [active, setActive] = useState(2);
     const { shows: { shows } } = useShowsContext()
     return (
         <div className="w-full mt-5 flex-col justify-center items-start gap-5 inline-flex">
-        <div className="self-stretch justify-between items-start inline-flex">
-            <div className="text-gray-800 text-3xl font-bold">
-                Popular
-            </div>
-            <div className="h-full w-28 inline-flex justify-between items-start">
-                <div className="h-12 w-12 rounded-3xl inline-flex justify-center items-center">
-
-                    <button className='nav-left' onClick={() => setActive(i => i - 1)}>
-                        <svg className="stroke-slate-500 hover:stroke-indigo-400 w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </button>
-                </div>
-                <div className="h-12 w-12 rounded-3xl inline-flex justify-center items-center">
-                    <button className='nav-left' onClick={() => setActive(i => i + 1)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 stroke-slate-500 hover:stroke-indigo-400">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <SectionHeader 
+            sectionName="Popular" 
+            arrowLeftFunction={() => setActive(i => i - 1)}
+            arrowRightFunction={() => setActive(i => i + 1)}
+        />
         <div className="self-stretch flex-col justify-start items-center flex">
             <PopularCarousel active={active} shows={shows} />
-            <div className="self-stretch justify-between items-start inline-flex">
-                <div className="w-[271px] p-5 bg-white bg-opacity-80 rounded-xl flex-col justify-start items-start gap-[5px] inline-flex">
+            <div className="flex-wrap justify-center max-[500px]:justify-start items-start gap-8 inline-flex">
+                <div className="min-w-[340px] grow shrink basis-0 max-h-[130px] flex-col justify-start items-start gap-2.5 inline-flex">
+                    <div className="text-2xl font-bold">{shows[active] && shows[active].title}</div>
+
+                    <p className="text-gray-500 text-ellipsis overflow-hidden text-sm self-stretch font-normal leading-[30.60px]">
+                        {shows[active] && shows[active].synopsis}
+                    </p>
+                </div>
+                <div className="grow shrink min-w-[200px] max-w-[400px] basis-0 flex-col justify-start items-start gap-2.5 inline-flex">
+                    <div className="text-lg font-bold leading-[18px]">Cast</div>
+                    <div className="justify-start items-start inline-flex">
+                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
+                    </div>
+                    <div className="self-stretch text-gray-800 text-base font-normal leading-[25.20px]">Lee Jung-jae, Park Hae soo, Wi Ha-joon...</div>
+                </div>
+                <div className="w-[271px] p-5 bg-white bg-opacity-70 rounded-xl flex-col justify-start items-start gap-[5px] inline-flex">
                     <div className="self-stretch pb-[5px] justify-between items-start inline-flex">
                         <div className="justify-start items-center gap-[13px] flex">
                             <div className="text-gray-800 text-base font-medium">Overall</div>
@@ -104,24 +107,7 @@ const PopularSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[412px] h-[130px] flex-col justify-start items-start gap-2.5 inline-flex overflow-hidden">
-                    <div className="text-gray-800 text-2xl font-bold">{shows[active] && shows[active].title}</div>
-
-                    <p className="text-gray-500 text-sm font-normal leading-[30.60px] ">
-                        {shows[active] && shows[active].synopsis}
-                    </p>
-                </div>
-                <div className="w-60 flex-col justify-start items-start gap-2.5 inline-flex">
-                    <div className="text-gray-800 text-lg font-bold leading-[18px]">Cast</div>
-                    <div className="justify-start items-start inline-flex">
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                    </div>
-                    <div className="self-stretch text-gray-800 text-base font-normal leading-[25.20px]">Lee Jung-jae, Park Hae soo, Wi Ha-joon...</div>
-                </div>
+                
             </div>
         </div>
     </div>

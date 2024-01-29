@@ -5,6 +5,7 @@ import Home from './pages/Home/HomePage';
 import LoginPage from './pages/Login/LoginPage';
 import SideBar from './pages/Home/SideBar';
 import TopNavBar from './pages/Home/NavBar/TopNavBar';
+import ReviewsPage from './pages/Reviews/Reviews';
 // import  from'./assets
 
 import { useAuthContext } from './context/AuthContext';
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
           </Routes>
         </div>
       </div>

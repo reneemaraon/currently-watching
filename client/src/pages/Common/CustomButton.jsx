@@ -10,7 +10,9 @@ const CustomButton = ({ styleSet, size, edge, onClick, children }) => {
   const selectedStyle = styleSets[styleSet] || styleSets['primary'];
 
   const sizeSets = {
-    defaultSize: 'h-12 px-5 py-4 gap-2'
+    defaultSize: 'h-12 px-5 py-3 gap-2 font-medium text-base',
+    defaultResize: 'sm:h-12 sm:px-5 sm:py-3 sm:gap-2 sm:font-medium sm:text-base h-8 px-2.5 py-2 gap-1 font-light text-xs',
+    smallSize: 'h-8 px-2.5 py-2 gap-1 font-light text-xs',
   }
 
   const selectedSize = sizeSets[size] || sizeSets['defaultSize'];
