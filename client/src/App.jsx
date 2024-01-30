@@ -6,9 +6,13 @@ import LoginPage from './pages/Login/LoginPage';
 import SideBar from './pages/Home/SideBar';
 import TopNavBar from './pages/Home/NavBar/TopNavBar';
 import ReviewsPage from './pages/Reviews/Reviews';
-// import  from'./assets
+import CreateReview from './pages/CreateReview/CreateReview';
 
 import { useAuthContext } from './context/AuthContext';
+import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
+import ShowDetail from './pages/ShowDetail/ShowDetail';
+import ProfilePage from './pages/Profile/ProfilePage';
+import MyListsPage from './pages/MyLists/MyLists';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -27,12 +31,17 @@ function App() {
         <img src="src/assets/overlay.jpg" className="blur-lg opacity-25 w-full overflow-hidden" />
       </div>
         <SideBar/>
-        <div className="main_body_container z-10 xl:pl-60 flex-col w-full justify-start items-center gap-2.5 inline-flex">
+        <div className="main_body_container relative z-10 xl:pl-60 flex-col w-full justify-start items-center inline-flex">
           <TopNavBar />
           <Routes>
             <Route index element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/create-review" element={<CreateReview />} />
+            <Route path="/my-lists" element={<MyListsPage />} />
+            <Route path="/reviews/:id" element={<ReviewDetail />} />
+            <Route path="/shows/:id" element={<ShowDetail />} />
+            <Route path="/users/:id" element={<ProfilePage />} />
           </Routes>
         </div>
       </div>

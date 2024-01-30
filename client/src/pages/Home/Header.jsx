@@ -7,7 +7,7 @@ const Header = () => {
 
 
   return (
-    <div className="overflow-x-hidden sticky top-0 z-40 backdrop-blur flex-none lg:z-10 border-b  border-slate-50/[0.1]  supports-backdrop-blur:bg-white/60 bg-transparent">
+    <div className="overflow-x-hidden sticky top-0 z-40 backdrop-blur flex-none lg:z-10 border-b  border-slate-50/[0.1]  supports-backdrop-blur:bg-theme-base/60 bg-transparent">
       <header className="flex items-center w-full justify-between text-white h-8 lg:px-40 px-10 py-8">
         <Link to="/" className="flex items-center content-center gap-4 w-1/3">
           <svg

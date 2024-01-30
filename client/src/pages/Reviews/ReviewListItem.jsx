@@ -24,7 +24,7 @@ const RatingRow = ({ ratingName }) => {
 const ReviewsListItem = () => {
     return (
         <div className="w-full 
-            bg-white bg-opacity-70 rounded-[20px] border h-[230px] border-slate-200 justify-start items-start inline-flex
+            bg-theme-base bg-opacity-70 rounded-[20px] border h-[230px] border-slate-200 justify-start items-start inline-flex
             max-[600px]:flex-col
             max-[600px]:h-[350px]
                         

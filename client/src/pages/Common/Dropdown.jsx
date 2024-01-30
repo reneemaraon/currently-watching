@@ -2,7 +2,7 @@ import React from 'react'
 
 const Option = ({text, selected, onSelect}) => {
     return (  
-        <div onClick={onSelect} className="Option w-full h-9 p-2.5 hover:bg-white rounded-lg justify-between items-center inline-flex">
+        <div onClick={onSelect} className="Option w-full h-9 p-2.5 hover:bg-theme-base rounded-lg justify-between items-center inline-flex">
             <div className={`OptionText text-gray-800 text-sm ${selected && "font-semibold"}`}>{text}</div>
             <div className="CheckContainer justify-between items-center flex">
                 {selected && (

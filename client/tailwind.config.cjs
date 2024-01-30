@@ -9,6 +9,7 @@ module.exports = {
       },
       colors: {
         'main-bg': '#F1F1F5',
+        'theme-base': '#FFFFFF',
         'text-dark': '#242C39',
         'brand-tq': '#00ABD0',
         'brand-tq-hover': '#0188A5',

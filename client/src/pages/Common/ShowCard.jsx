@@ -2,7 +2,7 @@ import StarIcon from "./Star";
 
 const ShowCardSmall = () => {
     return (
-        <div className="overflow-hidden w-64 shrink-0 h-[214px] bg-white bg-opacity-70 rounded-[17px] flex-col justify-start items-start inline-flex">
+        <div className="overflow-hidden w-64 shrink-0 h-[214px] bg-theme-base bg-opacity-70 rounded-[17px] flex-col justify-start items-start inline-flex">
             <img className="Show h-[135px]" src="https://via.placeholder.com/262x135" />
             <div className="ShowDetails w-full px-[13px] py-[11px] justify-between items-start inline-flex">
                 <div className="ShowDetailsText w-40 h-[50px] pl-[5px] pt-[5px] flex-col justify-between items-start inline-flex">

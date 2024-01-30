@@ -19,7 +19,7 @@ const RatingRow = ({ ratingName }) => {
 const ReviewsListItem = () => {
     return (
         <div className="
-            ReviewListItem overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] min-w-[550px] h-[260px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex
+            ReviewListItem overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] min-w-[550px] h-[260px] bg-theme-base bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex
             max-[600px]:min-w-[320px]  max-[600px]:min-h-[450px] 
         ">
             <div className="

@@ -28,15 +28,15 @@ const PopularSection = () => {
                 <div className="grow shrink min-w-[200px] max-w-[400px] basis-0 flex-col justify-start items-start gap-2.5 inline-flex">
                     <div className="text-lg font-bold leading-[18px]">Cast</div>
                     <div className="justify-start items-start inline-flex">
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
-                        <div className="w-[35px] h-[35px] bg-white rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
+                        <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
                     </div>
                     <div className="self-stretch text-gray-800 text-base font-normal leading-[25.20px]">Lee Jung-jae, Park Hae soo, Wi Ha-joon...</div>
                 </div>
-                <div className="w-[271px] p-5 bg-white bg-opacity-70 rounded-xl flex-col justify-start items-start gap-[5px] inline-flex">
+                <div className="w-[271px] p-5 bg-theme-base bg-opacity-70 rounded-xl flex-col justify-start items-start gap-[5px] inline-flex">
                     <div className="self-stretch pb-[5px] justify-between items-start inline-flex">
                         <div className="justify-start items-center gap-[13px] flex">
                             <div className="text-gray-800 text-base font-medium">Overall</div>

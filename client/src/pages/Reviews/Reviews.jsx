@@ -1,4 +1,5 @@
 import ReviewListItem from "./ReviewListItem";
+import { Link } from "react-router-dom";
 
 function ReviewsPage() {
   return (
@@ -12,9 +13,9 @@ function ReviewsPage() {
                 </div>
                 <div className="AddReviewContainer flex-col justify-center items-center gap-2.5 inline-flex">
                     <div className="Button px-5 py-[15px] bg-gray-800 rounded-lg justify-center items-center gap-2 inline-flex">
-                        <div className="Button grow shrink basis-0 text-center text-white text-base font-semibold font-['Inter']">
+                        <Link to="/create-review" className="Button grow shrink basis-0 text-center text-white text-base font-semibold font-['Inter']">
                             + Add Review
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
