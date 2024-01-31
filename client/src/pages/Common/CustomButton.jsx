@@ -3,7 +3,8 @@ import React from 'react';
 const CustomButton = ({ styleSet, size, edge, onClick, children }) => {
   const styleSets = {
     primary: 'bg-brand-tq text-white hover:bg-brand-tq-hover',
-    gradient: 'bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-tq text-white hover:to-brand-tq-hover hover:via-sky-600 hover:from-blue-600',
+    gradient: 'bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-tq text-white hover:from-cyan-700 hover:via-sky-600 hover:to-cyan-600',
+    dark: 'bg-text-dark text-theme-base hover:bg-gray-700'    
   };
 
   // Default to 'primary' if the specified style set doesn't exist
@@ -19,7 +20,8 @@ const CustomButton = ({ styleSet, size, edge, onClick, children }) => {
 
 
   const edgeStyles = {
-    defaultEdge: 'rounded-lg'
+    defaultEdge: 'rounded-lg',
+    rounded: 'rounded-full'
   }
 
   const selectedEdge = edgeStyles[edge] || edgeStyles['defaultEdge'];

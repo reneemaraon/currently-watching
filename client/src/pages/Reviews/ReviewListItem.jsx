@@ -41,10 +41,10 @@ const ReviewsListItem = () => {
             ">
                 <img className="object-cover align-center w-full h-full" src="https://image.tmdb.org/t/p/w500/6KMhKm2ZHG8KUtg4lhsNUdt4iPh.jpg" />
                 <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
-                    <div className="Title grow shrink basis-0 text-white text-xs font-semibold">Twenty Five Twenty One</div>
+                    <div className="Title grow shrink basis-0 text-white text-xs font-light sm:font-semibold">Twenty Five Twenty One</div>
                 </div>
             </div>
-            <div className="ReviewDetails w-full h-full p-4 flex-col justify-start items-start gap-2 inline-flex grow">
+            <div className="ReviewDetails w-full h-full py-4 px-2.5 sm:px-4 flex-col justify-start items-start gap-1 sm:gap-2 inline-flex grow">
                 <div className="Author pl-[5px] py-px justify-between items-start inline-flex">
                 <div className="Profile justify-start items-center gap-3 flex">
                   <img className="ProfilePhoto w-6 h-6 sm:w-10 sm:h-10 relative rounded-full" src="https://via.placeholder.com/41x42" />
@@ -56,7 +56,7 @@ const ReviewsListItem = () => {
                 </div>
                 <div className="ReviewSnippets grow h-[89px] pl-[5px] flex-col justify-start items-start gap-2 flex">
                   <div className="Title text-gray-800 text-base sm:text-l font-medium">This was such a great watch</div>
-                  <div className="Preview text-zinc-500 text-sm font-normal grow overflow-hidden">I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ...Whenever there was something bla ba bla. So heartbreaking to see them not </div>
+                  <div className="Preview text-zinc-500 max-[380px]:text-xs text-sm font-normal grow overflow-hidden">I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ...Whenever there was something bla ba bla. So heartbreaking to see them not </div>
                 </div>
                 <div className="Footer w-full justify-between items-end gap-4 inline-flex">
                 <div className="RatingsCont w-full items-start inline-flex">
@@ -66,14 +66,14 @@ const ReviewsListItem = () => {
                         <RatingRow ratingName="Visuals" />
                     </div>
                 </div>
-                <div className="Options justify-end items-start gap-3 flex">
-                    <div className="Like flex-col justify-start items-center gap-0.5 inline-flex">
-                    <div className="Frame w-5 h-5 relative" />
-                    <div className=" text-zinc-500 text-xs font-medium">1234</div>
+                <div className="justify-end items-start gap-3 flex">
+                    <div className="max-[380px]:hidden Like flex-col justify-start items-center gap-0.5 inline-flex">
+                        <div className="w-5 h-5 relative" />
+                        <div className=" text-zinc-500 text-xs font-medium">1234</div>
                     </div>
-                    <div className="Share flex-col justify-start items-center gap-0.5 inline-flex">
-                    <div className="Frame w-5 h-5 relative" />
-                    <div className=" text-zinc-500 text-xs font-medium">1234</div>
+                    <div className="max-[380px]:hidden Share flex-col justify-start items-center gap-0.5 inline-flex">
+                        <div className="w-5 h-5 relative" />
+                        <div className=" text-zinc-500 text-xs font-medium">1234</div>
                     </div>
                 </div>
                 </div>
