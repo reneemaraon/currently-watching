@@ -12,9 +12,18 @@ import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
 import ShowDetail from './pages/ShowDetail/ShowDetail';
 import ProfilePage from './pages/Profile/ProfilePage';
 import MyListsPage from './pages/MyLists/MyLists';
+import { useState } from 'react';
+import PopupSidebar from './pages/Home/PopupSidebar';
 
 function App() {
   const { isLoading } = useAuthContext();
+  const [showSidebar, setSidebar ] = useState(false)
+
+  const toggleSidebar = () => {
+    setSidebar(!showSidebar)
+  }
+
+
   if (isLoading) {
     return (
       <section className='page page-center'>
@@ -24,14 +33,17 @@ function App() {
   }
   return (
     <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-poppins text-gray-800">
-      <div className="justify-start items-start inline-flex w-screen"> 
+      <div className="relative justify-start items-start inline-flex w-screen"> 
 
-      <div className="fixed bg-main-bg w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
-        <img src="src/assets/overlay.jpg" className="blur-lg opacity-25 w-full overflow-hidden" />
-      </div>
+        <div className="fixed bg-main-bg w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
+          <img src="src/assets/overlay.jpg" className="blur-lg opacity-25 w-full overflow-hidden" />
+        </div>
         <SideBar/>
+        {showSidebar && (
+          <PopupSidebar toggleSidebar={toggleSidebar} />
+        )}
         <div className="main_body_container relative z-10 xl:pl-60 flex-col w-full justify-start items-center inline-flex">
-          <TopNavBar />
+          <TopNavBar toggleSidebar={toggleSidebar} />
           <Routes>
             <Route index element={<Home />} />
             <Route path="/login" element={<LoginPage />} />

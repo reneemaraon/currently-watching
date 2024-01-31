@@ -21,7 +21,7 @@ const LogInButton = ({ login }) => (
 
 
 
-const TopNavBar = () => {
+const TopNavBar = ({ toggleSidebar }) => {
   const { user } = useAuthContext();
 
   const onTwitterLogin = async (e) => {
@@ -31,7 +31,7 @@ const TopNavBar = () => {
   return (
     <div className="top_nav z-20 w-full h-20 max-[600px]:h-14 px-[50px] max-[600px]:px-6 bg-zinc-100 bg-opacity-25 backdrop-blur-sm border-b border-zinc-300 justify-between items-center inline-flex sticky top-0">
       <div className="left_side justify-start items-center gap-[30px] flex">
-        <div className="xl:hidden move_icon px-1.5 py-1.5 rounded hover:bg-main-bg hover:cursor-pointer">
+        <div onClick={toggleSidebar} className="xl:hidden move_icon px-1.5 py-1.5 rounded hover:bg-main-bg hover:cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
