@@ -12,7 +12,11 @@ import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
 import ShowDetail from './pages/ShowDetail/ShowDetail';
 import ProfilePage from './pages/Profile/ProfilePage';
 import MyListsPage from './pages/MyLists/MyLists';
-import { useState } from 'react';
+import {
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import PopupSidebar from './pages/Home/PopupSidebar';
 
 function App() {
@@ -23,6 +27,21 @@ function App() {
     setSidebar(!showSidebar)
   }
 
+  const sidebarRef = useRef(null);
+
+  const handleOutsideClick = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setSidebar(false);
+      }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
 
   if (isLoading) {
     return (
@@ -32,15 +51,15 @@ function App() {
     );
   }
   return (
-    <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-poppins text-gray-800">
+    <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-inter text-gray-800">
       <div className="relative justify-start items-start inline-flex w-screen"> 
 
         <div className="fixed bg-main-bg w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
           <img src="src/assets/overlay.jpg" className="blur-lg opacity-25 w-full overflow-hidden" />
         </div>
-        <SideBar/>
+        <SideBar />
         {showSidebar && (
-          <PopupSidebar toggleSidebar={toggleSidebar} />
+          <PopupSidebar anchor={sidebarRef} toggleSidebar={toggleSidebar} />
         )}
         <div className="main_body_container relative z-10 xl:pl-60 flex-col w-full justify-start items-center inline-flex">
           <TopNavBar toggleSidebar={toggleSidebar} />
