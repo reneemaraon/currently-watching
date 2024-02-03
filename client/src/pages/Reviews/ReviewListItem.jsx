@@ -23,11 +23,12 @@ const RatingRow = ({ ratingName }) => {
 
 const ReviewsListItem = () => {
     return (
-        <div className="w-full 
+        <div className="w-full hover:cursor-pointer hover:bg-opacity-100
             bg-theme-base bg-opacity-70 rounded-[20px] border h-[230px] border-slate-200 justify-start items-start inline-flex
             max-[600px]:flex-col
             max-[600px]:h-[350px]
-                        
+            group
+            ease-in
         ">
             <div className="
                 Show relative overflow-hidden 
@@ -39,7 +40,7 @@ const ReviewsListItem = () => {
                 grow
                 max-[600px]:h-[220px]
             ">
-                <img className="object-cover align-center w-full h-full" src="https://image.tmdb.org/t/p/w500/6KMhKm2ZHG8KUtg4lhsNUdt4iPh.jpg" />
+                <img className="group-hover:scale-[1.01] ease-out group-hover:ease-in duration-200 object-cover align-center w-full h-full" src="https://image.tmdb.org/t/p/w500/6KMhKm2ZHG8KUtg4lhsNUdt4iPh.jpg" />
                 <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
                     <div className="Title grow shrink basis-0 text-white text-xs font-light sm:font-semibold">Twenty Five Twenty One</div>
                 </div>
