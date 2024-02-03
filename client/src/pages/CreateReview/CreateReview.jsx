@@ -36,13 +36,15 @@ const StarInput = () => {
  
 const ShowDetail = () => {
   return (
-    <div className="h-[220px] w-[480px] border-light-stroke overflow-hidden border rounded-lg justify-start items-start inline-flex">
-      <img className="" src="https://via.placeholder.com/220x214" />
-      <div className="h-full shrink w-full p-2 md:p-3 flex-col inline-flex items-start justify-start">
-        <div className="w-full  overflow-hidden flex-col gap-[7px]">
+    <div className="h-48 max-[500px]:h-[300px] w-[400px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
+      <div className="max-[500px]:w-full w-1/2 max-[500px]:h-1/3 h-full">
+        <img className="object-cover w-full h-full" src="https://via.placeholder.com/220x214" />
+      </div>
+      <div className="h-full max-[500px]:h-3/5 max-[500px]:grow w-full p-3 flex-col inline-flex items-start justify-start">
+        <div className="w-full max-[500px]:h-full overflow-hidden flex-col gap-[7px]">
           <div className="text-l md:text-l font-semibold">The Glory (2022)</div>
           <div className="w-full overflow-hidden">
-            <div className="md:text-[12px] h-5 my-0.5 overflow-hidden font-normal w-full">
+            <div className="text-[12px] h-5 my-0.5 overflow-hidden text- font-normal w-full">
               Ji Changwook, Choi Sungeun, Hwang Inyoup
             </div>
           </div>
@@ -87,12 +89,19 @@ const ShowDetail = () => {
 
 export default function CreateReview() {
   return (
-    <div className="w-full max-w-[1200px] px-8 max-[900px]:px-4 max-[600px]:px-2 py-8 flex-col justify-start items-center gap-24 inline-flex">
-      <div className="w-full px-6 py-2 bg-theme-base rounded-[15px] flex-col justify-start items-start gap-2.5 inline-flex">
-        <div className="py-[15px] border-b border-slate-200 justify-start items-center gap-2.5 inline-flex">
-          <div className="text-gray-800 text-xl font-semibold">Your Review</div>
+    <div className="
+      w-full max-w-[1200px] 
+      px-8 max-[900px]:px-4 max-[600px]:px-2 max-[400px]:px-0.5
+      py-8 max-[400px]:py-4
+
+      flex-col justify-start items-center gap-24 inline-flex">
+      <div className="WhiteContainer w-full 
+        px-2 min-[500px]:px-6 py-0.5 min-[500px]:py-2 gap-2.5 
+        bg-theme-base rounded-[15px] flex-col justify-start items-start inline-flex">
+        <div className="py-4 max-[400px]:py-2 w-full border-b border-slate-200 justify-start items-center gap-2.5 inline-flex">
+          <div className="text-gray-800 text-l sm:text-xl font-semibold">Your Review</div>
         </div>
-        <div className="w-full flex-row-reverse flex-wrap py-[30px] border-b justify-end items-center gap-6 inline-flex">
+        <div className="w-full flex-wrap py-8 max-sm:py-4 border-b justify-start items-center gap-10 inline-flex">
           <ShowDetail />
           <StarInput />
         </div>
