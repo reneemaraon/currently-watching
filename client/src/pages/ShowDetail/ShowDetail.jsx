@@ -39,7 +39,7 @@ export default function ShowDetail() {
                       </div>
                     </div>
                   </div>
-                  <div className="AYoungWomanBulliedToThePointOfDecidingToDropOutOfSchoolPlansTheBestWayToGetRevengeAfterBecomingAPrimarySchoolTeacherSheTakesInTheSonOfTheManWhoTormentedHerTheMostToEnactHerVengeance self-stretch text-gray-800 text-base font-normal font-['Inter'] leading-7">A young woman, bullied to the point of deciding to drop out of school, plans the best way to get revenge. After becoming a primary school teacher, she takes in the son of the man who tormented her the most to enact her vengeance.</div>
+                  <div className="AYoungWomanBulliedToThePointOfDecidingToDropOutOfSchoolPlansTheBestWayToGetRevengeAfterBecomingAPrimarySchoolTeacherSheTakesInTheSonOfTheManWhoTormentedHerTheMostToEnactHerVengeance self-stretch text-gray-800 text-base font-normal leading-7">A young woman, bullied to the point of deciding to drop out of school, plans the best way to get revenge. After becoming a primary school teacher, she takes in the son of the man who tormented her the most to enact her vengeance.</div>
                   <div className="Cast pb-1.5 justify-start items-start gap-2.5 inline-flex">
                     <div className="Cast text-gray-800 text-sm font-medium font-['Inter']">Cast:</div>
                     <div className="SongHyeKyoLeeDohyunLimJiyeon text-gray-800 text-sm font-bold font-['Inter']">Song Hye Kyo, Lee Dohyun, Lim Jiyeon</div>
@@ -77,10 +77,10 @@ export default function ShowDetail() {
                         </div>
                         <div className="RatingsContainer self-stretch py-[5px] justify-center items-center gap-2.5 inline-flex">
                           <div className="StarRating w-20 h-20 px-2.5 py-5 rounded-[40px] border-2 border-cyan-500 justify-center items-center gap-[5px] flex">
-                            <div className="8 text-black text-xl font-bold font-['Inter'] leading-[14px]">4.8</div>
+                            <div className="8 text-black text-xl font-bold leading-[14px]">4.8</div>
                           </div>
                         </div>
-                        <div className="From234kReviews self-stretch text-center"><span className="text-gray-800 text-[13px] font-normal font-['Inter'] leading-normal">from </span><span className="text-gray-800 text-[13px] font-bold font-['Inter'] leading-normal">23.4k</span><span className="text-gray-800 text-[13px] font-normal font-['Inter'] leading-normal"> reviews</span></div>
+                        <div className="From234kReviews self-stretch text-center"><span className="text-gray-800 text-[13px] font-normal leading-normal">from </span><span className="text-gray-800 text-[13px] font-bold leading-normal">23.4k</span><span className="text-gray-800 text-[13px] font-normal leading-normal"> reviews</span></div>
                       </div>
                     </div>
                   </div>

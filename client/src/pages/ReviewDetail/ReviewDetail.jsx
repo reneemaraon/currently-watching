@@ -61,7 +61,7 @@ export default function ReviewDetail() {
             </div>
           </div>
           <div className="NarrativeContent self-stretch h-[315px] py-5 border-b flex-col justify-center items-start gap-5 flex">
-            <div className="EternalBlossomTookMeOnAnEmotionalRollercoasterFromStartToFinishTheIntricatePlotWeavesTogetherLoveLossAndTheResilienceOfTheHumanSpiritTheCharacterArcsAreWellDevelopedAndTheDialoguesAreBothPoignantAndMemorableThePacingOfTheNarrativeIsPerfectAllowingForMomentsOfQuietReflectionAndIntenseHeartPoundingScenesTheRomanceIsHeartwarmingAndTheMysteryElementKeepsYouGuessingUntilTheVeryEndIAppreciatedTheDepthOfTheThemesExploredAndTheConclusionLeftMeWithASenseOfFulfillmentInConclusionEternalBlossomIsAMustWatchKoreanDramaThatExcelsInEveryAspectTheStellarPerformancesEngagingNarrativeAndBreathtakingCinematographyMakeItAStandoutInTheGenreWhetherYouReAFanOfRomanceDramaOrMysteryThisSeriesOffersAPerfectBlendThatWillLeaveA self-stretch"><span className="text-gray-800 text-sm font-normal font-['Inter'] leading-[25.20px]">"Eternal Blossom" took me on an emotional rollercoaster from start to finish. The intricate plot weaves together love, loss, and the resilience of the human spirit. The character arcs are well-developed, and the dialogues are both poignant and memorable.<br/><br/>The pacing of the narrative is perfect, allowing for moments of quiet reflection and intense, heart-pounding scenes. The romance is heartwarming, and the mystery element keeps you guessing until the very end. I appreciated the depth of the themes explored, and the conclusion left me with a sense of fulfillment.<br/><br/></span><span className="text-gray-800 text-sm font-bold font-['Inter'] leading-[25.20px]">In Conclusion:<br/><br/></span><span className="text-gray-800 text-sm font-normal font-['Inter'] leading-[25.20px]">"Eternal Blossom" is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a </span></div>
+            <div className="EternalBlossomTookMeOnAnEmotionalRollercoasterFromStartToFinishTheIntricatePlotWeavesTogetherLoveLossAndTheResilienceOfTheHumanSpiritTheCharacterArcsAreWellDevelopedAndTheDialoguesAreBothPoignantAndMemorableThePacingOfTheNarrativeIsPerfectAllowingForMomentsOfQuietReflectionAndIntenseHeartPoundingScenesTheRomanceIsHeartwarmingAndTheMysteryElementKeepsYouGuessingUntilTheVeryEndIAppreciatedTheDepthOfTheThemesExploredAndTheConclusionLeftMeWithASenseOfFulfillmentInConclusionEternalBlossomIsAMustWatchKoreanDramaThatExcelsInEveryAspectTheStellarPerformancesEngagingNarrativeAndBreathtakingCinematographyMakeItAStandoutInTheGenreWhetherYouReAFanOfRomanceDramaOrMysteryThisSeriesOffersAPerfectBlendThatWillLeaveA self-stretch"><span className="text-gray-800 text-sm font-normal leading-[25.20px]">"Eternal Blossom" took me on an emotional rollercoaster from start to finish. The intricate plot weaves together love, loss, and the resilience of the human spirit. The character arcs are well-developed, and the dialogues are both poignant and memorable.<br/><br/>The pacing of the narrative is perfect, allowing for moments of quiet reflection and intense, heart-pounding scenes. The romance is heartwarming, and the mystery element keeps you guessing until the very end. I appreciated the depth of the themes explored, and the conclusion left me with a sense of fulfillment.<br/><br/></span><span className="text-gray-800 text-sm font-bold leading-[25.20px]">In Conclusion:<br/><br/></span><span className="text-gray-800 text-sm font-normal leading-[25.20px]">"Eternal Blossom" is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a </span></div>
           </div>
           <div className="Footer self-stretch h-[1349px] pt-[50px] pb-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
             <div className="Item flex-col justify-center items-start gap-[15px] flex">
@@ -77,7 +77,7 @@ export default function ReviewDetail() {
                   </div>
                   <div className="RatingsContainer w-[55px] h-[55px] justify-between items-start flex">
                     <div className="StarRating w-[55px] h-[55px] px-2.5 py-5 rounded-[30px] border-2 border-cyan-500 justify-center items-center gap-0.5 flex">
-                      <div className="8 text-gray-800 text-[15px] font-bold font-['Inter'] leading-[10.50px]">4.8</div>
+                      <div className="8 text-gray-800 text-[15px] font-bold leading-[10.50px]">4.8</div>
                     </div>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export default function ReviewDetail() {
               </div>
               <div className="CommentList self-stretch h-[839px] flex-col justify-center items-start gap-[15px] flex">
                 <div className="CommentInput self-stretch h-[99px] p-[15px] bg-white rounded-[10px] border border-slate-200 flex-col justify-start items-start gap-5 flex">
-                  <div className="Preview text-neutral-300 text-[13px] font-normal font-['Inter'] leading-[16.90px]">What are your thoughts on this review?</div>
+                  <div className="Preview text-neutral-300 text-[13px] font-normal leading-[16.90px]">What are your thoughts on this review?</div>
                   <div className="Action self-stretch px-[5px] justify-end items-start gap-2.5 inline-flex">
                     <div className="Button px-2.5 py-2 opacity-50 bg-cyan-500 rounded-[18px] justify-center items-center gap-[5px] flex">
                       <div className="Button text-center text-white text-[13px] font-medium font-['Inter']">Submit</div>
@@ -113,7 +113,7 @@ export default function ReviewDetail() {
                     </div>
                     <div className="CommentActionOptions p-[15px] justify-center items-center gap-2.5 flex" />
                   </div>
-                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal font-['Inter'] leading-[27px]">"Eternal Blossom" is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a lasting impression.</div>
+                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal leading-[27px]">"Eternal Blossom" is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a lasting impression.</div>
                 </div>
                 <div className="CommentItem self-stretch h-[123px] p-[15px] bg-white rounded-[15px] border border-slate-200 flex-col justify-center items-start gap-[15px] flex">
                   <div className="CommentHead self-stretch justify-between items-start inline-flex">
@@ -131,7 +131,7 @@ export default function ReviewDetail() {
                     </div>
                     <div className="CommentActionOptions p-[15px] justify-center items-center gap-2.5 flex" />
                   </div>
-                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal font-['Inter'] leading-[27px]">That's putting it mildly! What a wondrous story. Synchronicity is strong in you, young Jedi.</div>
+                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal leading-[27px]">That's putting it mildly! What a wondrous story. Synchronicity is strong in you, young Jedi.</div>
                 </div>
                 <div className="CommentItem self-stretch h-[177px] p-[15px] bg-white rounded-[15px] border border-slate-200 flex-col justify-center items-start gap-[15px] flex">
                   <div className="CommentHead self-stretch justify-between items-start inline-flex">
@@ -149,7 +149,7 @@ export default function ReviewDetail() {
                     </div>
                     <div className="CommentActionOptions p-[15px] justify-center items-center gap-2.5 flex" />
                   </div>
-                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal font-['Inter'] leading-[27px]">"Eternal Blossom" is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a lasting impression.</div>
+                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal leading-[27px]">"Eternal Blossom" is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a lasting impression.</div>
                 </div>
                 <div className="CommentItem self-stretch h-[123px] p-[15px] bg-white rounded-[15px] border border-slate-200 flex-col justify-center items-start gap-[15px] flex">
                   <div className="CommentHead self-stretch justify-between items-start inline-flex">
@@ -167,7 +167,7 @@ export default function ReviewDetail() {
                     </div>
                     <div className="CommentActionOptions p-[15px] justify-center items-center gap-2.5 flex" />
                   </div>
-                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal font-['Inter'] leading-[27px]">That's putting it mildly! What a wondrous story. Synchronicity is strong in you, young Jedi.</div>
+                  <div className="CommentText self-stretch text-gray-800 text-[15px] font-normal leading-[27px]">That's putting it mildly! What a wondrous story. Synchronicity is strong in you, young Jedi.</div>
                 </div>
                 <div className="LoadMorePanel self-stretch h-[65px] flex-col justify-end items-center gap-2.5 flex">
                   <div className="Button px-5 py-[15px] bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">

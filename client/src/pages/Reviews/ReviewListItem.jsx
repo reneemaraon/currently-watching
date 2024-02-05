@@ -70,11 +70,11 @@ const ReviewsListItem = () => {
                 <div className="justify-end items-start gap-3 flex">
                     <div className="max-[380px]:hidden Like flex-col justify-start items-center gap-0.5 inline-flex">
                         <div className="w-5 h-5 relative" />
-                        <div className=" text-zinc-500 text-xs font-medium">1234</div>
+                        <div className=" info-text font-medium">1234</div>
                     </div>
                     <div className="max-[380px]:hidden Share flex-col justify-start items-center gap-0.5 inline-flex">
                         <div className="w-5 h-5 relative" />
-                        <div className=" text-zinc-500 text-xs font-medium">1234</div>
+                        <div className=" info-text font-medium">1234</div>
                     </div>
                 </div>
                 </div>

@@ -39,6 +39,14 @@
         @apply right-0;
         transform: translateX(100%) translatey(-50%);
     }
+
+    .subheader-text {
+        @apply text-base md:text-lg font-medium;
+    }
+
+    .info-text {
+        @apply text-light-text text-xs;
+    }
 }
 
 body {
