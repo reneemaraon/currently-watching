@@ -1,4 +1,5 @@
 import React from 'react'
+import MainContentEditor from './RichTextEditorBody';
 
 const StarInputItem = ({ name, helperText}) => {
   return (
@@ -82,20 +83,19 @@ export default function CreateReview() {
 
       flex-col justify-start items-center gap-24 inline-flex">
       <div className="WhiteContainer w-full 
-        px-2 min-[500px]:px-6 py-0.5 min-[500px]:py-2 gap-2.5 
+        px-2 min-[500px]:px-6 py-0.5 min-[500px]:py-2 
         bg-theme-base rounded-[15px] flex-col justify-start items-start inline-flex">
-        <div className="pt-4 max-[400px]:pt-2 pb-8 w-full border-b flex-col border-slate-200 justify-start gap-4 inline-flex">
-          <div className="text-gray-800 text-l md:text-xl font-semibold">Your Review</div>
-          <div className="w-full inline-flex justify-center">
+        <div className="pt-4 max-[400px]:pt-2 pb-6 w-full flex-col justify-start gap-4 inline-flex">
+          <div className="text-l md:text-xl font-semibold">Your Review</div>
+          <div className="w-full inline-flex">
             <ShowDetail />
           </div>
         </div>
-        <div className="w-full py-2 max-sm:py-4 border-b justify-start gap-10 inline-flex flex-col">
-          
+        <div className="w-full pt-4 pb-8 justify-start gap-10 inline-flex flex-col">
           <StarInput />
         </div>
-        <div className="h-[574px] py-5 border-b flex-col justify-center items-start gap-5 flex">
-          <div className="h-[59px] pb-[15px] border-b flex-col justify-start items-start gap-[5px] flex">
+        <div className="py-8 border-b flex-col justify-center items-start gap-5 flex">
+          <div className="h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
             <div><span className="subheader-text">Write a narrative review </span><span className="text-zinc-500 text-lg font-normal">(optional)</span></div>
             <div className="text-zinc-500 text-sm font-normal">Share your thoughts of this drama below.</div>
           </div>
@@ -107,43 +107,11 @@ export default function CreateReview() {
               <div className="text-gray-800 text-base font-normal leading-tight">This was bearable to watch</div>
             </div>
           </div>
-          <div className="h-[268px] flex-col justify-center items-start gap-2.5 flex">
+          <div className="flex-col justify-center items-start gap-2.5 flex">
             <div className="flex-col justify-start items-start gap-1 flex">
               <div className="subheader-text">Body</div>
             </div>
-            <div className="h-[236px] bg-theme-base rounded-[10px] border border-slate-200 flex-col justify-start items-start gap-2.5 flex">
-              <div className="p-[15px] rounded-[10px] border-b border-slate-200 justify-start items-start gap-2.5 inline-flex">
-                <div className="justify-start items-start gap-5 flex">
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                  <div className="w-[30px] h-[30px] bg-zinc-100 rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex">
-                    <div className="w-[15px] h-[15px] relative"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="grow shrink basis-0 px-[15px] py-[5px] justify-start items-start gap-2.5 inline-flex">
-                <div className="grow shrink basis-0 text-base font-normal leading-tight">I am so cool wow<br/><br/>sdskdksjdaks<br/>lorem ipsum<br/><br/></div>
-              </div>
-            </div>
+            <MainContentEditor />
           </div>
           <div className="px-2.5 py-[5px] justify-end items-start gap-[5px] inline-flex">
             <div className="px-5 py-[15px] bg-slate-500 rounded-lg justify-center items-center gap-2 flex">

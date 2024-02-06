@@ -2,6 +2,9 @@ import React from 'react'
 import { useAuthContext } from '../../../context/AuthContext';
 import ProfileView from './ProfileDropdown';
 import CustomButton from '../../Common/CustomButton';
+import Icon from '../../Common/Icon';
+import { TwitterIcon, SearchIcon } from '../../Common/IconList';
+
 
 const LogInButton = ({ login }) => (
     <>
@@ -10,9 +13,7 @@ const LogInButton = ({ login }) => (
         styleSet="gradient"
         size="defaultResize"
       >
-          <svg className="fill-white h-full p-0.5" viewBox="0 0 22 21" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path className="fill-white" d="M17.3263 0.666504H20.6998L13.3297 9.09L22 20.5525H15.2112L9.89404 13.6005L3.80995 20.5525H0.434432L8.31743 11.5426L0 0.666504H6.96111L11.7674 7.02083L17.3263 0.666504ZM16.1423 18.5333H18.0116L5.94539 2.57964H3.93946L16.1423 18.5333Z" fill="#242C39"/>
-          </svg>
+          <Icon sizeRules="h-5 w-5"><TwitterIcon /></Icon>
 
           Login with Twitter
       </CustomButton>
@@ -39,10 +40,9 @@ const TopNavBar = ({ toggleSidebar }) => {
 
         {/* searchbar */}
         <div className="max-[600px]:hidden w-64 h-10 px-5 py-[15px] bg-theme-base rounded-[10px] justify-start items-center gap-5 flex">
-          <div className="pr-2.5 justify-start items-center gap-2.5 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
+          <div className="pr-2.5 justify-start items-center gap-3 flex">
+              <Icon fill="fill-text-dark" sizeRules="h-3.5 w-3.5"><SearchIcon /></Icon>
+
 
               <div className="text-gray-800 text-[15px] font-normal leading-tight">Search by Keyword</div>
           </div>

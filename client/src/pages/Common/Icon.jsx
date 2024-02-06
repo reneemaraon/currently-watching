@@ -1,7 +1,14 @@
 import React from 'react'
 
-export default function Icon() {
+const Icon = ({ sizeRules, fill, children }) => {
   return (
-    <div>Icon</div>
+    <div className={sizeRules || 'w-4 h-4'}>
+      <svg viewBox="0 0 22 22" className={fill || "fill-theme-base"}>
+        {children}
+      </svg>
+    </div>
   )
 }
+
+
+export default Icon;
