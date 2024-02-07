@@ -32,17 +32,17 @@ const StarInput = () => {
  
 const ShowDetail = () => {
   return (
-    <div className="max-[500px]:h-[300px] w-full max-w-[800px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
+    <div className="max-[500px]:h-[285px] h-[175px] w-full max-w-[800px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
       <div className="max-[500px]:w-full w-1/3 max-[500px]:h-1/3 h-full">
         <img className="object-cover w-full h-full" src="https://via.placeholder.com/220x214" />
       </div>
-      <div className="h-full max-[500px]:h-3/5 w-full p-3">
+      <div className="h-full max-[500px]:h-2/3 w-full p-3">
         <div className="w-full h-full flex flex-col gap-1">
           <div className="text-l md:text-l font-semibold">The Glory (2022)</div>
           <div className="text-[12px] h-5 font-normal w-full">
             Ji Changwook, Choi Sungeun, Hwang Inyoup
           </div>
-          <div className="Preview h-18 overflow-hidden">
+          <div className="Preview grow overflow-hidden">
             <div className="info-text font-normal">
               I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happI had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ...
             </div>
