@@ -13,7 +13,9 @@ const LogInButton = ({ login }) => (
         styleSet="gradient"
         size="defaultResize"
       >
-          <Icon sizeRules="h-5 w-5"><TwitterIcon /></Icon>
+          <Icon fill="fill-theme-base" sizeRules="h-5 w-5">
+            <TwitterIcon />
+          </Icon>
 
           Login with Twitter
       </CustomButton>
@@ -41,7 +43,7 @@ const TopNavBar = ({ toggleSidebar }) => {
         {/* searchbar */}
         <div className="max-[600px]:hidden w-64 h-10 px-5 py-[15px] bg-theme-base rounded-[10px] justify-start items-center gap-5 flex">
           <div className="pr-2.5 justify-start items-center gap-3 flex">
-              <Icon fill="fill-text-dark" sizeRules="h-3.5 w-3.5"><SearchIcon /></Icon>
+              <Icon sizeRules="h-3.5 w-3.5"><SearchIcon /></Icon>
 
 
               <div className="text-gray-800 text-[15px] font-normal leading-tight">Search by Keyword</div>

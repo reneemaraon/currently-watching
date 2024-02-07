@@ -94,20 +94,20 @@ export default function CreateReview() {
         <div className="w-full pt-4 pb-8 justify-start gap-10 inline-flex flex-col">
           <StarInput />
         </div>
-        <div className="py-8 border-b flex-col justify-center items-start gap-5 flex">
-          <div className="h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
+        <div className="w-full py-8 border-b flex-col justify-center items-start gap-5 flex">
+          <div className="w-full h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
             <div><span className="subheader-text">Write a narrative review </span><span className="text-zinc-500 text-lg font-normal">(optional)</span></div>
             <div className="text-zinc-500 text-sm font-normal">Share your thoughts of this drama below.</div>
           </div>
-          <div className="h-[87px] flex-col justify-center items-start gap-2.5 flex">
+          <div className="w-full h-[87px] flex-col justify-center items-start gap-2.5 flex">
             <div className="flex-col justify-start items-start gap-1 flex">
               <div className="subheader-text">Headline</div>
             </div>
-            <div className="w-[510px] h-[55px] px-5 bg-theme-base rounded-[10px] border border-slate-200 flex-col justify-center items-start gap-2.5 flex">
+            <div className="w-full max-w-[600px] h-[55px] px-5 bg-theme-base rounded-[10px] border border-slate-200 flex-col justify-center items-start gap-2.5 flex">
               <div className="text-gray-800 text-base font-normal leading-tight">This was bearable to watch</div>
             </div>
           </div>
-          <div className="flex-col justify-center items-start gap-2.5 flex">
+          <div className="w-full flex-col justify-center items-start gap-2.5 flex">
             <div className="flex-col justify-start items-start gap-1 flex">
               <div className="subheader-text">Body</div>
             </div>
