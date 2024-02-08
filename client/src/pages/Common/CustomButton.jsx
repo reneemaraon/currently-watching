@@ -4,7 +4,8 @@ const CustomButton = ({ styleSet, size, edge, onClick, children }) => {
   const styleSets = {
     primary: 'bg-brand-tq text-white hover:bg-brand-tq-hover',
     gradient: 'bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-tq text-white hover:from-cyan-700 hover:via-sky-600 hover:to-cyan-600',
-    dark: 'bg-text-dark text-theme-base hover:bg-gray-700'    
+    dark: 'bg-text-dark text-theme-base hover:bg-gray-700',    
+    secondary: 'bg-brand-gray text-theme-base hover:bg-gray-400'    
   };
 
   // Default to 'primary' if the specified style set doesn't exist

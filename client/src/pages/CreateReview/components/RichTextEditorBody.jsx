@@ -24,8 +24,8 @@ const EditorOption = ({children, fill}) => {
 
 const MainContentEditor = () => {
     return (
-      <div className="min-h-[300px] w-full bg-theme-base rounded-[10px] border border-slate-200 flex-col justify-start items-start gap-2.5 flex">
-        <div className="w-full p-[15px] rounded-[10px] border-b border-slate-200 justify-start items-start gap-2.5 inline-flex">
+      <div className="min-h-[300px] w-full input-area flex-col justify-start items-start gap-4 flex">
+        <div className="w-full pb-4 border-b border-slate-200 justify-start items-start gap-2.5 inline-flex">
           <div className="justify-start flex-wrap items-start gap-4 flex">
             <EditorOption><BoldIcon /></EditorOption>
             <EditorOption><ItalicizeIcon /></EditorOption>
@@ -37,7 +37,7 @@ const MainContentEditor = () => {
             <EditorOption><UploadImageIcon /></EditorOption>
           </div>
         </div>
-        <div className="grow shrink basis-0 px-[15px] py-[5px] justify-start items-start gap-2.5 inline-flex">
+        <div className="grow shrink basis-0 justify-start items-start gap-2.5 inline-flex">
           <div className="grow shrink basis-0 text-base font-normal leading-tight">
             I am so cool wow
             <br />

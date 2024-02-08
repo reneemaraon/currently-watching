@@ -14,6 +14,7 @@ module.exports = {
         'light-text': '#676573',
         'brand-tq': '#00ABD0',
         'brand-tq-hover': '#0188A5',
+        'brand-gray': '#7E8AA0',
         'main-yellow': '#FFE456', 
         'dark-yellow': '#E9B500',
         'light-stroke': '#E2ECEC',

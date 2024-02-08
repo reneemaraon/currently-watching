@@ -1,18 +1,27 @@
 import StarIcon from "../../Common/Star";
 
+
+const Star = ({ active }) => (
+    <StarIcon 
+      fill={active ? null : 'fill-none'} 
+      stroke={active ? null : 'stroke-light-stroke stroke-1'} 
+      sizeRules="h-7 w-7" 
+    />
+)
+
 const StarInputItem = ({ name, helperText}) => {
     return (
-      <div className="w-full flex-wrap-reverse px-3.5 py-2 gap-x-2 gap-y-4 rounded-[10px] border border-slate-200 justify-between items-center inline-flex">
+      <div className="w-full flex-wrap px-3.5 py-4 min-[500px]:py-2 gap-4 rounded-[10px] border border-slate-200 justify-between items-center inline-flex">
         <div className="w-full min-w-[200px] grow shrink basis-0 pr-2.5 flex-col justify-end items-start gap-[3px] inline-flex">
           <div className="text-sm md:text-base font-bold">{name}</div>
           <div className="info-text font-normal">{helperText}</div>
         </div>
-        <div className="h-full justify-start items-center gap-2 flex">
-            <StarIcon sizeRules="sm:h-8 sm:w-8 h-7 w-7" />
-            <StarIcon sizeRules="sm:h-8 sm:w-8 h-7 w-7" />
-            <StarIcon sizeRules="sm:h-8 sm:w-8 h-7 w-7" />
-            <StarIcon sizeRules="sm:h-8 sm:w-8 h-7 w-7" fill="fill-none" stroke="stroke-light-stroke stroke-1" />
-            <StarIcon sizeRules="sm:h-8 sm:w-8 h-7 w-7" fill="fill-none" stroke="stroke-light-stroke stroke-1" />
+        <div className="h-full justify-start items-center gap-5 min-[500px]:gap-2 flex">
+          <Star active />
+          <Star active />
+          <Star active />
+          <Star />
+          <Star />
         </div>
       </div>
     );
