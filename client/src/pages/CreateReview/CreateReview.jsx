@@ -1,34 +1,7 @@
 import React from 'react'
-import MainContentEditor from './RichTextEditorBody';
+import MainContentEditor from './components/RichTextEditorBody';
+import StarInput from './components/StarInput';
 
-const StarInputItem = ({ name, helperText}) => {
-  return (
-    <div className="w-[430px] px-3.5 py-2 rounded-[10px] border border-slate-200 justify-between items-start inline-flex">
-      <div className="grow shrink basis-0 pr-2.5 flex-col justify-end items-start gap-[3px] inline-flex">
-        <div className="text-sm md:text-base font-bold">{name}</div>
-        <div className="info-text font-normal">{helperText}</div>
-      </div>
-      <div className="w-[154.86px] justify-start items-center gap-2.5 flex"></div>
-    </div>
-  );
-}
- 
-
-const StarInput = () => {
-  return (
-    <div className="flex-col justify-start items-start gap-[15px] inline-flex">
-      <div className="flex-col justify-start items-start gap-1 flex">
-        <div className="subheader-text">Star Ratings</div>
-        <div className="text-zinc-500 text-sm font-normal">Rate the following aspects of this drama from 1 to 5 stars</div>
-      </div>
-      <div className="flex-col justify-start items-start gap-3 flex">
-        <StarInputItem name="Acting" helperText="Cast performances and portrayals" />
-        <StarInputItem name="Plot" helperText="Story, script, writing, pace" />
-        <StarInputItem name="Visuals" helperText="Cinematography, shots, setting, props" />
-      </div>
-    </div>
-  );
-}
  
 const ShowDetail = () => {
   return (
@@ -96,7 +69,7 @@ export default function CreateReview() {
         </div>
         <div className="w-full py-8 border-b flex-col justify-center items-start gap-5 flex">
           <div className="w-full h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
-            <div><span className="subheader-text">Write a narrative review </span><span className="text-zinc-500 text-lg font-normal">(optional)</span></div>
+            <div><span className="subheader-text">Write a narrative review </span><span className="text-zinc-500 text-xs font-normal">(optional)</span></div>
             <div className="text-zinc-500 text-sm font-normal">Share your thoughts of this drama below.</div>
           </div>
           <div className="w-full h-[87px] flex-col justify-center items-start gap-2.5 flex">

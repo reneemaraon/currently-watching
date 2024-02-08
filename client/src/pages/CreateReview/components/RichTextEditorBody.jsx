@@ -1,4 +1,4 @@
-import Icon from "../Common/Icon";
+import Icon from "../../Common/Icon";
 import { 
   AlignCenterIcon, 
   AlignLeftIcon, 
@@ -8,7 +8,7 @@ import {
   ItalicizeIcon, 
   UnderlineIcon, 
   UploadImageIcon 
-} from "../Common/IconList";
+} from "../../Common/IconList";
 
 const EditorOption = ({children, fill}) => {
   return (
