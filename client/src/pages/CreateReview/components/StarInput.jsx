@@ -5,7 +5,7 @@ const Star = ({ active }) => (
     <StarIcon 
       fill={active ? null : 'fill-none'} 
       stroke={active ? null : 'stroke-light-stroke stroke-1'} 
-      sizeRules="h-7 w-7" 
+      sizeRules="h-6 w-6 sm:h-7 sm:w-7" 
     />
 )
 
@@ -30,15 +30,17 @@ const StarInputItem = ({ name, helperText}) => {
   
   const StarInput = () => {
     return (
-      <div className="w-full flex-col justify-start items-start gap-[15px] inline-flex">
-        <div className="flex-col justify-start items-start gap-1 flex">
-          <div className="subheader-text">Star Ratings</div>
-          <div className="text-zinc-500 text-sm font-normal">Rate the following aspects of this drama from 1 to 5 stars</div>
-        </div>
-        <div className="flex-col w-full max-w-[480px] justify-start items-start gap-3 flex">
-          <StarInputItem name="Acting" helperText="Cast performances and portrayals" />
-          <StarInputItem name="Plot" helperText="Story, script, writing, pace" />
-          <StarInputItem name="Visuals" helperText="Cinematography, shots, setting, props" />
+      <div className="w-full py-6 md:py-12 justify-start gap-10 inline-flex flex-col">
+        <div className="w-full flex-col justify-start items-start gap-[15px] inline-flex">
+          <div className="flex-col justify-start items-start gap-1 flex">
+            <div className="subheader-text">Star Ratings</div>
+            <div className="info-text">Rate the following aspects of this drama from 1 to 5 stars</div>
+          </div>
+          <div className="flex-col w-full max-w-[480px] justify-start items-start gap-3 flex">
+            <StarInputItem name="Acting" helperText="Cast performances and portrayals" />
+            <StarInputItem name="Plot" helperText="Story, script, writing, pace" />
+            <StarInputItem name="Visuals" helperText="Cinematography, shots, setting, props" />
+          </div>
         </div>
       </div>
     );

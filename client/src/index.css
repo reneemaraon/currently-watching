@@ -44,6 +44,10 @@
         @apply text-base md:text-lg font-medium;
     }
 
+    .section-header-text {
+        @apply text-base sm:text-xl font-semibold;
+    }
+
     .info-text {
         @apply text-light-text text-xs;
     }
@@ -51,6 +55,7 @@
     .input-area {
         @apply  bg-theme-base p-3 sm:p-4 rounded-lg border border-light-stroke
     }
+
 
 }
 

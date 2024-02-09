@@ -16,28 +16,30 @@ const RatingType = ({ name, rate }) => (
 
 const ShowDetail = () => {
   return (
-    <div className="max-[500px]:h-[285px] h-[175px] w-full max-w-[800px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
-      <div className="max-[500px]:w-full w-1/3 max-[500px]:h-1/3 h-full">
-        <img className="object-cover w-full h-full" src="https://via.placeholder.com/220x214" />
-      </div>
-      <div className="h-full max-[500px]:h-2/3 w-full p-3">
-        <div className="w-full h-full flex flex-col gap-1">
-          <div className="text-l md:text-l font-semibold">The Glory (2022)</div>
-          <div className="text-[12px] h-5 font-normal w-full">
-            Ji Changwook, Choi Sungeun, Hwang Inyoup
-          </div>
-          <div className="Preview grow overflow-hidden">
-            <div className="info-text font-normal">
-              I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happI had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ...
+    <div className="w-full inline-flex">
+      <div className="max-[500px]:h-[285px] h-[175px] w-full max-w-[800px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
+        <div className="max-[500px]:w-full w-1/3 max-[500px]:h-1/3 h-full">
+          <img className="object-cover w-full h-full" src="https://via.placeholder.com/220x214" />
+        </div>
+        <div className="h-full max-[500px]:h-2/3 w-full p-3">
+          <div className="w-full h-full flex flex-col gap-1">
+            <div className="text-l md:text-l font-semibold">The Glory (2022)</div>
+            <div className="text-[12px] h-5 font-normal w-full">
+              Ji Changwook, Choi Sungeun, Hwang Inyoup
+            </div>
+            <div className="Preview grow overflow-hidden">
+              <div className="info-text font-normal">
+                I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ I had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happI had a great time watching this drama. Whenever there was something bla ba bla. So heartbreaking to see them not end up together and what happ...
+              </div>
+            </div>
+            <div className="pt-3 border-t border-zinc-300 border-opacity-50 justify-start items-start gap-2.5 inline-flex">
+              <RatingType name="Acting" rate="4.2" />
+              <RatingType name="Plot" rate="4.5" />
+              <RatingType name="Visuals" rate="3.2" />
             </div>
           </div>
-          <div className="pt-3 border-t border-zinc-300 border-opacity-50 justify-start items-start gap-2.5 inline-flex">
-            <RatingType name="Acting" rate="4.2" />
-            <RatingType name="Plot" rate="4.5" />
-            <RatingType name="Visuals" rate="3.2" />
-          </div>
-        </div>
 
+        </div>
       </div>
     </div>
   )
@@ -52,17 +54,13 @@ export default function CreateReview() {
 
       flex-col justify-start items-center gap-24 inline-flex">
       <div className="WhiteContainer w-full 
-        px-2 min-[500px]:px-6 py-0.5 min-[500px]:py-2 
+        px-4 min-[500px]:px-6 py-0.5 min-[500px]:py-2 
         bg-theme-base rounded-[15px] flex-col justify-start items-start inline-flex">
         <div className="pt-4 max-[400px]:pt-2 pb-6 w-full flex-col justify-start gap-4 inline-flex">
-          <div className="text-l md:text-xl font-semibold">Your Review</div>
-          <div className="w-full inline-flex">
-            <ShowDetail />
-          </div>
+          <div className="pl-1 section-header-text">Your Review</div>
         </div>
-        <div className="w-full pt-4 pb-8 justify-start gap-10 inline-flex flex-col">
-          <StarInput />
-        </div>
+        <ShowDetail />
+        <StarInput />
         <div className="w-full py-8 border-b flex-col justify-center items-start gap-5 flex">
           <div className="w-full h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
             <div><span className="subheader-text">Write a narrative review </span><span className="text-zinc-500 text-xs font-normal">(optional)</span></div>
