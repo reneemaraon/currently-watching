@@ -54,13 +54,13 @@ export default function ReviewDetail() {
               <div className="Rating flex-col justify-center items-start gap-[3px] inline-flex">
                 <div className="Acting text-black text-xs font-bold font-['Inter']">Acting</div>
               </div>
-              <div className="Rating w-[110.31px] w-full justify-start items-center gap-2 flex" />
+              <div className="Rating w-full justify-start items-center gap-2 flex" />
             </div>
             <div className="RatingInputRow px-2.5 py-2 rounded-[5px] border border-slate-200 justify-start items-center gap-[15px] flex">
               <div className="Rating flex-col justify-end items-start gap-[3px] inline-flex">
                 <div className="Plot text-black text-xs font-bold font-['Inter']">Plot</div>
               </div>
-              <div className="Rating w-[110.31px] w-full justify-start items-center gap-2 flex" />
+              <div className="Rating w-full justify-start items-center gap-2 flex" />
             </div>
             <div className="RatingInputRow px-2.5 py-2 rounded-[5px] border border-slate-200 justify-start items-center gap-[15px] flex">
               <div className="Rating flex-col justify-end items-start gap-[3px] inline-flex">
