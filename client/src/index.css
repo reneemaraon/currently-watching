@@ -56,6 +56,19 @@
         @apply  bg-theme-base p-3 sm:p-4 rounded-lg border border-light-stroke
     }
 
+    .container-center-card {
+        @apply 
+        w-full max-w-[1200px] 
+        px-8 max-[900px]:px-4 max-[600px]:px-2 max-[400px]:px-0.5
+        py-8 max-[400px]:py-4
+        flex-col justify-start items-center inline-flex
+    }
+
+    .large-white-card {
+        @apply w-full 
+        px-4 min-[500px]:px-6 py-0.5 min-[500px]:py-2 
+        bg-theme-base rounded-[15px] flex-col justify-start items-start inline-flex
+    }
 
 }
 

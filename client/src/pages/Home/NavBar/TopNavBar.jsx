@@ -43,7 +43,7 @@ const TopNavBar = ({ toggleSidebar }) => {
         {/* searchbar */}
         <div className="max-[600px]:hidden w-64 h-10 px-5 py-[15px] bg-theme-base rounded-[10px] justify-start items-center gap-5 flex">
           <div className="pr-2.5 justify-start items-center gap-3 flex">
-              <Icon sizeRules="h-3.5 w-3.5"><SearchIcon /></Icon>
+              <Icon fill="fill-none stroke-2 stroke-text-dark" sizeRules="h-3.5 w-3.5"><SearchIcon /></Icon>
 
 
               <div className="text-gray-800 text-[15px] font-normal leading-tight">Search by Keyword</div>

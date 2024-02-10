@@ -1,4 +1,5 @@
 import StarIcon from "./Star";
+import { useNavigate } from 'react-router-dom';
 
 const RatingRow = ({ ratingName }) => {
     return (
@@ -16,9 +17,16 @@ const RatingRow = ({ ratingName }) => {
 }
  
 
-const ReviewsListItem = () => {
+const ReviewsListItem = ({ id }) => {
+    const navigate = useNavigate() 
+    
+    const onClickNavigate = () => {
+        navigate(`reviews/${id || "1"}`)    
+    }
+
+
     return (
-        <div className="
+        <div onClick={onClickNavigate} className="
             ReviewListItem overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] min-w-[550px] h-[260px] bg-theme-base bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex
             max-[600px]:min-w-[320px]  max-[600px]:min-h-[450px] 
         ">

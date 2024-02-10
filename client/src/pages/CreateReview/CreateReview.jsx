@@ -47,15 +47,8 @@ const ShowDetail = () => {
 
 export default function CreateReview() {
   return (
-    <div className="
-      w-full max-w-[1200px] 
-      px-8 max-[900px]:px-4 max-[600px]:px-2 max-[400px]:px-0.5
-      py-8 max-[400px]:py-4
-
-      flex-col justify-start items-center gap-24 inline-flex">
-      <div className="WhiteContainer w-full 
-        px-4 min-[500px]:px-6 py-0.5 min-[500px]:py-2 
-        bg-theme-base rounded-[15px] flex-col justify-start items-start inline-flex">
+    <div className="container-center-card">
+      <div className="large-white-card">
         <div className="pt-4 max-[400px]:pt-2 pb-6 w-full flex-col justify-start gap-4 inline-flex">
           <div className="pl-1 section-header-text">Your Review</div>
         </div>
