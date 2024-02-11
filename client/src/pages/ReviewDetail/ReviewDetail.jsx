@@ -19,14 +19,14 @@ export default function ReviewDetail() {
   return (
     <div className="relative inline-flex flex-col items-center w-full">
       <img 
-          className="object-cover w-full h-[541px] absolute z-0 top-0"
+          className="object-cover w-full h-auto md:h-[541px] absolute z-0 top-0"
           src="https://image.tmdb.org/t/p/w500/4jY17xSgcZT9WodpXtnjVAJjSba.jpg"
       />
       <div className="Background w-full h-[541px] top-0 z-5 absolute bg-gradient-to-b from-transparent to-gray-100">
       </div>
       
 
-      <div className="container-center-card pt-36">
+      <div className="container-center-card pt-20 sm:pt-36">
       {/* Main contentt */}
       <div className="z-10 Main large-white-card p-4 sm:p-6">
           <div className="w-full pb-4 flex-col justify-start items-start gap-3 flex">

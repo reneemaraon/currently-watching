@@ -1,3 +1,4 @@
+import CustomButton from "../Common/CustomButton";
 
 const commentList = [
 { 
@@ -44,9 +45,9 @@ const CommentsArea = () => {
         <div className="CommentInput w-full h-[99px] p-[15px] bg-white rounded-[10px] border border-slate-200 flex-col justify-start items-start gap-5 flex">
           <div className="Preview text-neutral-300 text-[13px] font-normal leading-[16.90px]">What are your thoughts on this review?</div>
           <div className="Action w-full px-[5px] justify-end items-start gap-2.5 inline-flex">
-            <div className="Button px-2.5 py-2 opacity-50 bg-cyan-500 rounded-[18px] justify-center items-center gap-[5px] flex">
-              <div className="Button text-center text-white text-[13px] font-medium font-['Inter']">Submit</div>
-            </div>
+            <CustomButton disabled edge="rounded" size="smallSize">
+              <span className="font-semibold">Submit</span>
+            </CustomButton> 
           </div>
         </div>
         <Comment 
