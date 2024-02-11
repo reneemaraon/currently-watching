@@ -19,16 +19,14 @@ const ShowCardSmall = () => {
                     12333 reviews
                 </div>
             </div>
-            <div className="RatingsContainer w-[55px] h-[55px] justify-between items-start flex">
-                <div className="StarRating w-[55px] h-[55px] px-2.5 py-5 rounded-[30px] border-2 border-brand-tq justify-center items-center gap-0.5 flex">
-                    <div className="text-[15px] font-bold leading-[10.50px]">
-                        4.8
-                    </div>
-                    <div className="w-4 h-4">
-                        <StarIcon />
-                    </div>
+            <div className="StarRating w-14 h-14 rounded-full border-2 border-brand-tq justify-center items-center gap-0.5 flex">
+                <div className="text-[15px] font-bold leading-[10.50px]">
+                    4.8
                 </div>
+                <div className="w-4 h-4">
+                    <StarIcon />
                 </div>
+            </div>
             </div>
         </div>
     );
