@@ -1,4 +1,6 @@
 import CustomButton from "../Common/CustomButton";
+import Icon from "../Common/Icon";
+import { OptionsIcon } from "../Common/IconList";
 
 const commentList = [
 { 
@@ -21,7 +23,11 @@ const Comment = ({name, username, display_photo, comment}) => (
           <div className="DatePublished info-text">6 days ago</div>
         </div>
       </div>
-      <div className="CommentActionOptions p-[15px] justify-center items-center gap-2.5 flex" />
+      <div className="CommentActionOptions px-2 justify-center items-center gap-2.5 flex">
+        <Icon size="h-2 w-2">
+          <OptionsIcon />
+        </Icon>
+      </div>
     </div>
     <p className="CommentText w-full text-sm leading-6 font-normal">
       {comment || ''}
