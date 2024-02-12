@@ -11,21 +11,19 @@ const commentList = [
 const Comment = ({name, username, display_photo, comment}) => (
   <div className="w-full p-4 bg-theme-base rounded-2xl border border-light-stroke flex-col justify-center items-start gap-4 flex">
     <div className="CommentHead w-full justify-between items-start inline-flex">
-      <div className="Comment grow shrink basis-0 justify-start items-start gap-4 sm:gap-5 flex">
-        <img className="ProfilePhoto w-8 h-8 sm:w-10 sm:h-10 rounded-full" src="https://via.placeholder.com/50x51" />
-        <div className="Details grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex">
-          <div className="NameUsername w-full justify-start items-center gap-2 inline-flex">
+      <div className="Comment grow shrink basis-0 justify-start items-center gap-3 sm:gap-4 flex">
+        <img className="ProfilePhoto w-7 h-7 sm:w-8 sm:h-8 rounded-full" src="https://via.placeholder.com/50x51" />
+        <div className="Details grow shrink basis-0 flex-col justify-start items-start gap-0.5 inline-flex">
+          <div className="NameUsername w-full justify-start items-center gap-1.5 inline-flex">
             <div className="author-name">{name || "Hwang Inyoup"}</div>
             <div className="Username info-text">{username || "@hi_high_hiy"}</div>
           </div>
-          <div className="AccDetails justify-start items-center gap-[5px] inline-flex">
-            <div className="DatePublished info-text">6 days ago</div>
-          </div>
+          <div className="DatePublished info-text">6 days ago</div>
         </div>
       </div>
       <div className="CommentActionOptions p-[15px] justify-center items-center gap-2.5 flex" />
     </div>
-    <p className="CommentText w-full text-xs sm:text-sm leading-5 sm:leading-6 font-normal">
+    <p className="CommentText w-full text-sm leading-6 font-normal">
       {comment || ''}
     </p>
   </div>

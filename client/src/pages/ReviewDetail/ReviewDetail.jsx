@@ -17,14 +17,11 @@ const CircularButton = ({ children }) => (
 
 export default function ReviewDetail() {
   return (
-    <div className="relative inline-flex flex-col items-center w-full">
+    <div className="relative inline-flex flex-col items-center w-full ">
       <img 
-          className="object-cover w-full h-auto md:h-[541px] absolute z-0 top-0"
+          className="object-cover w-full h-auto md:h-[300px] absolute z-0 top-0"
           src="https://image.tmdb.org/t/p/w500/4jY17xSgcZT9WodpXtnjVAJjSba.jpg"
       />
-      <div className="Background w-full h-[541px] top-0 z-5 absolute bg-gradient-to-b from-transparent to-gray-100">
-      </div>
-      
 
       <div className="container-center-card pt-20 sm:pt-36">
       {/* Main contentt */}
