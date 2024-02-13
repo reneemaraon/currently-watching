@@ -7,24 +7,24 @@ const ShowDetail = () => {
     <div className="w-full inline-flex flex-col items-center relative">
       <div className="container-center-card pt-10">
         {/* Main contentt */}
-        <div className="z-10 Main large-white-card p-4 sm:p-6">
-          <div className="Details grow shrink basis-0 h-[459px] justify-start items-start gap-5 flex">
-            <div className="PosterContainer w-[299px] h-[448px] overflow-hidden rounded-xl">
+        <div className="z-10 Main large-white-card p-3.5 sm:p-6">
+          <div className="Details flex-wrap grow shrink basis-0 justify-start items-start gap-5 flex">
+            <div className="PosterContainer w-1/3 min-w-[240px] h-auto overflow-hidden rounded-xl">
               <img
                 className="object-cover"
                 src="https://via.placeholder.com/299x448"
               />
             </div>
-            <div className="ShowDetails grow shrink basis-0 px-[15px] flex-col justify-start items-start gap-[15px] inline-flex">
+            <div className="ShowDetails min-w-[250px] grow shrink basis-0 px-3.5 flex-col justify-start items-start gap-3.5 inline-flex">
               <div className="ShowHeader flex-wrap w-full pb-2 gap-3 border-b justify-start items-start inline-flex">
                 <div className="TitleGenre grow py-2.5 flex-col justify-start items-start gap-2 inline-flex">
-                  <div className="TitleAndViews w-full justify-start items-center inline-flex">
-                    <div className="TheGlory2022 text-2xl font-medium">
+                  <div className="TitleAndViews grow flex-wrap gap-1 justify-start items-center inline-flex">
+                    <div className="TheGlory2022 title-text">
                       The Glory (2022)
                     </div>
-                    <div className="454kWatched info-text">• 454k watched</div>
+                    <div className="subtext">• 454k watched</div>
                   </div>
-                  <div className="SeasonsPg13ThrillerRevenge w-full text-indigo-800 text-base">
+                  <div className="subtext text-brand-tq">
                     2 seasons | PG-13 | Thriller, Revenge
                   </div>
                 </div>
@@ -37,22 +37,22 @@ const ShowDetail = () => {
                   </CircularButton>
                 </div>
               </div>
-              <div className="w-full text-gray-800 text-base font-normal leading-7">
+              <div className="w-full paragraph-text leading-7">
                 A young woman, bullied to the point of deciding to drop out of
                 school, plans the best way to get revenge. After becoming a
                 primary school teacher, she takes in the son of the man who
                 tormented her the most to enact her vengeance.
               </div>
-              <div className="Cast pb-1.5 justify-start items-start gap-2.5 inline-flex">
-                <div className="Cast text-gray-800 text-sm font-medium font-['Inter']">
+              <div className="Cast pb-1.5 justify-end items-center gap-2.5 inline-flex">
+                <div className="subtext text-text-dark font-bold">
                   Cast:
                 </div>
-                <div className="SongHyeKyoLeeDohyunLimJiyeon text-gray-800 text-sm font-bold font-['Inter']">
+                <div className="subtext text-text-dark">
                   Song Hye Kyo, Lee Dohyun, Lim Jiyeon
                 </div>
               </div>
-              <div className="StatContainer py-[15px] flex-col justify-start items-start gap-2.5 flex">
-                <div className="Ratings px-5 py-[15px] rounded-[10px] border border-slate-200 justify-start items-start gap-[42px] inline-flex">
+              <div className="StatContainer py-3.5 flex-col justify-start items-start gap-2.5 flex">
+                <div className="Ratings px-5 py-3.5 rounded-[10px] border border-slate-200 justify-start items-start gap-[42px] inline-flex">
                   <div className="AspectRatings flex-col justify-start items-start gap-2.5 inline-flex">
                     <div className="RatingHeader pb-1.5 justify-start items-start gap-2.5 inline-flex">
                       <div className="AveragePerAspect text-gray-800 text-sm font-medium font-['Inter']">
@@ -123,7 +123,7 @@ const ShowDetail = () => {
             </div>
           </div>
           <div className="Footer w-full h-[1084px] px-5 py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
-            <div className="ReviewSection w-full h-[1024px] pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-[15px] flex">
+            <div className="ReviewSection w-full h-[1024px] pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
               <div className="Header w-full pb-5 border-b justify-between items-start inline-flex">
                 <div className="Reviews20">
                   <span className="text-gray-800 text-2xl font-medium font-['Inter']">
@@ -134,16 +134,16 @@ const ShowDetail = () => {
                   </span>
                 </div>
                 <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex">
-                  <div className="Button px-5 py-[15px] bg-gray-800 rounded-lg justify-center items-center gap-2 flex">
+                  <div className="Button px-5 py-3.5 bg-gray-800 rounded-lg justify-center items-center gap-2 flex">
                     <div className="Button grow shrink basis-0 text-center text-white text-base font-semibold font-['Inter']">
                       + Add Review
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="CommentList w-full h-[909px] px-5 flex-col justify-center items-start gap-[15px] flex">
+              <div className="CommentList w-full h-[909px] px-5 flex-col justify-center items-start gap-3.5 flex">
                 <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-[15px] flex-col justify-start items-start gap-3 inline-flex">
+                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
                     <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
                       <div className="Profile justify-start items-center gap-3 flex">
                         <img
@@ -211,7 +211,7 @@ const ShowDetail = () => {
                   </div>
                 </div>
                 <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-[15px] flex-col justify-start items-start gap-3 inline-flex">
+                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
                     <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
                       <div className="Profile justify-start items-center gap-3 flex">
                         <img
@@ -279,7 +279,7 @@ const ShowDetail = () => {
                   </div>
                 </div>
                 <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-[15px] flex-col justify-start items-start gap-3 inline-flex">
+                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
                     <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
                       <div className="Profile justify-start items-center gap-3 flex">
                         <img
@@ -347,7 +347,7 @@ const ShowDetail = () => {
                   </div>
                 </div>
                 <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-[15px] flex-col justify-start items-start gap-3 inline-flex">
+                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
                     <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
                       <div className="Profile justify-start items-center gap-3 flex">
                         <img
@@ -415,7 +415,7 @@ const ShowDetail = () => {
                   </div>
                 </div>
                 <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
-                  <div className="Button px-5 py-[15px] bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">
+                  <div className="Button px-5 py-3.5 bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">
                     <div className="Button grow shrink basis-0 text-center text-gray-800 text-base font-semibold font-['Inter']">
                       Load More
                     </div>

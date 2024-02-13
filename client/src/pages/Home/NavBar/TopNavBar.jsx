@@ -32,8 +32,8 @@ const TopNavBar = ({ toggleSidebar }) => {
   };
 
   return (
-    <div className="top_nav z-20 w-full h-20 max-[600px]:h-14 px-[50px] max-[600px]:px-6 bg-zinc-100 bg-opacity-25 backdrop-blur-sm border-b border-zinc-300 justify-between items-center inline-flex sticky top-0">
-      <div className="left_side justify-start items-center gap-[30px] flex">
+    <div className="top_nav z-20 w-full h-20 max-[600px]:h-14 px-[50px] max-[600px]:px-6 bg-zinc-100 bg-opacity-25 backdrop-blur-sm border-b border-zinc-300 items-center inline-flex sticky top-0">
+      <div className="left_side grow justify-start items-center gap-[30px] flex">
         <div onClick={toggleSidebar} className="xl:hidden move_icon px-1.5 py-1.5 rounded hover:bg-main-bg hover:cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -41,12 +41,12 @@ const TopNavBar = ({ toggleSidebar }) => {
         </div>
 
         {/* searchbar */}
-        <div className="max-[600px]:hidden w-64 h-10 px-5 py-[15px] bg-theme-base rounded-[10px] justify-start items-center gap-5 flex">
+        <div className="max-[600px]:hidden grow w-full max-w-56 sm:max-w-64 px-3 py-2.5 sm:px-5 sm:py-3.5 bg-theme-base rounded-lg justify-start items-center gap-5 flex">
           <div className="pr-2.5 justify-start items-center gap-3 flex">
               <Icon fill="fill-none stroke-2 stroke-text-dark" sizeRules="h-3.5 w-3.5"><SearchIcon /></Icon>
 
 
-              <div className="text-gray-800 text-[15px] font-normal leading-tight">Search by Keyword</div>
+              <div className=" text-sm sm:text-base font-normal leading-tight">Search by Keyword</div>
           </div>
         {/* searchbar end */}
       </div>

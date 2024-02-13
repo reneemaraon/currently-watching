@@ -52,6 +52,14 @@
         @apply text-light-text text-xs;
     }
 
+    .subtext {
+        @apply text-light-text text-xs sm:text-sm
+    }
+
+    .paragraph-text {
+        @apply text-sm sm:text-base
+    }
+
     .input-area {
         @apply  bg-theme-base p-3 sm:p-4 rounded-lg border border-light-stroke
     }
