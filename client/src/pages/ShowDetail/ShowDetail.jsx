@@ -1,35 +1,35 @@
-import React from "react";
-import CircularButton from "../Common/CircleButton";
-import { HeartIcon, ShareIcon } from "../Common/IconList";
-import StatContainer from "./StatContainer";
+import React from 'react';
+import CircularButton from '../Common/CircleButton';
+import { HeartIcon, ShareIcon } from '../Common/IconList';
+import StatContainer from './StatContainer';
 
 const ShowDetail = () => {
   return (
     <div className="w-full inline-flex flex-col items-center relative">
-      <div className="container-center-card pt-10">
+      <div className="container-center-card pt-4 sm:pt-10">
         {/* Main contentt */}
-        <div className="z-10 Main large-white-card p-3.5 sm:p-6">
-          <div className="Details flex-wrap grow shrink basis-0 justify-start items-start gap-5 flex">
-            <div className="PosterContainer w-1/3 min-w-[240px] h-auto overflow-hidden rounded-xl">
+        <div className="z-10 Main large-white-card py-6 px-3.5 sm:px-6">
+          <div className="Details flex-wrap grow shrink basis-0 justify-start items-start gap-3 flex">
+            <div className="PosterContainer flex max-[530px]:justify-center pb-5 justify-end max-[530px]:max-w-[500px] max-[530px]:w-full w-1/3 max-w-[300px] min-w-[240px] h-auto overflow-hidden">
               <img
-                className="object-cover"
+                className="object-contain sm:object-cover sm:w-full rounded-xl"
                 src="https://via.placeholder.com/299x448"
               />
             </div>
-            <div className="ShowDetails min-w-[250px] grow shrink basis-0 px-3.5 flex-col justify-start items-start gap-3.5 inline-flex">
+            <div className="ShowDetails min-w-[230px] grow shrink basis-0 px-1 sm:px-3.5 flex-col justify-start items-start gap-3.5 inline-flex">
               <div className="ShowHeader flex-wrap w-full pb-2 gap-3 border-b justify-start items-start inline-flex">
                 <div className="TitleGenre grow py-2.5 flex-col justify-start items-start gap-2 inline-flex">
-                  <div className="TitleAndViews grow flex-wrap gap-1 justify-start items-center inline-flex">
+                  <div className="TitleAndViews grow flex-wrap gap-1 sm:gap-2 justify-start items-center inline-flex">
                     <div className="TheGlory2022 title-text">
                       The Glory (2022)
                     </div>
-                    <div className="subtext">• 454k watched</div>
+                    <div className="subtext">454k watched</div>
                   </div>
                   <div className="subtext text-brand-tq">
                     2 seasons | PG-13 | Thriller, Revenge
                   </div>
                 </div>
-                <div className="ReviewActions justify-start items-start pb-2 gap-2.5 flex">
+                <div className="ReviewActions justify-start items-start pb-2 gap-1.5 sm:gap-2.5 flex">
                   <CircularButton>
                     <HeartIcon />
                   </CircularButton>
@@ -44,21 +44,26 @@ const ShowDetail = () => {
                 primary school teacher, she takes in the son of the man who
                 tormented her the most to enact her vengeance.
               </div>
-              <div className="Cast pb-1.5 justify-end items-center gap-2.5 inline-flex">
+              <div className="Cast pb-1.5 justify-start  gap-2.5 inline-flex">
                 <div className="subtext text-text-dark font-bold">Cast:</div>
                 <div className="subtext text-text-dark">
                   Song Hye Kyo, Lee Dohyun, Lim Jiyeon
                 </div>
               </div>
-              <StatContainer />
+              <div className="hidden sm:block">
+                <StatContainer />
+              </div>
             </div>
+          </div>
+          <div className="block sm:hidden py-4">
+            <StatContainer />
           </div>
           <div className="Footer w-full h-[1084px] px-5 py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
             <div className="ReviewSection w-full h-[1024px] pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
               <div className="Header w-full pb-5 border-b justify-between items-start inline-flex">
                 <div className="Reviews20">
                   <span className="text-gray-800 text-2xl font-medium font-['Inter']">
-                    Reviews{" "}
+                    Reviews{' '}
                   </span>
                   <span className="text-neutral-300 text-2xl font-medium font-['Inter']">
                     (20)
@@ -100,7 +105,7 @@ const ShowDetail = () => {
                         I had a great time watching this drama. Whenever there
                         was something bla ba bla. So heartbreaking to see them
                         not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{" "}
+                        something bla ba bla. So heartbreaking to see them not{' '}
                       </div>
                     </div>
                     <div className="Footer w-full justify-between items-end inline-flex">
@@ -168,7 +173,7 @@ const ShowDetail = () => {
                         I had a great time watching this drama. Whenever there
                         was something bla ba bla. So heartbreaking to see them
                         not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{" "}
+                        something bla ba bla. So heartbreaking to see them not{' '}
                       </div>
                     </div>
                     <div className="Footer w-full justify-between items-end inline-flex">
@@ -236,7 +241,7 @@ const ShowDetail = () => {
                         I had a great time watching this drama. Whenever there
                         was something bla ba bla. So heartbreaking to see them
                         not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{" "}
+                        something bla ba bla. So heartbreaking to see them not{' '}
                       </div>
                     </div>
                     <div className="Footer w-full justify-between items-end inline-flex">
@@ -304,7 +309,7 @@ const ShowDetail = () => {
                         I had a great time watching this drama. Whenever there
                         was something bla ba bla. So heartbreaking to see them
                         not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{" "}
+                        something bla ba bla. So heartbreaking to see them not{' '}
                       </div>
                     </div>
                     <div className="Footer w-full justify-between items-end inline-flex">

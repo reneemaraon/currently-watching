@@ -24,7 +24,7 @@ const TopNavBar = ({ toggleSidebar }) => {
   };
 
   return (
-    <div className="top_nav z-20 w-full h-20 max-[600px]:h-14 px-[50px] max-[600px]:px-6 bg-zinc-100 bg-opacity-25 backdrop-blur-sm border-b border-zinc-300 items-center inline-flex sticky top-0">
+    <div className="top_nav z-20 w-full h-20 gap-5 max-[600px]:h-14 px-[50px] max-[600px]:px-6 bg-zinc-100 bg-opacity-25 backdrop-blur-sm border-b border-zinc-300 items-center inline-flex sticky top-0">
       <div className="left_side grow justify-start items-center gap-[30px] flex">
         <div
           onClick={toggleSidebar}
