@@ -1,9 +1,9 @@
-import React from 'react';
-import CircularButton from '../Common/CircleButton';
-import { HeartIcon, ShareIcon } from '../Common/IconList';
-import StatContainer from './StatContainer';
-import ReviewsListItem from '../Reviews/ReviewListItem';
-import CustomButton from '../Common/CustomButton';
+import React from "react";
+import CircularButton from "../Common/CircleButton";
+import { HeartIcon, ShareIcon } from "../Common/IconList";
+import StatContainer from "./StatContainer";
+import ReviewsListItem from "../Reviews/ReviewListItem";
+import CustomButton from "../Common/CustomButton";
 
 const ShowDetail = () => {
   return (
@@ -77,7 +77,7 @@ const ShowDetail = () => {
                   </CustomButton>
                 </div>
               </div>
-              <div className="CommentList w-full px-2 flex-col justify-center items-start gap-4 flex">
+              <div className="CommentList w-full sm:px-2 flex-col justify-center items-start gap-4 flex">
                 <ReviewsListItem noImage />
                 <ReviewsListItem noImage />
                 <ReviewsListItem noImage />

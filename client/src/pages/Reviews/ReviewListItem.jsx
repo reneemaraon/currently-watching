@@ -1,6 +1,6 @@
-import Icon from '../Common/Icon';
-import { HeartIcon, ShareIcon } from '../Common/IconList';
-import StarIcon from '../Common/Star';
+import Icon from "../Common/Icon";
+import { HeartIcon, ShareIcon } from "../Common/IconList";
+import StarIcon from "../Common/Star";
 
 const RatingRow = ({ ratingName }) => {
   return (
@@ -41,7 +41,7 @@ const ReviewsListItem = ({ noImage }) => {
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
             bg-theme-base bg-opacity-70 rounded-[20px] border h-[230px] border-light-stroke justify-start items-start inline-flex
             max-[600px]:flex-col
-            ${noImage ? 'max-[600px]:h-[210px]' : 'max-[600px]:h-[350px]'}
+            ${noImage ? "max-[600px]:h-[210px]" : "max-[600px]:h-[350px]"}
             group
             ease-in`}
     >
@@ -55,7 +55,7 @@ const ReviewsListItem = ({ noImage }) => {
                 max-[600px]:w-full
                 grow
                 max-[600px]:h-[220px]
-                ${noImage && 'hidden'}
+                ${noImage && "hidden"}
             `}
       >
         <img
@@ -68,24 +68,24 @@ const ReviewsListItem = ({ noImage }) => {
           </div>
         </div>
       </div>
-      <div className="ReviewDetails w-full h-full py-4 px-2.5 sm:px-4 flex-col justify-start items-start gap-1.5 sm:gap-2 inline-flex grow">
-        <div className="Author pl-[5px] justify-between items-start inline-flex">
-          <div className="Profile justify-start items-center gap-3 flex">
+      <div className="ReviewDetails w-full h-full py-4 px-2.5 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
+        <div className="Author justify-between items-start inline-flex">
+          <div className="Profile justify-start items-center gap-2 sm:gap-3 flex">
             <img
               className="ProfilePhoto w-6 h-6 sm:w-10 sm:h-10 relative rounded-full"
               src="https://via.placeholder.com/41x42"
             />
-            <div className="AccDetails flex-col justify-center items-start gap-0 sm:gap-0.5 inline-flex">
-              <div className="TwtDisplayName text-gray-800 text-sm sm:text-base font-medium font-['Inter']">
+            <div className="AccDetails max-[600px]:items-center max-[600px]:flex-row max-[600px]:gap-1.5 flex-col justify-center items-start gap-0 sm:gap-0.5 inline-flex">
+              <div className="text-sm sm:text-base font-medium font-['Inter']">
                 Hwang Inyoup
               </div>
-              <div className="Username text-slate-500 text-xs sm:text-sm font-normal font-['Inter']">
+              <div className="Username text-slate-500 text-xs sm:text-sm">
                 @hi_high_hiy
               </div>
             </div>
           </div>
         </div>
-        <div className="Title text-base sm:text-l font-medium">
+        <div className="max-[400px]:text-sm text-base sm:text-l font-medium">
           This was such a great watch
         </div>
         <div className="Preview text-zinc-500 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
@@ -96,11 +96,11 @@ const ReviewsListItem = ({ noImage }) => {
           to see them not Whenever there was something bla ba bla. So
           heartbreaking to see them not Whenever there was something bla ba bla.
           So heartbreaking to see them not Whenever there was something bla ba
-          bla. So heartbreaking to see them not{' '}
+          bla. So heartbreaking to see them not{" "}
         </div>
         <div className="Footer w-full pt-1 justify-between items-center gap-4 inline-flex">
           <div className="RatingsCont w-full items-start inline-flex">
-            <div className="Ratings w-full justify-start items-end gap-5 max-[900px]:gap-2 flex">
+            <div className="Ratings w-full pt-1 justify-start items-end gap-5 max-[900px]:gap-2 flex">
               <RatingRow ratingName="Acting" />
               <RatingRow ratingName="Plot" />
               <RatingRow ratingName="Visuals" />
