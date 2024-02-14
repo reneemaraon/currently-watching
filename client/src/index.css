@@ -53,7 +53,11 @@
     }
 
     .subtext {
-        @apply text-light-text text-xs sm:text-sm
+        @apply text-light-text text-xs sm:text-sm;
+    }
+
+    .important-small-text {
+        @apply text-text-dark text-xs sm:text-sm font-medium
     }
 
     .paragraph-text {
@@ -83,7 +87,7 @@
     }
 
     .author-username {
-        @apply text-xs sm:text-xs text-light-text;
+        @apply text-xs sm:text-sm text-light-text;
     }
 
     .title-text {

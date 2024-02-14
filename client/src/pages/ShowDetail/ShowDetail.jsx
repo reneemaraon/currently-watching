@@ -10,9 +10,9 @@ const ShowDetail = () => {
         {/* Main contentt */}
         <div className="z-10 Main large-white-card py-6 px-3.5 sm:px-6">
           <div className="Details flex-wrap grow shrink basis-0 justify-start items-start gap-3 flex">
-            <div className="PosterContainer flex max-[530px]:justify-center pb-5 justify-end max-[530px]:max-w-[500px] max-[530px]:w-full w-1/3 max-w-[300px] min-w-[240px] h-auto overflow-hidden">
+            <div className="PosterContainer flex max-[530px]:justify-start max-[530px]:px-4 pb-3 justify-end max-[530px]:max-w-[500px] max-[530px]:w-full w-1/3 max-w-[300px] min-w-[240px] h-auto overflow-hidden">
               <img
-                className="object-contain sm:object-cover sm:w-full rounded-xl"
+                className="object-contain sm:object-cover w-[220px] sm:w-full rounded-xl"
                 src="https://via.placeholder.com/299x448"
               />
             </div>
@@ -50,12 +50,12 @@ const ShowDetail = () => {
                   Song Hye Kyo, Lee Dohyun, Lim Jiyeon
                 </div>
               </div>
-              <div className="hidden sm:block">
+              <div className="w-full hidden sm:block">
                 <StatContainer />
               </div>
             </div>
           </div>
-          <div className="block sm:hidden py-4">
+          <div className="w-full block sm:hidden py-4">
             <StatContainer />
           </div>
           <div className="Footer w-full h-[1084px] px-5 py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
