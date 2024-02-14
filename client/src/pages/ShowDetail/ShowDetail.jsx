@@ -2,6 +2,8 @@ import React from 'react';
 import CircularButton from '../Common/CircleButton';
 import { HeartIcon, ShareIcon } from '../Common/IconList';
 import StatContainer from './StatContainer';
+import ReviewsListItem from '../Reviews/ReviewListItem';
+import CustomButton from '../Common/CustomButton';
 
 const ShowDetail = () => {
   return (
@@ -58,298 +60,28 @@ const ShowDetail = () => {
           <div className="w-full block sm:hidden py-4">
             <StatContainer />
           </div>
-          <div className="Footer w-full h-[1084px] px-5 py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
-            <div className="ReviewSection w-full h-[1024px] pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
-              <div className="Header w-full pb-5 border-b justify-between items-start inline-flex">
-                <div className="Reviews20">
+          <div className="Footer w-full py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
+            <div className="ReviewSection w-full pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
+              <div className="Header px-2 w-full pb-5 justify-between items-start inline-flex">
+                <div className="inline-flex gap-2">
                   <span className="text-gray-800 text-2xl font-medium font-['Inter']">
-                    Reviews{' '}
+                    Reviews
                   </span>
                   <span className="text-neutral-300 text-2xl font-medium font-['Inter']">
                     (20)
                   </span>
                 </div>
                 <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex">
-                  <div className="Button px-5 py-3.5 bg-gray-800 rounded-lg justify-center items-center gap-2 flex">
-                    <div className="Button grow shrink basis-0 text-center text-white text-base font-semibold font-['Inter']">
-                      + Add Review
-                    </div>
-                  </div>
+                  <CustomButton styleSet="dark" size="defaultResize">
+                    + Add Review
+                  </CustomButton>
                 </div>
               </div>
-              <div className="CommentList w-full h-[909px] px-5 flex-col justify-center items-start gap-3.5 flex">
-                <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
-                    <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
-                      <div className="Profile justify-start items-center gap-3 flex">
-                        <img
-                          className="ProfilePhoto w-[41px] h-[42px] relative rounded-[40px]"
-                          src="https://via.placeholder.com/41x42"
-                        />
-                        <div className="AccDetails flex-col justify-center items-start gap-0.5 inline-flex">
-                          <div className="TwtDisplayName text-gray-800 text-base font-medium font-['Inter']">
-                            Hwang Inyoup
-                          </div>
-                          <div className="Username text-slate-500 text-sm font-normal font-['Inter']">
-                            @hi_high_hiy
-                          </div>
-                        </div>
-                      </div>
-                      <div className="Frame w-5 h-5 relative" />
-                    </div>
-                    <div className="ReviewSnippets w-full h-[70px] pl-[5px] flex-col justify-start items-start gap-2 flex">
-                      <div className="Title text-gray-800 text-xl font-medium font-['Inter']">
-                        This was such a great watch
-                      </div>
-                      <div className="Preview w-full text-zinc-500 text-base font-normal font-['Inter']">
-                        I had a great time watching this drama. Whenever there
-                        was something bla ba bla. So heartbreaking to see them
-                        not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{' '}
-                      </div>
-                    </div>
-                    <div className="Footer w-full justify-between items-end inline-flex">
-                      <div className="Ratings justify-start items-start gap-[7px] flex">
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Acting
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Plot
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Visuals
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                      </div>
-                      <div className="Options justify-end items-start gap-4 flex">
-                        <div className="Like flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                        <div className="Share flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
-                    <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
-                      <div className="Profile justify-start items-center gap-3 flex">
-                        <img
-                          className="ProfilePhoto w-[41px] h-[42px] relative rounded-[40px]"
-                          src="https://via.placeholder.com/41x42"
-                        />
-                        <div className="AccDetails flex-col justify-center items-start gap-0.5 inline-flex">
-                          <div className="TwtDisplayName text-gray-800 text-base font-medium font-['Inter']">
-                            Hwang Inyoup
-                          </div>
-                          <div className="Username text-slate-500 text-sm font-normal font-['Inter']">
-                            @hi_high_hiy
-                          </div>
-                        </div>
-                      </div>
-                      <div className="Frame w-5 h-5 relative" />
-                    </div>
-                    <div className="ReviewSnippets w-full h-[70px] pl-[5px] flex-col justify-start items-start gap-2 flex">
-                      <div className="Title text-gray-800 text-xl font-medium font-['Inter']">
-                        This was such a great watch
-                      </div>
-                      <div className="Preview w-full text-zinc-500 text-base font-normal font-['Inter']">
-                        I had a great time watching this drama. Whenever there
-                        was something bla ba bla. So heartbreaking to see them
-                        not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{' '}
-                      </div>
-                    </div>
-                    <div className="Footer w-full justify-between items-end inline-flex">
-                      <div className="Ratings justify-start items-start gap-[7px] flex">
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Acting
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Plot
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Visuals
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                      </div>
-                      <div className="Options justify-end items-start gap-4 flex">
-                        <div className="Like flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                        <div className="Share flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
-                    <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
-                      <div className="Profile justify-start items-center gap-3 flex">
-                        <img
-                          className="ProfilePhoto w-[41px] h-[42px] relative rounded-[40px]"
-                          src="https://via.placeholder.com/41x42"
-                        />
-                        <div className="AccDetails flex-col justify-center items-start gap-0.5 inline-flex">
-                          <div className="TwtDisplayName text-gray-800 text-base font-medium font-['Inter']">
-                            Hwang Inyoup
-                          </div>
-                          <div className="Username text-slate-500 text-sm font-normal font-['Inter']">
-                            @hi_high_hiy
-                          </div>
-                        </div>
-                      </div>
-                      <div className="Frame w-5 h-5 relative" />
-                    </div>
-                    <div className="ReviewSnippets w-full h-[70px] pl-[5px] flex-col justify-start items-start gap-2 flex">
-                      <div className="Title text-gray-800 text-xl font-medium font-['Inter']">
-                        This was such a great watch
-                      </div>
-                      <div className="Preview w-full text-zinc-500 text-base font-normal font-['Inter']">
-                        I had a great time watching this drama. Whenever there
-                        was something bla ba bla. So heartbreaking to see them
-                        not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{' '}
-                      </div>
-                    </div>
-                    <div className="Footer w-full justify-between items-end inline-flex">
-                      <div className="Ratings justify-start items-start gap-[7px] flex">
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Acting
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Plot
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Visuals
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                      </div>
-                      <div className="Options justify-end items-start gap-4 flex">
-                        <div className="Like flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                        <div className="Share flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="ReviewListItem w-[940px] bg-white bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex">
-                  <div className="ReviewDetails grow shrink basis-0 p-3.5 flex-col justify-start items-start gap-3 inline-flex">
-                    <div className="Author w-full pl-[5px] justify-between items-start inline-flex">
-                      <div className="Profile justify-start items-center gap-3 flex">
-                        <img
-                          className="ProfilePhoto w-[41px] h-[42px] relative rounded-[40px]"
-                          src="https://via.placeholder.com/41x42"
-                        />
-                        <div className="AccDetails flex-col justify-center items-start gap-0.5 inline-flex">
-                          <div className="TwtDisplayName text-gray-800 text-base font-medium font-['Inter']">
-                            Hwang Inyoup
-                          </div>
-                          <div className="Username text-slate-500 text-sm font-normal font-['Inter']">
-                            @hi_high_hiy
-                          </div>
-                        </div>
-                      </div>
-                      <div className="Frame w-5 h-5 relative" />
-                    </div>
-                    <div className="ReviewSnippets w-full h-[70px] pl-[5px] flex-col justify-start items-start gap-2 flex">
-                      <div className="Title text-gray-800 text-xl font-medium font-['Inter']">
-                        This was such a great watch
-                      </div>
-                      <div className="Preview w-full text-zinc-500 text-base font-normal font-['Inter']">
-                        I had a great time watching this drama. Whenever there
-                        was something bla ba bla. So heartbreaking to see them
-                        not end up together and what happ...Whenever there was
-                        something bla ba bla. So heartbreaking to see them not{' '}
-                      </div>
-                    </div>
-                    <div className="Footer w-full justify-between items-end inline-flex">
-                      <div className="Ratings justify-start items-start gap-[7px] flex">
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Acting
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Plot
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                        <div className="RatingRow p-[5px] rounded-[5px] border border-yellow-300 border-opacity-80 justify-start items-center gap-2.5 flex">
-                          <div className="Acting text-gray-800 text-xs font-medium font-['Inter']">
-                            Visuals
-                          </div>
-                          <div className="Rating w-[82.65px] w-full justify-start items-center gap-[5px] flex" />
-                        </div>
-                      </div>
-                      <div className="Options justify-end items-start gap-4 flex">
-                        <div className="Like flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                        <div className="Share flex-col justify-start items-end inline-flex">
-                          <div className="Frame w-5 h-5 relative" />
-                          <div className=" text-zinc-500 text-[8px] font-medium font-['Inter']">
-                            1234
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="CommentList w-full px-2 flex-col justify-center items-start gap-4 flex">
+                <ReviewsListItem noImage />
+                <ReviewsListItem noImage />
+                <ReviewsListItem noImage />
+                <ReviewsListItem noImage />
                 <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
                   <div className="Button px-5 py-3.5 bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">
                     <div className="Button grow shrink basis-0 text-center text-gray-800 text-base font-semibold font-['Inter']">
