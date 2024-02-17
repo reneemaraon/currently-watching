@@ -53,7 +53,7 @@ const List = ({ list }) => {
         {showItems && [<ListItem />, <ListItem />].map((item) => item)}
         <div className="cursor-pointer w-full" onClick={toggleShowItems}>
           {showItems ? (
-            <div className="ShowDetailCard w-full h-6 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
+            <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
               <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
                 <Icon
                   sizeRules="w-3 h-3 sm:w-4 sm:h-4"
