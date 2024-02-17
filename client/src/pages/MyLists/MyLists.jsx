@@ -1,5 +1,5 @@
-import CustomButton from '../Common/CustomButton';
-import List from './List';
+import CustomButton from "../Common/CustomButton";
+import List from "./List";
 
 const MyListsPage = () => {
   return (
@@ -12,7 +12,7 @@ const MyListsPage = () => {
           + Add Custom List
         </CustomButton>
       </div>
-      <div className="ListArea self-stretch flex-col justify-start items-center gap-[50px] flex">
+      <div className="ListArea self-stretch flex-col justify-start items-center gap-11 sm:gap-12 flex">
         <List />
         <List />
         <List />

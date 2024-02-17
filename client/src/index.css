@@ -94,6 +94,30 @@
         @apply text-lg sm:text-xl md:text-2xl font-medium;
     }
 
+    .primary-button-style {
+        @apply bg-brand-tq text-white hover:bg-brand-tq-hover;
+    }
+
+    .gradient-button-style {
+        @apply bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-tq text-white hover:from-cyan-700 hover:via-sky-600 hover:to-cyan-600;
+    }
+
+    .dark-button-style {
+        @apply bg-text-dark text-theme-base hover:bg-gray-700;
+    }
+
+    .secondary-button-style {
+        @apply bg-brand-gray text-theme-base hover:bg-gray-400;
+    }
+
+    .inverse-button-style {
+        @apply bg-brand-tq bg-opacity-20 text-brand-tq hover:bg-opacity-30;
+    }
+
+    .small-button {
+        @apply h-7 px-2 py-1 sm:h-8 sm:px-2.5 sm:py-2 gap-1 font-light text-xs;
+    }
+
 }
 
 body {
