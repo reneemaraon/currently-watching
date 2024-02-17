@@ -1,25 +1,28 @@
-import Icon from '../Common/Icon';
-import { BarsIcon } from '../Common/IconList';
-import StarIcon from '../Common/Star';
+import Icon from "../Common/Icon";
+import { BarsIcon } from "../Common/IconList";
+import StarIcon from "../Common/Star";
 
 const ListItem = () => {
   return (
     <div className="ShowDetailCard w-full h-20 bg-white bg-opacity-70 rounded-[15px] border border-slate-200 justify-start items-center inline-flex">
-      <div className="RankNumContainer h-[17px] px-10 justify-center items-center gap-2.5 flex">
-        <div className="RankNumber text-2xl font-semibold leading-none">4</div>
+      <div className="RankNumContainer px-5 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex">
+        <div className="RankNumber text-lg sm:text-xl md:text-2xl font-medium leading-none">
+          4
+        </div>
       </div>
       <img
         className="hidden sm:block ShowImage w-20 h-[60px] rounded-[10px]"
         src="https://via.placeholder.com/80x60"
       />
-      <div className="ShowDetails grow shrink basis-0 self-stretch px-[26px] py-[11px] justify-between items-center flex">
-        <div className="ShowDetailsText pl-[5px] pt-[5px] flex-col justify-start items-start gap-[5px] inline-flex">
+      <div className="ShowDetails grow shrink basis-0 self-stretch px-2 sm:px-5 md:px-7 py-[11px] justify-between items-center flex">
+        <div className="ShowDetailsText pt-[5px] flex-col justify-start items-start gap-0.5 sm:gap-1 md:gap-2 inline-flex">
           <div className="Title">
-            <span className="text-gray-800 text-lg font-semibold">
-              The Glory
+            <span className="gap-1 text-base md:text-lg">
+              <span className="font-semibold">
+                The Glory
+                <span className="font-normal"> (2022)</span>
+              </span>
             </span>
-            <span className="text-gray-800 text-lg font-bold"> </span>
-            <span className="text-gray-800 text-lg font-normal">(2022)</span>
           </div>
           <div className="RatingRow justify-start items-center gap-[5px] inline-flex">
             <div className="Score info-text font-medium">Score</div>
@@ -32,8 +35,8 @@ const ListItem = () => {
             </div>
           </div>
         </div>
-        <div className="Right w-[151px] self-stretch justify-end items-center gap-10 flex">
-          <div className="PersonalRating w-[75px] self-stretch px-2.5 justify-end items-center gap-[30px] flex">
+        <div className="Right self-stretch justify-end items-center gap-2 min-[400px]:gap-4 sm:gap-6 md:gap-8 flex">
+          <div className="PersonalRating self-stretch px-2.5 justify-end items-center gap-[30px] flex">
             <div className="RatingsContainer w-[55px] h-[55px] justify-between items-start flex">
               <div className="StarRating h-full px-2.5  rounded-[30px] justify-center items-center gap-1 flex">
                 <div className="8 text-[15px] font-bold leading-[10.50px]">
