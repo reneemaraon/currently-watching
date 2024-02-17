@@ -9,7 +9,7 @@ const ListItem = () => {
         <div className="RankNumber text-2xl font-semibold leading-none">4</div>
       </div>
       <img
-        className="ShowImage w-20 h-[60px] rounded-[10px]"
+        className="hidden sm:block ShowImage w-20 h-[60px] rounded-[10px]"
         src="https://via.placeholder.com/80x60"
       />
       <div className="ShowDetails grow shrink basis-0 self-stretch px-[26px] py-[11px] justify-between items-center flex">
