@@ -3,7 +3,7 @@ import CircularButton from '../Common/CircleButton';
 import { ShareIcon, TwitterIcon } from '../Common/IconList';
 import CustomButton from '../Common/CustomButton';
 import Icon from '../Common/Icon';
-import ReviewsListItem from '../Common/ReviewListItem';
+import ReviewsListItem from '../Reviews/ReviewListItem';
 import List from '../MyLists/List';
 
 export default function ProfilePage() {
