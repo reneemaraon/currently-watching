@@ -5,17 +5,18 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['"Poppins"'],
-        inter: ['"Inter"']
+        inter: ['"Inter"'],
       },
       colors: {
         'main-bg': '#F1F1F5',
         'theme-base': '#FFFFFF',
         'text-dark': '#242C39',
         'light-text': '#676573',
+        'lighter-text': '#B6BCC6',
         'brand-tq': '#00ABD0',
         'brand-tq-hover': '#0188A5',
         'brand-gray': '#7E8AA0',
-        'main-yellow': '#FFE456', 
+        'main-yellow': '#FFE456',
         'dark-yellow': '#E9B500',
         'light-stroke': '#E2ECEC',
         'dark-bg': '#09243F',
