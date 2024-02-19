@@ -64,11 +64,13 @@ export default function ProfilePage() {
                   <ReviewsListItem />
                   <ReviewsListItem />
                   <div className="LoadMorePanel self-stretch h-[65px]  flex-col justify-end items-center gap-2.5 flex">
-                    <div className="Button px-5 py-[15px] bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">
-                      <div className="Button grow shrink basis-0 text-center text-gray-800 text-base font-semibold font-['Inter']">
-                        Load More Reviews
-                      </div>
-                    </div>
+                    <CustomButton
+                      styleSet="light"
+                      size="defaultResize"
+                      edge="rounded"
+                    >
+                      Load more reviews
+                    </CustomButton>
                   </div>
                 </div>
               </div>
@@ -82,11 +84,13 @@ export default function ProfilePage() {
                 </div>
                 <List />
                 <div className="LoadMorePanel self-stretch h-[65px]  flex-col justify-end items-center gap-2.5 flex">
-                  <div className="Button px-5 py-[15px] bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">
-                    <div className="Button grow shrink basis-0 text-center text-gray-800 text-base font-semibold font-['Inter']">
-                      Load More Lists
-                    </div>
-                  </div>
+                  <CustomButton
+                    styleSet="light"
+                    size="defaultResize"
+                    edge="rounded"
+                  >
+                    Load more lists
+                  </CustomButton>
                 </div>
               </div>
             </div>

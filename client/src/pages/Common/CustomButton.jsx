@@ -15,6 +15,7 @@ const CustomButton = ({
     dark: 'bg-text-dark text-theme-base hover:bg-gray-700',
     secondary: 'bg-brand-gray text-theme-base hover:bg-gray-400',
     inverse: 'bg-brand-tq bg-opacity-20 text-brand-tq hover:bg-opacity-30',
+    light: 'border bg-brand-gray-light text-text-dark hover:bg-opacity-70',
   };
 
   // Default to 'primary' if the specified style set doesn't exist
