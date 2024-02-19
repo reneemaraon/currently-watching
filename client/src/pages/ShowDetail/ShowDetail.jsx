@@ -1,9 +1,9 @@
-import React from "react";
-import CircularButton from "../Common/CircleButton";
-import { HeartIcon, ShareIcon } from "../Common/IconList";
-import StatContainer from "./StatContainer";
-import ReviewsListItem from "../Reviews/ReviewListItem";
-import CustomButton from "../Common/CustomButton";
+import React from 'react';
+import CircularButton from '../Common/CircleButton';
+import { HeartIcon, ShareIcon } from '../Common/IconList';
+import StatContainer from './StatContainer';
+import ReviewsListItem from '../Reviews/ReviewListItem';
+import CustomButton from '../Common/CustomButton';
 
 const ShowDetail = () => {
   return (
@@ -83,11 +83,13 @@ const ShowDetail = () => {
                 <ReviewsListItem noImage />
                 <ReviewsListItem noImage />
                 <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
-                  <div className="Button px-5 py-3.5 bg-zinc-100 rounded-[30px] border border-slate-200 justify-center items-center gap-2 inline-flex">
-                    <div className="Button grow shrink basis-0 text-center text-gray-800 text-base font-semibold font-['Inter']">
-                      Load More
-                    </div>
-                  </div>
+                  <CustomButton
+                    styleSet="light"
+                    size="defaultResize"
+                    edge="rounded"
+                  >
+                    Load more
+                  </CustomButton>
                 </div>
               </div>
             </div>
