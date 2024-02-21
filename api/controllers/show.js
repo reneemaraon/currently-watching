@@ -1,5 +1,5 @@
 const Show = require('../models/show');
-const Actor = require('../models/Actor');
+const Actor = require('../models/actor');
 const { BadRequestError, NotFoundError } = require('../errors');
 const { StatusCodes } = require('http-status-codes');
 
