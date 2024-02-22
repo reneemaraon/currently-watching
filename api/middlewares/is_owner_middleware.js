@@ -9,7 +9,7 @@ const isReviewOwner = async (req, res, next) => {
       return res.status(404).json({ message: "Review not found" });
     }
 
-    if (req.user && req.user._id.equals(review.user)) {
+    if (req.user && req.user._id.equals(review.user_id)) {
       // User is the owner of the review, proceed to the next middleware or route handler
       return next();
     } else {

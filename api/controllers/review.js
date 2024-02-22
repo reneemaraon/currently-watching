@@ -38,9 +38,8 @@ const getReview = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-  console.log(req.body);
-  const review = await Review.create({ ...req.body });
-  res.status(StatusCodes.CREATED).json({ ...req.body });
+  const review = await Review.create({ ...req.body, user_id: req.user });
+  res.status(StatusCodes.CREATED).json({ ...review });
 };
 
 const deleteReview = async (req, res) => {
