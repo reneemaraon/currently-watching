@@ -1,5 +1,11 @@
 require("dotenv").config(); // to access environment variables
 require("express-async-errors");
+const { ApolloServer } = require("@apollo/server");
+const gql = require("graphql-tag");
+const { buildSubgraphSchema } = require("@apollo/subgraph");
+const { expressMiddleware } = require("@apollo/server/express4");
+const resolvers = require("./resolvers");
+const { readFileSync } = require("fs");
 
 const express = require("express");
 const MongoStore = require("connect-mongo");
@@ -12,6 +18,19 @@ const cors = require("cors");
 
 app.use(express.json());
 // app.set("trust proxy", 1);
+
+const typeDefs = gql(
+  readFileSync("schema.graphql", {
+    encoding: "utf-8",
+  })
+);
+
+const server = new ApolloServer({
+  schema: buildSubgraphSchema({ typeDefs, resolvers }),
+});
+// Note you must call `start()` on the `ApolloServer`
+// instance before passing the instance to `expressMiddleware`
+server.start();
 
 app.use(
   session({
@@ -51,6 +70,7 @@ const errorHandlerMiddleware = require("./middlewares/error_handler");
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/shows", showRouter);
 app.use("/api/v1/reviews", reviewRouter);
+app.use("/graphql", cors(), json(), expressMiddleware(server));
 
 app.use(errorHandlerMiddleware);
 
