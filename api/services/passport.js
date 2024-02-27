@@ -1,11 +1,10 @@
-const passport = require("passport");
-const TwitterStrategy = require("passport-twitter");
-const User = require('../models/User');
+const passport = require('passport');
+const TwitterStrategy = require('passport-twitter');
+const User = require('../models/user');
 const { Strategy } = require('@superfaceai/passport-twitter-oauth2');
 
 // const keys = require("./keys");
 // const User = require("../models/user");
-
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -13,26 +12,25 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findById(id)
-    .then(user => {
+    .then((user) => {
       done(null, user);
     })
-    .catch(e => {
-      done(new Error("Failed to deserialize an user"));
+    .catch((e) => {
+      done(new Error('Failed to deserialize an user'));
     });
 });
-
 
 passport.use(
   new TwitterStrategy(
     {
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-      callbackURL: 'http://127.0.0.1:4000/api/v1/auth/twitter/callback/'
+      callbackURL: 'http://127.0.0.1:4000/api/v1/auth/twitter/callback/',
     },
     async (token, tokenSecret, profile, done) => {
       // Find user in User model
       const currentUser = await User.findOne({
-        twitterId: profile._json.id_str
+        twitterId: profile._json.id_str,
       });
 
       if (!currentUser) {
@@ -40,18 +38,16 @@ passport.use(
           name: profile._json.name,
           screenName: profile._json.screen_name,
           twitterId: profile._json.id_str,
-          profilePhotoUrl: profile._json.profile_image_url
-        }).save()
+          profilePhotoUrl: profile._json.profile_image_url,
+        }).save();
 
         if (newUser) {
-          done(null, newUser)
-          return
+          done(null, newUser);
+          return;
         }
       }
 
-
-      done(null, currentUser)
-
+      done(null, currentUser);
     }
   )
 );

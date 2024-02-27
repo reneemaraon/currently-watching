@@ -1,46 +1,74 @@
-import db from "./db/conn.ts";
+// resolvers.js
+
+const User = require('./models/user');
+const Show = require('./models/show');
+const Review = require('./models/review');
 
 const resolvers = {
-  Record: {
-    id: (parent) => parent.id ?? parent._id,
-  },
   Query: {
-    async record(_, { id }) {
-      let collection = await db.collection("records");
-      let query = { _id: new ObjectId(id) };
-
-      return await collection.findOne(query);
+    getUserById: async (_, { userId }) => {
+      try {
+        const user = await User.findById(userId);
+        return user;
+      } catch (error) {
+        throw new Error('Failed to fetch user');
+      }
     },
-    async records(_, __, context) {
-      let collection = await db.collection("records");
-      const records = await collection.find({}).toArray();
-      return records;
+    getAllShows: async () => {
+      try {
+        const shows = await Show.find();
+        return shows;
+      } catch (error) {
+        throw new Error('Failed to fetch shows');
+      }
+    },
+    getShowById: async (_, { showId }) => {
+      try {
+        const show = await Show.findById(showId);
+        return show;
+      } catch (error) {
+        throw new Error('Failed to fetch show');
+      }
+    },
+    getReviewsByUserId: async (_, { userId }) => {
+      try {
+        const reviews = await Review.find({ user: userId });
+        return reviews;
+      } catch (error) {
+        throw new Error('Failed to fetch reviews');
+      }
     },
   },
   Mutation: {
-    async createRecord(_, { name, position, level }, context) {
-      let collection = await db.collection("records");
-      const insert = await collection.insertOne({ name, position, level });
-      if (insert.acknowledged)
-        return { name, position, level, id: insert.insertedId };
-      return null;
-    },
-    async updateRecord(_, args, context) {
-      const id = new ObjectId(args.id);
-      let query = { _id: new ObjectId(id) };
-      let collection = await db.collection("records");
-      const update = await collection.updateOne(query, { $set: { ...args } });
-
-      if (update.acknowledged) return await collection.findOne(query);
-
-      return null;
-    },
-    async deleteRecord(_, { id }, context) {
-      let collection = await db.collection("records");
-      const dbDelete = await collection.deleteOne({ _id: new ObjectId(id) });
-      return dbDelete.acknowledged && dbDelete.deletedCount == 1 ? true : false;
+    createReview: async (
+      _,
+      {
+        userId,
+        showId,
+        overallRating,
+        performanceRating,
+        narrativeRating,
+        cinematographyRating,
+        body,
+      }
+    ) => {
+      try {
+        const review = new Review({
+          user: userId,
+          show: showId,
+          overallRating,
+          performanceRating,
+          narrativeRating,
+          cinematographyRating,
+          body,
+        });
+        await review.save();
+        return review;
+      } catch (error) {
+        throw new Error('Failed to create review');
+      }
     },
   },
 };
 
-export default resolvers;
+module.exports = resolvers;

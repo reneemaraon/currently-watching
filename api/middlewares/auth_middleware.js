@@ -1,11 +1,11 @@
-const User = require('../models/User');
+const User = require('../models/user');
 
 // Middleware function for authentication using Passport
 const authenticate = (req, res, next) => {
-    if (req.isAuthenticated()) {
-      return next(); // User is authenticated, proceed to the next middleware or route handler
-    }
-    res.status(401).json({ message: 'Not logged in' }); // Not authenticated, send unauthorized response
+  if (req.isAuthenticated()) {
+    return next(); // User is authenticated, proceed to the next middleware or route handler
+  }
+  res.status(401).json({ message: 'Not logged in' }); // Not authenticated, send unauthorized response
 };
 
 const authorize = (req, res, next) => {
@@ -14,8 +14,7 @@ const authorize = (req, res, next) => {
   } else {
     res.status(403).json({ message: 'Unauthorized user type' }); // User is not an admin
   }
-}
-
+};
 
 module.exports = {
   authenticate,
