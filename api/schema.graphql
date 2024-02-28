@@ -26,6 +26,7 @@ type Review {
   _id: ID!
   user: User!
   show: Show!
+  title: String!
   overallRating: Float!
   performanceRating: Float!
   narrativeRating: Float!
@@ -34,20 +35,8 @@ type Review {
 }
 
 type Query {
-  getUserById(userId: ID!): User
-  getAllShows: [Show!]!
-  getShowById(showId: ID!): Show
-  getReviewsByUserId(userId: ID!): [Review!]!
+  reviews: [Review]
+  shows: [Show]
+  users: [User]
 }
 
-type Mutation {
-  createReview(
-    userId: ID!
-    showId: ID!
-    overallRating: Float!
-    performanceRating: Float!
-    narrativeRating: Float!
-    cinematographyRating: Float!
-    body: String!
-  ): Review!
-}
