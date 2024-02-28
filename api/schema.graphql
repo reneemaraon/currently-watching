@@ -17,9 +17,28 @@ enum UserRole {
 type Show {
   _id: ID!
   title: String!
-  description: String!
-  actors: [String!]!
+  synopsis: String!
+  imdbId: String
+  tmdbId: String!
+  tmdbPoster: String
+  tmdbBackdrop: String
+  originalName: String
+  mediaType: String
+  cast: [Actor!]
   releaseDate: String!
+  
+}
+
+type Actor {
+  _id: ID!
+  name: String!
+  imdbId: String
+  tmdbId: String!
+  profileImage: String
+  gender: String
+  homepage: String
+  biography: String
+  starredIn: [Show!]
 }
 
 type Review {
@@ -28,15 +47,26 @@ type Review {
   show: Show!
   title: String!
   overallRating: Float!
-  performanceRating: Float!
-  narrativeRating: Float!
-  cinematographyRating: Float!
+  actingRating: Float!
+  plotRating: Float!
+  visualsRating: Float!
   body: String!
 }
 
+input FilterInput {
+  page: Int
+  limit: Int
+  search: String
+}
+
 type Query {
-  reviews: [Review]
-  shows: [Show]
+  reviews(filter: FilterInput): [Review]
+  review(id: ID!): Review
+
+  shows(filter: FilterInput): [Show]
+  show(id: ID!): Show
+
   users: [User]
+  user(id: ID!): User
 }
 

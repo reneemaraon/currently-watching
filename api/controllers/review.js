@@ -1,13 +1,13 @@
-const Review = require("../models/review");
-const { BadRequestError, NotFoundError } = require("../errors");
-const { StatusCodes } = require("http-status-codes");
+const Review = require('../models/review');
+const { BadRequestError, NotFoundError } = require('../errors');
+const { StatusCodes } = require('http-status-codes');
 
 const getAllReviews = async (req, res) => {
   const { page = 1, limit = 20, search } = req.query;
 
   const searchConditions = {};
   if (search) {
-    searchConditions.title = { $regex: new RegExp(search, "i") };
+    searchConditions.title = { $regex: new RegExp(search, 'i') };
   }
 
   const reviews = await Review.find(searchConditions)
@@ -32,21 +32,21 @@ const getReview = async (req, res) => {
   const review = await Review.findOne({ _id: reviewId });
 
   if (!review) {
-    throw new NotFoundError("Review not found");
+    throw new NotFoundError('Review not found');
   }
   res.status(StatusCodes.OK).json({ review });
 };
 
 const createReview = async (req, res) => {
-  const { acting_rating, plot_rating, visuals_rating } = req.body;
-  const overall_rating = (
-    (acting_rating + plot_rating + visuals_rating) /
+  const { actingRating, plotRating, visualsRating } = req.body;
+  const overallRating = (
+    (actingRating + plotRating + visualsRating) /
     3
   ).toFixed(1);
   const review = await Review.create({
     ...req.body,
-    user_id: req.user,
-    overall_rating,
+    user: req.user,
+    overallRating,
   });
 
   res.status(StatusCodes.CREATED).json(review);
@@ -60,9 +60,9 @@ const deleteReview = async (req, res) => {
 
   const review = await Review.findOneAndDelete({ _id: reviewId });
   if (!review) {
-    throw new Error("Review not found");
+    throw new Error('Review not found');
   }
-  res.status(StatusCodes.OK).json({ msg: "Deleted" });
+  res.status(StatusCodes.OK).json({ msg: 'Deleted' });
 };
 
 const updateReview = async (req, res) => {
