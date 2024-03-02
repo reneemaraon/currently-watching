@@ -46,11 +46,11 @@ const resolvers = {
   },
   Review: {
     user: async (parent, args, context) => {
-      const user = await User.findById(parent.user_id);
+      const user = await User.findById(parent.user);
       return user;
     },
     show: async (parent, args, context) => {
-      const show = await Show.findById(parent.show_id);
+      const show = await Show.findById(parent.show);
       return show;
     },
   },
