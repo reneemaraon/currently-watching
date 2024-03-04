@@ -1,29 +1,21 @@
-import Icon from "../Common/Icon";
-import { HeartIcon, ShareIcon } from "../Common/IconList";
-import StarIcon from "../Common/Star";
+import Icon from '../Common/Icon';
+import { HeartIcon, ShareIcon } from '../Common/IconList';
+import StarIcon from '../Common/Star';
+import renderStars from '../Common/renderStars';
 
-const RatingRow = ({ ratingName }) => {
+const RatingRow = ({ ratingName, rating }) => {
+  const starObject = (
+    <div className="w-4 h-4">
+      <StarIcon />
+    </div>
+  );
   return (
     <div className="RatingRow pl-[3px] gap-2 justify-between items-center inline-flex">
       <div className="Acting text-gray-800 text-xs font-medium">
         {ratingName}
       </div>
-      <div className="max-[1000px]:hidden Rating w-[85.09px] justify-center items-center gap-[3px] flex">
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
+      <div className="max-[1000px]:hidden Rating justify-center items-center gap-[3px] flex">
+        {renderStars(rating, starObject)}
       </div>
       <div className="min-[1001px]:hidden Rating justify-center items-center gap-[3px] max-[600px]:gap-0 flex">
         <div className="Number text-xs font-bold">5</div>
@@ -41,7 +33,7 @@ const ReviewsListItem = ({ noImage, review }) => {
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
             bg-theme-base bg-opacity-70 rounded-[20px] border h-[230px] border-light-stroke justify-start items-start inline-flex
             max-[600px]:flex-col
-            ${noImage ? "max-[600px]:h-[210px]" : "max-[600px]:h-[350px]"}
+            ${noImage ? 'max-[600px]:h-[210px]' : 'max-[600px]:h-[350px]'}
             group
             ease-in`}
     >
@@ -55,7 +47,7 @@ const ReviewsListItem = ({ noImage, review }) => {
                 max-[600px]:w-full
                 grow
                 max-[600px]:h-[220px]
-                ${noImage && "hidden"}
+                ${noImage && 'hidden'}
             `}
       >
         <img
@@ -95,9 +87,9 @@ const ReviewsListItem = ({ noImage, review }) => {
         <div className="Footer w-full pt-1 justify-between items-center gap-4 inline-flex">
           <div className="RatingsCont w-full items-start inline-flex">
             <div className="Ratings w-full pt-1 justify-start items-end gap-5 max-[900px]:gap-2 flex">
-              <RatingRow ratingName="Acting" />
-              <RatingRow ratingName="Plot" />
-              <RatingRow ratingName="Visuals" />
+              <RatingRow rating={review.actingRating} ratingName="Acting" />
+              <RatingRow rating={review.plotRating} ratingName="Plot" />
+              <RatingRow rating={review.visualsRating} ratingName="Visuals" />
             </div>
           </div>
           <div className="justify-end items-start gap-3 flex">
