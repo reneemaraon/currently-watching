@@ -35,7 +35,7 @@ const RatingRow = ({ ratingName }) => {
   );
 };
 
-const ReviewsListItem = ({ noImage }) => {
+const ReviewsListItem = ({ noImage, review }) => {
   return (
     <div
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
@@ -60,11 +60,11 @@ const ReviewsListItem = ({ noImage }) => {
       >
         <img
           className="group-hover:scale-[1.01] ease-out group-hover:ease-in duration-200 object-cover align-center w-full h-full"
-          src="https://image.tmdb.org/t/p/w500/6KMhKm2ZHG8KUtg4lhsNUdt4iPh.jpg"
+          src={`https://image.tmdb.org/t/p/original${review.show.tmdbPoster}`}
         />
         <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
           <div className="Title grow shrink basis-0 text-white text-xs font-light sm:font-semibold">
-            Twenty Five Twenty One
+            {review.show.title}
           </div>
         </div>
       </div>
@@ -73,30 +73,24 @@ const ReviewsListItem = ({ noImage }) => {
           <div className="Profile justify-start items-center gap-2 sm:gap-3 flex">
             <img
               className="ProfilePhoto w-6 h-6 sm:w-10 sm:h-10 relative rounded-full"
-              src="https://via.placeholder.com/41x42"
+              src={review.user.profilePhotoUrl}
             />
             <div className="AccDetails max-[600px]:items-center max-[600px]:flex-row max-[600px]:gap-1.5 flex-col justify-center items-start gap-0 sm:gap-0.5 inline-flex">
               <div className="text-sm sm:text-base font-medium font-['Inter']">
-                Hwang Inyoup
+                {review.user.name}
               </div>
               <div className="Username text-slate-500 text-xs sm:text-sm">
-                @hi_high_hiy
+                @{review.user.screenName}
               </div>
             </div>
           </div>
         </div>
         <div className="max-[400px]:text-sm text-base sm:text-l font-medium">
-          This was such a great watch
+          {review.title}
         </div>
-        <div className="Preview text-zinc-500 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
-          I had a great time watching this drama. Whenever there was something
-          bla ba bla. So heartbreaking to see them not end up together and what
-          happ...Whenever there was something bla ba bla. So heartbreaking to
-          see them not Whenever there was something bla ba bla. So heartbreaking
-          to see them not Whenever there was something bla ba bla. So
-          heartbreaking to see them not Whenever there was something bla ba bla.
-          So heartbreaking to see them not Whenever there was something bla ba
-          bla. So heartbreaking to see them not{" "}
+        <div className="Preview grow text-zinc-500 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
+          {review.body}
+          {/* pending fix after implementing tiptap */}
         </div>
         <div className="Footer w-full pt-1 justify-between items-center gap-4 inline-flex">
           <div className="RatingsCont w-full items-start inline-flex">

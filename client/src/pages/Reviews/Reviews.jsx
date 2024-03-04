@@ -1,16 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import CustomButton from '../Common/CustomButton';
-import ReviewListItem from './ReviewListItem';
-import { useReviewsContext } from '../../context/ReviewContext';
-import { useEffect } from 'react';
+import CustomButton from "../Common/CustomButton";
+import ReviewListItem from "./ReviewListItem";
+import { useReviewsContext } from "../../context/ReviewContext";
+import { useEffect } from "react";
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
   const { error, reviews, loading } = useReviewsContext();
 
   const handleClick = () => {
-    navigate('/create-review');
+    navigate("/create-review");
   };
 
   if (loading) {
@@ -20,10 +20,6 @@ const ReviewsPage = () => {
   if (error) {
     return <div>Error</div>;
   }
-
-  useEffect(() => {
-    console.log(reviews);
-  }, [reviews]);
 
   return (
     <div className="w-full max-w-[1200px] px-16 max-[900px]:px-8 max-[600px]:px-5 py-2 sm:py-8 flex-col justify-start items-center gap-24 inline-flex">
@@ -47,7 +43,7 @@ const ReviewsPage = () => {
         <div className="ReviewsList self-stretch h-[920px] px-0.5 sm:px-2.5 flex-col justify-start items-start gap-5 flex">
           {reviews &&
             reviews.map((review) => {
-              return <ReviewListItem>hi</ReviewListItem>;
+              return <ReviewListItem review={review}>hi</ReviewListItem>;
             })}
         </div>
       </div>

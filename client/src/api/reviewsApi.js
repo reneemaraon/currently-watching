@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client';
-import axios from 'axios';
+import { gql } from "@apollo/client";
+import axios from "axios";
 
 export const GET_REVIEWS_LIST = gql`
   query ReviewsList {
@@ -20,13 +20,14 @@ export const GET_REVIEWS_LIST = gql`
         _id
         name
         screenName
+        profilePhotoUrl
       }
     }
   }
 `;
 
 export const getReviewsRequest = async (params) =>
-  await axios.get('/api/v1/reviews/');
+  await axios.get("/api/v1/reviews/");
 
 export const getReviewRequest = async (id) =>
-  await axios.get('/api/v1/reviews/' + id);
+  await axios.get("/api/v1/reviews/" + id);
