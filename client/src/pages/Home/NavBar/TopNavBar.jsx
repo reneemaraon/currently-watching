@@ -3,7 +3,8 @@ import { useAuthContext } from '../../../context/AuthContext';
 import ProfileView from './ProfileDropdown';
 import CustomButton from '../../Common/CustomButton';
 import Icon from '../../Common/Icon';
-import { TwitterIcon, SearchIcon } from '../../Common/IconList';
+import { TwitterIcon } from '../../Common/IconList';
+import SearchBar from './SearchBar';
 
 const LogInButton = ({ login }) => (
   <>
@@ -45,23 +46,7 @@ const TopNavBar = ({ toggleSidebar }) => {
             />
           </svg>
         </div>
-
-        {/* searchbar */}
-        <div className="max-[600px]:hidden grow w-full max-w-[260px] sm:max-w-[320px] px-3 py-2.5 sm:px-5 sm:py-3.5 bg-theme-base rounded-lg justify-start items-center gap-5 flex">
-          <div className="pr-2.5 justify-start items-center gap-3 flex">
-            <Icon
-              fill="fill-none stroke-2 stroke-text-dark"
-              sizeRules="h-3.5 w-3.5"
-            >
-              <SearchIcon />
-            </Icon>
-
-            <div className=" text-sm sm:text-base font-normal leading-tight">
-              Search by Keyword
-            </div>
-          </div>
-          {/* searchbar end */}
-        </div>
+        <SearchBar />
       </div>
       {user ? (
         <ProfileView
