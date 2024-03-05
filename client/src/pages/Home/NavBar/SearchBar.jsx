@@ -2,14 +2,22 @@ import { useState } from 'react';
 import Icon from '../../Common/Icon';
 import { SearchIcon } from '../../Common/IconList';
 import SearchResult from './SearchResult';
+import { useSearchContext } from '../../../context/SearchContext';
+
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchTerm, setSearchTerm, refetchResults, searchResults, loading } =
+    useSearchContext();
   const [isFocused, setIsFocused] = useState(false);
-
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -17,6 +25,13 @@ const SearchBar = () => {
 
   const handleBlur = () => {
     setIsFocused(false);
+  };
+
+  const debouncedRefetchResults = debounce(refetchResults, 800);
+
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+    debouncedRefetchResults();
   };
 
   return (
@@ -47,14 +62,28 @@ const SearchBar = () => {
       </div>
       <div
         className={`${
-          isFocused ? 'block' : 'hidden'
-        }  py-1 w-full min-w-[500px] overflow-hidden absolute top-full left-0`}
+          isFocused ? 'block' : 'block'
+        }  py-1 w-full min-w-[400px] overflow-hidden absolute top-full left-0`}
       >
-        <div className="inline-flex flex-col gap-2 w-full rounded-xl bg-theme-base p-2">
-          <SearchResult />
-          <SearchResult />
-          <SearchResult />
-        </div>
+        {searchTerm.length > 0 && (
+          <div className="inline-flex flex-col gap-2 w-full rounded-md bg-light-stroke p-2">
+            {searchResults.length === 0 && (
+              <div className="w-full h-[50px] text-sm text-light-text inline-flex px-8 items-center">
+                No shows match your search.
+              </div>
+            )}
+            {loading && (
+              <div className="w-full h-[50px] text-sm text-light-text inline-flex px-8 items-center">
+                Loading...
+              </div>
+            )}
+            {!loading &&
+              searchResults &&
+              searchResults.map((searchResult) => (
+                <SearchResult searchItem={searchResult} />
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
