@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import Icon from '../../Common/Icon';
-import { SearchIcon } from '../../Common/IconList';
-import SearchResult from './SearchResult';
-import { useSearchContext } from '../../../context/SearchContext';
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import Icon from "../../Common/Icon";
+import { SearchIcon } from "../../Common/IconList";
+import SearchResult from "./SearchResult";
+import { useSearchContext } from "../../../context/SearchContext";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -18,13 +20,31 @@ const SearchBar = () => {
   const { searchTerm, setSearchTerm, refetchResults, searchResults, loading } =
     useSearchContext();
   const [isFocused, setIsFocused] = useState(false);
+  const [isSearchListVisible, setSearchListVisible] = useState(false);
+  const searchListRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleFocus = () => {
     setIsFocused(true);
+    setSearchListVisible(true);
   };
 
   const handleBlur = () => {
     setIsFocused(false);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (
+      searchListRef.current &&
+      !searchListRef.current.contains(event.target)
+    ) {
+      setSearchListVisible(false);
+    }
+  };
+
+  const onSearchItemClick = (id) => {
+    navigate(`shows/${id}`);
+    setSearchListVisible(false);
   };
 
   const debouncedRefetchResults = debounce(refetchResults, 800);
@@ -34,11 +54,18 @@ const SearchBar = () => {
     debouncedRefetchResults();
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div ref={searchListRef} className="relative">
       <div
         className={`${
-          isFocused ? 'border-brand-gray' : 'border-transparent'
+          isFocused ? "border-brand-gray" : "border-transparent"
         }  border max-[600px]:hidden grow w-full max-w-[260px] sm:max-w-[320px] px-3 sm:px-5 sm:py-3.5 bg-theme-base rounded-xl justify-start items-center gap-5 flex`}
       >
         <div className="pr-2.5 justify-start items-center gap-3 flex">
@@ -62,7 +89,7 @@ const SearchBar = () => {
       </div>
       <div
         className={`${
-          isFocused ? 'block' : 'hidden'
+          isFocused || isSearchListVisible ? "block" : "hidden"
         }  py-1 w-full min-w-[400px] overflow-hidden absolute top-full left-0`}
       >
         {searchTerm.length > 0 && (
@@ -80,7 +107,10 @@ const SearchBar = () => {
             {!loading &&
               searchResults &&
               searchResults.map((searchResult) => (
-                <SearchResult searchItem={searchResult} />
+                <SearchResult
+                  onClick={() => onSearchItemClick(searchResult._id)}
+                  searchItem={searchResult}
+                />
               ))}
           </div>
         )}
