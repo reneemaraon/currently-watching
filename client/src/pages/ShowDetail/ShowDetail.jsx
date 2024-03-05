@@ -78,10 +78,10 @@ const ShowDetail = () => {
                 </div>
               </div>
               <div className="CommentList w-full sm:px-2 flex-col justify-center items-start gap-4 flex">
+                {/* <ReviewsListItem noImage />
                 <ReviewsListItem noImage />
                 <ReviewsListItem noImage />
-                <ReviewsListItem noImage />
-                <ReviewsListItem noImage />
+                <ReviewsListItem noImage /> */}
                 <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
                   <CustomButton
                     styleSet="light"

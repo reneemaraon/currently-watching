@@ -1,4 +1,5 @@
 import StarIcon from '../../Common/Star';
+import { useNavigate } from 'react-router-dom';
 
 const RatingType = ({ name, rate }) => (
   <div className="justify-center items-center gap-[3px] flex">
@@ -11,9 +12,18 @@ const RatingType = ({ name, rate }) => (
 );
 
 const SearchResult = ({ searchItem }) => {
+  const navigate = useNavigate();
+
+  const onClickNavigate = () => {
+    navigate(`shows/${searchItem._id}`);
+  };
+
   return (
-    <div className="w-full inline-flex">
-      <div className="bg-theme-base max-[500px]:h-[245px] h-[140px] w-full max-w-[800px] overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
+    <div
+      onClick={onClickNavigate}
+      className="w-full inline-flex hover:cursor-pointer"
+    >
+      <div className="bg-theme-base bg-opacity-75 hover:bg-opacity-100 max-[500px]:h-[245px] h-[140px] w-full max-w-[800px] overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
         <div className="w-1/3 h-full">
           <img
             className="object-cover w-full h-full"

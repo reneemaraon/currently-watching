@@ -62,11 +62,11 @@ const SearchBar = () => {
       </div>
       <div
         className={`${
-          isFocused ? 'block' : 'block'
+          isFocused ? 'block' : 'hidden'
         }  py-1 w-full min-w-[400px] overflow-hidden absolute top-full left-0`}
       >
         {searchTerm.length > 0 && (
-          <div className="inline-flex flex-col gap-2 w-full rounded-md bg-light-stroke p-2">
+          <div className="inline-flex flex-col gap-1 w-full rounded-md bg-light-stroke p-1">
             {searchResults.length === 0 && (
               <div className="w-full h-[50px] text-sm text-light-text inline-flex px-8 items-center">
                 No shows match your search.
