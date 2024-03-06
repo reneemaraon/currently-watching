@@ -62,6 +62,7 @@ input FilterInput {
 type Query {
   reviews(filter: FilterInput): [Review]
   review(id: ID!): Review
+  showReviews(id: ID!, filter: FilterInput): [Review]
 
   shows(filter: FilterInput): [Show]
   show(id: ID!): Show

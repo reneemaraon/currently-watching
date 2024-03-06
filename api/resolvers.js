@@ -39,6 +39,17 @@ const resolvers = {
         .skip(options.skip);
       return reviews;
     },
+    showReviews: async (_, { id, filter = {} }) => {
+      const { searchConditions, options } = generateSearchConditions(filter, [
+        'title',
+        'body',
+      ]);
+      searchConditions.show = id;
+      let reviews = await Review.find(searchConditions)
+        .limit(options.limit)
+        .skip(options.skip);
+      return reviews;
+    },
     review: async (_, { id }) => {
       let review = await Review.findOne({ _id: id });
       return review;

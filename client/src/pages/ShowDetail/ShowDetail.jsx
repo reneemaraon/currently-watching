@@ -12,10 +12,18 @@ import LoadingAnimation from '../Common/LoadingAnimation';
 
 const ShowDetail = () => {
   const { id } = useParams();
-  const { getShow, show, loading } = useShowDetailContext();
+  const {
+    showReviewsLoading,
+    showReviewsError,
+    showReviews,
+    setShowId,
+    show,
+    loading,
+    error,
+  } = useShowDetailContext();
 
   useEffect(() => {
-    getShow(id);
+    setShowId(id);
   }, [id]);
 
   if (loading) {
@@ -101,10 +109,10 @@ const ShowDetail = () => {
                   </div>
                 </div>
                 <div className="CommentList w-full sm:px-2 flex-col justify-center items-start gap-4 flex">
-                  {/* <ReviewsListItem noImage />
-                  <ReviewsListItem noImage />
-                  <ReviewsListItem noImage />
-                  <ReviewsListItem noImage /> */}
+                  {showReviews &&
+                    showReviews.map((showReview) => (
+                      <ReviewsListItem review={showReview} noImage />
+                    ))}
                   <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
                     <CustomButton
                       styleSet="light"
