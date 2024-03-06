@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import PopularCarousel from "./PopularCarousel";
-import { useShowsContext } from "../../../context/ShowContext";
-import SectionHeader from "./SectionHeader";
+import PopularCarousel from './PopularCarousel';
+import { useShowsContext } from '../../../context/ShowsContext';
+import SectionHeader from './SectionHeader';
 
 const PopularSection = () => {
   const [active, setActive] = useState(2);

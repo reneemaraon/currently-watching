@@ -13,7 +13,6 @@ export const ShowsProvider = ({ children }) => {
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [shows, setShows] = useState({ shows: [] });
-  const [show, setShow] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -21,18 +20,6 @@ export const ShowsProvider = ({ children }) => {
       setShows(res.data);
     })();
   }, []);
-
-  const getShow = async (id) => {
-    setIsLoading(true);
-    try {
-      const res = await getShowRequest(id);
-      setShow(res.data.show);
-    } catch (error) {
-      console.log(error);
-      setError(true);
-    }
-    setIsLoading(false);
-  };
 
   const getShows = async (params) => {
     setIsLoading(true);
@@ -47,9 +34,7 @@ export const ShowsProvider = ({ children }) => {
   };
 
   return (
-    <showContext.Provider
-      value={{ loading, error, shows, show, getShow, getShows }}
-    >
+    <showContext.Provider value={{ loading, error, shows, getShows }}>
       {children}
     </showContext.Provider>
   );

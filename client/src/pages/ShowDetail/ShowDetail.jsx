@@ -6,13 +6,13 @@ import { HeartIcon, ShareIcon } from '../Common/IconList';
 import StatContainer from './StatContainer';
 import ReviewsListItem from '../Reviews/ReviewListItem';
 import CustomButton from '../Common/CustomButton';
-import { useShowsContext } from '../../context/ShowContext';
+import { useShowDetailContext } from '../../context/ShowDetailContext';
 import commaSeparatedString from '../Common/commaSeparate';
 import LoadingAnimation from '../Common/LoadingAnimation';
 
 const ShowDetail = () => {
   const { id } = useParams();
-  const { getShow, show, loading } = useShowsContext();
+  const { getShow, show, loading } = useShowDetailContext();
 
   useEffect(() => {
     getShow(id);
