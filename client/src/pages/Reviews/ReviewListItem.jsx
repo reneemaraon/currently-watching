@@ -52,7 +52,7 @@ const ReviewsListItem = ({ noImage, review }) => {
       >
         <img
           className="group-hover:scale-[1.01] ease-out group-hover:ease-in duration-200 object-cover align-center w-full h-full"
-          src={`https://image.tmdb.org/t/p/original${review.show.tmdbPoster}`}
+          src={`https://image.tmdb.org/t/p/w500${review.show.tmdbPoster}`}
         />
         <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
           <div className="Title grow shrink basis-0 text-white text-xs font-light sm:font-semibold">

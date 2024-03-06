@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const fetchUser = async () => {
+    setIsLoading(true);
     try {
       const { data } = await axios.get(`/api/v1/auth/showMe`);
       saveUser(data.user);
