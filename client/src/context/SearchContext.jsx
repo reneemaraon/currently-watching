@@ -13,6 +13,8 @@ export const useSearchContext = () => {
 export const SearchProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [lastSelected, setSelectedItem] = useState(null);
+
   const {
     loading,
     error,
@@ -37,6 +39,8 @@ export const SearchProvider = ({ children }) => {
         refetchResults,
         error,
         loading,
+        setSelectedItem,
+        lastSelected,
       }}
     >
       {children}

@@ -3,6 +3,7 @@ import MainContentEditor from './components/RichTextEditorBody';
 import StarInput from './components/StarInput';
 import CustomButton from '../Common/CustomButton';
 import StarIcon from '../Common/Star';
+import commaSeparatedString from '../Common/commaSeparate';
 
 const RatingType = ({ name, rate }) => (
   <div className="justify-center items-center gap-[3px] flex">
@@ -14,34 +15,26 @@ const RatingType = ({ name, rate }) => (
   </div>
 );
 
-export const ShowDetail = () => {
+export const ShowDetail = ({ show }) => {
   return (
     <div className="w-full inline-flex">
       <div className="max-[500px]:h-[285px] h-[175px] w-full max-w-[800px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
-        <div className="max-[500px]:w-full w-1/3 max-[500px]:h-1/3 h-full">
+        <div className="max-[500px]:w-full w-3/5 max-[500px]:h-1/3 h-full">
           <img
             className="object-cover w-full h-full"
-            src="https://via.placeholder.com/220x214"
+            src={`https://image.tmdb.org/t/p/w500${show.tmdbPoster}`}
           />
         </div>
         <div className="h-full max-[500px]:h-2/3 w-full p-3">
           <div className="w-full h-full flex flex-col gap-1">
-            <div className="text-l md:text-l font-semibold">
-              The Glory (2022)
-            </div>
+            <div className="text-l md:text-l font-semibold">{show.title}</div>
             <div className="text-[12px] h-5 font-normal w-full">
-              Ji Changwook, Choi Sungeun, Hwang Inyoup
+              {commaSeparatedString(
+                show.cast.map((cast) => cast.name).slice(0, 3)
+              )}
             </div>
             <div className="Preview grow overflow-hidden">
-              <div className="info-text font-normal">
-                I had a great time watching this drama. Whenever there was
-                something bla ba bla. So heartbreaking to see them not end up
-                together and what happ I had a great time watching this drama.
-                Whenever there was something bla ba bla. So heartbreaking to see
-                them not end up together and what happI had a great time
-                watching this drama. Whenever there was something bla ba bla. So
-                heartbreaking to see them not end up together and what happ...
-              </div>
+              <div className="info-text font-normal">{show.synopsis}</div>
             </div>
             <div className="pt-3 border-t border-zinc-300 border-opacity-50 justify-start items-start gap-2.5 inline-flex">
               <RatingType name="Acting" rate="4.2" />
@@ -62,7 +55,7 @@ export default function CreateReview() {
         <div className="pt-4 max-[400px]:pt-2 pb-6 w-full flex-col justify-start gap-4 inline-flex">
           <div className="pl-1 section-header-text">Your Review</div>
         </div>
-        <ShowDetail />
+        {/* <ShowDetail /> */}
         <StarInput />
         <div className="w-full py-8 border-b flex-col justify-center items-start gap-5 flex">
           <div className="w-full h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">

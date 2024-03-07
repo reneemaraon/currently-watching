@@ -67,9 +67,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/create-review" element={<CreateReview />} />
             <Route path="/my-lists" element={<MyListsPage />} />
             <Route path="/reviews/:id" element={<ReviewDetail />} />
+            <Route path="/shows/:id/create-review" element={<CreateReview />} />
             <Route path="/shows/:id" element={<ShowDetail />} />
             <Route path="/users/:id" element={<ProfilePage />} />
           </Routes>

@@ -5,6 +5,7 @@ import CustomButton from '../../Common/CustomButton';
 import Icon from '../../Common/Icon';
 import { TwitterIcon } from '../../Common/IconList';
 import SearchBar from './SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 const LogInButton = ({ login }) => (
   <>
@@ -18,10 +19,15 @@ const LogInButton = ({ login }) => (
 );
 
 const TopNavBar = ({ toggleSidebar }) => {
+  const navigate = useNavigate();
   const { user } = useAuthContext();
 
   const onTwitterLogin = async (e) => {
     window.open('http://127.0.0.1:3000/api/v1/auth/twitter/', '_self');
+  };
+
+  const navigateToShow = (id) => {
+    navigate(`shows/${id}`);
   };
 
   return (
@@ -46,7 +52,9 @@ const TopNavBar = ({ toggleSidebar }) => {
             />
           </svg>
         </div>
-        <SearchBar />
+        <div className="max-[600px]:hidden grow w-full max-w-[260px] sm:max-w-[320px]">
+          <SearchBar onItemClick={navigateToShow} />
+        </div>
       </div>
       {user ? (
         <ProfileView

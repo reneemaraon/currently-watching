@@ -16,13 +16,18 @@ function debounce(func, delay) {
   };
 }
 
-const SearchBar = () => {
-  const { searchTerm, setSearchTerm, refetchResults, searchResults, loading } =
-    useSearchContext();
+const SearchBar = ({ onItemClick }) => {
+  const {
+    searchTerm,
+    setSelectedItem,
+    setSearchTerm,
+    refetchResults,
+    searchResults,
+    loading,
+  } = useSearchContext();
   const [isFocused, setIsFocused] = useState(false);
   const [isSearchListVisible, setSearchListVisible] = useState(false);
   const searchListRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -42,8 +47,10 @@ const SearchBar = () => {
     }
   };
 
-  const onSearchItemClick = (id) => {
-    navigate(`shows/${id}`);
+  const onSearchItemClick = (searchResult) => {
+    const { _id: id } = searchResult;
+    onItemClick(id);
+    setSelectedItem(searchResult);
     setSearchTerm('');
     setSearchListVisible(false);
   };
@@ -66,8 +73,8 @@ const SearchBar = () => {
     <div ref={searchListRef} className="relative">
       <div
         className={`${
-          isFocused ? 'border-brand-gray' : 'border-transparent'
-        }  border max-[600px]:hidden grow w-full max-w-[260px] sm:max-w-[320px] px-3 sm:px-5 sm:py-3.5 bg-theme-base rounded-xl justify-start items-center gap-5 flex`}
+          isFocused ? 'border-brand-gray' : 'border-light-stroke'
+        }  border px-3 sm:px-5 sm:py-3.5 w-full bg-theme-base rounded-xl justify-start items-center gap-5 flex`}
       >
         <div className="pr-2.5 justify-start items-center gap-3 flex">
           <Icon
@@ -81,7 +88,7 @@ const SearchBar = () => {
             type="text"
             className="text-sm sm:text-base placeholder-lighter-text leading-tight bg-transparent focus:outline-none"
             placeholder="Search by Keyword"
-            value={searchTerm}
+            value={isFocused ? searchTerm : ''}
             onChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -109,7 +116,7 @@ const SearchBar = () => {
               searchResults &&
               searchResults.map((searchResult) => (
                 <SearchResult
-                  onClick={() => onSearchItemClick(searchResult._id)}
+                  onClick={() => onSearchItemClick(searchResult)}
                   searchItem={searchResult}
                 />
               ))}

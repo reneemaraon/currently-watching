@@ -42,7 +42,7 @@ export const ShowDetailProvider = ({ children }) => {
     if (showData) {
       setShow(showData.show); // Assuming your data structure has a 'searchResults' field
     }
-  }, [showReviewsData]);
+  }, [showData]);
 
   useEffect(() => {
     if (showId) {
