@@ -99,7 +99,7 @@ const ShowDetail = () => {
                       Reviews
                     </span>
                     <span className="text-neutral-300 text-2xl font-medium font-['Inter']">
-                      (20)
+                      ({show.reviewsCount})
                     </span>
                   </div>
                   <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex">
@@ -113,14 +113,17 @@ const ShowDetail = () => {
                     showReviews.map((showReview) => (
                       <ReviewsListItem review={showReview} noImage />
                     ))}
+
                   <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
-                    <CustomButton
-                      styleSet="light"
-                      size="defaultResize"
-                      edge="rounded"
-                    >
-                      Load more
-                    </CustomButton>
+                    {showReviews && show.reviewsCount > showReviews.length && (
+                      <CustomButton
+                        styleSet="light"
+                        size="defaultResize"
+                        edge="rounded"
+                      >
+                        Load more
+                      </CustomButton>
+                    )}
                   </div>
                 </div>
               </div>

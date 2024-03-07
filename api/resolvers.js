@@ -65,6 +65,12 @@ const resolvers = {
       return show;
     },
   },
+  Show: {
+    reviewsCount: async (parent, args, context) => {
+      const reviews = await Review.find({ show: parent._id });
+      return reviews.length;
+    },
+  },
   Mutation: {},
 };
 

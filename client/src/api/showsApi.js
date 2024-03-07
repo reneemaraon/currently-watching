@@ -31,3 +31,19 @@ export const GET_SHOW_REVIEWS = gql`
     }
   }
 `;
+
+export const GET_SHOW = gql`
+  query GetShow($id: ID!) {
+    show(id: $id) {
+      _id
+      title
+      synopsis
+      tmdbPoster
+      cast {
+        _id
+        name
+      }
+      reviewsCount
+    }
+  }
+`;

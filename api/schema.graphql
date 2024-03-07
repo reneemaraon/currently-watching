@@ -23,6 +23,7 @@ type Show {
   tmdbPoster: String
   tmdbBackdrop: String
   originalName: String
+  reviewsCount: Int
   mediaType: String
   cast: [Actor!]
   releaseDate: String!
