@@ -6,7 +6,7 @@ import { useReviewsContext } from '../../context/ReviewContext';
 import { useEffect, useState } from 'react';
 import PopupModal from '../Common/PopupModal';
 import SearchBar from '../Home/NavBar/SearchBar';
-import { ShowDetail } from '../CreateReview/CreateReview';
+import CreateReviewShowDetail from '../CreateReview/components/CreateReviewShowDetail';
 import { useSearchContext } from '../../context/SearchContext';
 
 const ReviewsPage = () => {
@@ -39,10 +39,14 @@ const ReviewsPage = () => {
           <div className="gap-4 pb-2 flex-col inline-flex items-center w-full">
             <p className="title-text font-normal">Write Review</p>
             <p className="important-small-text font-normal">
-              Choose a drama you wish to write a review for.
+              {show && lastSelected
+                ? 'You are writing a review for:'
+                : 'Choose a drama you wish to write a review for.'}
             </p>
           </div>
-          {show && lastSelected && <ShowDetail show={lastSelected} />}
+          {show && lastSelected && (
+            <CreateReviewShowDetail show={lastSelected} />
+          )}
           {!show && <SearchBar onItemClick={setShowId} />}
           <CustomButton disabled={show ? false : true} onClick={startReview}>
             Start review
