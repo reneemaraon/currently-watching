@@ -98,7 +98,7 @@ const SearchBar = ({ onItemClick }) => {
       <div
         className={`${
           isFocused || isSearchListVisible ? 'block' : 'hidden'
-        }  py-1 w-full min-w-[400px] overflow-hidden absolute top-full left-0`}
+        }  py-1 w-full min-w-[400px] overflow-hidden absolute top-full left-0 z-[90]`}
       >
         {searchTerm.length > 0 && (
           <div className="inline-flex flex-col gap-1 w-full rounded-md bg-light-stroke p-1">

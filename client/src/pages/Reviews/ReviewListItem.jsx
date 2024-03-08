@@ -31,9 +31,9 @@ const ReviewsListItem = ({ noImage, review }) => {
   return (
     <div
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
-            bg-theme-base bg-opacity-70 rounded-[20px] border h-[230px] border-light-stroke justify-start items-start inline-flex
+            bg-theme-base bg-opacity-70 rounded-[20px] border h-[200px] border-light-stroke justify-start items-start inline-flex
             max-[600px]:flex-col
-            ${noImage ? 'max-[600px]:h-[210px]' : 'max-[600px]:h-[350px]'}
+            ${noImage ? 'max-[600px]:h-[210px]' : 'max-[600px]:h-[270px]'}
             group
             ease-in`}
     >
@@ -43,9 +43,8 @@ const ReviewsListItem = ({ noImage, review }) => {
                 rounded-l-[20px] h-full w-full flex-col justify-start items-center inline-flex
                 max-[600px]:rounded-t-[20px]
                 max-[600px]:rounded-bl-[0px]
-                min-[601px]:max-w-[240px]
+                min-[601px]:max-w-[220px]
                 max-[600px]:w-full
-                grow
                 max-[600px]:h-[220px]
                 ${noImage && 'hidden'}
             `}
@@ -60,31 +59,34 @@ const ReviewsListItem = ({ noImage, review }) => {
           </div>
         </div>
       </div>
-      <div className="ReviewDetails w-full h-full py-4 px-2.5 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
+      <div className="ReviewDetails w-full h-full py-4 px-3 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
         <div className="Author justify-between items-start inline-flex">
-          <div className="Profile justify-start items-center gap-2 sm:gap-3 flex">
+          <div className="Profile justify-start gap-2 sm:gap-3 flex">
             <img
-              className="ProfilePhoto w-6 h-6 sm:w-10 sm:h-10 relative rounded-full"
+              className="ProfilePhoto w-6 h-6 sm:w-8 sm:h-8 relative rounded-full"
               src={review.user.profilePhotoUrl}
             />
-            <div className="AccDetails max-[600px]:items-center max-[600px]:flex-row max-[600px]:gap-1.5 flex-col justify-center items-start gap-0 sm:gap-0.5 inline-flex">
-              <div className="text-sm sm:text-base font-medium font-['Inter']">
-                {review.user.name}
+            <div className="inline-flex flex-col gap-0">
+              <div className="AccDetails max-[600px]:items-center max-[600px]:flex-row gap-1.5 h-5 items-center inline-flex">
+                <div className="leading-3 text-sm sm:text-base font-medium font-['Inter']">
+                  {review.user.name}
+                </div>
+                <div className="Username leading-3 font-light text-light-text text-xs sm:text-sm">
+                  @{review.user.screenName}
+                </div>
               </div>
-              <div className="Username text-slate-500 text-xs sm:text-sm">
-                @{review.user.screenName}
-              </div>
+              <div className="date"></div>
             </div>
           </div>
         </div>
         <div className="max-[400px]:text-sm text-base sm:text-l font-medium">
           {review.title}
         </div>
-        <div className="Preview grow text-zinc-500 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
+        <div className="Preview grow text-light-text max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
           {review.body}
           {/* pending fix after implementing tiptap */}
         </div>
-        <div className="Footer w-full pt-1 justify-between items-center gap-4 inline-flex">
+        <div className="Footer w-full pt-1 justify-between items-end gap-4 inline-flex">
           <div className="RatingsCont w-full items-start inline-flex">
             <div className="Ratings w-full pt-1 justify-start items-end gap-5 max-[900px]:gap-2 flex">
               <RatingRow rating={review.actingRating} ratingName="Acting" />

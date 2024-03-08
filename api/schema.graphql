@@ -51,6 +51,7 @@ type Review {
   actingRating: Float!
   plotRating: Float!
   visualsRating: Float!
+  createdAt: String!
   body: String!
 }
 
