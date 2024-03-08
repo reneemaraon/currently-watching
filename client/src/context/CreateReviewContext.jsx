@@ -13,6 +13,11 @@ export const useCreateReviewContext = () => {
 export const CreateReviewContext = ({ children }) => {
   const [show, setShow] = useState(null);
   const [showId, setShowId] = useState(null);
+  const [actingRating, setActingRating] = useState(null);
+  const [plotRating, setPlotRating] = useState(null);
+  const [visualsRating, setVisualsRating] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [body, setBody] = useState(null);
 
   const {
     loading,
@@ -41,6 +46,12 @@ export const CreateReviewContext = ({ children }) => {
         showId,
         setShowId,
         loading,
+        actingRating,
+        setActingRating,
+        plotRating,
+        setPlotRating,
+        visualsRating,
+        setVisualsRating,
         error,
         show,
       }}
