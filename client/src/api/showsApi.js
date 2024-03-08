@@ -39,6 +39,7 @@ export const GET_SHOW = gql`
       title
       synopsis
       tmdbPoster
+      tmdbBackdrop
       cast {
         _id
         name
