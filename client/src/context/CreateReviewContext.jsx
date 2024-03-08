@@ -52,6 +52,10 @@ export const CreateReviewContext = ({ children }) => {
         setPlotRating,
         visualsRating,
         setVisualsRating,
+        title,
+        setTitle,
+        body,
+        setBody,
         error,
         show,
       }}

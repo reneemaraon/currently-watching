@@ -6,10 +6,11 @@ import StarInput from './components/StarInput';
 import CustomButton from '../Common/CustomButton';
 import CreateReviewShowDetail from './components/CreateReviewShowDetail';
 import { useCreateReviewContext } from '../../context/CreateReviewContext';
+import TextInput from './components/TextInput';
 
 const CreateReview = () => {
   const { id } = useParams();
-  const { show, setShowId } = useCreateReviewContext();
+  const { show, setShowId, title, setTitle } = useCreateReviewContext();
 
   useEffect(() => {
     setShowId(id);
@@ -37,15 +38,11 @@ const CreateReview = () => {
               Share your thoughts of this drama below.
             </div>
           </div>
-          <div className="w-full h-[87px] flex-col justify-center items-start gap-2.5 flex">
+          <div className="w-full h-20 flex-col justify-center items-start gap-2.5 flex">
             <div className="flex-col justify-start items-start gap-1 flex">
               <div className="subheader-text">Headline</div>
             </div>
-            <div className="w-full max-w-[600px] flex-col justify-center items-start gap-2.5 flex input-area">
-              <div className="text-gray-800 text-base font-normal leading-tight">
-                This was bearable to watch
-              </div>
-            </div>
+            <TextInput value={title} onValueChange={setTitle} />
           </div>
           <div className="w-full flex-col justify-center items-start gap-2.5 flex">
             <div className="flex-col justify-start items-start gap-1 flex">
