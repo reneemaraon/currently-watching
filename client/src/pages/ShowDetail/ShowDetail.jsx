@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import CircularButton from '../Common/CircleButton';
 import { HeartIcon, ShareIcon } from '../Common/IconList';
@@ -12,6 +12,7 @@ import LoadingAnimation from '../Common/LoadingAnimation';
 
 const ShowDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const {
     showReviewsLoading,
     showReviewsError,
@@ -21,6 +22,10 @@ const ShowDetail = () => {
     loading,
     error,
   } = useShowDetailContext();
+
+  const goToAddReview = () => {
+    navigate(`/shows/${id}/create-review`);
+  };
 
   useEffect(() => {
     setShowId(id);
@@ -103,7 +108,11 @@ const ShowDetail = () => {
                     </span>
                   </div>
                   <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex">
-                    <CustomButton styleSet="dark" size="defaultResize">
+                    <CustomButton
+                      onClick={goToAddReview}
+                      styleSet="dark"
+                      size="defaultResize"
+                    >
                       + Add Review
                     </CustomButton>
                   </div>

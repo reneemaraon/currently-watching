@@ -118,6 +118,7 @@
         @apply h-7 px-2 py-1 sm:h-8 sm:px-2.5 sm:py-2 gap-1 font-light text-xs;
     }
 
+
 }
 
 body {
@@ -125,3 +126,10 @@ body {
     overflow-x: hidden;
 }
 
+.ProseMirror {
+    @apply focus:outline-text-dark pt-[75px] bg-theme-base py-10 px-3 sm:px-4 rounded-lg border border-light-stroke min-h-[300px]
+  }
+
+  .ProseMirror-focused {
+    @apply border-brand-gray border focus:outline-none
+  }

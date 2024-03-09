@@ -17,7 +17,7 @@ export const CreateReviewContext = ({ children }) => {
   const [plotRating, setPlotRating] = useState(null);
   const [visualsRating, setVisualsRating] = useState(null);
   const [title, setTitle] = useState(null);
-  const [body, setBody] = useState(null);
+  const [body, setBody] = useState(``);
 
   const {
     loading,

@@ -10,7 +10,12 @@ import TextInput from './components/TextInput';
 
 const CreateReview = () => {
   const { id } = useParams();
-  const { show, setShowId, title, setTitle } = useCreateReviewContext();
+  const { show, setShowId, title, setTitle, body, setBody } =
+    useCreateReviewContext();
+
+  const onPublish = () => {
+    console.log(body);
+  };
 
   useEffect(() => {
     setShowId(id);
@@ -30,9 +35,6 @@ const CreateReview = () => {
           <div className="w-full h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
             <div>
               <span className="subheader-text">Write a narrative review </span>
-              <span className="text-zinc-500 text-xs font-normal">
-                (optional)
-              </span>
             </div>
             <div className="text-zinc-500 text-sm font-normal">
               Share your thoughts of this drama below.
@@ -48,13 +50,17 @@ const CreateReview = () => {
             <div className="flex-col justify-start items-start gap-1 flex">
               <div className="subheader-text">Body</div>
             </div>
-            <MainContentEditor />
+            <MainContentEditor value={body} setContent={setBody} />
           </div>
           <div className="px-2.5 py-[5px] justify-end items-start gap-[5px] inline-flex">
             <CustomButton size="defaultResize" styleSet="secondary">
               Cancel
             </CustomButton>
-            <CustomButton size="defaultResize" styleSet="primary">
+            <CustomButton
+              size="defaultResize"
+              onClick={onPublish}
+              styleSet="primary"
+            >
               Publish
             </CustomButton>
           </div>
