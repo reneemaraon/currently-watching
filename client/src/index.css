@@ -126,10 +126,19 @@ body {
     overflow-x: hidden;
 }
 
+ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+}
+
+li {
+    padding-left: 0.75rem; 
+}
+
 .ProseMirror {
-    @apply focus:outline-text-dark pt-[75px] bg-theme-base py-10 px-3 sm:px-4 rounded-lg border border-light-stroke min-h-[300px]
+    @apply w-full min-h-[250px]
   }
 
   .ProseMirror-focused {
-    @apply border-brand-gray border focus:outline-none
+    @apply focus:outline-none
   }

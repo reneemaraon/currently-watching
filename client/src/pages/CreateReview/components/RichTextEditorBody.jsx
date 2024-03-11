@@ -1,17 +1,25 @@
 import { EditorProvider, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import ListItem from '@tiptap/extension-list-item';
+import BulletList from '@tiptap/extension-bullet-list';
+import Underline from '@tiptap/extension-underline';
+import Document from '@tiptap/extension-document';
+import TextAlign from '@tiptap/extension-text-align';
+import Paragraph from '@tiptap/extension-paragraph';
+
+import Text from '@tiptap/extension-text';
 
 // define your extension array
 const extensions = [
-  StarterKit.configure({
-    bulletList: {
-      keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-    },
-    orderedList: {
-      keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-    },
+  StarterKit,
+  ListItem,
+  BulletList,
+  Underline,
+  Document,
+  Paragraph,
+  Text,
+  TextAlign.configure({
+    types: ['paragraph'],
   }),
 ];
 
@@ -26,11 +34,17 @@ const MainContentEditor = ({ value, setContent }) => {
     },
   });
   return (
-    <div className="relative editor min-h-[300px] w-full flex-col gap-4 flex">
-      <div className="z-50 absolute top-0 w-full">
+    <div
+      className={`${
+        editor.isFocused && 'border-brand-gray'
+      } min-h-[300px] w-full input-area flex-col justify-start items-start gap-4 flex`}
+    >
+      <div className="w-full">
         <EditorMenu editor={editor} />
       </div>
-      <EditorContent editor={editor} />
+      <div className="w-full" spellcheck="false">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 };
