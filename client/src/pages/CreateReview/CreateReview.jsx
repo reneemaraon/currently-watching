@@ -7,6 +7,7 @@ import CustomButton from '../Common/CustomButton';
 import CreateReviewShowDetail from './components/CreateReviewShowDetail';
 import { useCreateReviewContext } from '../../context/CreateReviewContext';
 import TextInput from './components/TextInput';
+import stripHtmlTags from '../../utils/stripTags';
 
 const CreateReview = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const CreateReview = () => {
   }, [id]);
 
   const handleTitleChange = (value) => {
-    if (value && value.length > 0) {
+    if (value && stripHtmlTags(value).length > 0) {
       setError('title', null);
     }
     setField('title', value);

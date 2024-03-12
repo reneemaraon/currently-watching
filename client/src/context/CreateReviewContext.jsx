@@ -9,6 +9,7 @@ import { GET_SHOW } from '../api/showsApi';
 import { useQuery } from '@apollo/client';
 import { postReviewRequest } from '../api/reviewsApi';
 import formReducer from '../utils/formReducer';
+import stripHtmlTags from '../utils/stripTags';
 
 const createReviewContext = createContext();
 
@@ -76,7 +77,7 @@ export const CreateReviewContext = ({ children }) => {
       isValid = false;
     }
 
-    if (!state.body.trim()) {
+    if (!stripHtmlTags(state.body).trim()) {
       setError('body', 'Please enter a body');
       isValid = false;
     }

@@ -1,3 +1,4 @@
+import stripHtmlTags from '../../utils/stripTags';
 import Icon from '../Common/Icon';
 import { HeartIcon, ShareIcon } from '../Common/IconList';
 import StarIcon from '../Common/Star';
@@ -83,8 +84,7 @@ const ReviewsListItem = ({ noImage, review }) => {
           {review.title}
         </div>
         <div className="Preview grow text-light-text max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
-          {review.body}
-          {/* pending fix after implementing tiptap */}
+          {stripHtmlTags(review.body)}
         </div>
         <div className="Footer w-full pt-1 justify-between items-end gap-4 inline-flex">
           <div className="RatingsCont w-full items-start inline-flex">
