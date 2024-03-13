@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import MainContentEditor from './components/RichTextEditorBody';
-import StarInput from './components/StarInput';
-import CustomButton from '../Common/CustomButton';
-import CreateReviewShowDetail from './components/CreateReviewShowDetail';
-import { useCreateReviewContext } from '../../context/CreateReviewContext';
-import TextInput from './components/TextInput';
-import stripHtmlTags from '../../utils/stripTags';
+import MainContentEditor from "./components/RichTextEditorBody";
+import StarInput from "./components/StarInput";
+import CustomButton from "../Common/CustomButton";
+import CreateReviewShowDetail from "./components/CreateReviewShowDetail";
+import { useCreateReviewContext } from "../../context/CreateReviewContext";
+import TextInput from "./components/TextInput";
+import stripHtmlTags from "../../utils/stripTags";
+import ToastMessage from "../Common/Toast";
 
 const CreateReview = () => {
   const { id } = useParams();
@@ -15,22 +17,26 @@ const CreateReview = () => {
     useCreateReviewContext();
 
   useEffect(() => {
-    setField('showId', id);
+    setField("showId", id);
   }, [id]);
+
+  const displayToast = () => {
+    toast(<ToastMessage />);
+  };
 
   const handleTitleChange = (value) => {
     if (value && stripHtmlTags(value).length > 0) {
-      setError('title', null);
+      setError("title", null);
     }
-    setField('title', value);
+    setField("title", value);
   };
 
   const handleBodyChange = (value) => {
     // strip tags later here
     if (value && value.length > 0) {
-      setError('body', null);
+      setError("body", null);
     }
-    setField('body', value);
+    setField("body", value);
   };
   return (
     <div className="container-center-card">
@@ -72,7 +78,11 @@ const CreateReview = () => {
             />
           </div>
           <div className="px-2.5 py-[5px] justify-end items-start gap-[5px] inline-flex">
-            <CustomButton size="defaultResize" styleSet="secondary">
+            <CustomButton
+              onClick={displayToast}
+              size="defaultResize"
+              styleSet="secondary"
+            >
               Cancel
             </CustomButton>
             <CustomButton
