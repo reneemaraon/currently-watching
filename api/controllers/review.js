@@ -39,6 +39,15 @@ const getReview = async (req, res) => {
 
 const createReview = async (req, res) => {
   const { actingRating, plotRating, visualsRating } = req.body;
+
+  const existingReview = await Review.findOne({ user: req.user._id, showId });
+
+  if (existingReview) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: 'You have already posted a review for this show' });
+  }
+
   const overallRating = (
     (actingRating + plotRating + visualsRating) /
     3

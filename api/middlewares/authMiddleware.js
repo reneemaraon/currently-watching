@@ -1,18 +1,19 @@
 const User = require('../models/user');
+const { UnauthenticatedError } = require('../errors');
 
 // Middleware function for authentication using Passport
 const authenticate = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next(); // User is authenticated, proceed to the next middleware or route handler
   }
-  res.status(401).json({ message: 'Not logged in' }); // Not authenticated, send unauthorized response
+  throw new UnauthenticatedError('Not logged in.');
 };
 
 const authorize = (req, res, next) => {
   if (req.user && req.user.role == 'admin') {
     next(); // User is an admin, allow access
   } else {
-    res.status(403).json({ message: 'Unauthorized user type' }); // User is not an admin
+    throw new UnauthenticatedError('Unauthorized user type');
   }
 };
 

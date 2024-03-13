@@ -1,7 +1,7 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { authenticate } = require("../middlewares/auth_middleware");
-const { isReviewOwner } = require("../middlewares/is_owner_middleware");
+const { authenticate } = require('../middlewares/authMiddleware');
+const { isReviewOwner } = require('../middlewares/isOwnerMiddleware');
 
 const {
   createReview,
@@ -9,14 +9,14 @@ const {
   getReview,
   updateReview,
   deleteReview,
-} = require("../controllers/review");
+} = require('../controllers/review');
 
-router.route("/").get(getAllReviews);
+router.route('/').get(getAllReviews);
 
-router.route("/").post(authenticate, createReview);
+router.route('/').post(authenticate, createReview);
 
 router
-  .route("/:id")
+  .route('/:id')
   .get(getReview)
   .patch(authenticate, isReviewOwner, updateReview)
   .delete(authenticate, isReviewOwner, deleteReview);

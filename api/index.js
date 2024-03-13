@@ -62,7 +62,7 @@ const showRouter = require('./routes/show');
 const reviewRouter = require('./routes/review');
 
 //custom middlewares
-const errorHandlerMiddleware = require('./middlewares/error_handler');
+const errorHandlerMiddleware = require('./middlewares/errorHandler');
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/shows', showRouter);
