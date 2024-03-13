@@ -123,7 +123,7 @@ const deleteShow = async (req, res) => {
 
   const show = await Show.findOneAndDelete({ _id: showId });
   if (!show) {
-    throw new Error('Show not found');
+    throw new NotFoundError('Show not found');
   }
   res.status(StatusCodes.OK).json({ msg: 'Deleted' });
 };
@@ -131,9 +131,7 @@ const deleteShow = async (req, res) => {
 const updateShow = async (req, res) => {
   try {
     const { id } = req.params;
-    // TODO: validate req.body before to update
 
-    // if a new image is uploaded upload it to cloudinary
     console.log(req.body);
     const updatedShow = await Show.findByIdAndUpdate(id, { $set: req.body });
     return res.json(updatedShow);

@@ -43,9 +43,7 @@ const createReview = async (req, res) => {
   const existingReview = await Review.findOne({ user: req.user._id, showId });
 
   if (existingReview) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: 'You have already posted a review for this show' });
+    throw new BadRequestError('You have already posted a review for this show');
   }
 
   const overallRating = (

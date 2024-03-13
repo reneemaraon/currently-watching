@@ -1,4 +1,9 @@
-const Review = require("../models/review");
+const Review = require('../models/review');
+const {
+  UnauthenticatedError,
+  BadRequestError,
+  NotFoundError,
+} = require('../errors');
 
 const isReviewOwner = async (req, res, next) => {
   try {
@@ -6,7 +11,7 @@ const isReviewOwner = async (req, res, next) => {
     const review = await Review.findById(reviewId);
 
     if (!review) {
-      return res.status(404).json({ message: "Review not found" });
+      throw new NotFoundError('Review not found');
     }
 
     if (req.user && req.user._id.equals(review.user_id)) {
@@ -14,11 +19,10 @@ const isReviewOwner = async (req, res, next) => {
       return next();
     } else {
       // User is not the owner of the review, send a 403 Forbidden response
-      return res.status(403).json({ message: "Unauthorized access" });
+      throw new UnauthenticatedError('Unauthorized access');
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
+    throw new BadRequestError('Internal server error');
   }
 };
 
