@@ -1,22 +1,21 @@
-import { Route, Routes } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { Route, Routes } from 'react-router-dom';
 
-import "./App.css";
-import Home from "./pages/Home/HomePage";
-import LoginPage from "./pages/Login/LoginPage";
-import SideBar from "./pages/Home/SideBar";
-import TopNavBar from "./pages/Home/NavBar/TopNavBar";
-import ReviewsPage from "./pages/Reviews/Reviews";
-import CreateReview from "./pages/CreateReview/CreateReview";
+import './App.css';
+import Home from './pages/Home/HomePage';
+import LoginPage from './pages/Login/LoginPage';
+import SideBar from './pages/Home/SideBar';
+import TopNavBar from './pages/Home/NavBar/TopNavBar';
+import ReviewsPage from './pages/Reviews/Reviews';
+import CreateReview from './pages/CreateReview/CreateReview';
 
-import { useAuthContext } from "./context/AuthContext";
-import ReviewDetail from "./pages/ReviewDetail/ReviewDetail";
-import ShowDetail from "./pages/ShowDetail/ShowDetail";
-import ProfilePage from "./pages/Profile/ProfilePage";
-import MyListsPage from "./pages/MyLists/MyLists";
-import { useState, useEffect, useRef } from "react";
-import PopupSidebar from "./pages/Home/PopupSidebar";
-import LoadingAnimation from "./pages/Common/LoadingAnimation";
+import { useAuthContext } from './context/AuthContext';
+import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
+import ShowDetail from './pages/ShowDetail/ShowDetail';
+import ProfilePage from './pages/Profile/ProfilePage';
+import MyListsPage from './pages/MyLists/MyLists';
+import { useState, useEffect, useRef } from 'react';
+import PopupSidebar from './pages/Home/PopupSidebar';
+import LoadingAnimation from './pages/Common/LoadingAnimation';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -35,9 +34,9 @@ function App() {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -76,9 +75,6 @@ function App() {
             <Route path="/users/:id" element={<ProfilePage />} />
           </Routes>
         </div>
-      </div>
-      <div className="z-[200] pt-20 w-screen h-screen absolute">
-        <ToastContainer />
       </div>
     </div>
   );

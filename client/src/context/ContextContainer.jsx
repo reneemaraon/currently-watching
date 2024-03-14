@@ -5,6 +5,7 @@ import { ReviewsProvider } from './ReviewContext';
 import { SearchProvider } from './SearchContext';
 import { ShowDetailProvider } from './ShowDetailContext';
 import { CreateReviewContext } from './CreateReviewContext';
+import { ToastProvider } from './ToastContext';
 
 export const ContextContainer = ({ children }) => (
   <AuthProvider>
@@ -12,7 +13,9 @@ export const ContextContainer = ({ children }) => (
       <ReviewsProvider>
         <ShowDetailProvider>
           <CreateReviewContext>
-            <SearchProvider>{children}</SearchProvider>
+            <ToastProvider>
+              <SearchProvider>{children}</SearchProvider>
+            </ToastProvider>
           </CreateReviewContext>
         </ShowDetailProvider>
       </ReviewsProvider>
