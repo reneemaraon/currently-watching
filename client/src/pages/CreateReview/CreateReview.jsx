@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import MainContentEditor from './components/RichTextEditorBody';
 import StarInput from './components/StarInput';
@@ -9,7 +8,6 @@ import CreateReviewShowDetail from './components/CreateReviewShowDetail';
 import { useCreateReviewContext } from '../../context/CreateReviewContext';
 import TextInput from './components/TextInput';
 import stripHtmlTags from '../../utils/stripTags';
-import ToastMessage from '../Common/Toast';
 import { useToast } from '../../context/ToastContext';
 
 const CreateReview = () => {
@@ -22,10 +20,6 @@ const CreateReview = () => {
   useEffect(() => {
     setField('showId', id);
   }, [id]);
-
-  const displayToast = () => {
-    toast(<ToastMessage />);
-  };
 
   const handleTitleChange = (value) => {
     if (value && stripHtmlTags(value).length > 0) {
