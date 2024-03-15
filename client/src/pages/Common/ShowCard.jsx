@@ -24,8 +24,8 @@ const ShowCardSmall = ({ id, show }) => {
       <div className="ShowDetails w-full px-4 py-3 justify-between items-start inline-flex">
         <div className="ShowDetailsText h-full w-40 flex-col justify-center items-start inline-flex">
           <div className="inline-flex gap-1">
-            <span className="text-sm font-bold">
-              {show ? show.title : 'The Glory'}
+            <span className="text-sm font-medium">
+              {show ? show.title : 'Drama Name'}
             </span>
           </div>
           <div className="NoOfReviews text-slate-500 text-xs font-medium">

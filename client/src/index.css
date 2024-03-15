@@ -142,3 +142,8 @@ li {
   .ProseMirror-focused {
     @apply focus:outline-none
   }
+
+
+strong {
+    font-weight: 500;
+}
