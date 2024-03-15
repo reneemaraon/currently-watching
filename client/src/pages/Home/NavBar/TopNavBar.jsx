@@ -52,7 +52,7 @@ const TopNavBar = ({ toggleSidebar }) => {
             />
           </svg>
         </div>
-        <div className="max-[600px]:hidden grow w-full max-w-[260px] sm:max-w-[320px]">
+        <div className="max-[650px]:hidden grow w-full max-w-[260px] sm:max-w-[320px]">
           <SearchBar onItemClick={navigateToShow} />
         </div>
       </div>

@@ -1,4 +1,5 @@
 const Review = require('../models/review');
+const Show = require('../models/show');
 const { BadRequestError, NotFoundError } = require('../errors');
 const { StatusCodes } = require('http-status-codes');
 
@@ -38,9 +39,20 @@ const getReview = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-  const { actingRating, plotRating, visualsRating } = req.body;
+  const { show, actingRating, plotRating, visualsRating } = req.body;
 
-  const existingReview = await Review.findOne({ user: req.user._id, showId });
+  const existingShow = await Show.findOne({
+    _id: show,
+  });
+
+  if (!existingShow) {
+    throw new NotFoundError('No show given.');
+  }
+
+  const existingReview = await Review.findOne({
+    user: req.user._id,
+    show,
+  });
 
   if (existingReview) {
     throw new BadRequestError('You have already posted a review for this show');
@@ -52,7 +64,7 @@ const createReview = async (req, res) => {
   ).toFixed(1);
   const review = await Review.create({
     ...req.body,
-    user: req.user,
+    user: req.user._id,
     overallRating,
   });
 

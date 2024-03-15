@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import MainContentEditor from './components/RichTextEditorBody';
 import StarInput from './components/StarInput';
@@ -12,10 +13,39 @@ import { useToast } from '../../context/ToastContext';
 
 const CreateReview = () => {
   const { id } = useParams();
-  const { state, setField, setError, loading, error, postReview } =
-    useCreateReviewContext();
+  const navigate = useNavigate();
+  const {
+    state,
+    setField,
+    setError,
+    createdReview,
+    loading,
+    error,
+    postReview,
+    createError,
+  } = useCreateReviewContext();
 
   const { showToast } = useToast();
+
+  useEffect(() => {
+    if (createError) {
+      showToast(createError, 'error');
+    }
+  }, [createError]);
+
+  useEffect(() => {
+    if (createdReview) {
+      showToast('Your review is successfully created.', 'success');
+      navigate(`/reviews/${createdReview._id}`);
+    }
+  }, [createdReview]);
+
+  useEffect(() => {
+    if (error && state.showId) {
+      console.log(error);
+      showToast('Something went wrong. Please try again.', 'error');
+    }
+  }, [error]);
 
   useEffect(() => {
     setField('showId', id);
@@ -49,7 +79,7 @@ const CreateReview = () => {
           {state.show && <CreateReviewShowDetail show={state.show} />}
         </div>
         <StarInput />
-        <div className="w-full py-8 border-b flex-col justify-center items-start gap-5 flex">
+        <div className="w-full py-8 flex-col justify-center items-start gap-5 flex">
           <div className="w-full h-[59px] pb-[15px] flex-col justify-start items-start gap-[5px] flex">
             <div>
               <span className="subheader-text">Write a narrative review </span>

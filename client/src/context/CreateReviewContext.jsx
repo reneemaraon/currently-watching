@@ -39,6 +39,9 @@ export const useCreateReviewContext = () => {
 export const CreateReviewContext = ({ children }) => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [show, setShow] = useState(null);
+  const [createdReview, setCreatedReview] = useState(null);
+  const [createError, setCreateError] = useState(null);
+  const [createLoading, setCreateLoading] = useState(false);
 
   const {
     loading,
@@ -102,6 +105,8 @@ export const CreateReviewContext = ({ children }) => {
 
   const postReview = async () => {
     console.log(state);
+    setCreateError(null);
+    setCreateLoading(true);
     if (!validateForm()) {
       return;
     }
@@ -116,10 +121,13 @@ export const CreateReviewContext = ({ children }) => {
     };
     try {
       const response = await postReviewRequest(payload);
-      console.log(response);
+      console.log(response.data);
+      setCreatedReview(response.data);
     } catch (error) {
+      setCreateError(error.response.data.message);
       console.log(error);
     }
+    setCreateLoading(false);
   };
 
   return (
@@ -127,6 +135,9 @@ export const CreateReviewContext = ({ children }) => {
       value={{
         state,
         setField,
+        createError,
+        createLoading,
+        createdReview,
         setError,
         loading,
         error,

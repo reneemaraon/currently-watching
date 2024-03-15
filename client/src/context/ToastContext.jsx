@@ -13,13 +13,19 @@ export const ToastProvider = ({ children }) => {
     setToastType(type);
     setTimeout(() => {
       setToastMessage('');
-    }, 20000); // Auto-hide after 5 seconds
+    }, 5000); // Auto-hide after 5 seconds
   };
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {toastMessage && <ToastMessage message={toastMessage} type={toastType} />}
+      {toastMessage && (
+        <ToastMessage
+          closeToast={() => setToastMessage('')}
+          message={toastMessage}
+          type={toastType}
+        />
+      )}
     </ToastContext.Provider>
   );
 };
