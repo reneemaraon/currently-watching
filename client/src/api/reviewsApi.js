@@ -26,6 +26,32 @@ export const GET_REVIEWS_LIST = gql`
   }
 `;
 
+export const GET_REVIEW = gql`
+  query Review($id: ID!) {
+    review(id: $id) {
+      _id
+      title
+      body
+      overallRating
+      actingRating
+      plotRating
+      visualsRating
+      show {
+        _id
+        title
+        tmdbPoster
+        tmdbBackdrop
+      }
+      user {
+        _id
+        name
+        screenName
+        profilePhotoUrl
+      }
+    }
+  }
+`;
+
 export const getReviewsRequest = async (params) =>
   await axios.get('/api/v1/reviews/');
 

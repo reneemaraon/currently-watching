@@ -19,6 +19,7 @@ const CreateReview = () => {
     setField,
     setError,
     createdReview,
+    setCreatedReview,
     loading,
     error,
     postReview,
@@ -36,6 +37,7 @@ const CreateReview = () => {
   useEffect(() => {
     if (createdReview) {
       showToast('Your review is successfully created.', 'success');
+      setCreatedReview(null);
       navigate(`/reviews/${createdReview._id}`);
     }
   }, [createdReview]);

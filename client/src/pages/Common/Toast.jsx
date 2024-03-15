@@ -25,7 +25,7 @@ const ToastMessage = ({ message, type, closeToast }) => {
   const icon = icons[type] || icons['info'];
   return (
     <div
-      className={`${selectedStyle} shadow-xl border bg-theme-base flex z-[100] fixed items-center right-0 sm:right-6 top-24 max-[600px]:top-16 max-[550px]:right-4 max-[400px]:right-0 w-full max-w-[400px] p-4 mb-4 rounded-xl `}
+      className={`${selectedStyle}  transition-opacity duration-500 shadow-xl border bg-theme-base flex z-[100] fixed items-center right-0 sm:right-6 top-24 max-[600px]:top-16 max-[550px]:right-4 max-[400px]:right-0 w-full max-w-[400px] p-4 mb-4 rounded-xl `}
       role="alert"
     >
       <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">

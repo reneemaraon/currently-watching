@@ -1,4 +1,5 @@
 import stripHtmlTags from '../../utils/stripTags';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../Common/Icon';
 import { HeartIcon, ShareIcon } from '../Common/IconList';
 import StarIcon from '../Common/Star';
@@ -29,8 +30,15 @@ const RatingRow = ({ ratingName, rating }) => {
 };
 
 const ReviewsListItem = ({ noImage, review }) => {
+  const navigate = useNavigate();
+
+  const navigateToReview = () => {
+    navigate(`/reviews/${review._id}`);
+  };
+
   return (
     <div
+      onClick={navigateToReview}
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
             bg-theme-base bg-opacity-70 rounded-[20px] border h-[200px] border-light-stroke justify-start items-start inline-flex
             max-[600px]:flex-col
