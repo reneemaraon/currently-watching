@@ -8,7 +8,7 @@ module.exports = {
         inter: ['"Inter"'],
       },
       colors: {
-        'main-bg': '#F1F1F5',
+        'main-bg': '#F1F1F8',
         'theme-base': '#FFFFFF',
         'text-dark': '#242C39',
         'light-text': '#676573',

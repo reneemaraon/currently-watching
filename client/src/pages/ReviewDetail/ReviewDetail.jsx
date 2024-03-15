@@ -77,7 +77,7 @@ export default function ReviewDetail() {
               <RatingRowStars rating={review.plotRating} name="Plot" />
               <RatingRowStars rating={review.visualsRating} name="Visuals" />
             </div>
-            <div className="NarrativeContent w-full  py-5 border-b flex-col justify-center items-start gap-5 flex">
+            <div className="NarrativeContent w-full  py-5 flex-col justify-center items-start gap-5 flex">
               <HTMLRenderer htmlString={review.body} />
             </div>
             <div className="Footer w-full pt-12 pb-7 rounded-lg flex-col justify-center items-start gap-[50px] flex">
