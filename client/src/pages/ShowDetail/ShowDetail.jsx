@@ -8,7 +8,7 @@ import ReviewsListItem from '../Reviews/ReviewListItem';
 import CustomButton from '../Common/CustomButton';
 import { useShowDetailContext } from '../../context/ShowDetailContext';
 import commaSeparatedString from '../Common/commaSeparate';
-import LoadingAnimation from '../Common/LoadingAnimation';
+import FullPageLoading from '../Common/FullPageLoading';
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -32,13 +32,7 @@ const ShowDetail = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="w-full inline-flex h-[400px] justify-center items-center">
-        <div className="w-48">
-          <LoadingAnimation />
-        </div>
-      </div>
-    );
+    return <FullPageLoading />;
   }
   if (show) {
     return (
@@ -49,7 +43,7 @@ const ShowDetail = () => {
             <div className="Details flex-wrap grow shrink basis-0 justify-start items-start gap-3 flex">
               <div className="PosterContainer flex max-[530px]:justify-start max-[530px]:px-4 pb-3 justify-end max-[530px]:max-w-[500px] max-[530px]:w-full w-1/3 max-w-[300px] min-w-[240px] h-auto overflow-hidden">
                 <img
-                  className="object-contain sm:object-cover w-[220px] sm:w-full rounded-xl"
+                  className="object-contain sm:object-cover w-[220px] sm:w-full rounded-md"
                   src={`https://image.tmdb.org/t/p/w500${show.tmdbPoster}`}
                 />
               </div>
@@ -123,8 +117,8 @@ const ShowDetail = () => {
                       <ReviewsListItem review={showReview} noImage />
                     ))}
 
-                  <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
-                    {showReviews && show.reviewsCount > showReviews.length && (
+                  {showReviews && show.reviewsCount > showReviews.length && (
+                    <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
                       <CustomButton
                         styleSet="light"
                         size="defaultResize"
@@ -132,8 +126,8 @@ const ShowDetail = () => {
                       >
                         Load more
                       </CustomButton>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

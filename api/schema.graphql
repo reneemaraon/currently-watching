@@ -1,3 +1,4 @@
+scalar DateTime
 # // schema.graphql
 
 type User {
@@ -51,7 +52,7 @@ type Review {
   actingRating: Float!
   plotRating: Float!
   visualsRating: Float!
-  createdAt: String!
+  createdAt: DateTime!
   body: String!
 }
 

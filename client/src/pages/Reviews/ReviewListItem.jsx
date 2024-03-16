@@ -36,39 +36,51 @@ const ReviewsListItem = ({ noImage, review }) => {
     navigate(`/reviews/${review._id}`);
   };
 
+  const navigateToShow = (event) => {
+    event.stopPropagation();
+    navigate(`/shows/${review.show._id}`);
+  };
+
   return (
     <div
       onClick={navigateToReview}
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
-            bg-theme-base bg-opacity-70 rounded-[20px] border h-[200px] border-light-stroke justify-start items-start inline-flex
-            max-[600px]:flex-col
-            ${noImage ? 'max-[600px]:h-[210px]' : 'max-[600px]:h-[270px]'}
+            bg-theme-base bg-opacity-70 rounded-[10px] sm:rounded-[20px] border border-light-stroke justify-start items-start inline-flex
+            max-[600px]:flex-col min-[601px]:h-[220px]
             group
             ease-in`}
     >
       <div
         className={`
                 Show relative overflow-hidden 
-                rounded-l-[20px] h-full w-full flex-col justify-start items-center inline-flex
-                max-[600px]:rounded-t-[20px]
+                rounded-l-[20px] h-full w-full flex-col justify-start items-start inline-flex
+                max-[600px]:rounded-t-[10px]
                 max-[600px]:rounded-bl-[0px]
                 min-[601px]:max-w-[220px]
+                
                 max-[600px]:w-full
-                max-[600px]:h-[220px]
+                max-[600px]:h-[160px]
                 ${noImage && 'hidden'}
             `}
       >
         <img
-          className="group-hover:scale-[1.01] ease-out group-hover:ease-in duration-200 object-cover align-center w-full h-full"
+          className="min-[601px]:hidden group-hover:scale-[1.01] ease-out group-hover:ease-in duration-200 object-cover align-center w-full h-full"
+          src={`https://image.tmdb.org/t/p/original${review.show.tmdbBackdrop}`}
+        />
+        <img
+          className="max-[600px]:hidden group-hover:scale-[1.01] ease-out group-hover:ease-in duration-200 object-cover align-center w-full h-full"
           src={`https://image.tmdb.org/t/p/w500${review.show.tmdbPoster}`}
         />
         <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
-          <div className="Title grow shrink basis-0 text-white text-xs font-light sm:font-semibold">
+          <div
+            onClick={navigateToShow}
+            className="Title hover:underline grow shrink basis-0 text-white text-xs font-light sm:font-light truncate"
+          >
             {review.show.title}
           </div>
         </div>
       </div>
-      <div className="ReviewDetails w-full h-full py-4 px-3 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
+      <div className="ReviewDetails min-[601px]:h-full w-full max-[600px]:max-h-40 py-4 px-3 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
         <div className="Author justify-between items-start inline-flex">
           <div className="Profile justify-start gap-2 sm:gap-3 flex">
             <img

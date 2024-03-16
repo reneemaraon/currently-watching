@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import LoadingAnimation from '../Common/LoadingAnimation';
+import FullPageLoading from '../Common/FullPageLoading';
 import { HeartIcon, ShareIcon } from '../Common/IconList';
 import RatingRowStars from './RatingRow';
 import ShowCardSmall from '../Common/ShowCard';
@@ -9,6 +9,7 @@ import CommentsArea from './CommentsArea';
 import CircularButton from '../Common/CircleButton';
 import { useReviewDetailContext } from '../../context/ReviewDetailContext';
 import HTMLRenderer from './HtmlRenderer';
+import formatDateTime from '../../utils/formatDate';
 
 export default function ReviewDetail() {
   const { id } = useParams();
@@ -21,13 +22,7 @@ export default function ReviewDetail() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="w-full inline-flex h-[400px] justify-center items-center">
-        <div className="w-48">
-          <LoadingAnimation />
-        </div>
-      </div>
-    );
+    return <FullPageLoading />;
   }
   if (review) {
     return (
@@ -63,7 +58,9 @@ export default function ReviewDetail() {
                     <div className="info-text">@{review.user.name}</div>
                   </div>
                   <div className="AccDetails justify-start items-center gap-1.5 inline-flex">
-                    <div className="info-text">Dec 23, 2023</div>
+                    <div className="info-text">
+                      {formatDateTime(review.createdAt)}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -15,7 +15,7 @@ import ProfilePage from './pages/Profile/ProfilePage';
 import MyListsPage from './pages/MyLists/MyLists';
 import { useState, useEffect, useRef } from 'react';
 import PopupSidebar from './pages/Home/PopupSidebar';
-import LoadingAnimation from './pages/Common/LoadingAnimation';
+import FullPageLoading from './pages/Common/FullPageLoading';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -41,13 +41,7 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="w-screen h-screen bg-main-bg inline-flex justify-center items-center">
-        <div className="w-44">
-          <LoadingAnimation />
-        </div>
-      </div>
-    );
+    return <FullPageLoading />;
   }
   return (
     <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-inter text-gray-800">

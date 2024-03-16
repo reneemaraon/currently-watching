@@ -8,6 +8,7 @@ import PopupModal from '../Common/PopupModal';
 import SearchBar from '../Home/NavBar/SearchBar';
 import CreateReviewShowDetail from '../CreateReview/components/CreateReviewShowDetail';
 import { useSearchContext } from '../../context/SearchContext';
+import FullPageLoading from '../Common/FullPageLoading';
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const ReviewsPage = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <FullPageLoading />;
   }
 
   if (error) {
@@ -54,7 +55,7 @@ const ReviewsPage = () => {
         </div>
       </PopupModal>
       <div className="ReviewsBody w-full flex-col justify-start items-start gap-2.5 inline-flex">
-        <div className="Header self-stretch pb-[30px] justify-center items-end gap-5 inline-flex">
+        <div className="Header w-full pb-[30px] justify-center items-end gap-5 inline-flex">
           <div className="SecitonHeader grow shrink basis-0 h-[39px] justify-start items-end gap-2.5 flex">
             <div className="Reviews text-gray-800 text-2xl sm:text-3xl font-medium">
               Reviews
@@ -70,7 +71,7 @@ const ReviewsPage = () => {
             </CustomButton>
           </div>
         </div>
-        <div className="ReviewsList self-stretch h-[920px] px-0.5 sm:px-2.5 flex-col justify-start items-start gap-5 flex">
+        <div className="ReviewsList w-full inline-flex px-0.5 pb-4 sm:px-2.5 flex-col justify-start items-start gap-5">
           {reviews &&
             reviews.map((review) => {
               return <ReviewListItem review={review}>hi</ReviewListItem>;

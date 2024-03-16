@@ -11,10 +11,12 @@ export const GET_REVIEWS_LIST = gql`
       actingRating
       plotRating
       visualsRating
+      createdAt
       show {
         _id
         title
         tmdbPoster
+        tmdbBackdrop
       }
       user {
         _id
@@ -36,6 +38,7 @@ export const GET_REVIEW = gql`
       actingRating
       plotRating
       visualsRating
+      createdAt
       show {
         _id
         title
