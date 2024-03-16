@@ -46,7 +46,7 @@ const ReviewsListItem = ({ noImage, review }) => {
       onClick={navigateToReview}
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
             bg-theme-base bg-opacity-70 rounded-[10px] sm:rounded-[20px] border border-light-stroke justify-start items-start inline-flex
-            max-[600px]:flex-col min-[601px]:h-[220px]
+            max-[600px]:flex-col min-[601px]:h-[180px] max-w-[900px]
             group
             ease-in`}
     >
@@ -56,7 +56,7 @@ const ReviewsListItem = ({ noImage, review }) => {
                 rounded-l-[20px] h-full w-full flex-col justify-start items-start inline-flex
                 max-[600px]:rounded-t-[10px]
                 max-[600px]:rounded-bl-[0px]
-                min-[601px]:max-w-[220px]
+                min-[601px]:max-w-[180px]
                 
                 max-[600px]:w-full
                 max-[600px]:h-[160px]
@@ -114,8 +114,8 @@ const ReviewsListItem = ({ noImage, review }) => {
               <RatingRow rating={review.visualsRating} ratingName="Visuals" />
             </div>
           </div>
-          <div className="justify-end items-start gap-3 flex">
-            <div className="max-[380px]:hidden Like sm:flex-col justify-start items-center gap-0.5 inline-flex">
+          <div className="justify-end items-start gap-4 flex">
+            <div className="max-[380px]:hidden Like justify-start items-center gap-1 inline-flex">
               <Icon
                 sizeRules="sm:w-5 sm:h-5 h-4 w-4"
                 fill="fill-none stroke-0.5 stroke-text-dark"
@@ -124,7 +124,7 @@ const ReviewsListItem = ({ noImage, review }) => {
               </Icon>
               <div className="hidden sm:block info-text font-medium">1234</div>
             </div>
-            <div className="max-[380px]:hidden Share sm:flex-col justify-start items-center gap-0.5 inline-flex">
+            <div className="max-[380px]:hidden Share justify-start items-center gap-1 inline-flex">
               <Icon
                 sizeRules="sm:w-5 sm:h-5 h-4 w-4"
                 fill="fill-none stroke-1 stroke-text-dark"

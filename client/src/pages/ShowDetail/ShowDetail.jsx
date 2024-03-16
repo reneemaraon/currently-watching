@@ -94,11 +94,11 @@ const ShowDetail = () => {
               <div className="ReviewSection w-full pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
                 <div className="Header px-2 w-full pb-5 justify-between items-start inline-flex">
                   <div className="inline-flex gap-2">
-                    <span className="text-gray-800 text-2xl font-medium font-['Inter']">
-                      Reviews
-                    </span>
-                    <span className="text-neutral-300 text-2xl font-medium font-['Inter']">
-                      ({show.reviewsCount})
+                    <span className="title-text ">
+                      Reviews{' '}
+                      <span className="text-lighter-text ">
+                        ({show.reviewsCount})
+                      </span>
                     </span>
                   </div>
                   <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex">

@@ -5,7 +5,7 @@ const ShowCardSmall = ({ id, show }) => {
   const navigate = useNavigate();
 
   const onClickNavigate = () => {
-    navigate(`/shows/${id || '1'}`);
+    navigate(`/shows/${show._id || '1'}`);
   };
 
   return (

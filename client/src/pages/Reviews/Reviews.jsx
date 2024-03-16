@@ -34,7 +34,7 @@ const ReviewsPage = () => {
   }
 
   return (
-    <div className="w-full max-w-[1200px] px-16 max-[900px]:px-8 max-[600px]:px-5 py-2 sm:py-8 flex-col justify-start items-center gap-24 inline-flex">
+    <div className="w-full max-w-[1200px] px-10 max-[900px]:px-8 max-[600px]:px-5 max-[400px]:px-2 py-2 sm:py-8 flex-col justify-start items-center gap-6 sm:gap-8 md:gap-12 inline-flex">
       <PopupModal showModal={showModal} setShowModal={setShowModal}>
         <div className="w-full inline-flex flex-col items-center gap-8 py-7 px-4">
           <div className="gap-4 pb-2 flex-col inline-flex items-center w-full">
@@ -54,29 +54,23 @@ const ReviewsPage = () => {
           </CustomButton>
         </div>
       </PopupModal>
-      <div className="ReviewsBody w-full flex-col justify-start items-start gap-2.5 inline-flex">
-        <div className="Header w-full pb-[30px] justify-center items-end gap-5 inline-flex">
-          <div className="SecitonHeader grow shrink basis-0 h-[39px] justify-start items-end gap-2.5 flex">
-            <div className="Reviews text-gray-800 text-2xl sm:text-3xl font-medium">
-              Reviews
-            </div>
-          </div>
-          <div className="AddReviewContainer flex-col justify-center items-center gap-2.5 inline-flex">
-            <CustomButton
-              size="defaultResize"
-              onClick={handleClick}
-              styleSet="dark"
-            >
-              + Add Review
-            </CustomButton>
-          </div>
+      <div className="Header w-full px-2 py-2 sm:py-4 justify-center items-center gap-5 inline-flex">
+        <div className="grow shrink basis-0 justify-start items-start gap-2.5 flex">
+          <div className="Reviews title-text">Reviews</div>
         </div>
-        <div className="ReviewsList w-full inline-flex px-0.5 pb-4 sm:px-2.5 flex-col justify-start items-start gap-5">
-          {reviews &&
-            reviews.map((review) => {
-              return <ReviewListItem review={review}>hi</ReviewListItem>;
-            })}
-        </div>
+        <CustomButton
+          size="defaultResize"
+          onClick={handleClick}
+          styleSet="dark"
+        >
+          + Add Review
+        </CustomButton>
+      </div>
+      <div className="ReviewsList w-full inline-flex px-0.5 pb-4 sm:px-2.5 flex-col justify-start items-center gap-5">
+        {reviews &&
+          reviews.map((review) => {
+            return <ReviewListItem review={review} />;
+          })}
       </div>
     </div>
   );
