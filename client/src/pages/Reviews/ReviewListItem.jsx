@@ -131,7 +131,6 @@ const ReviewsListItem = ({ noImage, review }) => {
               >
                 <ShareIcon />
               </Icon>
-              <div className="hidden sm:block info-text font-medium">1234</div>
             </div>
           </div>
         </div>

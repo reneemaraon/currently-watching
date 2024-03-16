@@ -26,13 +26,15 @@ export default function ReviewDetail() {
   }
   if (review) {
     return (
-      <div className="relative inline-flex flex-col items-center w-full ">
-        <img
-          className="object-cover w-full h-auto md:h-[500px] absolute z-0 top-0"
-          src={`https://image.tmdb.org/t/p/original${review.show.tmdbBackdrop}`}
-        />
-
-        <div className="container-center-card pt-20 sm:pt-36">
+      <div
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/original${review.show.tmdbBackdrop})`,
+          backgroundSize: 'cover',
+          backgroundBlendMode: 'darken',
+        }}
+        className="relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden"
+      >
+        <div className="container-center-card pt-20 sm:pt-40">
           {/* Main contentt */}
           <div className="z-10 Main large-white-card p-4 sm:p-6">
             <div className="w-full pb-4 flex-col justify-start items-start gap-3 flex">
@@ -54,8 +56,8 @@ export default function ReviewDetail() {
                 />
                 <div className="Text flex-col justify-start items-start gap-1 inline-flex">
                   <div className="NameUsername justify-center items-center gap-2 inline-flex">
-                    <div className="author-name">{review.user.screenName}</div>
-                    <div className="info-text">@{review.user.name}</div>
+                    <div className="author-name">{review.user.name}</div>
+                    <div className="info-text">@{review.user.screenName}</div>
                   </div>
                   <div className="AccDetails justify-start items-center gap-1.5 inline-flex">
                     <div className="info-text">
@@ -78,6 +80,7 @@ export default function ReviewDetail() {
               <HTMLRenderer htmlString={review.body} />
             </div>
             <div className="Footer w-full pt-12 pb-7 rounded-lg flex-col justify-center items-start gap-[50px] flex">
+              <CommentsArea />
               <div className="Item w-full flex-col justify-center items-start gap-4 flex">
                 <div className="Header py-2 flex-col justify-start items-start w-full flex">
                   <div className="text-sm font-medium">
@@ -86,7 +89,6 @@ export default function ReviewDetail() {
                 </div>
                 <ShowCardSmall show={review.show} />
               </div>
-              <CommentsArea />
             </div>
           </div>
         </div>
