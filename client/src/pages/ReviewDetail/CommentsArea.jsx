@@ -1,44 +1,5 @@
-import CustomButton from '../Common/CustomButton';
-import Icon from '../Common/Icon';
-import { OptionsIcon } from '../Common/IconList';
-
-const commentList = [
-  {
-    name: 'Han Seojun',
-    profile_pic: '',
-    comment: '',
-  },
-];
-
-const Comment = ({ name, username, display_photo, comment }) => (
-  <div className="w-full p-4 bg-theme-base rounded-2xl border border-light-stroke flex-col justify-center items-start gap-4 flex">
-    <div className="CommentHead w-full justify-between items-start inline-flex">
-      <div className="Comment grow shrink basis-0 justify-start items-center gap-3 sm:gap-4 flex">
-        <img
-          className="ProfilePhoto w-7 h-7 sm:w-8 sm:h-8 rounded-full"
-          src="https://via.placeholder.com/50x51"
-        />
-        <div className="Details grow shrink basis-0 flex-col justify-start items-start gap-0.5 inline-flex">
-          <div className="NameUsername w-full justify-start items-center gap-1.5 inline-flex">
-            <div className="author-name">{name || 'Hwang Inyoup'}</div>
-            <div className="Username info-text">
-              {username || '@hi_high_hiy'}
-            </div>
-          </div>
-          <div className="DatePublished info-text">6 days ago</div>
-        </div>
-      </div>
-      <div className="CommentActionOptions px-2 justify-center items-center gap-2.5 flex">
-        <Icon size="h-2 w-2">
-          <OptionsIcon />
-        </Icon>
-      </div>
-    </div>
-    <p className="CommentText w-full text-sm leading-6 font-normal">
-      {comment || ''}
-    </p>
-  </div>
-);
+import CommentInput from './CommentInput';
+import Comment from './CommentItem';
 
 const CommentsArea = () => {
   return (
@@ -51,16 +12,7 @@ const CommentsArea = () => {
         <div className="ActionList w-8 justify-end items-start gap-2.5 flex" />
       </div>
       <div className="CommentList w-full flex-col justify-center items-start gap-[15px] flex">
-        <div className="CommentInput w-full h-[99px] p-[15px] bg-white rounded-[10px] border border-slate-200 flex-col justify-start items-start gap-5 flex">
-          <div className="Preview text-neutral-300 text-[13px] font-normal leading-[16.90px]">
-            What are your thoughts on this review?
-          </div>
-          <div className="Action w-full px-[5px] justify-end items-start gap-2.5 inline-flex">
-            <CustomButton disabled edge="rounded" size="smallSize">
-              <span className="font-semibold">Submit</span>
-            </CustomButton>
-          </div>
-        </div>
+        <CommentInput />
         <Comment comment="Eternal Blossom is a must-watch Korean drama that excels in every aspect. The stellar performances, engaging narrative, and breathtaking cinematography make it a standout in the genre. Whether you're a fan of romance, drama, or mystery, this series offers a perfect blend that will leave a lasting impression." />
         <Comment
           comment="That's putting it mildly! What a wondrous story. Synchronicity is strong in you, young Jedi."
