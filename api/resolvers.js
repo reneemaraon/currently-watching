@@ -22,6 +22,7 @@ const resolvers = {
         'title',
       ]);
       let shows = await Show.find(searchConditions)
+        .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
       return shows;
@@ -36,6 +37,7 @@ const resolvers = {
         'body',
       ]);
       let reviews = await Review.find(searchConditions)
+        .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
       return reviews;
@@ -47,6 +49,7 @@ const resolvers = {
       ]);
       searchConditions.show = id;
       let reviews = await Review.find(searchConditions)
+        .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
       return reviews;
@@ -61,6 +64,7 @@ const resolvers = {
       ]);
       searchConditions.review = id;
       let comments = await Comment.find(searchConditions)
+        .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
       return comments;

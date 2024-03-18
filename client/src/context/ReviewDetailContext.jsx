@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
-  getReviewRequest,
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
   postCommentRequest,
@@ -20,6 +19,7 @@ export const ReviewDetailProvider = ({ children }) => {
   const [reviewId, setReviewId] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentBody, setCommentBody] = useState('');
+  const [postLoading, setPostLoading] = useState(false);
   const { loading, error, data, refetch } = useQuery(GET_REVIEW, {
     variables: { id: reviewId },
   });
@@ -34,6 +34,7 @@ export const ReviewDetailProvider = ({ children }) => {
   });
 
   const postComment = async () => {
+    setPostLoading(true);
     try {
       const response = await postCommentRequest(reviewId, { commentBody });
       if (response) {
@@ -43,6 +44,7 @@ export const ReviewDetailProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+    setPostLoading(false);
   };
 
   useEffect(() => {
@@ -59,9 +61,7 @@ export const ReviewDetailProvider = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    if (commentsData && commentsData.reviewComments) {
-      console.log('commentsData');
-      console.log(commentsData);
+    if (commentsData) {
       setComments(commentsData.reviewComments);
     }
   }, [commentsData]);
@@ -70,6 +70,7 @@ export const ReviewDetailProvider = ({ children }) => {
     <reviewDetailContext.Provider
       value={{
         commentsLoading,
+        postLoading,
         commentsError,
         comments,
         commentBody,

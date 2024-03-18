@@ -1,13 +1,14 @@
+import formatDateTime from '../../utils/formatDate';
 import Icon from '../Common/Icon';
 import { OptionsIcon } from '../Common/IconList';
 
-const Comment = ({ name, username, display_photo, comment }) => (
+const Comment = ({ name, username, display_photo, comment, createdDate }) => (
   <div className="w-full p-4 bg-theme-base rounded-2xl border border-light-stroke flex-col justify-center items-start gap-4 flex">
     <div className="CommentHead w-full justify-between items-start inline-flex">
       <div className="Comment grow shrink basis-0 justify-start items-center gap-3 sm:gap-4 flex">
         <img
           className="ProfilePhoto w-7 h-7 sm:w-8 sm:h-8 rounded-full"
-          src="https://via.placeholder.com/50x51"
+          src={display_photo}
         />
         <div className="Details grow shrink basis-0 flex-col justify-start items-start gap-0.5 inline-flex">
           <div className="NameUsername w-full justify-start items-center gap-1.5 inline-flex">
@@ -16,7 +17,9 @@ const Comment = ({ name, username, display_photo, comment }) => (
               {username || '@hi_high_hiy'}
             </div>
           </div>
-          <div className="DatePublished info-text">6 days ago</div>
+          <div className="DatePublished info-text">
+            {formatDateTime(createdDate)}
+          </div>
         </div>
       </div>
       <div className="CommentActionOptions px-2 justify-center items-center gap-2.5 flex">
