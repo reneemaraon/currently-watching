@@ -5,6 +5,7 @@ const Show = require('./models/show');
 const Review = require('./models/review');
 
 const { generateSearchConditions } = require('./utils/search');
+const Comment = require('./models/comment');
 
 const resolvers = {
   Query: {
@@ -54,6 +55,16 @@ const resolvers = {
       let review = await Review.findOne({ _id: id });
       return review;
     },
+    reviewComments: async (_, { id, filter = {} }) => {
+      const { searchConditions, options } = generateSearchConditions(filter, [
+        'commentBody',
+      ]);
+      searchConditions.review = id;
+      let comments = await Comment.find(searchConditions)
+        .limit(options.limit)
+        .skip(options.skip);
+      return comments;
+    },
   },
   Review: {
     user: async (parent, args, context) => {
@@ -69,6 +80,16 @@ const resolvers = {
     reviewsCount: async (parent, args, context) => {
       const reviews = await Review.find({ show: parent._id });
       return reviews.length;
+    },
+  },
+  Comment: {
+    review: async (parent, args, context) => {
+      const review = await Review.findById(parent.review);
+      return review;
+    },
+    user: async (parent, args, context) => {
+      const user = await User.findById(parent.user);
+      return user;
     },
   },
   Mutation: {},

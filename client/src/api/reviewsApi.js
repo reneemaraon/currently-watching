@@ -55,6 +55,22 @@ export const GET_REVIEW = gql`
   }
 `;
 
+export const GET_REVIEW_COMMENTS = gql`
+  query ReviewComments($id: ID!, $filter: FilterInput) {
+    reviewComments(id: $id, filter: $filter) {
+      _id
+      commentBody
+      createdAt
+      user {
+        _id
+        name
+        screenName
+        profilePhotoUrl
+      }
+    }
+  }
+`;
+
 export const getReviewsRequest = async (params) =>
   await axios.get('/api/v1/reviews/');
 
@@ -63,3 +79,6 @@ export const getReviewRequest = async (id) =>
 
 export const postReviewRequest = async (payload) =>
   await axios.post('/api/v1/reviews/', payload);
+
+export const postCommentRequest = async (id, payload) =>
+  await axios.post(`/api/v1/reviews/${id}/comments`, payload);

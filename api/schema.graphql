@@ -56,6 +56,18 @@ type Review {
   body: String!
 }
 
+
+type Comment {
+  _id: ID!
+  user: User!
+  review: Review!
+  commentBody: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+
+
 input FilterInput {
   page: Int
   limit: Int
@@ -72,5 +84,7 @@ type Query {
 
   users: [User]
   user(id: ID!): User
+
+  reviewComments(id: ID!, filter: FilterInput): [Comment!]
 }
 
