@@ -4,7 +4,8 @@ import CommentInput from './CommentInput';
 import Comment from './CommentItem';
 
 const CommentsArea = () => {
-  const { comments, commentsLoading, postLoading } = useReviewDetailContext();
+  const { comments, commentsLoading, postLoading, review } =
+    useReviewDetailContext();
 
   const renderLoading = () => {
     return (
@@ -36,7 +37,7 @@ const CommentsArea = () => {
           <span className="title-text">
             Comments{' '}
             <span className="text-light-text subheader-text">
-              {comments && `(${comments.length})`}
+              {review && `(${review.commentCount})`}
             </span>
           </span>
         </div>

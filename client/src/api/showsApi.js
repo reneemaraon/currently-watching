@@ -46,7 +46,7 @@ export const GET_SHOW = gql`
         _id
         name
       }
-      reviewsCount
+      reviewCount
       actingAverage
       plotAverage
       visualsAverage

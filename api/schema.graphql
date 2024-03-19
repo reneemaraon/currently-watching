@@ -24,7 +24,7 @@ type Show {
   tmdbPoster: String
   tmdbBackdrop: String
   originalName: String
-  reviewsCount: Int!
+  reviewCount: Int!
   actingAverage: Float!
   plotAverage: Float!
   visualsAverage: Float!

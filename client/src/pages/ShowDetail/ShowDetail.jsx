@@ -97,7 +97,7 @@ const ShowDetail = () => {
                     <span className="title-text ">
                       Reviews{' '}
                       <span className="text-lighter-text ">
-                        ({show.reviewsCount})
+                        ({show.reviewCount})
                       </span>
                     </span>
                   </div>

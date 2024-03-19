@@ -1,7 +1,7 @@
 import stripHtmlTags from '../../utils/stripTags';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../Common/Icon';
-import { HeartIcon, ShareIcon } from '../Common/IconList';
+import { CommentIcon, HeartIcon } from '../Common/IconList';
 import StarIcon from '../Common/Star';
 import renderStars from '../Common/renderStars';
 
@@ -122,15 +122,20 @@ const ReviewsListItem = ({ noImage, review }) => {
               >
                 <HeartIcon />
               </Icon>
-              <div className="hidden sm:block info-text font-medium">1234</div>
+              <div className="hidden sm:block info-text font-medium">
+                {review.likeCount}
+              </div>
             </div>
-            <div className="max-[380px]:hidden Share justify-start items-center gap-1 inline-flex">
+            <div className="max-[380px]:hidden Share justify-start items-center gap-1 pr-0.5 inline-flex">
               <Icon
                 sizeRules="sm:w-5 sm:h-5 h-4 w-4"
-                fill="fill-none stroke-1 stroke-text-dark"
+                fill="fill-none stroke-0.5 stroke-text-dark"
               >
-                <ShareIcon />
+                <CommentIcon />
               </Icon>
+              <div className="hidden sm:block info-text font-medium">
+                {review.commentCount}
+              </div>
             </div>
           </div>
         </div>
