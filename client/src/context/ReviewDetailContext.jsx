@@ -1,16 +1,16 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
   postCommentRequest,
-} from '../api/reviewsApi';
-import { useQuery } from '@apollo/client';
+} from "../api/reviewsApi";
+import { useQuery } from "@apollo/client";
 
 const reviewDetailContext = createContext();
 
 export const useReviewDetailContext = () => {
   const context = useContext(reviewDetailContext);
-  if (!context) throw new Error('Review Detail Provider is missing');
+  if (!context) throw new Error("Review Detail Provider is missing");
   return context;
 };
 
@@ -18,7 +18,7 @@ export const ReviewDetailProvider = ({ children }) => {
   const [review, setReview] = useState(null);
   const [reviewId, setReviewId] = useState(null);
   const [comments, setComments] = useState([]);
-  const [commentBody, setCommentBody] = useState('');
+  const [commentBody, setCommentBody] = useState("");
   const [postLoading, setPostLoading] = useState(false);
   const { loading, error, data, refetch } = useQuery(GET_REVIEW, {
     variables: { id: reviewId },
@@ -38,8 +38,13 @@ export const ReviewDetailProvider = ({ children }) => {
     try {
       const response = await postCommentRequest(reviewId, { commentBody });
       if (response) {
-        refetchComments();
-        setCommentBody('');
+        // Increment the comment count in the review state
+        setReview({
+          ...review,
+          commentCount: review.commentCount + 1,
+        });
+        await refetchComments();
+        setCommentBody("");
       }
     } catch (error) {
       console.log(error);
