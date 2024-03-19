@@ -1,6 +1,6 @@
 const Comment = require('../models/comment');
 const Review = require('../models/review');
-const { BadRequestError, NotFoundError } = require('../errors');
+const { NotFoundError } = require('../errors');
 const { StatusCodes } = require('http-status-codes');
 
 const getAllComments = async (req, res) => {
@@ -44,6 +44,8 @@ const createComment = async (req, res) => {
     review: reviewId,
   });
 
+  await addComment(reviewId);
+
   res.status(StatusCodes.CREATED).json(comment);
 };
 
@@ -56,6 +58,9 @@ const deleteComment = async (req, res) => {
   if (!comment) {
     throw new Error('Comment not found');
   }
+
+  await removeComment(comment.review);
+
   res.status(StatusCodes.OK).json({ msg: 'Deleted' });
 };
 
@@ -70,6 +75,20 @@ const updateComment = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
+};
+
+// utils
+
+const updateReviewCommentCount = async (reviewId, inc) => {
+  await Review.updateOne({ _id: reviewId }, { $inc: { commentCount: inc } });
+};
+
+const addComment = async (reviewId) => {
+  await updateReviewCommentCount(reviewId, 1);
+};
+
+const removeComment = async (reviewId) => {
+  await updateReviewCommentCount(reviewId, -1);
 };
 
 module.exports = {

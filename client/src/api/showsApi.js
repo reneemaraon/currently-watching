@@ -17,6 +17,8 @@ export const GET_SHOW_REVIEWS = gql`
       actingRating
       plotRating
       visualsRating
+      commentCount
+      likeCount
       show {
         _id
         title
@@ -45,6 +47,10 @@ export const GET_SHOW = gql`
         name
       }
       reviewsCount
+      actingAverage
+      plotAverage
+      visualsAverage
+      totalAverage
     }
   }
 `;

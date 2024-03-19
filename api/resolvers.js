@@ -80,12 +80,7 @@ const resolvers = {
       return show;
     },
   },
-  Show: {
-    reviewsCount: async (parent, args, context) => {
-      const reviews = await Review.find({ show: parent._id });
-      return reviews.length;
-    },
-  },
+  Show: {},
   Comment: {
     review: async (parent, args, context) => {
       const review = await Review.findById(parent.review);

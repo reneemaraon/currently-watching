@@ -68,6 +68,8 @@ const createReview = async (req, res) => {
     overallRating,
   });
 
+  await recalculateRatings(review);
+
   res.status(StatusCodes.CREATED).json(review);
 };
 
@@ -81,6 +83,8 @@ const deleteReview = async (req, res) => {
   if (!review) {
     throw new Error('Review not found');
   }
+
+  await recalculateRatings(review, false);
   res.status(StatusCodes.OK).json({ msg: 'Deleted' });
 };
 
@@ -98,6 +102,71 @@ const updateReview = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
+};
+
+const recalculateRatings = async (review, isAddition = true) => {
+  const {
+    show: showId,
+    actingRating: newActingRating,
+    plotRating: newPlotRating,
+    visualeRating: newVisualsRating,
+    overallRating: newOverallRating,
+  } = review;
+
+  // Fetch the existing show
+  const existingShow = await Show.findById(showId);
+
+  if (!existingShow) {
+    throw new Error('Show not found');
+  }
+
+  const {
+    actingAverage,
+    plotAverage,
+    visualsAverage,
+    reviewCount,
+    totalAverage,
+  } = existingShow;
+
+  // Determine whether to add or subtract from review count
+  const adjustment = isAddition ? 1 : -1;
+
+  // Calculate review count new
+  const newReviewCount = reviewCount + adjustment;
+
+  // Calculate new average ratings
+  const newAverageActing = (
+    (actingAverage * reviewCount + newActingRating * adjustment) /
+    newReviewCount
+  ).toFixed(1);
+  const newAveragePlot = (
+    (plotAverage * reviewCount + newPlotRating * adjustment) /
+    newReviewCount
+  ).toFixed(1);
+  const newAverageVisuals = (
+    (visualsAverage * reviewCount + newVisualsRating * adjustment) /
+    newReviewCount
+  ).toFixed(1);
+
+  // Calculate the new total average rating
+  const newTotalAverage =
+    (totalAverage * reviewCount + newOverallRating * adjustment) /
+    newReviewCount;
+
+  // Update the Show model with the new ratings
+  await Show.findByIdAndUpdate(
+    showId,
+    {
+      $set: {
+        actingAverage: newAverageActing,
+        plotAverage: newAveragePlot,
+        visualsAverage: newAverageVisuals,
+        totalAverage: newTotalAverage,
+        reviewCount: newReviewCount,
+      },
+    },
+    { new: true }
+  );
 };
 
 module.exports = {

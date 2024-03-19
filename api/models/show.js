@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const showSchema = new Schema({
   title: { type: String, required: true },
-  synopsis: {type: String, default: ""},
+  synopsis: { type: String, default: '' },
   imdbId: { type: String, required: true, unique: true },
   tmdbId: { type: String, required: true, unique: true },
   posterUrl: { type: String },
@@ -13,7 +13,19 @@ const showSchema = new Schema({
   tmdbBackdrop: String,
   originalName: String,
   mediaType: String,
-  cast: [{ name: String, actor: { type: mongoose.SchemaTypes.ObjectId, ref: 'Actor'}, character: String, order: Number}],
+  reviewCount: { type: Number, default: 0 },
+  actingAverage: { type: Number, default: 0 },
+  plotAverage: { type: Number, default: 0 },
+  visualsAverage: { type: Number, default: 0 },
+  totalAverage: { type: Number, default: 0 },
+  cast: [
+    {
+      name: String,
+      actor: { type: mongoose.SchemaTypes.ObjectId, ref: 'Actor' },
+      character: String,
+      order: Number,
+    },
+  ],
 });
 
 const Show = mongoose.model('show', showSchema);

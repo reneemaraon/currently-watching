@@ -24,7 +24,11 @@ type Show {
   tmdbPoster: String
   tmdbBackdrop: String
   originalName: String
-  reviewsCount: Int
+  reviewsCount: Int!
+  actingAverage: Float!
+  plotAverage: Float!
+  visualsAverage: Float!
+  totalAverage: Float!
   mediaType: String
   cast: [Actor!]
   releaseDate: String!
@@ -53,6 +57,8 @@ type Review {
   plotRating: Float!
   visualsRating: Float!
   createdAt: DateTime!
+  commentCount: Int
+  likeCount: Int
   body: String!
 }
 

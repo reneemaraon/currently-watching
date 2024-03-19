@@ -52,6 +52,8 @@ const reviewSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  commentCount: { type: Number, default: 0 },
+  likeCount: { type: Number, default: 0 },
 });
 
 const Review = mongoose.model('review', reviewSchema);

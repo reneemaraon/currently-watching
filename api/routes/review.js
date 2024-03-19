@@ -20,6 +20,7 @@ const {
   updateComment,
   deleteComment,
 } = require('../controllers/comment');
+const { createLike, deleteLike } = require('../controllers/like');
 
 router.route('/').get(getAllReviews);
 
@@ -41,3 +42,7 @@ router
   .patch(authenticate, isCommentOwner, updateComment)
   .delete(authenticate, isCommentOwner, deleteComment);
 module.exports = router;
+
+router.route('/:id/likes').post(createLike);
+
+router.route('/:reviewId/likes/:id').delete(deleteLike);
