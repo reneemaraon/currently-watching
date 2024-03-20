@@ -9,19 +9,19 @@ import { ToastProvider } from './ToastContext';
 import { ReviewDetailProvider } from './ReviewDetailContext';
 
 export const ContextContainer = ({ children }) => (
-  <AuthProvider>
-    <ShowsProvider>
-      <ReviewsProvider>
-        <ShowDetailProvider>
-          <CreateReviewContext>
-            <ToastProvider>
+  <ToastProvider>
+    <AuthProvider>
+      <ShowsProvider>
+        <ReviewsProvider>
+          <ShowDetailProvider>
+            <CreateReviewContext>
               <ReviewDetailProvider>
                 <SearchProvider>{children}</SearchProvider>
               </ReviewDetailProvider>
-            </ToastProvider>
-          </CreateReviewContext>
-        </ShowDetailProvider>
-      </ReviewsProvider>
-    </ShowsProvider>
-  </AuthProvider>
+            </CreateReviewContext>
+          </ShowDetailProvider>
+        </ReviewsProvider>
+      </ShowsProvider>
+    </AuthProvider>
+  </ToastProvider>
 );

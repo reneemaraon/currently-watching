@@ -36,7 +36,7 @@ const isCommentOwner = async (req, res, next) => {
       throw new NotFoundError('Comment not found');
     }
 
-    if (req.user && req.user._id.equals(review.user_id)) {
+    if (req.user && req.user._id.equals(comment.user)) {
       // User is the owner of the review, proceed to the next middleware or route handler
       return next();
     } else {
