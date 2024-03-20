@@ -1,7 +1,7 @@
-import { useReviewDetailContext } from '../../context/ReviewDetailContext';
-import LoadingAnimation from '../Common/LoadingAnimation';
-import CommentInput from './CommentInput';
-import Comment from './CommentItem';
+import { useReviewDetailContext } from "../../context/ReviewDetailContext";
+import LoadingAnimation from "../Common/LoadingAnimation";
+import CommentInput from "./CommentInput";
+import Comment from "./CommentItem";
 
 const CommentsArea = () => {
   const { comments, commentsLoading, postLoading, review } =
@@ -19,15 +19,7 @@ const CommentsArea = () => {
 
   const renderComments = () => {
     if (comments) {
-      return comments.map((comment) => (
-        <Comment
-          name={comment.user.screenName}
-          username={`@${comment.user.name}`}
-          display_photo={comment.user.profilePhotoUrl}
-          comment={comment.commentBody}
-          createdDate={comment.createdAt}
-        />
-      ));
+      return comments.map((comment) => <Comment comment={comment} />);
     }
   };
   return (
@@ -35,7 +27,7 @@ const CommentsArea = () => {
       <div className="Header w-full pt-2 pb-[15px] justify-between items-start inline-flex">
         <div className="Comments20">
           <span className="title-text">
-            Comments{' '}
+            Comments{" "}
             <span className="text-light-text subheader-text">
               {review && `(${review.commentCount})`}
             </span>

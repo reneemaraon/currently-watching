@@ -1,17 +1,17 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
   POST_COMMENT_MUTATION,
-  postCommentRequest,
-} from '../api/reviewsApi';
-import { useQuery, useMutation } from '@apollo/client';
+  deleteCommentRequest,
+} from "../api/reviewsApi";
+import { useQuery, useMutation } from "@apollo/client";
 
 const reviewDetailContext = createContext();
 
 export const useReviewDetailContext = () => {
   const context = useContext(reviewDetailContext);
-  if (!context) throw new Error('Review Detail Provider is missing');
+  if (!context) throw new Error("Review Detail Provider is missing");
   return context;
 };
 
@@ -19,7 +19,7 @@ export const ReviewDetailProvider = ({ children }) => {
   const [review, setReview] = useState(null);
   const [reviewId, setReviewId] = useState(null);
   const [comments, setComments] = useState([]);
-  const [commentBody, setCommentBody] = useState('');
+  const [commentBody, setCommentBody] = useState("");
   // const [postLoading, setPostLoading] = useState(false);
   const [postCommentRequest, { loading: postLoading, error: postError }] =
     useMutation(POST_COMMENT_MUTATION);
@@ -48,24 +48,32 @@ export const ReviewDetailProvider = ({ children }) => {
       if (response) {
         const newComment = response.data.createComment;
         setComments(() => [newComment, ...comments]);
-        // Increment the comment count in the review state
         setReview({
           ...review,
           commentCount: review.commentCount + 1,
         });
 
-        setCommentBody('');
+        setCommentBody("");
       }
     } catch (error) {
-      console.log('error');
+      console.log("error");
     }
-    // setPostLoading(true);
-    // try {
-    //   const response = await postCommentRequest(reviewId, { commentBody });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // setPostLoading(false);
+  };
+
+  const deleteComment = async (id) => {
+    try {
+      const response = await deleteCommentRequest(reviewId, id);
+
+      if (response) {
+        setComments(() => comments.filter((comment) => comment.id !== id));
+        setReview((prevReview) => ({
+          ...prevReview,
+          commentCount: prevReview.commentCount - 1,
+        }));
+      }
+    } catch (error) {
+      console.log("error");
+    }
   };
 
   useEffect(() => {
@@ -97,6 +105,7 @@ export const ReviewDetailProvider = ({ children }) => {
         commentBody,
         setCommentBody,
         postComment,
+        deleteComment,
         setReview,
         setReviewId,
         review,

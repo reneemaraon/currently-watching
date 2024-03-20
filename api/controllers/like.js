@@ -1,7 +1,7 @@
-const Like = require('../models/like');
-const Review = require('../models/review');
-const { NotFoundError } = require('../errors');
-const { StatusCodes } = require('http-status-codes');
+const Like = require("../models/like");
+const Review = require("../models/review");
+const { NotFoundError } = require("../errors");
+const { StatusCodes } = require("http-status-codes");
 
 const createLike = async (req, res) => {
   const {
@@ -13,7 +13,7 @@ const createLike = async (req, res) => {
   });
 
   if (!existingReview) {
-    throw new NotFoundError('Review does not exist.');
+    throw new NotFoundError("Review does not exist.");
   }
 
   const likeInstance = await Like.create({
@@ -33,12 +33,12 @@ const deleteLike = async (req, res) => {
 
   const likeInstance = await Like.findOneAndDelete({ _id: likeId });
   if (!likeInstance) {
-    throw new Error('Like instance not found');
+    throw new Error("Like instance not found");
   }
 
   await removeLike(likeInstance.review);
 
-  res.status(StatusCodes.OK).json({ msg: 'Deleted' });
+  res.status(StatusCodes.OK).json({ message: "Deleted" });
 };
 
 // utils

@@ -1,14 +1,14 @@
-const Review = require('../models/review');
-const Show = require('../models/show');
-const { BadRequestError, NotFoundError } = require('../errors');
-const { StatusCodes } = require('http-status-codes');
+const Review = require("../models/review");
+const Show = require("../models/show");
+const { BadRequestError, NotFoundError } = require("../errors");
+const { StatusCodes } = require("http-status-codes");
 
 const getAllReviews = async (req, res) => {
   const { page = 1, limit = 20, search } = req.query;
 
   const searchConditions = {};
   if (search) {
-    searchConditions.title = { $regex: new RegExp(search, 'i') };
+    searchConditions.title = { $regex: new RegExp(search, "i") };
   }
 
   const reviews = await Review.find(searchConditions)
@@ -33,7 +33,7 @@ const getReview = async (req, res) => {
   const review = await Review.findOne({ _id: reviewId });
 
   if (!review) {
-    throw new NotFoundError('Review not found');
+    throw new NotFoundError("Review not found");
   }
   res.status(StatusCodes.OK).json({ review });
 };
@@ -46,7 +46,7 @@ const createReview = async (req, res) => {
   });
 
   if (!existingShow) {
-    throw new NotFoundError('No show given.');
+    throw new NotFoundError("No show given.");
   }
 
   const existingReview = await Review.findOne({
@@ -55,7 +55,7 @@ const createReview = async (req, res) => {
   });
 
   if (existingReview) {
-    throw new BadRequestError('You have already posted a review for this show');
+    throw new BadRequestError("You have already posted a review for this show");
   }
 
   const overallRating = (
@@ -81,11 +81,11 @@ const deleteReview = async (req, res) => {
 
   const review = await Review.findOneAndDelete({ _id: reviewId });
   if (!review) {
-    throw new Error('Review not found');
+    throw new Error("Review not found");
   }
 
   await recalculateRatings(review, false);
-  res.status(StatusCodes.OK).json({ msg: 'Deleted' });
+  res.status(StatusCodes.OK).json({ message: "Deleted" });
 };
 
 const updateReview = async (req, res) => {
@@ -117,7 +117,7 @@ const recalculateRatings = async (review, isAddition = true) => {
   const existingShow = await Show.findById(showId);
 
   if (!existingShow) {
-    throw new Error('Show not found');
+    throw new Error("Show not found");
   }
 
   const {
