@@ -62,6 +62,10 @@ type Review {
   body: String!
 }
 
+type Mutation {
+  createComment(reviewId: ID!, commentBody: String!): Comment!
+}
+
 
 type Comment {
   _id: ID!

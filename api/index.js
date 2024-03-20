@@ -25,10 +25,6 @@ const typeDefs = gql(
   })
 );
 
-const server = new ApolloServer({
-  schema: buildSubgraphSchema({ typeDefs, resolvers }),
-});
-
 app.use(
   session({
     secret: 'secretcode',
@@ -70,9 +66,22 @@ app.use('/api/v1/reviews', reviewRouter);
 
 // Note you must call `start()` on the `ApolloServer`
 // instance before passing the instance to `expressMiddleware`
+
+const server = new ApolloServer({
+  schema: buildSubgraphSchema({
+    typeDefs,
+    resolvers,
+  }),
+});
+
 const apollo_start = async () => {
   await server.start();
-  app.use('/graphql', cors(), expressMiddleware(server));
+  app.use(
+    '/graphql',
+    expressMiddleware(server, {
+      context: async ({ req }) => ({ user: req.user }),
+    })
+  );
 };
 apollo_start();
 

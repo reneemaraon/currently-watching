@@ -6,6 +6,7 @@ const Review = require('./models/review');
 
 const { generateSearchConditions } = require('./utils/search');
 const Comment = require('./models/comment');
+const { processCreateComment } = require('./controllers/comment');
 
 const resolvers = {
   Query: {
@@ -91,7 +92,20 @@ const resolvers = {
       return user;
     },
   },
-  Mutation: {},
+  Mutation: {
+    createComment: async (_, { reviewId, commentBody }, { user }) => {
+      try {
+        const newComment = await processCreateComment(
+          reviewId,
+          user._id,
+          commentBody
+        );
+        return newComment;
+      } catch (error) {
+        throw new Error('Failed to create comment');
+      }
+    },
+  },
 };
 
 module.exports = resolvers;

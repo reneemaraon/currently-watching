@@ -75,6 +75,22 @@ export const GET_REVIEW_COMMENTS = gql`
   }
 `;
 
+export const POST_COMMENT_MUTATION = gql`
+  mutation PostComment($reviewId: ID!, $commentBody: String!) {
+    createComment(reviewId: $reviewId, commentBody: $commentBody) {
+      _id
+      commentBody
+      createdAt
+      user {
+        _id
+        name
+        screenName
+        profilePhotoUrl
+      }
+    }
+  }
+`;
+
 export const getReviewsRequest = async (params) =>
   await axios.get('/api/v1/reviews/');
 

@@ -1,8 +1,8 @@
-const Comment = require("../models/comment");
-const Review = require("../models/review");
-const User = require("../models/user");
-const { NotFoundError } = require("../errors");
-const { StatusCodes } = require("http-status-codes");
+const Comment = require('../models/comment');
+const Review = require('../models/review');
+const User = require('../models/user');
+const { NotFoundError } = require('../errors');
+const { StatusCodes } = require('http-status-codes');
 
 const getAllComments = async (req, res) => {
   const {
@@ -25,19 +25,13 @@ const getAllComments = async (req, res) => {
   });
 };
 
-const createComment = async (req, res) => {
-  const {
-    params: { id: reviewId },
-    user: { _id: userId },
-  } = req;
-  const { commentBody } = req.body;
-
+const processCreateComment = async (reviewId, userId, commentBody) => {
   const existingReview = await Review.findOne({
     _id: reviewId,
   });
 
   if (!existingReview) {
-    throw new NotFoundError("Review does not exist.");
+    throw new NotFoundError('Review does not exist.');
   }
 
   const comment = await Comment.create({
@@ -46,18 +40,21 @@ const createComment = async (req, res) => {
     review: reviewId,
   });
 
-  const userInstance = await User.findOne({ _id: userId });
-
   await addComment(reviewId);
 
-  res
-    .status(StatusCodes.CREATED)
-    .json({
-      user: userInstance,
-      commentBody,
-      review: reviewId,
-      createdAt: comment.createdAt,
-    });
+  return comment;
+};
+
+const createComment = async (req, res) => {
+  const {
+    params: { id: reviewId },
+    user: { _id: userId },
+  } = req;
+  const { commentBody } = req.body;
+
+  const comment = await processCreateComment(reviewId, userId, commentBody);
+
+  res.status(StatusCodes.CREATED).json({ comment });
 };
 
 const deleteComment = async (req, res) => {
@@ -67,12 +64,12 @@ const deleteComment = async (req, res) => {
 
   const comment = await Comment.findOneAndDelete({ _id: commentId });
   if (!comment) {
-    throw new Error("Comment not found");
+    throw new Error('Comment not found');
   }
 
   await removeComment(comment.review);
 
-  res.status(StatusCodes.OK).json({ msg: "Deleted" });
+  res.status(StatusCodes.OK).json({ msg: 'Deleted' });
 };
 
 const updateComment = async (req, res) => {
@@ -107,4 +104,5 @@ module.exports = {
   getAllComments,
   updateComment,
   deleteComment,
+  processCreateComment,
 };
