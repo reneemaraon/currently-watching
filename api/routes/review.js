@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { authenticate } = require('../middlewares/authMiddleware');
+const { authenticate } = require("../middlewares/authMiddleware");
 const {
   isReviewOwner,
   isCommentOwner,
-} = require('../middlewares/isOwnerMiddleware');
+} = require("../middlewares/isOwnerMiddleware");
 
 const {
   createReview,
@@ -12,37 +12,37 @@ const {
   getReview,
   updateReview,
   deleteReview,
-} = require('../controllers/review');
+} = require("../controllers/review");
 
 const {
   createComment,
   getAllComments,
   updateComment,
   deleteComment,
-} = require('../controllers/comment');
-const { createLike, deleteLike } = require('../controllers/like');
+} = require("../controllers/comment");
+const { createLike, deleteLike } = require("../controllers/like");
 
-router.route('/').get(getAllReviews);
+router.route("/").get(getAllReviews);
 
-router.route('/').post(authenticate, createReview);
+router.route("/").post(authenticate, createReview);
 
 router
-  .route('/:id')
+  .route("/:id")
   .get(getReview)
   .patch(authenticate, isReviewOwner, updateReview)
   .delete(authenticate, isReviewOwner, deleteReview);
 
 router
-  .route('/:id/comments')
+  .route("/:id/comments")
   .get(getAllComments)
   .post(authenticate, createComment);
 
 router
-  .route('/:reviewId/comments/:id')
+  .route("/:reviewId/comments/:id")
   .patch(authenticate, isCommentOwner, updateComment)
   .delete(authenticate, isCommentOwner, deleteComment);
 module.exports = router;
 
-router.route('/:id/likes').post(createLike);
+router.route("/:id/likes").post(createLike);
 
-router.route('/:reviewId/likes/:id').delete(deleteLike);
+router.route("/:reviewId/likes/:id").delete(deleteLike);

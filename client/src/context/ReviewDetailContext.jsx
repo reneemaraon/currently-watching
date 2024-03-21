@@ -1,17 +1,17 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
   POST_COMMENT_MUTATION,
   deleteCommentRequest,
-} from '../api/reviewsApi';
-import { useQuery, useMutation } from '@apollo/client';
+} from "../api/reviewsApi";
+import { useQuery, useMutation } from "@apollo/client";
 
 const reviewDetailContext = createContext();
 
 export const useReviewDetailContext = () => {
   const context = useContext(reviewDetailContext);
-  if (!context) throw new Error('Review Detail Provider is missing');
+  if (!context) throw new Error("Review Detail Provider is missing");
   return context;
 };
 
@@ -19,7 +19,7 @@ export const ReviewDetailProvider = ({ children }) => {
   const [review, setReview] = useState(null);
   const [reviewId, setReviewId] = useState(null);
   const [comments, setComments] = useState([]);
-  const [commentBody, setCommentBody] = useState('');
+  const [commentBody, setCommentBody] = useState("");
   // const [postLoading, setPostLoading] = useState(false);
   const [postCommentRequest, { loading: postLoading, error: postError }] =
     useMutation(POST_COMMENT_MUTATION);
@@ -53,27 +53,23 @@ export const ReviewDetailProvider = ({ children }) => {
           commentCount: review.commentCount + 1,
         });
 
-        setCommentBody('');
+        setCommentBody("");
       }
     } catch (error) {
-      console.log('error');
+      console.log("error");
     }
   };
 
   const deleteComment = async (id) => {
-    try {
-      const response = await deleteCommentRequest(reviewId, id);
+    const response = await deleteCommentRequest(reviewId, id);
 
-      if (response) {
-        setComments(() => comments.filter((comment) => comment._id !== id));
-        setReview((prevReview) => ({
-          ...prevReview,
-          commentCount: prevReview.commentCount - 1,
-        }));
-        return response;
-      }
-    } catch (error) {
-      console.log('error');
+    if (response) {
+      setComments(() => comments.filter((comment) => comment._id !== id));
+      setReview((prevReview) => ({
+        ...prevReview,
+        commentCount: prevReview.commentCount - 1,
+      }));
+      return response;
     }
   };
 
