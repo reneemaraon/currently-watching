@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../../context/AuthContext';
-import Dropdown from '../../Common/Dropdown';
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../../context/AuthContext";
+import Dropdown, { Option } from "../../Common/Dropdown";
 
 const ProfileView = ({ name, profile_photo }) => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const ProfileView = ({ name, profile_photo }) => {
   };
 
   const onProfileClick = () => {
-    navigate('/users/1');
+    navigate("/users/1");
   };
 
   const onLogout = async () => {
@@ -29,9 +29,9 @@ const ProfileView = ({ name, profile_photo }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -47,10 +47,13 @@ const ProfileView = ({ name, profile_photo }) => {
         <div className="absolute w-40 top-full right-0 mt-1 z-40">
           <Dropdown
             options={[
-              { name: 'Profile', type: 'redirect', onSelect: onProfileClick },
-              { name: 'Logout', type: '', onSelect: onLogout },
+              { name: "Profile", type: "redirect", onSelect: onProfileClick },
+              { name: "Logout", type: "", onSelect: onLogout },
             ]}
-          />
+          >
+            <Option key="Profile" text="Profile" onSelect={onProfileClick} />
+            <Option key="Logout" text="Logout" onSelect={onLogout} />
+          </Dropdown>
         </div>
       )}
     </div>

@@ -1,8 +1,9 @@
-import formatDateTime from '../../utils/formatDate';
-import Icon from '../Common/Icon';
-import { OptionsIcon } from '../Common/IconList';
-import Dropdown from '../Common/Dropdown';
-import { useState, useRef, useEffect } from 'react';
+import formatDateTime from "../../utils/formatDate";
+import Icon from "../Common/Icon";
+import { OptionsIcon } from "../Common/IconList";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useState, useRef, useEffect } from "react";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Comment = ({ comment, onDelete }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -11,6 +12,7 @@ const Comment = ({ comment, onDelete }) => {
     commentBody,
     createdAt,
   } = comment;
+  const { user } = useAuthContext();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -24,9 +26,9 @@ const Comment = ({ comment, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -40,39 +42,39 @@ const Comment = ({ comment, onDelete }) => {
           />
           <div className="Details grow shrink basis-0 flex-col justify-start items-start gap-0.5 inline-flex">
             <div className="NameUsername w-full justify-start items-center gap-1.5 inline-flex">
-              <div className="author-name">{screenName || 'Hwang Inyoup'}</div>
-              <div className="Username info-text">@{name || 'hi_high_hiy'}</div>
+              <div className="author-name">{screenName || "Hwang Inyoup"}</div>
+              <div className="Username info-text">@{name || "hi_high_hiy"}</div>
             </div>
             <div className="DatePublished info-text">
               {formatDateTime(createdAt)}
             </div>
           </div>
         </div>
-        <div
-          onClick={toggleDropdown}
-          ref={dropdownRef}
-          className="relative px-2 justify-center items-center cursor-pointer flex"
-        >
-          <Icon size="h-2 w-2">
-            <OptionsIcon />
-          </Icon>
-          {isDropdownVisible && (
-            <div className="absolute w-40 top-full right-0 mt-1 z-40">
-              <Dropdown
-                options={[
-                  {
-                    name: 'Delete',
-                    type: '',
-                    onSelect: () => onDelete(comment._id),
-                  },
-                ]}
-              />
-            </div>
-          )}
-        </div>
+        {user && user._id == comment.user._id && (
+          <div
+            onClick={toggleDropdown}
+            ref={dropdownRef}
+            className="relative px-2 justify-center items-center cursor-pointer flex"
+          >
+            <Icon size="h-2 w-2">
+              <OptionsIcon />
+            </Icon>
+            {isDropdownVisible && (
+              <div className="absolute w-40 top-full right-0 mt-1 z-40">
+                <Dropdown>
+                  <Option
+                    key="Delete"
+                    text="Delete"
+                    onSelect={() => onDelete(comment._id)}
+                  />
+                </Dropdown>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <p className="CommentText w-full text-sm leading-6 font-normal">
-        {commentBody || ''}
+        {commentBody || ""}
       </p>
     </div>
   );
