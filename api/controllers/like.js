@@ -3,11 +3,7 @@ const Review = require("../models/review");
 const { NotFoundError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 
-const createLike = async (req, res) => {
-  const {
-    params: { id: reviewId },
-  } = req;
-
+const processCreateLike = async (reviewId, userId) => {
   const existingReview = await Review.findOne({
     _id: reviewId,
   });
@@ -17,11 +13,22 @@ const createLike = async (req, res) => {
   }
 
   const likeInstance = await Like.create({
-    user: req.user._id,
+    user: userId,
     review: reviewId,
   });
 
   await addLike(reviewId);
+
+  return likeInstance;
+};
+
+const createLike = async (req, res) => {
+  const {
+    params: { id: reviewId },
+    user: { _id: userId },
+  } = req;
+
+  const likeInstance = processCreateLike(reviewId, userId);
 
   res.status(StatusCodes.CREATED).json({ likeInstance });
 };
@@ -58,4 +65,5 @@ const removeLike = async (reviewId) => {
 module.exports = {
   createLike,
   deleteLike,
+  processCreateLike,
 };

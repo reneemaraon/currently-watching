@@ -60,10 +60,12 @@ type Review {
   commentCount: Int
   likeCount: Int
   body: String!
+  liked: Boolean!
 }
 
 type Mutation {
   createComment(reviewId: ID!, commentBody: String!): Comment!
+  likeReview(reviewId: ID!): Like!
 }
 
 
@@ -76,7 +78,13 @@ type Comment {
   updatedAt: DateTime!
 }
 
-
+type Like {
+  _id: ID!
+  user: User!
+  review: Review!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
 
 input FilterInput {
   page: Int

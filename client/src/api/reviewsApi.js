@@ -43,6 +43,7 @@ export const GET_REVIEW = gql`
       createdAt
       commentCount
       likeCount
+      liked
       show {
         _id
         title
@@ -86,6 +87,19 @@ export const POST_COMMENT_MUTATION = gql`
         name
         screenName
         profilePhotoUrl
+      }
+    }
+  }
+`;
+
+export const POST_REVIEW_LIKE_MUTATION = gql`
+  mutation PostLike($reviewId: ID!) {
+    likeReview(reviewId: $reviewId) {
+      user {
+        _id
+      }
+      review {
+        _id
       }
     }
   }

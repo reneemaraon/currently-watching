@@ -3,6 +3,7 @@ import {
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
   POST_COMMENT_MUTATION,
+  POST_REVIEW_LIKE_MUTATION,
   deleteCommentRequest,
 } from "../api/reviewsApi";
 import { useQuery, useMutation } from "@apollo/client";
@@ -18,11 +19,14 @@ export const useReviewDetailContext = () => {
 export const ReviewDetailProvider = ({ children }) => {
   const [review, setReview] = useState(null);
   const [reviewId, setReviewId] = useState(null);
+
   const [comments, setComments] = useState([]);
   const [commentBody, setCommentBody] = useState("");
   // const [postLoading, setPostLoading] = useState(false);
   const [postCommentRequest, { loading: postLoading, error: postError }] =
     useMutation(POST_COMMENT_MUTATION);
+  const [postReviewLikeRequest, { error: likeError, data: likedReviewData }] =
+    useMutation(POST_REVIEW_LIKE_MUTATION);
   const { loading, error, data, refetch } = useQuery(GET_REVIEW, {
     variables: { id: reviewId },
   });
@@ -73,6 +77,14 @@ export const ReviewDetailProvider = ({ children }) => {
     }
   };
 
+  const postLike = async () => {
+    console.log(reviewId);
+    const { data } = await postReviewLikeRequest({
+      variables: { reviewId },
+    });
+    console.log(data);
+  };
+
   useEffect(() => {
     if (reviewId) {
       refetch();
@@ -109,6 +121,9 @@ export const ReviewDetailProvider = ({ children }) => {
         error,
         refetch,
         loading,
+        postLike,
+        likeError,
+        likedReviewData,
       }}
     >
       {children}
