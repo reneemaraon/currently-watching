@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import FullPageLoading from "../Common/FullPageLoading";
-import { HeartIcon, ShareIcon } from "../Common/IconList";
-import RatingRowStars from "./RatingRow";
-import ShowCardSmall from "../Common/ShowCard";
-import CommentsArea from "./CommentsArea";
-import CircularButton from "../Common/CircleButton";
-import { useReviewDetailContext } from "../../context/ReviewDetailContext";
-import HTMLRenderer from "./HtmlRenderer";
-import formatDateTime from "../../utils/formatDate";
+import FullPageLoading from '../Common/FullPageLoading';
+import { HeartIcon, ShareIcon } from '../Common/IconList';
+import RatingRowStars from './RatingRow';
+import ShowCardSmall from '../Common/ShowCard';
+import CommentsArea from './CommentsArea';
+import CircularButton from '../Common/CircleButton';
+import { useReviewDetailContext } from '../../context/ReviewDetailContext';
+import HTMLRenderer from './HtmlRenderer';
+import formatDateTime from '../../utils/formatDate';
+import { useToast } from '../../context/ToastContext';
 
 export default function ReviewDetail() {
   const { id } = useParams();
-  const { setReviewId, loading, review, postLike, likedReviewData } =
+  const { setReviewId, loading, review, deleteLike, postLike, heartError } =
     useReviewDetailContext();
   const [liked, setLiked] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (id) {
@@ -24,13 +26,11 @@ export default function ReviewDetail() {
   }, [id]);
 
   useEffect(() => {
-    // if (likedReviewData) {
-    //   if (likedReviewData.review._id == review._id) {
-    //     //toast error
-    //     setLiked(true);
-    //   }
-    // }
-  }, [likedReviewData]);
+    if (heartError) {
+      showToast('Something went wrong. Please try again.', 'error');
+      setLiked(!liked);
+    }
+  }, [heartError]);
 
   useEffect(() => {
     if (review) {
@@ -43,6 +43,7 @@ export default function ReviewDetail() {
   const onLikeClick = () => {
     if (liked) {
       //
+      deleteLike();
       setLiked(false);
     } else {
       postLike();
@@ -58,8 +59,8 @@ export default function ReviewDetail() {
       <div
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original${review.show.tmdbBackdrop})`,
-          backgroundSize: "cover",
-          backgroundBlendMode: "darken",
+          backgroundSize: 'cover',
+          backgroundBlendMode: 'darken',
         }}
         className="relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden"
       >
@@ -97,7 +98,7 @@ export default function ReviewDetail() {
               </div>
             </div>
             <div className="py-2 text-sm font-medium">
-              This user rated{" "}
+              This user rated{' '}
               <span className=" text-brand-tq">{review.show.title}</span>:
             </div>
             <div className="Right w-full flex-wrap justify-start items-start gap-3 py-2 inline-flex">

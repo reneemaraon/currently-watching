@@ -1,15 +1,13 @@
-const Like = require("../models/like");
-const Review = require("../models/review");
-const { NotFoundError } = require("../errors");
-const { StatusCodes } = require("http-status-codes");
+const Like = require('../models/like');
+const Review = require('../models/review');
+const { NotFoundError } = require('../errors');
+const { StatusCodes } = require('http-status-codes');
 
 const processCreateLike = async (reviewId, userId) => {
-  const existingReview = await Review.findOne({
-    _id: reviewId,
-  });
+  const existingLike = Like.find({ review: reviewId, user: userId });
 
-  if (!existingReview) {
-    throw new NotFoundError("Review does not exist.");
+  if (existingLike.length == 1) {
+    return existingLike;
   }
 
   const likeInstance = await Like.create({
@@ -33,19 +31,27 @@ const createLike = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ likeInstance });
 };
 
-const deleteLike = async (req, res) => {
-  const {
-    params: { id: likeId },
-  } = req;
-
-  const likeInstance = await Like.findOneAndDelete({ _id: likeId });
+const processDeleteLike = async (reviewId, userId) => {
+  const likeInstance = await Like.findOneAndDelete({
+    review: reviewId,
+    user: userId,
+  });
   if (!likeInstance) {
-    throw new Error("Like instance not found");
+    throw new Error('Like instance not found');
   }
 
   await removeLike(likeInstance.review);
+};
 
-  res.status(StatusCodes.OK).json({ message: "Deleted" });
+const deleteLike = async (req, res) => {
+  const {
+    params: { id: reviewId },
+    user: { _id: userId },
+  } = req;
+
+  processDeleteLike(reviewId, userId);
+
+  res.status(StatusCodes.OK).json({ message: 'Deleted' });
 };
 
 // utils
@@ -66,4 +72,5 @@ module.exports = {
   createLike,
   deleteLike,
   processCreateLike,
+  processDeleteLike,
 };

@@ -1,18 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 import {
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
   POST_COMMENT_MUTATION,
   POST_REVIEW_LIKE_MUTATION,
+  DELETE_REVIEW_LIKE_MUTATION,
   deleteCommentRequest,
-} from "../api/reviewsApi";
-import { useQuery, useMutation } from "@apollo/client";
+} from '../api/reviewsApi';
+import { useQuery, useMutation } from '@apollo/client';
 
 const reviewDetailContext = createContext();
 
 export const useReviewDetailContext = () => {
   const context = useContext(reviewDetailContext);
-  if (!context) throw new Error("Review Detail Provider is missing");
+  if (!context) throw new Error('Review Detail Provider is missing');
   return context;
 };
 
@@ -21,12 +22,18 @@ export const ReviewDetailProvider = ({ children }) => {
   const [reviewId, setReviewId] = useState(null);
 
   const [comments, setComments] = useState([]);
-  const [commentBody, setCommentBody] = useState("");
-  // const [postLoading, setPostLoading] = useState(false);
+  const [commentBody, setCommentBody] = useState('');
+
   const [postCommentRequest, { loading: postLoading, error: postError }] =
     useMutation(POST_COMMENT_MUTATION);
+
   const [postReviewLikeRequest, { error: likeError, data: likedReviewData }] =
     useMutation(POST_REVIEW_LIKE_MUTATION);
+
+  const [deleteReviewLikeRequest, { error: deleteLikeError }] = useMutation(
+    DELETE_REVIEW_LIKE_MUTATION
+  );
+
   const { loading, error, data, refetch } = useQuery(GET_REVIEW, {
     variables: { id: reviewId },
   });
@@ -57,10 +64,10 @@ export const ReviewDetailProvider = ({ children }) => {
           commentCount: review.commentCount + 1,
         });
 
-        setCommentBody("");
+        setCommentBody('');
       }
     } catch (error) {
-      console.log("error");
+      console.log('error');
     }
   };
 
@@ -78,11 +85,15 @@ export const ReviewDetailProvider = ({ children }) => {
   };
 
   const postLike = async () => {
-    console.log(reviewId);
     const { data } = await postReviewLikeRequest({
       variables: { reviewId },
     });
-    console.log(data);
+  };
+
+  const deleteLike = async () => {
+    const { data } = await deleteReviewLikeRequest({
+      variables: { reviewId },
+    });
   };
 
   useEffect(() => {
@@ -122,7 +133,8 @@ export const ReviewDetailProvider = ({ children }) => {
         refetch,
         loading,
         postLike,
-        likeError,
+        deleteLike,
+        heartError: likeError || deleteLikeError,
         likedReviewData,
       }}
     >
