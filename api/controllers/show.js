@@ -1,14 +1,14 @@
-const Show = require("../models/show");
-const Actor = require("../models/actor");
-const { BadRequestError, NotFoundError } = require("../errors");
-const { StatusCodes } = require("http-status-codes");
+const Show = require('../models/show');
+const Actor = require('../models/actor');
+const { BadRequestError, NotFoundError } = require('../errors');
+const { StatusCodes } = require('http-status-codes');
 
 const getAllShows = async (req, res) => {
   const { page = 1, limit = 20, search } = req.query;
 
   const searchConditions = {};
   if (search) {
-    searchConditions.title = { $regex: new RegExp(search, "i") };
+    searchConditions.title = { $regex: new RegExp(search, 'i') };
   }
 
   const shows = await Show.find(searchConditions)
@@ -33,7 +33,7 @@ const getShow = async (req, res) => {
   const show = await Show.findOne({ _id: showId });
 
   if (!show) {
-    throw new NotFoundError("Show not found");
+    throw new NotFoundError('Show not found');
   }
   res.status(StatusCodes.OK).json({ show });
 };
@@ -46,7 +46,7 @@ const getImdbShow = async (req, res) => {
   const show = await Show.findOne({ imdbId: showId });
 
   if (!show) {
-    throw new NotFoundError("Show not found");
+    throw new NotFoundError('Show not found');
   }
 
   res.status(StatusCodes.OK).json({ show });
@@ -60,14 +60,13 @@ const getTmdbShow = async (req, res) => {
   const show = await Show.findOne({ tmdbId: showId });
 
   if (!show) {
-    throw new NotFoundError("Show not found");
+    throw new NotFoundError('Show not found');
   }
 
   res.status(StatusCodes.OK).json({ show });
 };
 
 const createShow = async (req, res) => {
-  console.log(req.body);
   const show = await Show.create({ ...req.body });
   res.status(StatusCodes.CREATED).json({ ...req.body });
 };
@@ -80,7 +79,7 @@ const addCast = async (req, res) => {
   const show = await Show.findOne({ _id: showId });
 
   if (!show) {
-    throw new NotFoundError("Show not found");
+    throw new NotFoundError('Show not found');
   }
 
   var actor = await Actor.findOne({ tmdbId });
@@ -107,9 +106,6 @@ const addCast = async (req, res) => {
 
   actor.save();
 
-  console.log(show);
-  console.log(actor);
-
   res.status(StatusCodes.OK).json({
     show,
   });
@@ -119,20 +115,18 @@ const deleteShow = async (req, res) => {
   const {
     params: { id: showId },
   } = req;
-  console.log(showId);
 
   const show = await Show.findOneAndDelete({ _id: showId });
   if (!show) {
-    throw new NotFoundError("Show not found");
+    throw new NotFoundError('Show not found');
   }
-  res.status(StatusCodes.OK).json({ message: "Deleted" });
+  res.status(StatusCodes.OK).json({ message: 'Deleted' });
 };
 
 const updateShow = async (req, res) => {
   try {
     const { id } = req.params;
 
-    console.log(req.body);
     const updatedShow = await Show.findByIdAndUpdate(id, { $set: req.body });
     return res.json(updatedShow);
   } catch (error) {

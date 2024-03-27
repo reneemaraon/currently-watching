@@ -8,6 +8,16 @@ const showSchema = new Schema({
   tmdbId: { type: String, required: true, unique: true },
   posterUrl: { type: String },
   firstAirDate: Date,
+  lastAirDate: Date,
+  genres: [
+    {
+      name: String,
+      id: Number,
+    },
+  ],
+  numberOfSeasons: Number,
+  numberOfEpisodes: Number,
+  popularity: Number,
   originCountry: [String],
   tmdbPoster: String,
   tmdbBackdrop: String,

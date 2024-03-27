@@ -46,6 +46,11 @@ export const GET_SHOW = gql`
         _id
         name
       }
+      genres {
+        name
+      }
+      numberOfSeasons
+      numberOfEpisodes
       reviewCount
       actingAverage
       plotAverage

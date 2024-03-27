@@ -15,6 +15,11 @@ enum UserRole {
   ADMIN
 }
 
+type Genre {
+  name: String!
+  id: Int!
+}
+
 type Show {
   _id: ID!
   title: String!
@@ -31,8 +36,12 @@ type Show {
   totalAverage: Float!
   mediaType: String
   cast: [Actor!]
-  releaseDate: String!
-  
+  firstAirDate: DateTime!
+  lastAirDate: DateTime!
+  genres: [Genre!]
+  numberOfSeasons: Int!
+  numberOfEpisodes: Int!
+  popularity: Float!
 }
 
 type Actor {

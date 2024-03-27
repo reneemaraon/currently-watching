@@ -59,7 +59,13 @@ const ShowDetail = () => {
                       } watched`}</div>
                     </div>
                     <div className="subtext text-brand-tq">
-                      2 seasons | PG-13 | Thriller, Revenge
+                      {`${show.numberOfSeasons} season${
+                        show.numberOfSeasons > 1 ? 's' : ''
+                      } `}{' '}
+                      | {show.numberOfEpisodes} episodes |{' '}
+                      {commaSeparatedString(
+                        show.genres.map((genre) => genre.name)
+                      )}
                     </div>
                   </div>
                   <div className="ReviewActions justify-start items-start pb-2 gap-1.5 sm:gap-2.5 flex">
