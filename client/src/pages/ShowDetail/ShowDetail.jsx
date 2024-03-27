@@ -9,6 +9,7 @@ import CustomButton from '../Common/CustomButton';
 import { useShowDetailContext } from '../../context/ShowDetailContext';
 import commaSeparatedString from '../Common/commaSeparate';
 import FullPageLoading from '../Common/FullPageLoading';
+import ListLoading from '../Common/LoadingList';
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -118,6 +119,7 @@ const ShowDetail = () => {
                   </div>
                 </div>
                 <div className="CommentList w-full sm:px-2 flex-col justify-center items-start gap-4 flex">
+                  {showReviewsLoading && <ListLoading />}
                   {showReviews &&
                     showReviews.map((showReview) => (
                       <ReviewsListItem review={showReview} noImage />

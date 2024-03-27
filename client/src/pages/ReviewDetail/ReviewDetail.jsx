@@ -64,7 +64,7 @@ export default function ReviewDetail() {
         }}
         className="relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden"
       >
-        <div className="container-center-card pt-20 sm:pt-40">
+        <div className="container-center-card pt-20 sm:pt-30">
           {/* Main contentt */}
           <div className="z-10 Main large-white-card p-4 sm:p-6">
             <div className="w-full pb-4 flex-col justify-start items-start gap-3 flex">

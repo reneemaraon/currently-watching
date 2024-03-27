@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useReviewDetailContext } from "../../context/ReviewDetailContext";
-import LoadingAnimation from "../Common/LoadingAnimation";
-import CommentInput from "./CommentInput";
-import Comment from "./CommentItem";
-import PopupModal from "../Common/PopupModal";
-import CustomButton from "../Common/CustomButton";
-import { useToast } from "../../context/ToastContext";
+import { useState } from 'react';
+import { useReviewDetailContext } from '../../context/ReviewDetailContext';
+import LoadingAnimation from '../Common/LoadingAnimation';
+import CommentInput from './CommentInput';
+import Comment from './CommentItem';
+import PopupModal from '../Common/PopupModal';
+import CustomButton from '../Common/CustomButton';
+import { useToast } from '../../context/ToastContext';
+import ListLoading from '../Common/LoadingList';
 
 const CommentsArea = () => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -24,22 +25,12 @@ const CommentsArea = () => {
     try {
       const response = await deleteComment(commentToDelete);
       if (response) {
-        showToast("Your comment was deleted successfully", "success");
+        showToast('Your comment was deleted successfully', 'success');
       }
     } catch (error) {
       console.log(error);
-      showToast(error.response.data.message, "error");
+      showToast(error.response.data.message, 'error');
     }
-  };
-
-  const renderLoading = () => {
-    return (
-      <div className="w-full justify-center inline-flex py-4">
-        <div className="w-40">
-          <LoadingAnimation />
-        </div>
-      </div>
-    );
   };
 
   const renderPopup = () => (
@@ -78,7 +69,7 @@ const CommentsArea = () => {
       <div className="Header w-full pt-2 pb-[15px] justify-between items-start inline-flex">
         <div className="Comments20">
           <span className="title-text">
-            Comments{" "}
+            Comments{' '}
             <span className="text-light-text subheader-text">
               {review && `(${review.commentCount})`}
             </span>
@@ -88,7 +79,7 @@ const CommentsArea = () => {
       </div>
       <div className="CommentList w-full flex-col justify-center items-start gap-[15px] flex">
         <CommentInput />
-        {commentsLoading || (postLoading && renderLoading())}
+        {(commentsLoading || postLoading) && <ListLoading />}
         {renderComments()}
 
         <div className="LoadMorePanel w-full h-16 flex-col justify-end items-center gap-2.5 flex">
