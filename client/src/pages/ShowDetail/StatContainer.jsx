@@ -1,3 +1,4 @@
+import { useShowDetailContext } from '../../context/ShowDetailContext';
 import Icon from '../Common/Icon';
 import StarIcon from '../Common/Star';
 
@@ -16,6 +17,15 @@ const Row = ({ name, value }) => (
 );
 
 const StatContainer = () => {
+  const {
+    show: {
+      visualsAverage,
+      actingAverage,
+      plotAverage,
+      reviewCount,
+      totalAverage,
+    },
+  } = useShowDetailContext();
   return (
     <div className="Ratings w-full max-w-[400px] px-3 sm:px-5 py-3.5 sm:py-3.5 rounded-lg border border-slate-200 justify-start items-start gap-5 inline-flex">
       <div className="AspectRatings flex-col grow  justify-start items-start gap-2.5 inline-flex">
@@ -25,9 +35,9 @@ const StatContainer = () => {
           </div>
         </div>
         <div className="w-full flex-col justify-start items-start gap-3 flex">
-          <Row name="Acting" value="2.5" />
-          <Row name="Plot" value="4.5" />
-          <Row name="Visuals" value="3.4" />
+          <Row name="Acting" value={actingAverage} />
+          <Row name="Plot" value={plotAverage} />
+          <Row name="Visuals" value={visualsAverage} />
         </div>
       </div>
       <div className="AspectRatings flex-col justify-center items-center gap-2.5 inline-flex">
@@ -39,7 +49,7 @@ const StatContainer = () => {
         <div className="RatingsContainer w-full py-[5px] justify-center items-center gap-2.5 inline-flex">
           <div className="StarRating w-20 h-20 px-2.5 py-5 rounded-[40px] border-2 border-brand-tq justify-center items-center gap-[5px] flex">
             <div className="8 text-black text-xl font-bold leading-[14px]">
-              4.8
+              {totalAverage}
             </div>
             <Icon>
               <StarIcon />
@@ -51,11 +61,10 @@ const StatContainer = () => {
             from{' '}
           </span>
           <span className="text-gray-800 text-[13px] font-bold leading-normal">
-            23.4k
+            {reviewCount}
           </span>
           <span className="text-gray-800 text-[13px] font-normal leading-normal">
-            {' '}
-            reviews
+            {` review${reviewCount > 1 ? 's' : ''}`}
           </span>
         </div>
       </div>

@@ -11,10 +11,10 @@ async function runJobs() {
     // Call your recalculateRatings function or any other logic here
     await connectDB(process.env.MONGO_URI);
 
-    // await recalculateRatings();
+    await recalculateRatings();
     // console.log('Recalculated show items  successfully.');
 
-    await updateReviews();
+    // await updateReviews();
     console.log('Updated review like and comments counts successfully.');
 
     console.log('Jobs completed successfully.');
