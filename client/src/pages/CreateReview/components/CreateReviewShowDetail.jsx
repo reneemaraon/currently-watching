@@ -1,3 +1,4 @@
+import ImageWithOpacityTransition from '../../Common/ImageTransition';
 import StarIcon from '../../Common/Star';
 import commaSeparatedString from '../../Common/commaSeparate';
 
@@ -16,8 +17,8 @@ const CreateReviewShowDetail = ({ show }) => {
     <div className="w-full inline-flex">
       <div className="max-[500px]:h-[260px] h-[175px] w-full max-w-[800px] border-light-stroke overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
         <div className="max-[500px]:w-full w-3/5 max-[500px]:h-2/5 h-full">
-          <img
-            className="object-cover w-full h-full"
+          <ImageWithOpacityTransition
+            styleAttach="object-cover w-full h-full"
             src={`https://image.tmdb.org/t/p/w500${show.tmdbPoster}`}
           />
         </div>

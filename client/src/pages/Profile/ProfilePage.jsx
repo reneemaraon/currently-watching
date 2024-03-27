@@ -5,6 +5,7 @@ import CustomButton from '../Common/CustomButton';
 import Icon from '../Common/Icon';
 import ReviewsListItem from '../Reviews/ReviewListItem';
 import List from '../MyLists/List';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
 
 export default function ProfilePage() {
   return (
@@ -17,8 +18,8 @@ export default function ProfilePage() {
               <div className="w-full sm:px-2 md:px-4 items-start flex">
                 <div className="ProfileDetails grow pb-[15px] flex-col justify-start items-start gap-[15px] inline-flex">
                   <div className="Profile justify-start items-start gap-4 sm:gap-6 inline-flex">
-                    <img
-                      className="ProfilePhoto w-12 h-12 sm:h-16 sm:w-16 md:w-[70px] md:h-[70px] relative rounded-full"
+                    <ImageWithOpacityTransition
+                      styleAttach="w-12 h-12 sm:h-16 sm:w-16 md:w-[70px] md:h-[70px] relative rounded-full"
                       src="https://via.placeholder.com/80x82"
                     />
                     <div className="Text self-stretch flex-col justify-center items-start gap-0.5 sm:gap-2 inline-flex">

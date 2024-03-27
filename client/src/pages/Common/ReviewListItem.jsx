@@ -1,3 +1,4 @@
+import ImageWithOpacityTransition from './ImageTransition';
 import StarIcon from './Star';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,8 +50,8 @@ const ReviewsListItem = ({ id }) => {
                 max-[600px]:min-h-[190px]    
             "
       >
-        <img
-          className="object-cover align-center w-full h-full"
+        <ImageWithOpacityTransition
+          styleAttach="object-cover align-center w-full h-full"
           src="https://image.tmdb.org/t/p/w500/6KMhKm2ZHG8KUtg4lhsNUdt4iPh.jpg"
         />
         <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
@@ -62,8 +63,8 @@ const ReviewsListItem = ({ id }) => {
       <div className="ReviewDetails w-full h-full self-stretch p-4 flex-col justify-start items-start gap-2 inline-flex">
         <div className="Author self-stretch pl-[5px] py-px justify-between items-start inline-flex">
           <div className="Profile h-[31px] justify-start items-center gap-[11px] flex">
-            <img
-              className="ProfilePhoto w-[31px] h-[31px] relative rounded-[40px]"
+            <ImageWithOpacityTransition
+              styleAttach="ProfilePhoto w-[31px] h-[31px] relative rounded-[40px]"
               src="https://via.placeholder.com/31x31"
             />
             <div className="AccDetails flex-col justify-center items-start inline-flex">

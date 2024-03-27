@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../../context/AuthContext";
-import Dropdown, { Option } from "../../Common/Dropdown";
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../../context/AuthContext';
+import Dropdown, { Option } from '../../Common/Dropdown';
+import ImageWithOpacityTransition from '../../Common/ImageTransition';
 
 const ProfileView = ({ name, profile_photo }) => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const ProfileView = ({ name, profile_photo }) => {
   };
 
   const onProfileClick = () => {
-    navigate("/users/1");
+    navigate('/users/1');
   };
 
   const onLogout = async () => {
@@ -29,9 +30,9 @@ const ProfileView = ({ name, profile_photo }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -41,14 +42,17 @@ const ProfileView = ({ name, profile_photo }) => {
       ref={dropdownRef}
       className="hover:bg-main-bg relative hover:cursor-pointer rounded-lg px-2.5 py-2.5 justify-end items-center gap-2.5 flex select-none"
     >
-      <img className="w-8 h-8 rounded-full" src={profile_photo} />
+      <ImageWithOpacityTransition
+        styleAttach="w-8 h-8 rounded-full"
+        src={profile_photo}
+      />
       <div className="text-sm leading-tight">{name}</div>
       {isDropdownVisible && (
         <div className="absolute w-40 top-full right-0 mt-1 z-40">
           <Dropdown
             options={[
-              { name: "Profile", type: "redirect", onSelect: onProfileClick },
-              { name: "Logout", type: "", onSelect: onLogout },
+              { name: 'Profile', type: 'redirect', onSelect: onProfileClick },
+              { name: 'Logout', type: '', onSelect: onLogout },
             ]}
           >
             <Option key="Profile" text="Profile" onSelect={onProfileClick} />

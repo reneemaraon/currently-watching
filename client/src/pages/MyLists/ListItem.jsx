@@ -1,6 +1,7 @@
-import Icon from "../Common/Icon";
-import { BarsIcon } from "../Common/IconList";
-import StarIcon from "../Common/Star";
+import Icon from '../Common/Icon';
+import { BarsIcon } from '../Common/IconList';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import StarIcon from '../Common/Star';
 
 const ListItem = () => {
   return (
@@ -12,8 +13,8 @@ const ListItem = () => {
       </div>
       <div className="hidden min-[400px]:block ShowImage md:w-20 h-full px-1 py-1 sm:py-1.5 md:py-2">
         <div className="w-full h-full overflow-hidden rounded-lg sm:rounded-xl">
-          <img
-            className="h-full w-full object-cover"
+          <ImageWithOpacityTransition
+            styleAttach="h-full w-full object-cover"
             src="https://via.placeholder.com/80x60"
           />
         </div>
@@ -25,7 +26,7 @@ const ListItem = () => {
               <span className="font-normal sm:font-medium md:font-semibold">
                 The Glory
                 <span className="font-extralight sm:font-light md:font-normal">
-                  {" "}
+                  {' '}
                   (2022)
                 </span>
               </span>

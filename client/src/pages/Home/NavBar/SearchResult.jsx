@@ -1,10 +1,11 @@
-import StarIcon from "../../Common/Star";
+import ImageWithOpacityTransition from '../../Common/ImageTransition';
+import StarIcon from '../../Common/Star';
 
 const RatingType = ({ name, rate }) => (
   <div className="justify-center items-center gap-[3px] flex">
-    <div className="text-xs">{name || ""}</div>
+    <div className="text-xs">{name || ''}</div>
     <div className="pl-1 justify-start items-center gap-0.5 flex">
-      <div className="text-xs font-bold">{rate || "5.0"}</div>
+      <div className="text-xs font-bold">{rate || '5.0'}</div>
       <StarIcon sizeRules="w-4 h-4" />
     </div>
   </div>
@@ -15,8 +16,8 @@ const SearchResult = ({ searchItem, onClick }) => {
     <div onClick={onClick} className="w-full inline-flex hover:cursor-pointer">
       <div className="bg-theme-base bg-opacity-75 hover:bg-opacity-100 max-[500px]:h-[245px] h-[140px] w-full max-w-[800px] overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
         <div className="w-1/3 h-full">
-          <img
-            className="object-cover w-full h-full"
+          <ImageWithOpacityTransition
+            styleAttach="object-cover w-full h-full"
             src={`https://image.tmdb.org/t/p/w500${searchItem.tmdbPoster}`}
           />
         </div>

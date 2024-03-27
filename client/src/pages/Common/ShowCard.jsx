@@ -1,3 +1,4 @@
+import ImageWithOpacityTransition from './ImageTransition';
 import StarIcon from './Star';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,8 +14,8 @@ const ShowCardSmall = ({ id, show }) => {
       onClick={onClickNavigate}
       className="cursor-pointer overflow-hidden border w-64 shrink-0 bg-theme-base bg-opacity-70 rounded-[17px] flex-col justify-start items-start inline-flex"
     >
-      <img
-        className="Show w-full object-cover h-[135px]"
+      <ImageWithOpacityTransition
+        styleAttach="Show w-full object-cover h-[135px]"
         src={
           show
             ? `https://image.tmdb.org/t/p/w500${show.tmdbBackdrop}`

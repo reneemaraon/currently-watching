@@ -10,6 +10,7 @@ import { useShowDetailContext } from '../../context/ShowDetailContext';
 import commaSeparatedString from '../Common/commaSeparate';
 import FullPageLoading from '../Common/FullPageLoading';
 import ListLoading from '../Common/LoadingList';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -43,8 +44,8 @@ const ShowDetail = () => {
           <div className="z-10 Main large-white-card py-6 px-3.5 sm:px-6">
             <div className="Details flex-wrap grow shrink basis-0 justify-start items-start gap-3 flex">
               <div className="PosterContainer flex max-[530px]:justify-start max-[530px]:px-4 pb-3 justify-end max-[530px]:max-w-[500px] max-[530px]:w-full w-1/3 max-w-[300px] min-w-[240px] h-auto overflow-hidden">
-                <img
-                  className="object-contain sm:object-cover w-[220px] sm:w-full rounded-md"
+                <ImageWithOpacityTransition
+                  styleAttach="object-contain sm:object-cover w-[220px] sm:w-full rounded-md"
                   src={`https://image.tmdb.org/t/p/w500${show.tmdbPoster}`}
                 />
               </div>
