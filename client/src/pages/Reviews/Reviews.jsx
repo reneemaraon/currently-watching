@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import CustomButton from '../Common/CustomButton';
-import ReviewListItem from './ReviewListItem';
-import { useReviewsContext } from '../../context/ReviewContext';
-import { useEffect, useState } from 'react';
-import PopupModal from '../Common/PopupModal';
-import SearchBar from '../Home/NavBar/SearchBar';
-import CreateReviewShowDetail from '../CreateReview/components/CreateReviewShowDetail';
-import { useSearchContext } from '../../context/SearchContext';
-import FullPageLoading from '../Common/FullPageLoading';
+import CustomButton from "../Common/CustomButton";
+import ReviewListItem from "./ReviewListItem";
+import { useReviewsContext } from "../../context/ReviewContext";
+import { useEffect, useState } from "react";
+import PopupModal from "../Common/PopupModal";
+import SearchBar from "../Home/NavBar/SearchBar";
+import CreateReviewShowDetail from "../CreateReview/components/CreateReviewShowDetail";
+import { useSearchContext } from "../../context/SearchContext";
+import FullPageLoading from "../Common/FullPageLoading";
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
@@ -25,6 +25,10 @@ const ReviewsPage = () => {
     navigate(`/shows/${show}/create-review`);
   };
 
+  const deleteReview = (id) => {
+    console.log(`delete ${id}`);
+  };
+
   const renderPopup = () => (
     <PopupModal showModal={showModal} setShowModal={setShowModal}>
       <div className="w-full inline-flex flex-col items-center gap-8 py-7 px-4">
@@ -32,8 +36,8 @@ const ReviewsPage = () => {
           <p className="title-text font-normal">Write Review</p>
           <p className="important-small-text font-normal">
             {show && lastSelected
-              ? 'You are writing a review for:'
-              : 'Choose a drama you wish to write a review for.'}
+              ? "You are writing a review for:"
+              : "Choose a drama you wish to write a review for."}
           </p>
         </div>
         {show && lastSelected && <CreateReviewShowDetail show={lastSelected} />}
@@ -71,7 +75,13 @@ const ReviewsPage = () => {
       <div className="ReviewsList w-full inline-flex px-0.5 pb-4 sm:px-2.5 flex-col justify-start items-center gap-5">
         {reviews &&
           reviews.map((review) => {
-            return <ReviewListItem review={review} />;
+            return (
+              <ReviewListItem
+                onDelete={() => deleteReview(review._id)}
+                key={review._id}
+                review={review}
+              />
+            );
           })}
       </div>
     </div>

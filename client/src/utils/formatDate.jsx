@@ -15,7 +15,7 @@ function formatDateTime(dateTime) {
 
   if (diffInDays > 7) {
     return targetDate.toLocaleDateString("en-GB", options);
-  } else if (diffInDays < 7 && diffInDays > 1) {
+  } else if (diffInDays < 7 && diffInDays >= 1) {
     return `${diffInDays} day${diffInDays == 1 ? "" : "s"} ago`;
   } else if (diffInHours > 0) {
     return `${diffInHours} hour${diffInHours == 1 ? "" : "s"} ago`;

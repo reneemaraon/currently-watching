@@ -1,9 +1,13 @@
-import stripHtmlTags from '../../utils/stripTags';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../Common/Icon';
-import { CommentIcon, HeartIcon } from '../Common/IconList';
-import StarIcon from '../Common/Star';
-import renderStars from '../Common/renderStars';
+import stripHtmlTags from "../../utils/stripTags";
+import { useNavigate } from "react-router-dom";
+import Icon from "../Common/Icon";
+import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
+import StarIcon from "../Common/Star";
+import renderStars from "../Common/renderStars";
+import formatDateTime from "../../utils/formatDate";
+import { useAuthContext } from "../../context/AuthContext";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useEffect, useRef, useState } from "react";
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -29,7 +33,11 @@ const RatingRow = ({ ratingName, rating }) => {
   );
 };
 
-const ReviewsListItem = ({ noImage, review }) => {
+const ReviewsListItem = ({ noImage, review, onDelete }) => {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+  const { user } = useAuthContext();
+
   const navigate = useNavigate();
 
   const navigateToReview = () => {
@@ -40,6 +48,24 @@ const ReviewsListItem = ({ noImage, review }) => {
     event.stopPropagation();
     navigate(`/shows/${review.show._id}`);
   };
+
+  const toggleDropdown = (event) => {
+    event.stopPropagation();
+    setDropdownVisible(!isDropdownVisible);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div
@@ -60,7 +86,7 @@ const ReviewsListItem = ({ noImage, review }) => {
                 
                 max-[600px]:w-full
                 max-[600px]:h-[160px]
-                ${noImage && 'hidden'}
+                ${noImage && "hidden"}
             `}
       >
         <img
@@ -81,23 +107,52 @@ const ReviewsListItem = ({ noImage, review }) => {
         </div>
       </div>
       <div className="ReviewDetails min-[601px]:h-full w-full max-[600px]:max-h-40 py-4 px-3 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
-        <div className="Author justify-between items-start inline-flex">
-          <div className="Profile justify-start gap-2 sm:gap-3 flex">
+        <div className="w-full Author justify-between items-start inline-flex">
+          <div className="Profile justify-start grow items-center gap-2 sm:gap-3 flex">
             <img
               className="ProfilePhoto w-6 h-6 sm:w-8 sm:h-8 relative rounded-full"
               src={review.user.profilePhotoUrl}
             />
-            <div className="inline-flex flex-col gap-0">
+            <div className="inline-flex flex-col gap-0.5">
               <div className="AccDetails max-[600px]:items-center max-[600px]:flex-row gap-1.5 h-5 items-center inline-flex">
                 <div className="leading-3 text-sm sm:text-base font-medium font-['Inter']">
                   {review.user.name}
                 </div>
-                <div className="Username leading-3 font-light text-light-text text-xs sm:text-sm">
+                <div className="Username leading-3 font-light text-light-text text-[10px] sm:text-xs">
                   @{review.user.screenName}
                 </div>
               </div>
-              <div className="date"></div>
+              <div className="info-text text-[8px] sm:text-[10px]">
+                {formatDateTime(review.createdAt)}
+              </div>
             </div>
+          </div>
+          <div
+            onClick={toggleDropdown}
+            ref={dropdownRef}
+            className="relative p-2 justify-center items-center cursor-pointer flex"
+          >
+            <Icon size="h-2 w-2">
+              <OptionsIcon />
+            </Icon>
+            {isDropdownVisible && (
+              <div className="absolute w-40 top-full right-0 mt-1 z-40">
+                <Dropdown>
+                  {user && user._id == review.user._id && (
+                    <Option
+                      key="Delete"
+                      text="Delete"
+                      onSelect={() => onDelete(review._id)}
+                    />
+                  )}
+                  <Option
+                    key="copy"
+                    text="Copy Link"
+                    onSelect={() => onDelete(review._id)}
+                  />
+                </Dropdown>
+              </div>
+            )}
           </div>
         </div>
         <div className="max-[400px]:text-sm text-base sm:text-l font-medium">
