@@ -11,6 +11,7 @@ import commaSeparatedString from '../Common/commaSeparate';
 import FullPageLoading from '../Common/FullPageLoading';
 import ListLoading from '../Common/LoadingList';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
+import ShowReviewsList from './ShowReviewList';
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -98,9 +99,9 @@ const ShowDetail = () => {
             <div className="w-full block sm:hidden py-4">
               <StatContainer />
             </div>
-            <div className="Footer w-full py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
-              <div className="ReviewSection w-full pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
-                <div className="Header px-2 w-full pb-5 justify-between items-start inline-flex">
+            <div className="w-full py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
+              <div className="w-full pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
+                <div className="px-2 w-full pb-5 justify-between items-start inline-flex">
                   <div className="inline-flex gap-2">
                     <span className="title-text ">
                       Reviews{' '}
@@ -119,25 +120,7 @@ const ShowDetail = () => {
                     </CustomButton>
                   </div>
                 </div>
-                <div className="CommentList w-full sm:px-2 flex-col justify-center items-start gap-4 flex">
-                  {showReviewsLoading && <ListLoading />}
-                  {showReviews &&
-                    showReviews.map((showReview) => (
-                      <ReviewsListItem review={showReview} noImage />
-                    ))}
-
-                  {showReviews && show.reviewsCount > showReviews.length && (
-                    <div className="LoadMorePanel w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
-                      <CustomButton
-                        styleSet="light"
-                        size="defaultResize"
-                        edge="rounded"
-                      >
-                        Load more
-                      </CustomButton>
-                    </div>
-                  )}
-                </div>
+                <ShowReviewsList />
               </div>
             </div>
           </div>

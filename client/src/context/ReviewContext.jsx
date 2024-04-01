@@ -3,6 +3,7 @@ import {
   getReviewRequest,
   getReviewsRequest,
   GET_REVIEWS_LIST,
+  deleteReviewRequest,
 } from '../api/reviewsApi';
 import { useQuery } from '@apollo/client';
 
@@ -34,9 +35,19 @@ export const ReviewsProvider = ({ children }) => {
     }
   }, [data]);
 
+  const deleteReview = async (id) => {
+    const response = await deleteReviewRequest(id);
+
+    if (response) {
+      setReviews(() => reviews.filter((review) => review._id !== id));
+
+      return response;
+    }
+  };
+
   return (
     <reviewContext.Provider
-      value={{ reviews, review, error, getReview, loading }}
+      value={{ reviews, review, error, getReview, loading, deleteReview }}
     >
       {children}
     </reviewContext.Provider>

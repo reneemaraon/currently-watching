@@ -18,6 +18,7 @@ export const GET_SHOW_REVIEWS = gql`
       plotRating
       visualsRating
       commentCount
+      createdAt
       likeCount
       show {
         _id

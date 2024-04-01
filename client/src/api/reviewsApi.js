@@ -166,3 +166,6 @@ export const postCommentRequest = async (id, payload) =>
 
 export const deleteCommentRequest = async (reviewId, commentId) =>
   await axios.delete(`/api/v1/reviews/${reviewId}/comments/${commentId}`);
+
+export const deleteReviewRequest = async (reviewId) =>
+  await axios.delete(`/api/v1/reviews/${reviewId}`);

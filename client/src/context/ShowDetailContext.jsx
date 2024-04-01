@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getShowRequest, GET_SHOW_REVIEWS, GET_SHOW } from '../api/showsApi';
 import { useQuery } from '@apollo/client';
+import { deleteReviewRequest } from '../api/reviewsApi';
 
 const showDetailContext = createContext();
 
@@ -32,6 +33,19 @@ export const ShowDetailProvider = ({ children }) => {
     variables: { id: showId },
   });
 
+  const deleteReview = async (id) => {
+    const response = await deleteReviewRequest(id);
+
+    if (response) {
+      setShowReviews(() => showReviews.filter((review) => review._id !== id));
+      setShow(() => ({
+        ...show,
+        reviewCount: show.reviewCount - 1,
+      }));
+      return response;
+    }
+  };
+
   useEffect(() => {
     if (showReviewsData) {
       setShowReviews(showReviewsData.showReviews); // Assuming your data structure has a 'searchResults' field
@@ -59,6 +73,7 @@ export const ShowDetailProvider = ({ children }) => {
         loading,
         error,
         show,
+        deleteReview,
         showReviews,
         showReviewsLoading,
         showReviewsError,

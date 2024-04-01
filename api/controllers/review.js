@@ -77,7 +77,6 @@ const deleteReview = async (req, res) => {
   const {
     params: { id: reviewId },
   } = req;
-  console.log(reviewId);
 
   const review = await Review.findOneAndDelete({ _id: reviewId });
   if (!review) {
@@ -91,10 +90,7 @@ const deleteReview = async (req, res) => {
 const updateReview = async (req, res) => {
   try {
     const { id } = req.params;
-    // TODO: validate req.body before to update
 
-    // if a new image is uploaded upload it to cloudinary
-    console.log(req.body);
     const updatedReview = await Review.findByIdAndUpdate(id, {
       $set: req.body,
     });

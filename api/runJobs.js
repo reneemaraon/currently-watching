@@ -14,7 +14,7 @@ async function runJobs() {
     await recalculateRatings();
     // console.log('Recalculated show items  successfully.');
 
-    // await updateReviews();
+    await updateReviews();
     console.log('Updated review like and comments counts successfully.');
 
     console.log('Jobs completed successfully.');
