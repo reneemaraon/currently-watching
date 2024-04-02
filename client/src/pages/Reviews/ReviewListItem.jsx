@@ -1,13 +1,13 @@
-import stripHtmlTags from '../../utils/stripTags';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../Common/Icon';
-import { CommentIcon, HeartIcon, OptionsIcon } from '../Common/IconList';
-import StarIcon from '../Common/Star';
-import renderStars from '../Common/renderStars';
-import formatDateTime from '../../utils/formatDate';
-import { useAuthContext } from '../../context/AuthContext';
-import Dropdown, { Option } from '../Common/Dropdown';
-import { useEffect, useRef, useState } from 'react';
+import stripHtmlTags from "../../utils/stripTags";
+import { useNavigate } from "react-router-dom";
+import Icon from "../Common/Icon";
+import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
+import StarIcon from "../Common/Star";
+import renderStars from "../Common/renderStars";
+import formatDateTime from "../../utils/formatDate";
+import { useAuthContext } from "../../context/AuthContext";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useEffect, useRef, useState } from "react";
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -61,9 +61,9 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -86,7 +86,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                 
                 max-[600px]:w-full
                 max-[600px]:h-[160px]
-                ${noImage && 'hidden'}
+                ${noImage && "hidden"}
             `}
       >
         <img
