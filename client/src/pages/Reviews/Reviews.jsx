@@ -13,7 +13,12 @@ import FullPageLoading from '../Common/FullPageLoading';
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
-  const { error, reviews, loading, deleteReview } = useReviewsContext();
+  const {
+    error,
+    reviews: { reviews },
+    loading,
+    deleteReview,
+  } = useReviewsContext();
   const { lastSelected } = useSearchContext();
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

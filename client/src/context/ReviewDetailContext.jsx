@@ -75,7 +75,11 @@ export const ReviewDetailProvider = ({ children }) => {
     const response = await deleteCommentRequest(reviewId, id);
 
     if (response) {
-      setComments(() => comments.filter((comment) => comment._id !== id));
+      setComments({
+        ...comments,
+        totalCount: comments.totalCount - 1,
+        comments: comments.comments.filter((comment) => comment._id !== id),
+      });
       setReview((prevReview) => ({
         ...prevReview,
         commentCount: prevReview.commentCount - 1,

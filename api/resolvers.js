@@ -28,7 +28,14 @@ const resolvers = {
         .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
-      return shows;
+
+      const count = await Show.countDocuments();
+      return {
+        shows,
+        totalCount: count,
+        totalPages: Math.ceil(count / options.limit) + 1,
+        currentPage: parseInt(options.page),
+      };
     },
     show: async (_, { id }) => {
       let show = await Show.findOne({ _id: id });
@@ -39,11 +46,19 @@ const resolvers = {
         'title',
         'body',
       ]);
+
       let reviews = await Review.find(searchConditions)
         .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
-      return reviews;
+
+      const count = await Review.countDocuments();
+      return {
+        reviews,
+        totalCount: count,
+        totalPages: Math.ceil(count / options.limit) + 1,
+        currentPage: parseInt(options.page),
+      };
     },
     showReviews: async (_, { id, filter = {} }) => {
       const { searchConditions, options } = generateSearchConditions(filter, [
@@ -55,7 +70,13 @@ const resolvers = {
         .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
-      return reviews;
+      const count = await Review.find(searchConditions).countDocuments();
+      return {
+        reviews,
+        totalCount: count,
+        totalPages: Math.ceil(count / options.limit) + 1,
+        currentPage: parseInt(options.page),
+      };
     },
     review: async (_, { id }) => {
       let review = await Review.findOne({ _id: id });
@@ -70,7 +91,13 @@ const resolvers = {
         .sort({ createdAt: -1 })
         .limit(options.limit)
         .skip(options.skip);
-      return comments;
+      const count = await Comment.find(searchConditions).countDocuments();
+      return {
+        comments,
+        totalCount: count,
+        totalPages: Math.ceil(count / options.limit) + 1,
+        currentPage: parseInt(options.page),
+      };
     },
   },
   Review: {

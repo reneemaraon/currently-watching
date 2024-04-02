@@ -102,17 +102,39 @@ input FilterInput {
   search: String
 }
 
-type Query {
-  reviews(filter: FilterInput): [Review]
-  review(id: ID!): Review
-  showReviews(id: ID!, filter: FilterInput): [Review]
+type ReviewPagination {
+  currentPage: Int!
+  totalPages: Int!
+  totalCount: Int!
+  reviews: [Review]
+}
 
-  shows(filter: FilterInput): [Show]
+type ShowPagination {
+  currentPage: Int!
+  totalPages: Int!
+  totalCount: Int!
+  shows: [Show]
+}
+
+type CommentPagination {
+  currentPage: Int!
+  totalPages: Int!
+  totalCount: Int!
+  comments: [Comment]
+}
+
+
+type Query {
+  reviews(filter: FilterInput): ReviewPagination
+  review(id: ID!): Review
+  showReviews(id: ID!, filter: FilterInput): ReviewPagination
+
+  shows(filter: FilterInput): ShowPagination
   show(id: ID!): Show
 
   users: [User]
   user(id: ID!): User
 
-  reviewComments(id: ID!, filter: FilterInput): [Comment!]
+  reviewComments(id: ID!, filter: FilterInput): CommentPagination
 }
 

@@ -37,7 +37,11 @@ export const ShowDetailProvider = ({ children }) => {
     const response = await deleteReviewRequest(id);
 
     if (response) {
-      setShowReviews(() => showReviews.filter((review) => review._id !== id));
+      setShowReviews({
+        ...showReviews,
+        totalCount: showReviews.totalCount - 1,
+        reviews: showReviews.reviews.filter((review) => review._id !== id),
+      });
       setShow(() => ({
         ...show,
         reviewCount: show.reviewCount - 1,

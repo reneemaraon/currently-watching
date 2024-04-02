@@ -11,8 +11,13 @@ import ListLoading from '../Common/LoadingList';
 const CommentsArea = () => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
-  const { comments, commentsLoading, postLoading, review, deleteComment } =
-    useReviewDetailContext();
+  const {
+    comments: { comments, totalCount },
+    commentsLoading,
+    postLoading,
+    review,
+    deleteComment,
+  } = useReviewDetailContext();
   const { showToast } = useToast();
 
   const onAttemptDelete = (id) => {
@@ -71,7 +76,7 @@ const CommentsArea = () => {
           <span className="title-text">
             Comments{' '}
             <span className="text-light-text subheader-text">
-              {review && `(${review.commentCount})`}
+              {`(${totalCount})`}
             </span>
           </span>
         </div>
@@ -81,14 +86,15 @@ const CommentsArea = () => {
         <CommentInput />
         {(commentsLoading || postLoading) && <ListLoading />}
         {renderComments()}
-
-        <div className="LoadMorePanel w-full h-16 flex-col justify-end items-center gap-2.5 flex">
-          <div className="Button py-2 px-4 sm:py-3 sm:px-5 bg-light-stroke rounded-full border justify-center items-center gap-2 inline-flex">
-            <div className="Button grow shrink basis-0 text-center font-semibold text-sm sm:text-base ">
-              Load More
+        {comments && comments.length < totalCount && (
+          <div className="LoadMorePanel w-full h-16 flex-col justify-end items-center gap-2.5 flex">
+            <div className="Button py-2 px-4 sm:py-3 sm:px-5 bg-light-stroke rounded-full border justify-center items-center gap-2 inline-flex">
+              <div className="Button grow shrink basis-0 text-center font-semibold text-sm sm:text-base ">
+                Load More
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const getAllReviews = async (req, res) => {
   const count = await Review.countDocuments();
 
   res.status(StatusCodes.OK).json({
-    nbHits: reviews.length,
+    totalCount: reviews.length,
     totalPages: Math.ceil(count / limit) + 1,
     currentPage: parseInt(page),
     reviews,
@@ -128,7 +128,9 @@ const recalculateRatings = async (review, isAddition = true) => {
   const adjustment = isAddition ? 1 : -1;
 
   // Calculate review count new
-  const newReviewCount = reviewCount + adjustment;
+  const newCount = reviewCount + adjustment;
+
+  const newReviewCount = newCount == 0 ? 1 : newCount;
 
   // Calculate new average ratings
   const newAverageActing = (
@@ -159,7 +161,7 @@ const recalculateRatings = async (review, isAddition = true) => {
         plotAverage: newAveragePlot,
         visualsAverage: newAverageVisuals,
         totalAverage: newTotalAverage,
-        reviewCount: newReviewCount,
+        reviewCount: newCount,
       },
     },
     { new: true }

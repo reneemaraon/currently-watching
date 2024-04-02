@@ -8,8 +8,12 @@ import ListLoading from '../Common/LoadingList';
 import PopupModal from '../Common/PopupModal';
 
 const ShowReviewsList = () => {
-  const { showReviews, show, showReviewsLoading, deleteReview } =
-    useShowDetailContext();
+  const {
+    showReviews: { reviews: showReviews },
+    show,
+    showReviewsLoading,
+    deleteReview,
+  } = useShowDetailContext();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const { showToast } = useToast();

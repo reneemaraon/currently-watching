@@ -12,6 +12,7 @@ const generateSearchConditions = (filter, searchFields) => {
     options: {
       limit: limit * 1,
       skip: (page - 1) * limit,
+      page: page,
     },
   };
 };

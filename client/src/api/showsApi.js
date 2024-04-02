@@ -10,26 +10,31 @@ export const getShowRequest = async (id) =>
 export const GET_SHOW_REVIEWS = gql`
   query GetShowReviews($id: ID!, $filter: FilterInput) {
     showReviews(id: $id, filter: $filter) {
-      _id
-      title
-      body
-      overallRating
-      actingRating
-      plotRating
-      visualsRating
-      commentCount
-      createdAt
-      likeCount
-      show {
+      totalCount
+      totalPages
+      currentPage
+      reviews {
         _id
         title
-        tmdbPoster
-      }
-      user {
-        _id
-        name
-        screenName
-        profilePhotoUrl
+        body
+        overallRating
+        actingRating
+        plotRating
+        visualsRating
+        commentCount
+        createdAt
+        likeCount
+        show {
+          _id
+          title
+          tmdbPoster
+        }
+        user {
+          _id
+          name
+          screenName
+          profilePhotoUrl
+        }
       }
     }
   }

@@ -18,7 +18,7 @@ const getAllShows = async (req, res) => {
   const count = await Show.countDocuments();
 
   res.status(StatusCodes.OK).json({
-    nbHits: shows.length,
+    totalCount: shows.length,
     totalPages: Math.ceil(count / limit) + 1,
     currentPage: parseInt(page),
     shows,

@@ -4,27 +4,32 @@ import axios from 'axios';
 export const GET_REVIEWS_LIST = gql`
   query ReviewsList {
     reviews {
-      _id
-      title
-      body
-      overallRating
-      actingRating
-      plotRating
-      visualsRating
-      createdAt
-      commentCount
-      likeCount
-      show {
+      totalCount
+      totalPages
+      currentPage
+      reviews {
         _id
         title
-        tmdbPoster
-        tmdbBackdrop
-      }
-      user {
-        _id
-        name
-        screenName
-        profilePhotoUrl
+        body
+        overallRating
+        actingRating
+        plotRating
+        visualsRating
+        createdAt
+        commentCount
+        likeCount
+        show {
+          _id
+          title
+          tmdbPoster
+          tmdbBackdrop
+        }
+        user {
+          _id
+          name
+          screenName
+          profilePhotoUrl
+        }
       }
     }
   }
@@ -63,14 +68,19 @@ export const GET_REVIEW = gql`
 export const GET_REVIEW_COMMENTS = gql`
   query ReviewComments($id: ID!, $filter: FilterInput) {
     reviewComments(id: $id, filter: $filter) {
-      _id
-      commentBody
-      createdAt
-      user {
+      totalCount
+      totalPages
+      currentPage
+      comments {
         _id
-        name
-        screenName
-        profilePhotoUrl
+        commentBody
+        createdAt
+        user {
+          _id
+          name
+          screenName
+          profilePhotoUrl
+        }
       }
     }
   }
