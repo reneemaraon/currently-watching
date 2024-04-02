@@ -1,13 +1,13 @@
-import stripHtmlTags from "../../utils/stripTags";
-import { useNavigate } from "react-router-dom";
-import Icon from "../Common/Icon";
-import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
-import StarIcon from "../Common/Star";
-import renderStars from "../Common/renderStars";
-import formatDateTime from "../../utils/formatDate";
-import { useAuthContext } from "../../context/AuthContext";
-import Dropdown, { Option } from "../Common/Dropdown";
-import { useEffect, useRef, useState } from "react";
+import stripHtmlTags from '../../utils/stripTags';
+import { useNavigate } from 'react-router-dom';
+import Icon from '../Common/Icon';
+import { CommentIcon, HeartIcon, OptionsIcon } from '../Common/IconList';
+import StarIcon from '../Common/Star';
+import renderStars from '../Common/renderStars';
+import formatDateTime from '../../utils/formatDate';
+import { useAuthContext } from '../../context/AuthContext';
+import Dropdown, { Option } from '../Common/Dropdown';
+import { useEffect, useRef, useState } from 'react';
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -24,7 +24,7 @@ const RatingRow = ({ ratingName, rating }) => {
         {renderStars(rating, starObject)}
       </div>
       <div className="min-[1001px]:hidden Rating justify-center items-center gap-[3px] max-[600px]:gap-0 flex">
-        <div className="Number text-xs font-bold">5</div>
+        <div className="Number text-xs font-bold">{rating}</div>
         <div className="w-4 h-4">
           <StarIcon />
         </div>
@@ -61,9 +61,9 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -86,7 +86,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                 
                 max-[600px]:w-full
                 max-[600px]:h-[160px]
-                ${noImage && "hidden"}
+                ${noImage && 'hidden'}
             `}
       >
         <img
@@ -108,24 +108,19 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
       </div>
       <div className="ReviewDetails min-[601px]:h-full w-full max-[600px]:max-h-40 py-4 px-3 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
         <div className="w-full Author justify-between items-start inline-flex">
-          <div className="Profile justify-start grow items-center gap-2 sm:gap-3 flex">
+          <div className="Profile justify-start grow items-start gap-1 sm:gap-2.5 flex">
             <img
-              className="ProfilePhoto w-6 h-6 sm:w-8 sm:h-8 relative rounded-full"
+              className="ProfilePhoto w-4 h-4 sm:w-6 sm:h-6 relative rounded-full"
               src={review.user.profilePhotoUrl}
             />
-            <div className="inline-flex flex-col gap-0.5">
-              <div className="AccDetails max-[600px]:items-center max-[600px]:flex-row gap-1.5 h-5 items-center inline-flex">
-                <div className="leading-3 text-sm sm:text-base font-medium font-['Inter']">
-                  {review.user.name}
-                </div>
-                <div className="Username leading-3 font-light text-light-text text-[10px] sm:text-xs">
-                  @{review.user.screenName}
-                </div>
-              </div>
-              <div className="info-text text-[8px] sm:text-[10px]">
+            <span className="flex items-end text-sm sm:text-base py-1 sm:leading-3 leading-[10px] font-medium">
+              {review.user.name}
+              <span className="font-light leading-[10px] sm:leading-3 text-light-text text-[10px] sm:text-xs">
+                <span className="mx-1"> </span> @{review.user.screenName}
+                <span className="mx-1">&#183;</span>
                 {formatDateTime(review.createdAt)}
-              </div>
-            </div>
+              </span>
+            </span>
           </div>
           <div
             onClick={toggleDropdown}
