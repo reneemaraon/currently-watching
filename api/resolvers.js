@@ -33,7 +33,7 @@ const resolvers = {
       return {
         shows,
         totalCount: count,
-        totalPages: Math.ceil(count / options.limit) + 1,
+        totalPages: Math.ceil(count / options.limit),
         currentPage: parseInt(options.page),
       };
     },
@@ -56,7 +56,7 @@ const resolvers = {
       return {
         reviews,
         totalCount: count,
-        totalPages: Math.ceil(count / options.limit) + 1,
+        totalPages: Math.ceil(count / options.limit),
         currentPage: parseInt(options.page),
       };
     },
@@ -74,7 +74,7 @@ const resolvers = {
       return {
         reviews,
         totalCount: count,
-        totalPages: Math.ceil(count / options.limit) + 1,
+        totalPages: Math.ceil(count / options.limit),
         currentPage: parseInt(options.page),
       };
     },
@@ -95,7 +95,7 @@ const resolvers = {
       return {
         comments,
         totalCount: count,
-        totalPages: Math.ceil(count / options.limit) + 1,
+        totalPages: Math.ceil(count / options.limit),
         currentPage: parseInt(options.page),
       };
     },

@@ -1,18 +1,18 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 import {
   getReviewRequest,
   getReviewsRequest,
   GET_REVIEWS_LIST,
   deleteReviewRequest,
-} from "../api/reviewsApi";
-import { useQuery } from "@apollo/client";
+} from '../api/reviewsApi';
+import { useQuery } from '@apollo/client';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 2;
 const reviewContext = createContext();
 
 export const useReviewsContext = () => {
   const context = useContext(reviewContext);
-  if (!context) throw new Error("Review Provider is missing");
+  if (!context) throw new Error('Review Provider is missing');
   return context;
 };
 
@@ -40,9 +40,9 @@ export const ReviewsProvider = ({ children }) => {
 
   useEffect(() => {
     if (data) {
-      console.log("data");
+      console.log('data');
       console.log(data);
-      console.log("reviews");
+      console.log('reviews');
       console.log(reviews);
       if (reviews.currentPage < data.reviews.currentPage) {
         setReviews((prevReviews) => ({
@@ -103,7 +103,16 @@ export const ReviewsProvider = ({ children }) => {
 
   return (
     <reviewContext.Provider
-      value={{ reviews, review, error, getReview, loading, deleteReview }}
+      value={{
+        reviews,
+        review,
+        error,
+        getReview,
+        loading,
+        deleteReview,
+        page,
+        setPage,
+      }}
     >
       {children}
     </reviewContext.Provider>

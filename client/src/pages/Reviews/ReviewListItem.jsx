@@ -1,13 +1,13 @@
-import stripHtmlTags from "../../utils/stripTags";
-import { useNavigate } from "react-router-dom";
-import Icon from "../Common/Icon";
-import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
-import StarIcon from "../Common/Star";
-import renderStars from "../Common/renderStars";
-import formatDateTime from "../../utils/formatDate";
-import { useAuthContext } from "../../context/AuthContext";
-import Dropdown, { Option } from "../Common/Dropdown";
-import { useEffect, useRef, useState } from "react";
+import stripHtmlTags from '../../utils/stripTags';
+import { useNavigate } from 'react-router-dom';
+import Icon from '../Common/Icon';
+import { CommentIcon, HeartIcon, OptionsIcon } from '../Common/IconList';
+import StarIcon from '../Common/Star';
+import renderStars from '../Common/renderStars';
+import formatDateTime from '../../utils/formatDate';
+import { useAuthContext } from '../../context/AuthContext';
+import Dropdown, { Option } from '../Common/Dropdown';
+import { useEffect, useRef, useState } from 'react';
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -61,9 +61,9 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -72,7 +72,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
       onClick={navigateToReview}
       className={`w-full hover:cursor-pointer hover:bg-opacity-100
             bg-theme-base bg-opacity-70 rounded-[10px] sm:rounded-[20px] border border-light-stroke justify-start items-start inline-flex
-            max-[600px]:flex-col min-[601px]:h-[180px] max-w-[900px]
+            max-[600px]:flex-col min-[601px]:h-[190px] max-w-[900px]
             group
             ease-in`}
     >
@@ -85,8 +85,8 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                 min-[601px]:max-w-[180px]
                 
                 max-[600px]:w-full
-                max-[600px]:h-[160px]
-                ${noImage && "hidden"}
+                max-[600px]:h-[150px]
+                ${noImage && 'hidden'}
             `}
       >
         <img
@@ -106,54 +106,56 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
           </div>
         </div>
       </div>
-      <div className="ReviewDetails min-[601px]:h-full w-full max-[600px]:max-h-40 py-4 px-3 sm:px-4 flex-col justify-start items-start gap-2 inline-flex grow">
+      <div className="ReviewDetails relative min-[601px]:h-full w-full max-[600px]:max-h-44 max-[600px]:py-3 py-4 px-3 sm:px-4 flex-col justify-start items-start sm:gap-1 inline-flex grow">
         <div className="w-full Author justify-between items-start inline-flex">
-          <div className="Profile justify-start grow items-start gap-1 sm:gap-2.5 flex">
+          <div className="Profile justify-start grow max-[600px]:items-center items-start gap-2.5 flex">
             <img
-              className="ProfilePhoto w-4 h-4 sm:w-6 sm:h-6 relative rounded-full"
+              className="ProfilePhoto w-5 h-5 sm:w-6 sm:h-6 relative rounded-full"
               src={review.user.profilePhotoUrl}
             />
-            <span className="flex items-end text-sm sm:text-base py-1 sm:leading-3 leading-[10px] font-medium">
-              {review.user.name}
-              <span className="font-light leading-[10px] sm:leading-3 text-light-text text-[10px] sm:text-xs">
-                <span className="mx-1"> </span> @{review.user.screenName}
-                <span className="mx-1">&#183;</span>
+            <span className="max-[600px]:gap-1.5 max-[600px]:flex-col flex text-sm sm:text-base py-1 sm:leading-3 leading-[10px] font-medium">
+              <span className="mr-1 sm:mr-2">{review.user.name}</span>
+              <span className="font-light max-[600px]:gap-1 leading-[10px] sm:leading-3 text-light-text text-[10px] sm:text-xs">
+                <span>@{review.user.screenName}</span>
+                <span className="mx-0.5 min-[600px]:mx-1">&#183;</span>
                 {formatDateTime(review.createdAt)}
               </span>
             </span>
           </div>
-          <div
-            onClick={toggleDropdown}
-            ref={dropdownRef}
-            className="relative p-2 justify-center items-center cursor-pointer flex"
-          >
-            <Icon size="h-2 w-2">
-              <OptionsIcon />
-            </Icon>
-            {isDropdownVisible && (
-              <div className="absolute w-40 top-full right-0 mt-1 z-40">
-                <Dropdown>
-                  {user && user._id == review.user._id && (
+          <div className="absolute sm:right-2 top-1.5 right-1.5">
+            <div
+              onClick={toggleDropdown}
+              ref={dropdownRef}
+              className="rounded-full ease-in duration-200 transition-colors hover:bg-main-bg relative p-2 justify-center items-center cursor-pointer flex"
+            >
+              <Icon size="h-1 w-1 sm:h-2 sm:w-2">
+                <OptionsIcon />
+              </Icon>
+              {isDropdownVisible && (
+                <div className="absolute w-40 top-full right-0 mt-1 z-40">
+                  <Dropdown>
+                    {user && user._id == review.user._id && (
+                      <Option
+                        key="Delete"
+                        text="Delete"
+                        onSelect={() => onDelete(review._id)}
+                      />
+                    )}
                     <Option
-                      key="Delete"
-                      text="Delete"
+                      key="copy"
+                      text="Copy Link"
                       onSelect={() => onDelete(review._id)}
                     />
-                  )}
-                  <Option
-                    key="copy"
-                    text="Copy Link"
-                    onSelect={() => onDelete(review._id)}
-                  />
-                </Dropdown>
-              </div>
-            )}
+                  </Dropdown>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div className="max-[400px]:text-sm text-base sm:text-l font-medium">
+        <div className="max-[400px]:text-sm mt-1 text-base sm:text-l font-medium">
           {review.title}
         </div>
-        <div className="Preview grow text-light-text max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
+        <div className="Preview grow text-light-text my-0.5 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
           {stripHtmlTags(review.body)}
         </div>
         <div className="Footer w-full pt-1 justify-between items-end gap-4 inline-flex">

@@ -6,6 +6,7 @@ import Icon from '../Common/Icon';
 import ReviewsListItem from '../Reviews/ReviewListItem';
 import List from '../MyLists/List';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
+import LoadMorePanel from '../Common/LoadMorePagination';
 
 export default function ProfilePage() {
   return (
@@ -64,15 +65,7 @@ export default function ProfilePage() {
                   <ReviewsListItem />
                   <ReviewsListItem />
                   <ReviewsListItem />
-                  <div className="LoadMorePanel self-stretch h-[65px]  flex-col justify-end items-center gap-2.5 flex">
-                    <CustomButton
-                      styleSet="light"
-                      size="defaultResize"
-                      edge="rounded"
-                    >
-                      Load more reviews
-                    </CustomButton>
-                  </div>
+                  <LoadMorePanel />
                 </div>
               </div>
               <div className="Lists w-full flex-col justify-center items-center gap-[15px] flex">

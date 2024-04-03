@@ -22,7 +22,7 @@ const SearchBar = ({ onItemClick }) => {
     setSelectedItem,
     setSearchTerm,
     refetchResults,
-    searchResults,
+    searchResults: { shows: searchResults },
     loading,
   } = useSearchContext();
   const [isFocused, setIsFocused] = useState(false);

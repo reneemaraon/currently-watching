@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 import axios from 'axios';
 
 export const GET_REVIEWS_LIST = gql`
-  query ReviewsList {
-    reviews {
+  query ReviewsList($filter: FilterInput) {
+    reviews(filter: $filter) {
       totalCount
       totalPages
       currentPage

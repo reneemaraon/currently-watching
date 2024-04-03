@@ -11,7 +11,12 @@ export const useSearchContext = () => {
 };
 
 export const SearchProvider = ({ children }) => {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({
+    totalCount: 0,
+    currentPage: 0,
+    totalPages: 0,
+    shows: [],
+  });
   const [searchTerm, setSearchTerm] = useState('');
   const [lastSelected, setSelectedItem] = useState(null);
 

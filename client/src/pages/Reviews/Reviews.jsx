@@ -10,14 +10,19 @@ import CreateReviewShowDetail from '../CreateReview/components/CreateReviewShowD
 import { useSearchContext } from '../../context/SearchContext';
 import { useToast } from '../../context/ToastContext';
 import FullPageLoading from '../Common/FullPageLoading';
+import LoadMorePanel from '../Common/LoadMorePagination';
+import LoadingAnimation from '../Common/LoadingAnimation';
+import ListLoading from '../Common/LoadingList';
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
   const {
     error,
-    reviews: { reviews },
+    reviews: { totalCount, reviews },
     loading,
     deleteReview,
+    page,
+    setPage,
   } = useReviewsContext();
   const { lastSelected } = useSearchContext();
   const [showModal, setShowModal] = useState(false);
@@ -50,6 +55,10 @@ const ReviewsPage = () => {
   const onAttemptDelete = (id) => {
     setReviewToDelete(id);
     setShowDeleteModal(true);
+  };
+
+  const loadMoreItems = () => {
+    setPage((prevPage) => prevPage + 1);
   };
 
   const renderPopup = () => (
@@ -94,10 +103,6 @@ const ReviewsPage = () => {
     </PopupModal>
   );
 
-  if (loading) {
-    return <FullPageLoading />;
-  }
-
   if (error) {
     return <div>Error</div>;
   }
@@ -129,6 +134,10 @@ const ReviewsPage = () => {
               />
             );
           })}
+        {loading && <ListLoading />}
+        {!loading && totalCount > reviews.length && (
+          <LoadMorePanel onClick={loadMoreItems} />
+        )}
       </div>
     </div>
   );
