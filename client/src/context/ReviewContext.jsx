@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   getReviewRequest,
-  getReviewsRequest,
   GET_REVIEWS_LIST,
   deleteReviewRequest,
 } from "../api/reviewsApi";

@@ -1,13 +1,13 @@
-import stripHtmlTags from '../../utils/stripTags';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../Common/Icon';
-import { CommentIcon, HeartIcon, OptionsIcon } from '../Common/IconList';
-import StarIcon from '../Common/Star';
-import renderStars from '../Common/renderStars';
-import formatDateTime from '../../utils/formatDate';
-import { useAuthContext } from '../../context/AuthContext';
-import Dropdown, { Option } from '../Common/Dropdown';
-import { useEffect, useRef, useState } from 'react';
+import stripHtmlTags from "../../utils/stripTags";
+import { useNavigate } from "react-router-dom";
+import Icon from "../Common/Icon";
+import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
+import StarIcon from "../Common/Star";
+import renderStars from "../Common/renderStars";
+import formatDateTime from "../../utils/formatDate";
+import { useAuthContext } from "../../context/AuthContext";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useEffect, useRef, useState } from "react";
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -61,9 +61,9 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -86,7 +86,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                 
                 max-[600px]:w-full
                 max-[600px]:h-[150px]
-                ${noImage && 'hidden'}
+                ${noImage && "hidden"}
             `}
       >
         <img
@@ -155,7 +155,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
         <div className="max-[400px]:text-sm mt-1 text-base sm:text-l font-medium">
           {review.title}
         </div>
-        <div className="Preview grow text-light-text my-0.5 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
+        <div className="Preview grow text-light-text my-1 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
           {stripHtmlTags(review.body)}
         </div>
         <div className="Footer w-full pt-1 justify-between items-end gap-4 inline-flex">
