@@ -1,8 +1,8 @@
-const Comment = require('../models/comment');
-const Review = require('../models/review');
-const User = require('../models/user');
-const { NotFoundError } = require('../errors');
-const { StatusCodes } = require('http-status-codes');
+const Comment = require("../models/comment");
+const Review = require("../models/review");
+const User = require("../models/user");
+const { NotFoundError } = require("../errors");
+const { StatusCodes } = require("http-status-codes");
 
 const getAllComments = async (req, res) => {
   const {
@@ -31,7 +31,7 @@ const processCreateComment = async (reviewId, userId, commentBody) => {
   });
 
   if (!existingReview) {
-    throw new NotFoundError('Review does not exist.');
+    throw new NotFoundError("Review does not exist.");
   }
 
   const comment = await Comment.create({
@@ -64,12 +64,12 @@ const deleteComment = async (req, res) => {
 
   const comment = await Comment.findOneAndDelete({ _id: commentId });
   if (!comment) {
-    throw new Error('Comment not found');
+    throw new Error("Comment not found");
   }
 
   await removeComment(comment.review);
 
-  res.status(StatusCodes.OK).json({ message: 'Deleted' });
+  res.status(StatusCodes.OK).json({ message: "Deleted" });
 };
 
 const updateComment = async (req, res) => {

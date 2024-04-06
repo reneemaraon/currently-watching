@@ -100,25 +100,24 @@ input FilterInput {
   page: Int
   limit: Int
   search: String
+  cursorField: String
+  cursorType: String
+  cursorValue: String
+  cursorNumValue: Float
+  ascending: Boolean
 }
 
 type ReviewPagination {
-  currentPage: Int!
-  totalPages: Int!
   totalCount: Int!
   reviews: [Review]
 }
 
 type ShowPagination {
-  currentPage: Int!
-  totalPages: Int!
   totalCount: Int!
   shows: [Show]
 }
 
 type CommentPagination {
-  currentPage: Int!
-  totalPages: Int!
   totalCount: Int!
   comments: [Comment]
 }

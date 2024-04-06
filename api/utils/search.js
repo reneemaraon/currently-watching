@@ -1,18 +1,38 @@
 const generateSearchConditions = (filter, searchFields) => {
-  const { page = 1, limit = 20, search } = filter;
+  const {
+    limit = 20,
+    search,
+    cursorField = "createdAt",
+    cursorValue,
+    cursorNumValue,
+    cursorType = "date",
+    ascending = false,
+  } = filter;
 
   const searchConditions = {};
   if (search) {
-    const regex = { $regex: new RegExp(search, 'i') };
+    const regex = { $regex: new RegExp(search, "i") };
     searchConditions.$or = searchFields.map((field) => ({ [field]: regex }));
+  }
+
+  if (cursorValue) {
+    var queryObject = {};
+    if (cursorType == "date") {
+      queryObject = new Date(cursorValue);
+    } else if (cursorType == "number") {
+      queryObject = cursorNumValue;
+    }
+
+    searchConditions[cursorField] = ascending
+      ? { $gt: queryObject }
+      : { $lt: queryObject };
   }
 
   return {
     searchConditions,
     options: {
-      limit: limit * 1,
-      skip: (page - 1) * limit,
-      page: page,
+      limit,
+      sort: { [cursorField]: ascending ? 1 : -1 },
     },
   };
 };

@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import MainContentEditor from './components/RichTextEditorBody';
-import StarInput from './components/StarInput';
-import CustomButton from '../Common/CustomButton';
-import CreateReviewShowDetail from './components/CreateReviewShowDetail';
-import { useCreateReviewContext } from '../../context/CreateReviewContext';
-import TextInput from './components/TextInput';
-import stripHtmlTags from '../../utils/stripTags';
-import { useToast } from '../../context/ToastContext';
+import MainContentEditor from "./components/RichTextEditorBody";
+import StarInput from "./components/StarInput";
+import CustomButton from "../Common/CustomButton";
+import CreateReviewShowDetail from "./components/CreateReviewShowDetail";
+import { useCreateReviewContext } from "../../context/CreateReviewContext";
+import TextInput from "./components/TextInput";
+import stripHtmlTags from "../../utils/stripTags";
+import { useToast } from "../../context/ToastContext";
+import { useReviewsContext } from "../../context/ReviewContext";
 
 const CreateReview = () => {
   const { id } = useParams();
@@ -26,18 +27,21 @@ const CreateReview = () => {
     createError,
   } = useCreateReviewContext();
 
+  const { refreshList } = useReviewsContext();
+
   const { showToast } = useToast();
 
   useEffect(() => {
     if (createError) {
-      showToast(createError, 'error');
+      showToast(createError, "error");
     }
   }, [createError]);
 
   useEffect(() => {
     if (createdReview) {
-      showToast('Your review is successfully created.', 'success');
+      showToast("Your review is successfully created.", "success");
       setCreatedReview(null);
+      refreshList();
       navigate(`/reviews/${createdReview._id}`);
     }
   }, [createdReview]);
@@ -45,31 +49,31 @@ const CreateReview = () => {
   useEffect(() => {
     if (error && state.showId) {
       console.log(error);
-      showToast('Something went wrong. Please try again.', 'error');
+      showToast("Something went wrong. Please try again.", "error");
     }
   }, [error]);
 
   useEffect(() => {
-    setField('showId', id);
+    setField("showId", id);
   }, [id]);
 
   const handleTitleChange = (value) => {
     if (value && stripHtmlTags(value).length > 0) {
-      setError('title', null);
+      setError("title", null);
     }
-    setField('title', value);
+    setField("title", value);
   };
 
   const handleCancel = () => {
-    showToast('Hello', 'success');
+    showToast("Hello", "success");
   };
 
   const handleBodyChange = (value) => {
     // strip tags later here
     if (value && value.length > 0) {
-      setError('body', null);
+      setError("body", null);
     }
-    setField('body', value);
+    setField("body", value);
   };
   return (
     <div className="container-center-card">

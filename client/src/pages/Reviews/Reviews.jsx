@@ -1,18 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import CustomButton from '../Common/CustomButton';
-import ReviewListItem from './ReviewListItem';
-import { useReviewsContext } from '../../context/ReviewContext';
-import { useEffect, useState } from 'react';
-import PopupModal from '../Common/PopupModal';
-import SearchBar from '../Home/NavBar/SearchBar';
-import CreateReviewShowDetail from '../CreateReview/components/CreateReviewShowDetail';
-import { useSearchContext } from '../../context/SearchContext';
-import { useToast } from '../../context/ToastContext';
-import FullPageLoading from '../Common/FullPageLoading';
-import LoadMorePanel from '../Common/LoadMorePagination';
-import LoadingAnimation from '../Common/LoadingAnimation';
-import ListLoading from '../Common/LoadingList';
+import CustomButton from "../Common/CustomButton";
+import ReviewListItem from "./ReviewListItem";
+import { useReviewsContext } from "../../context/ReviewContext";
+import { useState } from "react";
+import PopupModal from "../Common/PopupModal";
+import SearchBar from "../Home/NavBar/SearchBar";
+import CreateReviewShowDetail from "../CreateReview/components/CreateReviewShowDetail";
+import { useSearchContext } from "../../context/SearchContext";
+import { useToast } from "../../context/ToastContext";
+import LoadMorePanel from "../Common/LoadMorePagination";
+import ListLoading from "../Common/LoadingList";
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
@@ -21,8 +19,7 @@ const ReviewsPage = () => {
     reviews: { totalCount, reviews },
     loading,
     deleteReview,
-    page,
-    setPage,
+    loadNextPage,
   } = useReviewsContext();
   const { lastSelected } = useSearchContext();
   const [showModal, setShowModal] = useState(false);
@@ -44,11 +41,11 @@ const ReviewsPage = () => {
     try {
       const response = await deleteReview(reviewToDelete);
       if (response) {
-        showToast('Your review was deleted successfully', 'success');
+        showToast("Your review was deleted successfully", "success");
       }
     } catch (error) {
       console.log(error);
-      showToast(error.response.data.message, 'error');
+      showToast(error.response.data.message, "error");
     }
   };
 
@@ -58,7 +55,7 @@ const ReviewsPage = () => {
   };
 
   const loadMoreItems = () => {
-    setPage((prevPage) => prevPage + 1);
+    loadNextPage();
   };
 
   const renderPopup = () => (
@@ -68,8 +65,8 @@ const ReviewsPage = () => {
           <p className="title-text font-normal">Write Review</p>
           <p className="important-small-text font-normal">
             {show && lastSelected
-              ? 'You are writing a review for:'
-              : 'Choose a drama you wish to write a review for.'}
+              ? "You are writing a review for:"
+              : "Choose a drama you wish to write a review for."}
           </p>
         </div>
         {show && lastSelected && <CreateReviewShowDetail show={lastSelected} />}
