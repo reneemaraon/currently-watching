@@ -1,27 +1,42 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { getShowRequest, GET_SHOW_REVIEWS, GET_SHOW } from '../api/showsApi';
-import { useQuery } from '@apollo/client';
-import { deleteReviewRequest } from '../api/reviewsApi';
+import { createContext, useContext, useEffect, useState } from "react";
+import { getShowRequest, GET_SHOW_REVIEWS, GET_SHOW } from "../api/showsApi";
+import { useQuery } from "@apollo/client";
+import { deleteReviewRequest } from "../api/reviewsApi";
+import findCursor from "../utils/getCursorFromList";
+
+const ITEMS_PER_PAGE = 5;
+const SORT_FIELD = "createdAt";
 
 const showDetailContext = createContext();
 
 export const useShowDetailContext = () => {
   const context = useContext(showDetailContext);
-  if (!context) throw new Error('Show Provider is missing');
+  if (!context) throw new Error("Show Provider is missing");
   return context;
 };
 
 export const ShowDetailProvider = ({ children }) => {
   const [show, setShow] = useState(null);
   const [showId, setShowId] = useState(null);
-  const [showReviews, setShowReviews] = useState([]);
+  const [showReviews, setShowReviews] = useState({
+    totalCount: 0,
+    showReviews: [],
+  });
+  const [cursor, setCursor] = useState(new Date());
   const {
     loading: showReviewsLoading,
     error: showReviewsError,
     data: showReviewsData,
     refetch: refetchShowReviews,
   } = useQuery(GET_SHOW_REVIEWS, {
-    variables: { id: showId, filter: { limit: 5 } },
+    variables: {
+      id: showId,
+      filter: {
+        limit: ITEMS_PER_PAGE,
+        cursorField: SORT_FIELD,
+        cursorValue: cursor,
+      },
+    },
   });
 
   const {
@@ -52,7 +67,19 @@ export const ShowDetailProvider = ({ children }) => {
 
   useEffect(() => {
     if (showReviewsData) {
-      setShowReviews(showReviewsData.showReviews); // Assuming your data structure has a 'searchResults' field
+      const { reviews: dataShowReviews } = showReviewsData.showReviews;
+      const { showReviews: currentShowReviews } = showReviews;
+
+      if (
+        findCursor(dataShowReviews, SORT_FIELD) !=
+        findCursor(currentShowReviews, SORT_FIELD)
+      ) {
+        const { totalCount, showReviews } = showReviewsData.showReviews;
+        setShowReviews((prevReviews) => ({
+          totalCount,
+          showReviews: [...prevReviews.showReviews, ...dataShowReviews],
+        }));
+      }
     }
   }, [showReviewsData]);
 
@@ -69,6 +96,24 @@ export const ShowDetailProvider = ({ children }) => {
     }
   }, [showId]);
 
+  const updateCursor = () => {
+    setCursor(findCursor(showReviews.showReviews, SORT_FIELD));
+  };
+
+  const loadNextPage = () => {
+    updateCursor();
+    refetchShowReviews();
+  };
+
+  const refreshList = () => {
+    setShowReviews({
+      totalCount: 0,
+      showReviews: [],
+    });
+    setCursor(null);
+    refetchShowReviews();
+  };
+
   return (
     <showDetailContext.Provider
       value={{
@@ -82,6 +127,8 @@ export const ShowDetailProvider = ({ children }) => {
         showReviewsLoading,
         showReviewsError,
         refetchShowReviews,
+        loadNextPage,
+        refreshList,
       }}
     >
       {children}

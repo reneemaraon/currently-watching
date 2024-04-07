@@ -5,8 +5,9 @@ import {
   deleteReviewRequest,
 } from "../api/reviewsApi";
 import { useQuery } from "@apollo/client";
+import findCursor from "../utils/getCursorFromList";
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 20;
 const SORT_FIELD = "createdAt";
 
 const reviewContext = createContext();
@@ -44,26 +45,20 @@ export const ReviewsProvider = ({ children }) => {
   };
 
   const updateCursor = () => {
-    setCursor(findCursor(reviews));
-  };
-
-  const findCursor = (list) => {
-    if (list.length > 0) {
-      return list[list.length - 1][SORT_FIELD];
-    } else {
-      return null;
-    }
+    setCursor(findCursor(reviews, SORT_FIELD));
   };
 
   useEffect(() => {
     if (data) {
       const { reviews: dataReviews } = data.reviews;
       const { reviews: currentReviews } = reviews;
-      if (findCursor(dataReviews) != findCursor(currentReviews)) {
+      if (
+        findCursor(dataReviews, SORT_FIELD) !=
+        findCursor(currentReviews, SORT_FIELD)
+      ) {
         setReviews((prevReviews) => ({
           ...prevReviews,
           totalCount: data.reviews.totalCount,
-          cursorValue: data.cursorValue,
           reviews: [...prevReviews.reviews, ...data.reviews.reviews],
         }));
       }

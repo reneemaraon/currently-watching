@@ -1,18 +1,20 @@
-import { useState } from 'react';
-import { useShowDetailContext } from '../../context/ShowDetailContext';
-import { useToast } from '../../context/ToastContext';
+import { useState } from "react";
+import { useShowDetailContext } from "../../context/ShowDetailContext";
+import { useToast } from "../../context/ToastContext";
 
-import ReviewsListItem from '../Reviews/ReviewListItem';
-import CustomButton from '../Common/CustomButton';
-import ListLoading from '../Common/LoadingList';
-import PopupModal from '../Common/PopupModal';
+import ReviewsListItem from "../Reviews/ReviewListItem";
+import CustomButton from "../Common/CustomButton";
+import ListLoading from "../Common/LoadingList";
+import PopupModal from "../Common/PopupModal";
+import LoadMorePanel from "../Common/LoadMorePagination";
 
 const ShowReviewsList = () => {
   const {
-    showReviews: { reviews: showReviews },
+    showReviews: { showReviews },
     show,
     showReviewsLoading,
     deleteReview,
+    loadNextPage,
   } = useShowDetailContext();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState(null);
@@ -23,11 +25,11 @@ const ShowReviewsList = () => {
     try {
       const response = await deleteReview(reviewToDelete);
       if (response) {
-        showToast('Your review was deleted successfully', 'success');
+        showToast("Your review was deleted successfully", "success");
       }
     } catch (error) {
       console.log(error);
-      showToast(error.response.data.message, 'error');
+      showToast(error.response.data.message, "error");
     }
   };
 
@@ -61,7 +63,6 @@ const ShowReviewsList = () => {
   return (
     <div className="w-full sm:px-2 flex-col justify-center items-start gap-4 flex">
       {renderDeletePopup()}
-      {showReviewsLoading && <ListLoading />}
       {showReviews &&
         showReviews.map((showReview) => (
           <ReviewsListItem
@@ -70,13 +71,10 @@ const ShowReviewsList = () => {
             noImage
           />
         ))}
+      {showReviewsLoading && <ListLoading />}
 
-      {showReviews && show.reviewsCount > showReviews.length && (
-        <div className="w-full h-[65px] flex-col justify-end items-center gap-2.5 flex">
-          <CustomButton styleSet="light" size="defaultResize" edge="rounded">
-            Load more
-          </CustomButton>
-        </div>
+      {showReviews && show.reviewCount > showReviews.length && (
+        <LoadMorePanel onClick={loadNextPage} />
       )}
     </div>
   );
