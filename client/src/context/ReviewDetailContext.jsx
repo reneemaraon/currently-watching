@@ -21,7 +21,10 @@ export const ReviewDetailProvider = ({ children }) => {
   const [review, setReview] = useState(null);
   const [reviewId, setReviewId] = useState(null);
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState({
+    comments: [],
+    totalCount: 0,
+  });
   const [commentBody, setCommentBody] = useState('');
 
   const [postCommentRequest, { loading: postLoading, error: postError }] =
@@ -58,11 +61,11 @@ export const ReviewDetailProvider = ({ children }) => {
 
       if (response) {
         const newComment = response.data.createComment;
-        setComments(() => [newComment, ...comments]);
-        setReview({
-          ...review,
-          commentCount: review.commentCount + 1,
-        });
+        setComments((prevComments) => ({
+          ...prevComments,
+          totalCount: comments.totalCount + 1,
+          comments: [newComment, ...prevComments.comments],
+        }));
 
         setCommentBody('');
       }
@@ -80,10 +83,7 @@ export const ReviewDetailProvider = ({ children }) => {
         totalCount: comments.totalCount - 1,
         comments: comments.comments.filter((comment) => comment._id !== id),
       });
-      setReview((prevReview) => ({
-        ...prevReview,
-        commentCount: prevReview.commentCount - 1,
-      }));
+
       return response;
     }
   };

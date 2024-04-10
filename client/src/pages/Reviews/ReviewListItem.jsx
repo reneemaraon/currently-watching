@@ -1,13 +1,13 @@
-import stripHtmlTags from "../../utils/stripTags";
-import { useNavigate } from "react-router-dom";
-import Icon from "../Common/Icon";
-import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
-import StarIcon from "../Common/Star";
-import renderStars from "../Common/renderStars";
-import formatDateTime from "../../utils/formatDate";
-import { useAuthContext } from "../../context/AuthContext";
-import Dropdown, { Option } from "../Common/Dropdown";
-import { useEffect, useRef, useState } from "react";
+import stripHtmlTags from '../../utils/stripTags';
+import { useNavigate } from 'react-router-dom';
+import Icon from '../Common/Icon';
+import { CommentIcon, HeartIcon, OptionsIcon } from '../Common/IconList';
+import StarIcon from '../Common/Star';
+import renderStars from '../Common/renderStars';
+import formatDateTime from '../../utils/formatDate';
+import { useAuthContext } from '../../context/AuthContext';
+import Dropdown, { Option } from '../Common/Dropdown';
+import { useEffect, useRef, useState } from 'react';
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -61,9 +61,9 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -86,7 +86,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                 
                 max-[600px]:w-full
                 max-[600px]:h-[150px]
-                ${noImage && "hidden"}
+                ${noImage && 'hidden'}
             `}
       >
         <img
@@ -114,7 +114,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
               src={review.user.profilePhotoUrl}
             />
             <span className="max-[600px]:gap-1.5 max-[600px]:flex-col flex text-sm sm:text-base py-1 sm:leading-3 leading-[10px] font-medium">
-              <span className="mr-1 sm:mr-2">{review.user.name}</span>
+              <span className=" mr-1 sm:mr-2">{review.user.name}</span>
               <span className="font-light max-[600px]:gap-1 leading-[10px] sm:leading-3 text-light-text text-[10px] sm:text-xs">
                 <span>@{review.user.screenName}</span>
                 <span className="mx-0.5 min-[600px]:mx-1">&#183;</span>
