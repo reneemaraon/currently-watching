@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { deleteReviewRequest } from "../api/reviewsApi";
 import findCursor from "../utils/getCursorFromList";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 const SORT_FIELD = "createdAt";
 
 const showDetailContext = createContext();
@@ -55,7 +55,9 @@ export const ShowDetailProvider = ({ children }) => {
       setShowReviews({
         ...showReviews,
         totalCount: showReviews.totalCount - 1,
-        reviews: showReviews.reviews.filter((review) => review._id !== id),
+        showReviews: showReviews.showReviews.filter(
+          (review) => review._id !== id
+        ),
       });
       setShow(() => ({
         ...show,
