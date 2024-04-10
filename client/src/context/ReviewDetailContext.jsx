@@ -8,6 +8,10 @@ import {
   deleteCommentRequest,
 } from '../api/reviewsApi';
 import { useQuery, useMutation } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
+
+const ITEMS_PER_PAGE = 5;
+const SORT_FIELD = 'createdAt';
 
 const reviewDetailContext = createContext();
 
@@ -26,6 +30,7 @@ export const ReviewDetailProvider = ({ children }) => {
     totalCount: 0,
   });
   const [commentBody, setCommentBody] = useState('');
+  const [cursor, setCursor] = useState(new Date());
 
   const [postCommentRequest, { loading: postLoading, error: postError }] =
     useMutation(POST_COMMENT_MUTATION);
@@ -47,7 +52,14 @@ export const ReviewDetailProvider = ({ children }) => {
     data: commentsData,
     refetch: refetchComments,
   } = useQuery(GET_REVIEW_COMMENTS, {
-    variables: { id: reviewId, filter: { limit: 5 } },
+    variables: {
+      id: reviewId,
+      filter: {
+        limit: ITEMS_PER_PAGE,
+        cursorField: SORT_FIELD,
+        cursorValue: cursor,
+      },
+    },
   });
 
   const postComment = async () => {
@@ -100,6 +112,24 @@ export const ReviewDetailProvider = ({ children }) => {
     });
   };
 
+  const updateCursor = () => {
+    setCursor(findCursor(comments.comments, SORT_FIELD));
+  };
+
+  const loadNextPage = () => {
+    updateCursor();
+    refetchComments();
+  };
+
+  const refreshList = () => {
+    setComments({
+      totalCount: 0,
+      comments: [],
+    });
+    setCursor(null);
+    refetchComments();
+  };
+
   useEffect(() => {
     if (reviewId) {
       refetch();
@@ -115,7 +145,18 @@ export const ReviewDetailProvider = ({ children }) => {
 
   useEffect(() => {
     if (commentsData) {
-      setComments(commentsData.reviewComments);
+      const { comments: dataComments, totalCount } =
+        commentsData.reviewComments;
+      const { comments: currentComments } = comments;
+      if (
+        findCursor(currentComments, SORT_FIELD) !=
+        findCursor(dataComments, SORT_FIELD)
+      ) {
+        setComments((prevComments) => ({
+          totalCount,
+          comments: [...prevComments.comments, ...dataComments],
+        }));
+      }
     }
   }, [commentsData]);
 
@@ -137,6 +178,8 @@ export const ReviewDetailProvider = ({ children }) => {
         refetch,
         loading,
         postLike,
+        refreshList,
+        loadNextPage,
         deleteLike,
         heartError: likeError || deleteLikeError,
         likedReviewData,
