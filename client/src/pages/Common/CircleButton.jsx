@@ -11,7 +11,7 @@ const CircularButton = ({ children, active, onClick }) => (
       fill={!active && 'fill-transparent'}
       sizeRules={`${
         active ? 'text-theme-base fill-theme-base' : 'text-text-dark'
-      } group-hover:text-theme-base group-hover:stroke-2 stroke-1 sm:stroke-1.5 w-full h-full`}
+      } group-hover:text-theme-base group-hover:fill-theme-base group-hover:stroke-2 stroke-1 sm:stroke-1.5 w-full h-full`}
     >
       {children}
     </Icon>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import FullPageLoading from '../Common/FullPageLoading';
-import { HeartIcon, ShareIcon } from '../Common/IconList';
+import { HeartIcon, OptionsIcon, ShareIcon } from '../Common/IconList';
 import RatingRowStars from './RatingRow';
 import ShowCardSmall from '../Common/ShowCard';
 import CommentsArea from './CommentsArea';
@@ -85,6 +85,9 @@ export default function ReviewDetail() {
                     </CircularButton>
                     <CircularButton>
                       <ShareIcon />
+                    </CircularButton>
+                    <CircularButton onClick={() => {}}>
+                      <OptionsIcon />
                     </CircularButton>
                   </div>
                   <p className="title-text text-wrap">{review.title}</p>
