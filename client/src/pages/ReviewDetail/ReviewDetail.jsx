@@ -46,9 +46,7 @@ export default function ReviewDetail() {
 
   useEffect(() => {
     if (review) {
-      if (review.liked) {
-        setLiked(true);
-      }
+      setLiked(review.liked);
     }
   }, [review]);
 

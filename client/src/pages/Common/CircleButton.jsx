@@ -1,17 +1,17 @@
-import Icon from "./Icon";
+import Icon from './Icon';
 
 const CircularButton = ({ children, active, onClick }) => (
   <button
     onClick={onClick}
     className={`${
-      active ? "bg-brand-tq" : "bg-theme-base"
-    } w-8 h-8 p-1.5 sm:p-2.5 sm:w-10 sm:h-10 rounded-full flex-col justify-center items-center inline-flex`}
+      active ? 'bg-brand-tq' : 'bg-main-bg'
+    } hover:bg-brand-tq w-8 h-8 group p-1.5 sm:p-2.5 sm:w-10 sm:h-10 rounded-full flex-col justify-center items-center inline-flex`}
   >
     <Icon
-      fill={!active && "fill-transparent"}
+      fill={!active && 'fill-transparent'}
       sizeRules={`${
-        active ? "text-theme-base fill-theme-base" : "text-text-dark"
-      } stroke-1 sm:stroke-1.5 w-full h-full`}
+        active ? 'text-theme-base fill-theme-base' : 'text-text-dark'
+      } group-hover:text-theme-base group-hover:stroke-2 stroke-1 sm:stroke-1.5 w-full h-full`}
     >
       {children}
     </Icon>
