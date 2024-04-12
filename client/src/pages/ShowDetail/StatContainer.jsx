@@ -7,7 +7,7 @@ const Row = ({ name, value }) => (
     <div className="Acting important-small-text font-bold">{name}</div>
     <div className="Rating justify-start items-center gap-0.5 flex">
       <div className="text-right important-small-text font-normal">
-        {value || '2.4'}
+        {value || '0'}
       </div>
       <Icon>
         <StarIcon />

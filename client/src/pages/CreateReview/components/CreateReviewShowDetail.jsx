@@ -6,7 +6,7 @@ export const RatingType = ({ name, rate }) => (
   <div className="justify-center items-center gap-[3px] flex">
     <div className="text-xs">{name || ''}</div>
     <div className="w-[31.49px] justify-start items-center gap-0.5 flex">
-      <div className="text-xs font-bold">{rate || '5.0'}</div>
+      <div className="text-xs font-bold">{rate.toFixed(1)}</div>
       <StarIcon />
     </div>
   </div>
@@ -34,9 +34,9 @@ const CreateReviewShowDetail = ({ show }) => {
               {show.synopsis}
             </div>
             <div className="pt-2 sm:pt-3 border-t border-zinc-300 border-opacity-50 justify-start items-start gap-2.5 inline-flex">
-              <RatingType name="Acting" rate="4.2" />
-              <RatingType name="Plot" rate="4.5" />
-              <RatingType name="Visuals" rate="3.2" />
+              <RatingType name="Acting" rate={show.actingAverage} />
+              <RatingType name="Plot" rate={show.plotAverage} />
+              <RatingType name="Visuals" rate={show.visualsAverage} />
             </div>
           </div>
         </div>

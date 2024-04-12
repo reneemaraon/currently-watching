@@ -31,6 +31,7 @@ const ShowReviewsList = () => {
         showReviews.map((showReview) => (
           <ReviewsListItem
             review={showReview}
+            key={showReview._id}
             onDelete={() => onAttemptDelete(showReview._id)}
             noImage
           />
