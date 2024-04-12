@@ -1,20 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import {
-  getReviewRequest,
-  GET_REVIEWS_LIST,
-  deleteReviewRequest,
-} from "../api/reviewsApi";
-import { useQuery } from "@apollo/client";
-import findCursor from "../utils/getCursorFromList";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { getReviewRequest, GET_REVIEWS_LIST } from '../api/reviewsApi';
+import { useQuery } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
 
 const ITEMS_PER_PAGE = 20;
-const SORT_FIELD = "createdAt";
+const SORT_FIELD = 'createdAt';
 
 const reviewContext = createContext();
 
 export const useReviewsContext = () => {
   const context = useContext(reviewContext);
-  if (!context) throw new Error("Review Provider is missing");
+  if (!context) throw new Error('Review Provider is missing');
   return context;
 };
 
@@ -65,16 +61,19 @@ export const ReviewsProvider = ({ children }) => {
     }
   }, [data]);
 
-  const deleteReview = async (id) => {
-    const response = await deleteReviewRequest(id);
-
-    if (response) {
+  const removeReviewFromList = (id) => {
+    const reviewIndex = reviews.reviews.findIndex(
+      (review) => review._id === id
+    );
+    if (reviewIndex !== -1) {
+      const updatedReviews = reviews.reviews.filter(
+        (review) => review._id !== id
+      );
       setReviews({
         ...reviews,
         totalCount: reviews.totalCount - 1,
-        reviews: reviews.reviews.filter((review) => review._id !== id),
+        reviews: updatedReviews,
       });
-      return response;
     }
   };
 
@@ -100,7 +99,7 @@ export const ReviewsProvider = ({ children }) => {
         error,
         getReview,
         loading,
-        deleteReview,
+        removeReviewFromList,
         loadNextPage,
         refreshList,
       }}

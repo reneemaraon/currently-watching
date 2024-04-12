@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import CircularButton from "../Common/CircleButton";
-import { HeartIcon, ShareIcon } from "../Common/IconList";
-import StatContainer from "./StatContainer";
-import CustomButton from "../Common/CustomButton";
-import { useShowDetailContext } from "../../context/ShowDetailContext";
-import commaSeparatedString from "../Common/commaSeparate";
-import FullPageLoading from "../Common/FullPageLoading";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import ShowReviewsList from "./ShowReviewList";
+import CircularButton from '../Common/CircleButton';
+import { HeartIcon, ShareIcon } from '../Common/IconList';
+import StatContainer from './StatContainer';
+import CustomButton from '../Common/CustomButton';
+import { useShowDetailContext } from '../../context/ShowDetailContext';
+import commaSeparatedString from '../Common/commaSeparate';
+import FullPageLoading from '../Common/FullPageLoading';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import ShowReviewsList from './ShowReviewList';
 
 const ShowDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { setShowId, show, loading } = useShowDetailContext();
+  const { setShowId, show, loading, showReviews } = useShowDetailContext();
 
   const goToAddReview = () => {
     navigate(`/shows/${id}/create-review`);
@@ -48,14 +48,14 @@ const ShowDetail = () => {
                         {show.title}
                       </div>
                       <div className="subtext">{`${
-                        show.watched ? show.watched : "0"
+                        show.watched ? show.watched : '0'
                       } watched`}</div>
                     </div>
                     <div className="subtext text-brand-tq">
                       {`${show.numberOfSeasons} season${
-                        show.numberOfSeasons > 1 ? "s" : ""
-                      } `}{" "}
-                      | {show.numberOfEpisodes} episodes |{" "}
+                        show.numberOfSeasons > 1 ? 's' : ''
+                      } `}{' '}
+                      | {show.numberOfEpisodes} episodes |{' '}
                       {commaSeparatedString(
                         show.genres.map((genre) => genre.name)
                       )}
@@ -94,9 +94,9 @@ const ShowDetail = () => {
                 <div className="px-2 w-full pb-5 justify-between items-start inline-flex">
                   <div className="inline-flex gap-2">
                     <span className="title-text ">
-                      Reviews{" "}
+                      Reviews{' '}
                       <span className="text-lighter-text ">
-                        ({show.reviewCount})
+                        ({showReviews && showReviews.totalCount})
                       </span>
                     </span>
                   </div>

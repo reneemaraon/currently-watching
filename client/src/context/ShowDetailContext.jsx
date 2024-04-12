@@ -1,17 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { getShowRequest, GET_SHOW_REVIEWS, GET_SHOW } from "../api/showsApi";
-import { useQuery } from "@apollo/client";
-import { deleteReviewRequest } from "../api/reviewsApi";
-import findCursor from "../utils/getCursorFromList";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { GET_SHOW_REVIEWS, GET_SHOW } from '../api/showsApi';
+import { useQuery } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
 
 const ITEMS_PER_PAGE = 10;
-const SORT_FIELD = "createdAt";
+const SORT_FIELD = 'createdAt';
 
 const showDetailContext = createContext();
 
 export const useShowDetailContext = () => {
   const context = useContext(showDetailContext);
-  if (!context) throw new Error("Show Provider is missing");
+  if (!context) throw new Error('Show Provider is missing');
   return context;
 };
 
@@ -47,25 +46,6 @@ export const ShowDetailProvider = ({ children }) => {
   } = useQuery(GET_SHOW, {
     variables: { id: showId },
   });
-
-  const deleteReview = async (id) => {
-    const response = await deleteReviewRequest(id);
-
-    if (response) {
-      setShowReviews({
-        ...showReviews,
-        totalCount: showReviews.totalCount - 1,
-        showReviews: showReviews.showReviews.filter(
-          (review) => review._id !== id
-        ),
-      });
-      setShow(() => ({
-        ...show,
-        reviewCount: show.reviewCount - 1,
-      }));
-      return response;
-    }
-  };
 
   useEffect(() => {
     if (showReviewsData) {
@@ -116,6 +96,22 @@ export const ShowDetailProvider = ({ children }) => {
     refetchShowReviews();
   };
 
+  const removeReviewShowReviews = (id) => {
+    const reviewIndex = showReviews.showReviews.findIndex(
+      (review) => review._id === id
+    );
+    if (reviewIndex !== -1) {
+      const updatedShowReviews = showReviews.showReviews.filter(
+        (review) => review._id !== id
+      );
+      setShowReviews((prevShowReviews) => ({
+        ...prevShowReviews,
+        totalCount: prevShowReviews.totalCount - 1,
+        showReviews: updatedShowReviews,
+      }));
+    }
+  };
+
   return (
     <showDetailContext.Provider
       value={{
@@ -124,13 +120,13 @@ export const ShowDetailProvider = ({ children }) => {
         loading,
         error,
         show,
-        deleteReview,
         showReviews,
         showReviewsLoading,
         showReviewsError,
         refetchShowReviews,
         loadNextPage,
         refreshList,
+        removeReviewShowReviews,
       }}
     >
       {children}

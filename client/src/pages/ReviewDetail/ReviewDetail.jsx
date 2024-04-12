@@ -2,31 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import FullPageLoading from '../Common/FullPageLoading';
-import { HeartIcon, OptionsIcon, ShareIcon } from '../Common/IconList';
 import RatingRowStars from './RatingRow';
 import ShowCardSmall from '../Common/ShowCard';
 import CommentsArea from './CommentsArea';
-import CircularButton from '../Common/CircleButton';
 import { useReviewDetailContext } from '../../context/ReviewDetailContext';
 import HTMLRenderer from './HtmlRenderer';
 import formatDateTime from '../../utils/formatDate';
-import { useToast } from '../../context/ToastContext';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
+import ReviewActions from './ReviewActions';
+import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
 
 export default function ReviewDetail() {
   const { id } = useParams();
-  const {
-    setReview,
-    setReviewId,
-    loading,
-    review,
-    deleteLike,
-    postLike,
-    heartError,
-    refetch,
-  } = useReviewDetailContext();
-  const [liked, setLiked] = useState(false);
-  const { showToast } = useToast();
+  const { setReview, setReviewId, loading, review } = useReviewDetailContext();
+  const { deleteLoading } = useDeleteReviewContext();
 
   useEffect(() => {
     if (id) {
@@ -37,38 +26,19 @@ export default function ReviewDetail() {
     }
   }, [id]);
 
-  useEffect(() => {
-    if (heartError) {
-      showToast('Something went wrong. Please try again.', 'error');
-      setLiked(!liked);
-    }
-  }, [heartError]);
-
-  useEffect(() => {
-    if (review) {
-      setLiked(review.liked);
-    }
-  }, [review]);
-
-  const onLikeClick = () => {
-    if (liked) {
-      //
-      deleteLike();
-      setLiked(false);
-    } else {
-      postLike();
-      setLiked(true);
-    }
-  };
+  if (loading) {
+    return <FullPageLoading />;
+  }
 
   return (
     <div className="w-full">
-      {loading && <FullPageLoading />}
       {review && (
         <div
           className={`${
-            review ? 'opacity-100' : 'opacity-0'
-          } ease-in transition-opacity duration-1000 relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden`}
+            review && !deleteLoading ? 'opacity-100' : 'opacity-0'
+          } ${
+            deleteLoading && 'opacity-50'
+          } ease-in transition-opacity duration-500 relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden`}
         >
           <ImageWithOpacityTransition
             styleAttach="object-cover absolute h-96 w-full top-0"
@@ -79,17 +49,7 @@ export default function ReviewDetail() {
             <div className="z-10 Main large-white-card p-4 sm:p-6">
               <div className="w-full pb-4 flex-col justify-start items-start gap-3 flex">
                 <div className="w-full pb-2">
-                  <div className="ReviewActions float-right justify-start items-start gap-2 sm:gap-2.5 flex">
-                    <CircularButton active={liked} onClick={onLikeClick}>
-                      <HeartIcon />
-                    </CircularButton>
-                    <CircularButton>
-                      <ShareIcon />
-                    </CircularButton>
-                    <CircularButton onClick={() => {}}>
-                      <OptionsIcon />
-                    </CircularButton>
-                  </div>
+                  <ReviewActions />
                   <p className="title-text text-wrap">{review.title}</p>
                 </div>
                 <div className="Profile justify-start items-start gap-3 inline-flex">
