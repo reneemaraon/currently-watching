@@ -32,12 +32,16 @@ const PopularSection = () => {
             <div className="text-base sm:text-lg font-medium leading-[18px]">
               Cast
             </div>
-            <div className="justify-start items-start inline-flex">
-              <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
-              <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
-              <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
-              <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
-              <div className="w-[35px] h-[35px] bg-theme-base rounded-full" />
+            <div className="justify-start gap-[-10px] items-start inline-flex">
+              {shows[active] &&
+                shows[active].cast.slice(0, 6).map((castMember) => (
+                  <div className="w-10 h-10 border border-main-bg overflow-hidden bg-theme-base rounded-full">
+                    <img
+                      className="object-cover"
+                      src={`https://image.tmdb.org/t/p/original${castMember.profileImage}`}
+                    />
+                  </div>
+                ))}
             </div>
             <div className="self-stretch text-gray-800 text-base font-normal leading-[25.20px]">
               Lee Jung-jae, Park Hae soo, Wi Ha-joon...

@@ -34,7 +34,7 @@ export default function PopularCarousel({ shows, active }) {
             }}
           >
             <Banner
-              key={show.id}
+              key={show._id}
               title={show.title}
               image_src={show.tmdbBackdrop}
             />

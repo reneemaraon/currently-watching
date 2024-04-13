@@ -16,6 +16,8 @@ export const SEARCH_SHOWS = gql`
         cast {
           _id
           name
+          profileImage
+          tmdbId
         }
       }
     }

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getShowRequest, getShowsRequest } from '../api/showsApi';
+import { GET_SHOWS_LIST } from '../api/showsApi';
+import { useQuery } from '@apollo/client';
 
 const showContext = createContext();
 
@@ -10,31 +11,28 @@ export const useShowsContext = () => {
 };
 
 export const ShowsProvider = ({ children }) => {
-  const [loading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [shows, setShows] = useState({ shows: [] });
+  const [shows, setShows] = useState({
+    totalCount: 0,
+    shows: [],
+  });
+
+  const {
+    loading,
+    error,
+    data,
+    refetch: refetchResults,
+  } = useQuery(GET_SHOWS_LIST, {
+    variables: { filter: { limit: 20 } },
+  });
 
   useEffect(() => {
-    (async () => {
-      const res = await getShowsRequest({});
-      setShows(res.data);
-    })();
-  }, []);
-
-  const getShows = async (params) => {
-    setIsLoading(true);
-    try {
-      const res = await getShowsRequest(params);
-      setShows(res.data);
-    } catch (error) {
-      console.log(error);
-      setError(true);
+    if (data) {
+      setShows(data.shows); // Assuming your data structure has a 'searchResults' field
     }
-    setIsLoading(false);
-  };
+  }, [data]);
 
   return (
-    <showContext.Provider value={{ loading, error, shows, getShows }}>
+    <showContext.Provider value={{ loading, error, shows }}>
       {children}
     </showContext.Provider>
   );

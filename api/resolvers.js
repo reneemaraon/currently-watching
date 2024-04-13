@@ -9,6 +9,7 @@ const Comment = require('./models/comment');
 const { generateSearchConditions } = require('./utils/search');
 const { processCreateComment } = require('./controllers/comment');
 const { processCreateLike, processDeleteLike } = require('./controllers/like');
+const Actor = require('./models/actor');
 
 const resolvers = {
   Query: {
@@ -109,7 +110,18 @@ const resolvers = {
       return like.length > 0;
     },
   },
-  Show: {},
+  Show: {
+    cast: async (parent) => {
+      // Populate the cast with details from the Actor model
+      const populatedCast = await Promise.all(
+        parent.cast.map(async (castMember) => {
+          const actor = await Actor.findById(castMember.actor);
+          return actor;
+        })
+      );
+      return populatedCast;
+    },
+  },
   Comment: {
     review: async (parent, args, context) => {
       const review = await Review.findById(parent.review);
