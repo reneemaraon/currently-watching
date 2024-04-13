@@ -13,6 +13,10 @@ const formReducer = (state, action) => {
           [action.field]: action.error,
         },
       };
+
+    case 'RESET_FORM':
+      return action.initialState;
+
     default:
       return state;
   }

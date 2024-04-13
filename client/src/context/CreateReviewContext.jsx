@@ -103,6 +103,10 @@ export const CreateReviewContext = ({ children }) => {
     return isValid;
   };
 
+  const resetForm = () => {
+    dispatch({ type: 'RESET_FORM', initialState });
+  };
+
   const postReview = async () => {
     console.log(state);
     setCreateError(null);
@@ -123,6 +127,7 @@ export const CreateReviewContext = ({ children }) => {
       const response = await postReviewRequest(payload);
       console.log(response.data);
       setCreatedReview(response.data);
+      resetForm();
     } catch (error) {
       setCreateError(error.response.data.message);
       console.log(error);
