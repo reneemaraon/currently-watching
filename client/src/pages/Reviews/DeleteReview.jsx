@@ -47,7 +47,6 @@ const DeleteReview = () => {
         </div>
         <div className="inline-flex gap-2">
           <CustomButton
-            className
             styleSet="light"
             onClick={() => setShowDeleteModal(false)}
           >

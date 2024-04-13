@@ -1,4 +1,4 @@
-import { EditorProvider, EditorContent, useEditor } from '@tiptap/react';
+import { EditorContent, useEditor } from '@tiptap/react';
 import Bold from '@tiptap/extension-bold';
 import Italic from '@tiptap/extension-italic';
 import ListItem from '@tiptap/extension-list-item';
@@ -7,6 +7,7 @@ import Underline from '@tiptap/extension-underline';
 import Document from '@tiptap/extension-document';
 import TextAlign from '@tiptap/extension-text-align';
 import Paragraph from '@tiptap/extension-paragraph';
+import Image from '@tiptap/extension-image';
 
 import Text from '@tiptap/extension-text';
 
@@ -20,6 +21,7 @@ const extensions = [
   Document,
   Paragraph,
   Text,
+  Image,
   TextAlign.configure({
     types: ['paragraph'],
   }),

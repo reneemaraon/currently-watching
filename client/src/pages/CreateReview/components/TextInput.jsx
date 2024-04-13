@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ErrorMessage from './ErrorMessage';
 
-const TextInput = ({ value, onValueChange, errorMessage }) => {
+const TextInput = ({ value, onValueChange, errorMessage, placeholder }) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => {
@@ -26,7 +26,7 @@ const TextInput = ({ value, onValueChange, errorMessage }) => {
         <input
           type="text"
           className="leading-tight w-full bg-transparent focus:outline-none placeholder-lighter-text"
-          placeholder="Write a headline here"
+          placeholder={placeholder || 'Write a headline here'}
           value={value}
           onChange={handleInputChange}
           onFocus={handleFocus}

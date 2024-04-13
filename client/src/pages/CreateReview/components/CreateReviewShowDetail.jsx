@@ -7,7 +7,7 @@ export const RatingType = ({ name, rate }) => (
     <div className="text-xs">{name || ''}</div>
     <div className="w-[31.49px] justify-start items-center gap-0.5 flex">
       <div className="text-xs font-bold">{rate ? rate.toFixed(1) : 0.0}</div>
-      <StarIcon />
+      <StarIcon sizeRules="w-4 h-4" />
     </div>
   </div>
 );
