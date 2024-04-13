@@ -18,6 +18,7 @@ const EditorOption = ({ children, stroke, disabled, onClick, isActive }) => {
     <button
       disabled={disabled}
       onClick={onClick}
+      tabIndex={-1}
       className={`${
         isActive ? 'bg-brand-tq' : 'bg-main-bg'
       } w-[30px] h-[30px] rounded-[15px] flex-col justify-center items-center gap-2.5 inline-flex`}

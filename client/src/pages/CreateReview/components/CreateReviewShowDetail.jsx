@@ -6,7 +6,7 @@ export const RatingType = ({ name, rate }) => (
   <div className="justify-center items-center gap-[3px] flex">
     <div className="text-xs">{name || ''}</div>
     <div className="w-[31.49px] justify-start items-center gap-0.5 flex">
-      <div className="text-xs font-bold">{rate.toFixed(1)}</div>
+      <div className="text-xs font-bold">{rate ? rate.toFixed(1) : 0.0}</div>
       <StarIcon />
     </div>
   </div>
@@ -25,7 +25,7 @@ const CreateReviewShowDetail = ({ show }) => {
         <div className="h-full max-[500px]:h-3/5 w-full p-3">
           <div className="w-full h-full flex flex-col gap-1">
             <div className="text-l md:text-l font-semibold">{show.title}</div>
-            <div className="text-[12px] h-5 font-normal w-full">
+            <div className="text-[12px] max-h-5 overflow-ellipsis overflow-hidden font-normal w-full">
               {commaSeparatedString(
                 show.cast.map((cast) => cast.name).slice(0, 3)
               )}

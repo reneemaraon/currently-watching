@@ -17,9 +17,7 @@ const RatingRow = ({ ratingName, rating }) => {
   );
   return (
     <div className="RatingRow pl-[3px] gap-2 justify-between items-center inline-flex">
-      <div className="Acting text-gray-800 text-xs font-medium">
-        {ratingName}
-      </div>
+      <div className="text-xs font-medium">{ratingName}</div>
       <div className="max-[1000px]:hidden Rating justify-center items-center gap-[3px] flex">
         {renderStars(rating, starObject)}
       </div>
