@@ -136,11 +136,15 @@ li {
 }
 
 .ProseMirror {
-    @apply w-full min-h-[250px]
+    @apply w-full min-h-[250px] leading-8
 }
 
 .ProseMirror-focused {
     @apply focus:outline-none
+}
+
+.editorImage {
+    @apply w-full p-8
 }
 
 strong {

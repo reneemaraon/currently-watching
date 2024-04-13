@@ -38,15 +38,18 @@ const EditorMenu = ({ editor }) => {
 
   const addImage = () => {
     editor.commands.setImage({ src: imageUrl });
+    setImageUrl('');
+    setActiveImagePastePopup(false);
+  };
+
+  const closeModal = () => {
+    setImageUrl('');
     setActiveImagePastePopup(false);
   };
 
   const renderModal = () => {
     return (
-      <PopupModal
-        showModal={activeImagePastePopup}
-        setShowModal={setActiveImagePastePopup}
-      >
+      <PopupModal showModal={activeImagePastePopup} setShowModal={closeModal}>
         <div className="w-full inline-flex flex-col items-center gap-8 py-7 px-4">
           <h2>Add Image URL</h2>
           <TextInput
@@ -55,10 +58,7 @@ const EditorMenu = ({ editor }) => {
             onValueChange={setImageUrl}
           />
           <div className="inline-flex gap-2">
-            <CustomButton
-              styleSet="light"
-              onClick={() => setActiveImagePastePopup(false)}
-            >
+            <CustomButton styleSet="light" onClick={closeModal}>
               Close
             </CustomButton>
             <CustomButton onClick={addImage}>Add Image</CustomButton>

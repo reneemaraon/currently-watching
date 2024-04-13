@@ -21,7 +21,11 @@ const extensions = [
   Document,
   Paragraph,
   Text,
-  Image,
+  Image.configure({
+    HTMLAttributes: {
+      class: 'editorImage',
+    },
+  }),
   TextAlign.configure({
     types: ['paragraph'],
   }),
