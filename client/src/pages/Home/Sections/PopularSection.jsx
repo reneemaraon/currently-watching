@@ -10,7 +10,7 @@ const PopularSection = () => {
     shows: { shows },
   } = useShowsContext();
   return (
-    <div className="w-full mt-5 flex-col justify-center items-start gap-5 inline-flex">
+    <div className="w-full">
       <SectionHeader
         sectionName="Popular"
         arrowLeftFunction={() => setActive((i) => i - 1)}

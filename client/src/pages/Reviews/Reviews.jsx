@@ -12,6 +12,7 @@ import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
 import LoadMorePanel from '../Common/LoadMorePagination';
 import ListLoading from '../Common/LoadingList';
 import DeleteReview from './DeleteReview';
+import { Header, HeaderName } from '../Home/Sections/SectionHeader';
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
@@ -72,10 +73,8 @@ const ReviewsPage = () => {
     <div className="w-full max-w-[1200px] px-10 max-[900px]:px-8 max-[600px]:px-5 max-[400px]:px-2 py-2 sm:py-8 flex-col justify-start items-center gap-6 sm:gap-8 md:gap-12 inline-flex">
       <DeleteReview />
       {renderPopup()}
-      <div className="Header w-full px-2 py-2 sm:py-4 justify-center items-center gap-5 inline-flex">
-        <div className="grow shrink basis-0 justify-start items-start gap-2.5 flex">
-          <div className="Reviews title-text">Reviews</div>
-        </div>
+      <Header>
+        <HeaderName>Reviews</HeaderName>
         <CustomButton
           size="defaultResize"
           onClick={handleClick}
@@ -83,7 +82,7 @@ const ReviewsPage = () => {
         >
           + Add Review
         </CustomButton>
-      </div>
+      </Header>
       <div className="ReviewsList w-full inline-flex px-0.5 pb-4 sm:px-2.5 flex-col justify-start items-center gap-5">
         {reviews &&
           reviews.map((review) => {

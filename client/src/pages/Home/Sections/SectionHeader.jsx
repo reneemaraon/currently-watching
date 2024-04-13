@@ -1,13 +1,23 @@
+export const Header = ({ children }) => (
+  <div className="Header w-full px-2 py-2 sm:py-4 justify-center items-center gap-5 inline-flex">
+    {children}
+  </div>
+);
+
+export const HeaderName = ({ children }) => (
+  <div className="grow shrink basis-0 justify-start items-start gap-2.5 flex">
+    <div className="title-text">{children}</div>
+  </div>
+);
+
 const SectionHeader = ({
   sectionName,
   arrowLeftFunction, //() => setActive(i => i - 1)
   arrowRightFunction, //() => setActive(i => i + 1)
 }) => {
   return (
-    <div className="self-stretch justify-between items-center inline-flex">
-      <div className="text-lg sm:text-xl md:text-3xl font-medium">
-        {sectionName}
-      </div>
+    <Header>
+      <HeaderName>{sectionName}</HeaderName>
       <div className="inline-flex justify-end items-start gap-0.5 sm:gap-3">
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
           <button className="nav-left" onClick={arrowLeftFunction}>
@@ -46,7 +56,7 @@ const SectionHeader = ({
           </button>
         </div>
       </div>
-    </div>
+    </Header>
   );
 };
 
