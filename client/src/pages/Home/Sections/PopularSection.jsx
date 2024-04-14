@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import PopularCarousel from "./PopularCarousel";
-import { useShowsContext } from "../../../context/ShowsContext";
-import SectionHeader from "./SectionHeader";
+import PopularCarousel from './PopularCarousel';
+import { useShowsContext } from '../../../context/ShowsContext';
+import SectionHeader from './SectionHeader';
+import ImageWithOpacityTransition from '../../Common/ImageTransition';
 
 const PopularSection = () => {
   const [active, setActive] = useState(2);
@@ -36,9 +37,9 @@ const PopularSection = () => {
               {shows[active] &&
                 shows[active].cast.slice(0, 6).map((castMember) => (
                   <div className="w-10 h-10 border border-main-bg overflow-hidden bg-theme-base rounded-full">
-                    <img
-                      className="object-cover"
-                      src={`https://image.tmdb.org/t/p/original${castMember.profileImage}`}
+                    <ImageWithOpacityTransition
+                      styleAttach="object-cover ease-out"
+                      src={`https://image.tmdb.org/t/p/w500${castMember.profileImage}`}
                     />
                   </div>
                 ))}
