@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import ImageWithOpacityTransition from '../../Common/ImageTransition';
 
-const CARDS = 10;
 const MAX_VISIBILITY = 3;
 
 const Banner = ({ title, image_src }) => (

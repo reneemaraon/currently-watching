@@ -102,6 +102,8 @@ const PopularSection = () => {
     <div className="w-full inline-flex flex-col">
       <SectionHeader
         sectionName="Popular"
+        disabledRight={active == shows.length - 1}
+        disabledLeft={active == 0}
         arrowLeftFunction={() => setActive((i) => i - 1)}
         arrowRightFunction={() => setActive((i) => i + 1)}
       />

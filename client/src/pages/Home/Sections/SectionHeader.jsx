@@ -14,13 +14,19 @@ const SectionHeader = ({
   sectionName,
   arrowLeftFunction, //() => setActive(i => i - 1)
   arrowRightFunction, //() => setActive(i => i + 1)
+  disabledRight,
+  disabledLeft,
 }) => {
   return (
     <Header>
       <HeaderName>{sectionName}</HeaderName>
       <div className="inline-flex justify-end items-start gap-0.5 sm:gap-3">
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
-          <button className="nav-left" onClick={arrowLeftFunction}>
+          <button
+            disabled={disabledLeft}
+            className={disabledLeft && 'opacity-30'}
+            onClick={arrowLeftFunction}
+          >
             <svg
               className="h-7 w-7 sm:w-10 sm:h-10 stroke-light-text hover:opacity-80"
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +44,11 @@ const SectionHeader = ({
           </button>
         </div>
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
-          <button className="nav-left" onClick={arrowRightFunction}>
+          <button
+            disabled={disabledRight}
+            className={disabledRight && 'opacity-30'}
+            onClick={arrowRightFunction}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
