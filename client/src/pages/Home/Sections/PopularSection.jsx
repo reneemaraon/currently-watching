@@ -4,29 +4,35 @@ import PopularCarousel from './PopularCarousel';
 import { useShowsContext } from '../../../context/ShowsContext';
 import SectionHeader from './SectionHeader';
 import ImageWithOpacityTransition from '../../Common/ImageTransition';
+import commaSeparatedString from '../../Common/commaSeparate';
+import StarIcon from '../../Common/Star';
+
+const StarRatingRow = ({ name, rating }) => (
+  <div className="justify-start items-start gap-2.5 inline-flex">
+    <div className="text-sm font-medium">{name}</div>
+    <div className="justify-start items-center gap-0.5 flex">
+      <div className="text-dark-yellow text-sm font-medium">{rating}</div>
+      <StarIcon fill="fill-dark-yellow" sizeRules="w-4 h-4" />
+    </div>
+  </div>
+);
 
 const PopularSection = () => {
   const [active, setActive] = useState(2);
   const {
     shows: { shows },
   } = useShowsContext();
-  return (
-    <div className="w-full inline-flex flex-col">
-      <SectionHeader
-        sectionName="Popular"
-        arrowLeftFunction={() => setActive((i) => i - 1)}
-        arrowRightFunction={() => setActive((i) => i + 1)}
-      />
-      <div className="self-stretch flex-col justify-start items-center flex">
-        <PopularCarousel active={active} shows={shows} />
+
+  const renderShowDetails = () => {
+    const show = shows[active];
+    if (shows[active]) {
+      return (
         <div className="flex-wrap justify-center max-[500px]:justify-start items-start gap-8 inline-flex">
           <div className="min-w-[340px] grow shrink basis-0 max-h-[130px] flex-col justify-start items-start gap-2.5 inline-flex">
-            <div className="title-text font-medium">
-              {shows[active] && shows[active].title}
-            </div>
+            <div className="title-text font-medium">{show.title}</div>
 
             <p className="text-light-text text-ellipsis overflow-hidden text-sm self-stretch font-normal leading-[30.60px]">
-              {shows[active] && shows[active].synopsis}
+              {show.synopsis}
             </p>
           </div>
           <div className="grow shrink min-w-[200px] max-w-[400px] basis-0 flex-col justify-start items-start gap-2.5 inline-flex">
@@ -34,18 +40,19 @@ const PopularSection = () => {
               Cast
             </div>
             <div className="justify-start gap-[-10px] items-start inline-flex">
-              {shows[active] &&
-                shows[active].cast.slice(0, 6).map((castMember) => (
-                  <div className="w-10 h-10 border border-main-bg overflow-hidden bg-theme-base rounded-full">
-                    <ImageWithOpacityTransition
-                      styleAttach="object-cover ease-out"
-                      src={`https://image.tmdb.org/t/p/w500${castMember.profileImage}`}
-                    />
-                  </div>
-                ))}
+              {show.cast.slice(0, 6).map((castMember) => (
+                <div className="w-10 h-10 border border-main-bg overflow-hidden bg-theme-base rounded-full">
+                  <ImageWithOpacityTransition
+                    styleAttach="object-cover ease-out"
+                    src={`https://image.tmdb.org/t/p/w500${castMember.profileImage}`}
+                  />
+                </div>
+              ))}
             </div>
-            <div className="self-stretch text-gray-800 text-base font-normal leading-[25.20px]">
-              Lee Jung-jae, Park Hae soo, Wi Ha-joon...
+            <div className="self-stretch text-base font-normal leading-6">
+              {commaSeparatedString(
+                show.cast.map((cast) => cast.name).slice(0, 3)
+              )}
             </div>
           </div>
           <div className="w-[271px] p-5 bg-theme-base bg-opacity-70 rounded-xl flex-col justify-start items-start gap-[5px] inline-flex">
@@ -55,21 +62,10 @@ const PopularSection = () => {
                   Overall
                 </div>
                 <div className="justify-start items-center gap-1 flex">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      className="fill-yellow-500"
-                      fillRule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div className="text-yellow-500 text-base font-medium">
-                    3.5
+                  <div className="text-dark-yellow text-base font-medium">
+                    {show.totalAverage}
                   </div>
+                  <StarIcon fill="fill-dark-yellow" sizeRules="w-6 h-6" />
                 </div>
               </div>
               <div className="justify-start items-center gap-1.5 flex">
@@ -91,70 +87,27 @@ const PopularSection = () => {
                     />
                   </svg>
                 </div>
-                <div className="text-gray-800 text-[15px] font-medium">23k</div>
+                <div className="text-sm font-medium">{show.watched || '0'}</div>
               </div>
             </div>
-            <div className="justify-start items-start gap-2.5 inline-flex">
-              <div className="text-gray-800 text-sm font-medium">
-                Performance
-              </div>
-              <div className="justify-start items-center gap-0.5 flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  className="w-4 h-4"
-                >
-                  <path
-                    className="fill-yellow-500"
-                    fillRule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-
-                <div className="text-yellow-500 text-sm font-medium">4.2</div>
-              </div>
-            </div>
-            <div className="justify-start items-start gap-2.5 inline-flex">
-              <div className="text-gray-800 text-sm font-medium">Narrative</div>
-              <div className="justify-start items-center gap-0.5 flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  className="w-4 h-4"
-                >
-                  <path
-                    className="fill-yellow-500"
-                    fillRule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <div className="text-yellow-500 text-sm font-medium">2.9</div>
-              </div>
-            </div>
-            <div className="justify-start items-start gap-2.5 inline-flex">
-              <div className="text-gray-800 text-sm font-medium">
-                Cinematography
-              </div>
-              <div className="justify-start items-center gap-0.5 flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  className="w-4 h-4"
-                >
-                  <path
-                    className="fill-yellow-500"
-                    fillRule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <div className="text-yellow-500 text-sm font-medium">3.5</div>
-              </div>
-            </div>
+            <StarRatingRow rating={show.actingAverage} name="Acting" />
+            <StarRatingRow rating={show.plotAverage} name="Plot" />
+            <StarRatingRow rating={show.visualsAverage} name="Visuals" />
           </div>
         </div>
+      );
+    }
+  };
+  return (
+    <div className="w-full inline-flex flex-col">
+      <SectionHeader
+        sectionName="Popular"
+        arrowLeftFunction={() => setActive((i) => i - 1)}
+        arrowRightFunction={() => setActive((i) => i + 1)}
+      />
+      <div className="self-stretch flex-col justify-start items-center flex">
+        <PopularCarousel active={active} shows={shows} />
+        {renderShowDetails()}
       </div>
     </div>
   );
