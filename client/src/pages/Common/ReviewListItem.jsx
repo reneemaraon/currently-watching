@@ -1,39 +1,47 @@
+import stripHtmlTags from '../../utils/stripTags';
 import ImageWithOpacityTransition from './ImageTransition';
 import StarIcon from './Star';
 import { useNavigate } from 'react-router-dom';
+import renderStars from './renderStars';
+import Icon from './Icon';
+import { CommentIcon, HeartIcon } from './IconList';
 
-const RatingRow = ({ ratingName }) => {
+const RatingRow = ({ ratingName, rating }) => {
+  const starObject = (
+    <div className="w-4 h-4">
+      <StarIcon />
+    </div>
+  );
   return (
     <div className="RatingRow pl-[3px] gap-6 justify-between items-center inline-flex">
       <div className="Acting text-gray-800 text-xs font-medium">
         {ratingName}
       </div>
       <div className="Rating w-[85.09px] justify-start items-center gap-[3px] flex">
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
-        <div className="w-4 h-4">
-          <StarIcon />
-        </div>
+        {renderStars(rating, starObject)}
       </div>
     </div>
   );
 };
 
-const ReviewsListItem = ({ id }) => {
+const ReviewsListItem = ({ review }) => {
   const navigate = useNavigate();
 
+  const {
+    _id: id,
+    title,
+    body,
+    actingRating,
+    plotRating,
+    visualsRating,
+    likeCount,
+    commentCount,
+    user: { profilePhotoUrl, screenName, name },
+    show: { title: showTitle, tmdbPoster },
+  } = review;
+
   const onClickNavigate = () => {
-    navigate(`reviews/${id || '1'}`);
+    navigate(`reviews/${id}`);
   };
 
   return (
@@ -52,11 +60,11 @@ const ReviewsListItem = ({ id }) => {
       >
         <ImageWithOpacityTransition
           styleAttach="object-cover align-center w-full h-full"
-          src="https://image.tmdb.org/t/p/w500/6KMhKm2ZHG8KUtg4lhsNUdt4iPh.jpg"
+          src={`https://image.tmdb.org/t/p/w500${tmdbPoster}`}
         />
         <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
           <div className="Title grow shrink basis-0 text-white text-xs font-semibold">
-            Twenty Five Twenty One
+            {showTitle}
           </div>
         </div>
       </div>
@@ -65,14 +73,14 @@ const ReviewsListItem = ({ id }) => {
           <div className="Profile h-[31px] justify-start items-center gap-[11px] flex">
             <ImageWithOpacityTransition
               styleAttach="ProfilePhoto w-[31px] h-[31px] relative rounded-[40px]"
-              src="https://via.placeholder.com/31x31"
+              src={profilePhotoUrl}
             />
             <div className="AccDetails flex-col justify-center items-start inline-flex">
               <div className="TwtDisplayName text-gray-800 text-[13px] font-medium">
-                Hwang Inyoup
+                {screenName}
               </div>
               <div className="Username text-slate-500 text-[11px] font-normal">
-                @hi_high_hiy
+                @{name}
               </div>
             </div>
           </div>
@@ -80,31 +88,38 @@ const ReviewsListItem = ({ id }) => {
         </div>
         <div className="ReviewSnippets self-stretch grow shrink basis-0 pl-[5px] pt-[5px] flex-col justify-start items-start gap-2 flex">
           <div className="Title self-stretch text-gray-800 text-base font-medium">
-            This was such a great watch
+            {title}
           </div>
           <div className="Preview overflow-hidden text-ellipsis h-[65px] w-full text-zinc-500 text-sm font-normal">
-            I had a great time watching this drama. Whenever there was something
-            bla ba bla. I had a great time watching this drama. Whenever there
-            was something bla ba bla. I had a great time watching this drama.
-            Whenever there was something bla ba bla.
+            {stripHtmlTags(body)}
           </div>
         </div>
         <div className="Footer self-stretch justify-center items-end gap-2.5 inline-flex">
           <div className="RatingsCont grow shrink basis-0 h-[71px] flex-col justify-between items-start inline-flex">
             <div className="Ratings max-w-28 h-[71px] pl-1 pr-2.5 py-[5px] flex-col justify-start gap-2 flex">
-              <RatingRow ratingName="Acting" />
-              <RatingRow ratingName="Plot" />
-              <RatingRow ratingName="Visuals" />
+              <RatingRow rating={actingRating} ratingName="Acting" />
+              <RatingRow rating={plotRating} ratingName="Plot" />
+              <RatingRow rating={visualsRating} ratingName="Visuals" />
             </div>
           </div>
           <div className="Options justify-end items-start gap-3 flex">
-            <div className="Like flex-col justify-start items-center gap-0.5 inline-flex">
-              <div className="Frame w-5 h-5 relative" />
-              <div className=" info-text font-medium">1234</div>
-            </div>
             <div className="Share flex-col justify-start items-center gap-0.5 inline-flex">
-              <div className="Frame w-5 h-5 relative" />
-              <div className=" info-text font-medium">1234</div>
+              <Icon
+                sizeRules="sm:w-5 sm:h-5 h-4 w-4"
+                fill="fill-none stroke-0.5 stroke-text-dark"
+              >
+                <CommentIcon />
+              </Icon>
+              <div className=" info-text font-medium">{commentCount}</div>
+            </div>
+            <div className="Like flex-col justify-start items-center gap-0.5 inline-flex">
+              <Icon
+                sizeRules="sm:w-5 sm:h-5 h-4 w-4"
+                fill="fill-none stroke-0.5 stroke-text-dark"
+              >
+                <HeartIcon />
+              </Icon>
+              <div className=" info-text font-medium">{likeCount}</div>
             </div>
           </div>
         </div>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import PopularCarousel from './PopularCarousel';
-import { useShowsContext } from '../../../context/ShowsContext';
 import SectionHeader from './SectionHeader';
 import ImageWithOpacityTransition from '../../Common/ImageTransition';
 import commaSeparatedString from '../../Common/commaSeparate';
 import StarIcon from '../../Common/Star';
+import { useHomepageContext } from '../../../context/HomepageContext';
 
 const StarRatingRow = ({ name, rating }) => (
   <div className="justify-start items-start gap-2.5 inline-flex">
@@ -21,7 +21,7 @@ const PopularSection = () => {
   const [active, setActive] = useState(2);
   const {
     shows: { shows },
-  } = useShowsContext();
+  } = useHomepageContext();
 
   const renderShowDetails = () => {
     const show = shows[active];
