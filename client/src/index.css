@@ -13,13 +13,13 @@
     }
 
     .carousel {
-        @apply relative w-[500px] h-[295] py-2 mb-10;
+        @apply relative w-full max-w-[500px] py-2 mb-10;
         perspective: 500px;
         transform-style: preserve-3d;
     }
     
     .card-container {
-        @apply absolute w-[500px] h-[295] blur-[calc(var(--abs-offset))] transition-all duration-[0.3s] ease-[ease-out];
+        @apply absolute w-full max-w-[500px] blur-[calc(var(--abs-offset))] transition-all duration-[0.3s] ease-[ease-out];
         transform: 
         rotateY(calc(var(--offset) * 15deg))
         scaleY(calc(1 + var(--abs-offset) * -0.05))

@@ -5,18 +5,17 @@ import ImageWithOpacityTransition from '../../Common/ImageTransition';
 const MAX_VISIBILITY = 3;
 
 const Banner = ({ title, image_src }) => (
-  <div className="card relative bg-indigo-200 overflow-hidden rounded-[15px] shadow">
+  <div className="card w-full relative bg-indigo-200 overflow-hidden rounded-[15px] shadow">
     <ImageWithOpacityTransition
-      styleAttach="object-cover w-full h-full"
+      styleAttach="object-cover w-full"
       src={'https://image.tmdb.org/t/p/w500' + image_src}
     />
-    <p className="absolute bottom-3 left-3 text-base">{title}</p>
   </div>
 );
 
 export default function PopularCarousel({ shows, active }) {
   return (
-    <div className="w-full flex-col h-[350px] justify-start items-center inline-flex overflow-hidden">
+    <div className="w-full flex-col h-[280px] min-[500px]:h-[320px] sm:h-[350px] justify-start items-center inline-flex overflow-hidden">
       <div className="carousel">
         {shows.map((show, i) => (
           <div

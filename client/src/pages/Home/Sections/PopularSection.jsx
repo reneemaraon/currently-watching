@@ -41,7 +41,7 @@ const PopularSection = () => {
             </div>
             <div className="justify-start gap-[-10px] items-start inline-flex">
               {show.cast.slice(0, 6).map((castMember) => (
-                <div className="w-10 h-10 border border-main-bg overflow-hidden bg-theme-base rounded-full">
+                <div className="w-10 h-10 shadow overflow-hidden bg-theme-base rounded-full">
                   <ImageWithOpacityTransition
                     styleAttach="object-cover ease-out"
                     src={`https://image.tmdb.org/t/p/w500${castMember.profileImage}`}
