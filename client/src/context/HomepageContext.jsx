@@ -20,6 +20,10 @@ export const HomepageProvider = ({ children }) => {
     totalCount: 0,
     shows: [],
   });
+  const [newShows, setNewShows] = useState({
+    totalCount: 0,
+    shows: [],
+  });
 
   const {
     loading: showsLoading,
@@ -37,11 +41,28 @@ export const HomepageProvider = ({ children }) => {
       },
     });
 
+  const {
+    loading: newShowsLoading,
+    error: newShowsError,
+    data: newShowsData,
+    refetch: refetchNewShows,
+  } = useQuery(GET_SHOWS_LIST, {
+    variables: {
+      filter: { limit: 10, cursorField: 'firstAirDate', ascending: false },
+    },
+  });
+
   useEffect(() => {
     if (showsData) {
       setShows(showsData.shows);
     }
   }, [showsData]);
+
+  useEffect(() => {
+    if (newShowsData) {
+      setNewShows(newShowsData.shows);
+    }
+  }, [newShowsData]);
 
   useEffect(() => {
     if (trendingReviewsData) {
@@ -57,6 +78,7 @@ export const HomepageProvider = ({ children }) => {
         shows,
         refetchResults,
         trendingReviews,
+        newShows,
       }}
     >
       {children}

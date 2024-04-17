@@ -30,11 +30,13 @@ const ShowCardSmall = ({ id, show }) => {
             </span>
           </div>
           <div className="NoOfReviews text-slate-500 text-xs font-medium">
-            12333 reviews
+            {show.reviewCount} reviews
           </div>
         </div>
         <div className="StarRating w-14 h-14 rounded-full border-2 border-brand-tq justify-center items-center gap-0.5 flex">
-          <div className="text-[15px] font-bold leading-[10.50px]">4.8</div>
+          <div className="text-[15px] font-bold leading-[10.50px]">
+            {show.totalAverage}
+          </div>
           <div className="w-4 h-4">
             <StarIcon />
           </div>

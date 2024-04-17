@@ -80,6 +80,7 @@ export const GET_SHOWS_LIST = gql`
         totalAverage
         tmdbPoster
         tmdbBackdrop
+        reviewCount
         cast {
           _id
           name
