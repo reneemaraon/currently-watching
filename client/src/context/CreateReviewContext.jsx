@@ -4,12 +4,12 @@ import {
   useEffect,
   useState,
   useReducer,
-} from 'react';
-import { GET_SHOW } from '../api/showsApi';
-import { useQuery } from '@apollo/client';
-import { postReviewRequest } from '../api/reviewsApi';
-import formReducer from '../utils/formReducer';
-import stripHtmlTags from '../utils/stripTags';
+} from "react";
+import { GET_SHOW } from "../api/showsApi";
+import { useQuery } from "@apollo/client";
+import { postReviewRequest } from "../api/reviewsApi";
+import formReducer from "../utils/formReducer";
+import stripHtmlTags from "../utils/stripTags";
 
 const createReviewContext = createContext();
 
@@ -19,8 +19,8 @@ const initialState = {
   show: null,
   plotRating: null,
   visualsRating: null,
-  title: '',
-  body: '',
+  title: "",
+  body: "",
   errors: {
     title: null,
     body: null,
@@ -32,7 +32,7 @@ const initialState = {
 
 export const useCreateReviewContext = () => {
   const context = useContext(createReviewContext);
-  if (!context) throw new Error('Show Provider is missing');
+  if (!context) throw new Error("Show Provider is missing");
   return context;
 };
 
@@ -54,7 +54,7 @@ export const CreateReviewContext = ({ children }) => {
 
   useEffect(() => {
     if (showData) {
-      dispatch({ type: 'SET_FIELD', field: 'show', value: showData.show });
+      dispatch({ type: "SET_FIELD", field: "show", value: showData.show });
     }
   }, [showData]);
 
@@ -65,38 +65,38 @@ export const CreateReviewContext = ({ children }) => {
   }, [state.showId]);
 
   const setField = (field, value) => {
-    dispatch({ type: 'SET_FIELD', field, value });
+    dispatch({ type: "SET_FIELD", field, value });
   };
 
   const setError = (field, error) => {
-    dispatch({ type: 'SET_ERROR', field, error });
+    dispatch({ type: "SET_ERROR", field, error });
   };
 
   const validateForm = () => {
     let isValid = true;
 
     if (!state.title.trim()) {
-      setError('title', 'Please enter a headline');
+      setError("title", "Please enter a headline");
       isValid = false;
     }
 
     if (!stripHtmlTags(state.body).trim()) {
-      setError('body', 'Please enter a body');
+      setError("body", "Please enter a body");
       isValid = false;
     }
 
     if (!state.actingRating) {
-      setError('actingRating', 'Please enter a Acting rating');
+      setError("actingRating", "Please enter a Acting rating");
       isValid = false;
     }
 
     if (!state.plotRating) {
-      setError('plotRating', 'Please enter a Plot rating');
+      setError("plotRating", "Please enter a Plot rating");
       isValid = false;
     }
 
     if (!state.visualsRating) {
-      setError('visualsRating', 'Please enter a Visuals rating');
+      setError("visualsRating", "Please enter a Visuals rating");
       isValid = false;
     }
 
@@ -104,11 +104,10 @@ export const CreateReviewContext = ({ children }) => {
   };
 
   const resetForm = () => {
-    dispatch({ type: 'RESET_FORM', initialState });
+    dispatch({ type: "RESET_FORM", initialState });
   };
 
   const postReview = async () => {
-    console.log(state);
     setCreateError(null);
     setCreateLoading(true);
     if (!validateForm()) {
@@ -125,7 +124,6 @@ export const CreateReviewContext = ({ children }) => {
     };
     try {
       const response = await postReviewRequest(payload);
-      console.log(response.data);
       setCreatedReview(response.data);
       resetForm();
     } catch (error) {

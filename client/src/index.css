@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+  }
+}
+
+
 @layer components {
     .rectangular-button {
         @apply bg-light-blue p-2 text-center px-4 text-lg w-full rounded-xl text-dark-bg
