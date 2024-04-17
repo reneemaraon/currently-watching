@@ -6,6 +6,18 @@ const { Strategy } = require('@superfaceai/passport-twitter-oauth2');
 // const keys = require("./keys");
 // const User = require("../models/user");
 
+const updateDetails = async (id, profile) => {
+  await User.findByIdAndUpdate(id, {
+    $set: {
+      name: profile._json.name,
+      screenName: profile._json.screen_name,
+      twitterId: profile._json.id_str,
+      profilePhotoUrl: profile._json.profile_image_url,
+      joinedDate: profile._json.created_at,
+    },
+  });
+};
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -39,6 +51,7 @@ passport.use(
           screenName: profile._json.screen_name,
           twitterId: profile._json.id_str,
           profilePhotoUrl: profile._json.profile_image_url,
+          joinedDate: profile._json.created_at,
         }).save();
 
         if (newUser) {
@@ -46,7 +59,7 @@ passport.use(
           return;
         }
       }
-
+      await updateDetails(currentUser._id, profile);
       done(null, currentUser);
     }
   )

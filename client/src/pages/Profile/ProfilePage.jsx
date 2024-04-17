@@ -7,8 +7,13 @@ import ReviewsListItem from '../Reviews/ReviewListItem';
 import List from '../MyLists/List';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
 import LoadMorePanel from '../Common/LoadMorePagination';
+import { useAuthContext } from '../../context/AuthContext';
+import formatDateTime from '../../utils/formatDate';
 
 export default function ProfilePage() {
+  const {
+    user: { screenName, name, profilePhotoUrl, joinedDate },
+  } = useAuthContext();
   return (
     <div className="w-full inline-flex flex-col items-center relative">
       <div className="container-center-card pt-4 sm:pt-10">
@@ -21,11 +26,11 @@ export default function ProfilePage() {
                   <div className="Profile justify-start items-start gap-4 sm:gap-6 inline-flex">
                     <ImageWithOpacityTransition
                       styleAttach="w-12 h-12 sm:h-16 sm:w-16 md:w-[70px] md:h-[70px] relative rounded-full"
-                      src="https://via.placeholder.com/80x82"
+                      src={profilePhotoUrl}
                     />
                     <div className="Text self-stretch flex-col justify-center items-start gap-0.5 sm:gap-2 inline-flex">
                       <div className="justify-start gap-2 flex-wrap inline-flex">
-                        <div className="title-text">Hwang Inyoup</div>
+                        <div className="title-text">{name}</div>
                         <CustomButton styleSet="inverse" size="smallResize">
                           <Icon
                             sizeRules="h-2.5 w-2.5 sm:h-3 sm:w-3"
@@ -39,9 +44,11 @@ export default function ProfilePage() {
                         </CustomButton>
                       </div>
                       <div className="paragraph-text text-light-text">
-                        @hi_high_hiy
+                        @{screenName}
                       </div>
-                      <div className="paragraph-text">Joined Dec 2024</div>
+                      <div className="paragraph-text">
+                        Joined {formatDateTime(joinedDate)}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -62,9 +69,9 @@ export default function ProfilePage() {
                   <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex" />
                 </div>
                 <div className="CommentList w-full flex-col justify-center items-start gap-[15px] flex">
+                  {/* <ReviewsListItem />
                   <ReviewsListItem />
-                  <ReviewsListItem />
-                  <ReviewsListItem />
+                  <ReviewsListItem /> */}
                   <LoadMorePanel />
                 </div>
               </div>

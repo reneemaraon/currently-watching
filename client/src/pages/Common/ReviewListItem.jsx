@@ -1,10 +1,10 @@
-import stripHtmlTags from "../../utils/stripTags";
-import ImageWithOpacityTransition from "./ImageTransition";
-import StarIcon from "./Star";
-import { useNavigate } from "react-router-dom";
-import renderStars from "./renderStars";
-import Icon from "./Icon";
-import { CommentIcon, HeartIcon } from "./IconList";
+import stripHtmlTags from '../../utils/stripTags';
+import ImageWithOpacityTransition from './ImageTransition';
+import StarIcon from './Star';
+import { useNavigate } from 'react-router-dom';
+import renderStars from './renderStars';
+import Icon from './Icon';
+import { CommentIcon, HeartIcon } from './IconList';
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -77,10 +77,10 @@ const ReviewsListItem = ({ review }) => {
             />
             <div className="AccDetails flex-col justify-center items-start inline-flex">
               <div className="TwtDisplayName text-gray-800 text-[13px] font-medium">
-                {screenName}
+                {name}
               </div>
               <div className="Username text-slate-500 text-[11px] font-normal">
-                @{name}
+                @{screenName}
               </div>
             </div>
           </div>

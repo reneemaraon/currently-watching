@@ -6,6 +6,7 @@ const userSchema = new Schema({
   screenName: { type: String, default: '' },
   twitterId: String,
   profilePhotoUrl: String,
+  joinedDate: String,
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
 });
 

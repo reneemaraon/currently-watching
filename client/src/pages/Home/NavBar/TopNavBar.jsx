@@ -57,10 +57,7 @@ const TopNavBar = ({ toggleSidebar }) => {
         </div>
       </div>
       {user ? (
-        <ProfileView
-          name={user.screenName}
-          profile_photo={user.profilePhotoUrl}
-        />
+        <ProfileView authUser={user} />
       ) : (
         <LogInButton login={onTwitterLogin} />
       )}

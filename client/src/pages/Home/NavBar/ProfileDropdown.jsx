@@ -4,9 +4,12 @@ import { useAuthContext } from '../../../context/AuthContext';
 import Dropdown, { Option } from '../../Common/Dropdown';
 import ImageWithOpacityTransition from '../../Common/ImageTransition';
 
-const ProfileView = ({ name, profile_photo }) => {
+const ProfileView = () => {
   const navigate = useNavigate();
-  const { logoutUser } = useAuthContext();
+  const {
+    logoutUser,
+    user: { _id, screenName, profilePhotoUrl },
+  } = useAuthContext();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
@@ -21,7 +24,7 @@ const ProfileView = ({ name, profile_photo }) => {
   };
 
   const onProfileClick = () => {
-    navigate('/users/1');
+    navigate(`/users/${_id}`);
   };
 
   const onLogout = async () => {
@@ -44,9 +47,9 @@ const ProfileView = ({ name, profile_photo }) => {
     >
       <ImageWithOpacityTransition
         styleAttach="w-8 h-8 rounded-full"
-        src={profile_photo}
+        src={profilePhotoUrl}
       />
-      <div className="text-sm leading-tight">{name}</div>
+      <div className="text-sm leading-tight">{screenName}</div>
       {isDropdownVisible && (
         <div className="absolute w-40 top-full right-0 mt-1 z-40">
           <Dropdown
