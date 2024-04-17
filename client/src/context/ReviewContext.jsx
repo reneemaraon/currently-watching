@@ -1,16 +1,16 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { getReviewRequest, GET_REVIEWS_LIST } from '../api/reviewsApi';
-import { useQuery } from '@apollo/client';
-import findCursor from '../utils/getCursorFromList';
+import { createContext, useContext, useEffect, useState } from "react";
+import { getReviewRequest, GET_REVIEWS_LIST } from "../api/reviewsApi";
+import { useQuery } from "@apollo/client";
+import findCursor from "../utils/getCursorFromList";
 
 const ITEMS_PER_PAGE = 20;
-const SORT_FIELD = 'createdAt';
+const SORT_FIELD = "createdAt";
 
 const reviewContext = createContext();
 
 export const useReviewsContext = () => {
   const context = useContext(reviewContext);
-  if (!context) throw new Error('Review Provider is missing');
+  if (!context) throw new Error("Review Provider is missing");
   return context;
 };
 
@@ -41,7 +41,7 @@ export const ReviewsProvider = ({ children }) => {
   };
 
   const updateCursor = () => {
-    setCursor(findCursor(reviews, SORT_FIELD));
+    setCursor(findCursor(reviews.reviews, SORT_FIELD));
   };
 
   useEffect(() => {

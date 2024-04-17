@@ -1,15 +1,15 @@
 // resolvers.js
 
-const User = require('./models/user');
-const Show = require('./models/show');
-const Review = require('./models/review');
-const Like = require('./models/like');
-const Comment = require('./models/comment');
+const User = require("./models/user");
+const Show = require("./models/show");
+const Review = require("./models/review");
+const Like = require("./models/like");
+const Comment = require("./models/comment");
 
-const { generateSearchConditions } = require('./utils/search');
-const { processCreateComment } = require('./controllers/comment');
-const { processCreateLike, processDeleteLike } = require('./controllers/like');
-const Actor = require('./models/actor');
+const { generateSearchConditions } = require("./utils/search");
+const { processCreateComment } = require("./controllers/comment");
+const { processCreateLike, processDeleteLike } = require("./controllers/like");
+const Actor = require("./models/actor");
 
 const resolvers = {
   Query: {
@@ -24,11 +24,14 @@ const resolvers = {
     shows: async (_, { filter = {} }) => {
       const {
         searchConditions,
+        cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title']);
-      let shows = await Show.find(searchConditions).sort(sort).limit(limit);
+      } = generateSearchConditions(filter, ["title"]);
+      let shows = await Show.find({ ...searchConditions, ...cursorConditions })
+        .sort(sort)
+        .limit(limit);
 
-      const count = await Show.countDocuments();
+      const count = await Show.find(searchConditions).countDocuments();
       return {
         shows,
         totalCount: count,
@@ -43,12 +46,18 @@ const resolvers = {
     reviews: async (_, { filter = {} }) => {
       const {
         searchConditions,
+        cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title', 'body']);
+      } = generateSearchConditions(filter, ["title", "body"]);
 
-      let reviews = await Review.find(searchConditions).sort(sort).limit(limit);
+      let reviews = await Review.find({
+        ...searchConditions,
+        ...cursorConditions,
+      })
+        .sort(sort)
+        .limit(limit);
 
-      const count = await Review.countDocuments();
+      const count = await Review.find(searchConditions).countDocuments();
       return {
         reviews,
         totalCount: count,
@@ -59,10 +68,16 @@ const resolvers = {
     showReviews: async (_, { id, filter = {} }) => {
       const {
         searchConditions,
+        cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title', 'body']);
+      } = generateSearchConditions(filter, ["title", "body"]);
       searchConditions.show = id;
-      let reviews = await Review.find(searchConditions).sort(sort).limit(limit);
+      let reviews = await Review.find({
+        ...searchConditions,
+        ...cursorConditions,
+      })
+        .sort(sort)
+        .limit(limit);
       const count = await Review.find(searchConditions).countDocuments();
       return {
         reviews,
@@ -78,13 +93,17 @@ const resolvers = {
     reviewComments: async (_, { id, filter = {} }) => {
       const {
         searchConditions,
+        cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['commentBody']);
+      } = generateSearchConditions(filter, ["commentBody"]);
       searchConditions.review = id;
-      let comments = await Comment.find(searchConditions)
+      let comments = await Comment.find({
+        ...searchConditions,
+        ...cursorConditions,
+      })
         .sort(sort)
         .limit(limit);
-      const count = await Comment.find({ review: id }).countDocuments();
+      const count = await Comment.find(searchConditions).countDocuments();
       return {
         comments,
         totalCount: count,
@@ -152,7 +171,7 @@ const resolvers = {
         );
         return newComment;
       } catch (error) {
-        throw new Error('Failed to create comment');
+        throw new Error("Failed to create comment");
       }
     },
     likeReview: async (_, { reviewId }, { user }) => {
@@ -161,7 +180,7 @@ const resolvers = {
         const review = await Review.findById(like.review);
         return review;
       } catch (error) {
-        throw new Error('Failed to like review.');
+        throw new Error("Failed to like review.");
       }
     },
     deleteLike: async (_, { reviewId }, { user }) => {
@@ -170,7 +189,7 @@ const resolvers = {
         const review = await Review.findById(reviewId);
         return review;
       } catch (error) {
-        throw new Error('Failed to unlike review.');
+        throw new Error("Failed to unlike review.");
       }
     },
   },

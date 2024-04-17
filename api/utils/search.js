@@ -10,6 +10,7 @@ const generateSearchConditions = (filter, searchFields) => {
   } = filter;
 
   const searchConditions = {};
+  const cursorConditions = {};
   if (search) {
     const regex = { $regex: new RegExp(search, "i") };
     searchConditions.$or = searchFields.map((field) => ({ [field]: regex }));
@@ -23,13 +24,14 @@ const generateSearchConditions = (filter, searchFields) => {
       queryObject = cursorNumValue;
     }
 
-    searchConditions[cursorField] = ascending
+    cursorConditions[cursorField] = ascending
       ? { $gt: queryObject }
       : { $lt: queryObject };
   }
 
   return {
     searchConditions,
+    cursorConditions,
     options: {
       limit,
       sort: { [cursorField]: ascending ? 1 : -1 },
