@@ -14,7 +14,8 @@ import ShowReviewsList from './ShowReviewList';
 const ShowDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { setShowId, show, loading, showReviews } = useShowDetailContext();
+  const { setShowId, show, loading, showReviews, refreshList } =
+    useShowDetailContext();
 
   const goToAddReview = () => {
     navigate(`/shows/${id}/create-review`);
@@ -22,6 +23,7 @@ const ShowDetail = () => {
 
   useEffect(() => {
     setShowId(id);
+    refreshList();
   }, [id]);
 
   if (loading) {

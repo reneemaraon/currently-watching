@@ -31,7 +31,7 @@ export const HomepageProvider = ({ children }) => {
     data: showsData,
     refetch: refetchResults,
   } = useQuery(GET_SHOWS_LIST, {
-    variables: { filter: { limit: 10 } },
+    variables: { filter: { limit: 10, cursorField: 'popularity' } },
   });
 
   const { data: trendingReviewsData, refetch: refetchTrendingReviews } =
