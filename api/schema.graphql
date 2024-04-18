@@ -7,13 +7,9 @@ type User {
   screenName: String
   twitterId: String!
   profilePhotoUrl: String!
-  role: UserRole!
+  joinedDate: DateTime!
 }
 
-enum UserRole {
-  USER
-  ADMIN
-}
 
 type Genre {
   name: String!
@@ -127,12 +123,14 @@ type Query {
   reviews(filter: FilterInput): ReviewPagination
   review(id: ID!): Review
   showReviews(id: ID!, filter: FilterInput): ReviewPagination
+  userReviews(id: ID!, filter: FilterInput): ReviewPagination
 
   shows(filter: FilterInput): ShowPagination
   show(id: ID!): Show
 
   users: [User]
   user(id: ID!): User
+
 
   reviewComments(id: ID!, filter: FilterInput): CommentPagination
 }

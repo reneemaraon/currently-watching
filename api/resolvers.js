@@ -86,6 +86,27 @@ const resolvers = {
         cursorNumValue: filter.cursorNumValue,
       };
     },
+    userReviews: async (_, { id, filter = {} }) => {
+      const {
+        searchConditions,
+        cursorConditions,
+        options: { sort, limit },
+      } = generateSearchConditions(filter, ["title", "body"]);
+      searchConditions.user = id;
+      let reviews = await Review.find({
+        ...searchConditions,
+        ...cursorConditions,
+      })
+        .sort(sort)
+        .limit(limit);
+      const count = await Review.find(searchConditions).countDocuments();
+      return {
+        reviews,
+        totalCount: count,
+        cursorValue: filter.cursorValue,
+        cursorNumValue: filter.cursorNumValue,
+      };
+    },
     review: async (_, { id }) => {
       let review = await Review.findOne({ _id: id });
       return review;
