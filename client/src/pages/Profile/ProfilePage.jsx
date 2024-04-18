@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
-import CircularButton from "../Common/CircleButton";
-import { ShareIcon, TwitterIcon } from "../Common/IconList";
-import CustomButton from "../Common/CustomButton";
-import Icon from "../Common/Icon";
-import ReviewsListItem from "../Reviews/ReviewListItem";
-import List from "../MyLists/List";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import LoadMorePanel from "../Common/LoadMorePagination";
-import { useAuthContext } from "../../context/AuthContext";
-import formatDateTime from "../../utils/formatDate";
-import { useUserDetailContext } from "../../context/UserDetailContext";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import CircularButton from '../Common/CircleButton';
+import { ShareIcon, TwitterIcon } from '../Common/IconList';
+import CustomButton from '../Common/CustomButton';
+import Icon from '../Common/Icon';
+import ReviewsListItem from '../Reviews/ReviewListItem';
+import List from '../MyLists/List';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import LoadMorePanel from '../Common/LoadMorePagination';
+import { useAuthContext } from '../../context/AuthContext';
+import formatDateTime from '../../utils/formatDate';
+import { useUserDetailContext } from '../../context/UserDetailContext';
+import { useParams } from 'react-router-dom';
+import { Header, HeaderName } from '../Home/Sections/SectionHeader';
+import DeleteReview from '../Reviews/DeleteReview';
+import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -21,6 +24,7 @@ export default function ProfilePage() {
     userReviews: { reviews, totalCount },
   } = useUserDetailContext();
   const { user: loggedInUser } = useAuthContext();
+  const { setShowDeleteModal, setReviewToDelete } = useDeleteReviewContext();
 
   useEffect(() => {
     if (id) {
@@ -30,13 +34,19 @@ export default function ProfilePage() {
 
   const openTwitter = () => {
     const { screenName } = user;
-    window.open(`http://twitter.com/${screenName}`, "_blank");
+    window.open(`http://twitter.com/${screenName}`, '_blank');
+  };
+
+  const onAttemptDelete = (id) => {
+    setReviewToDelete(id);
+    setShowDeleteModal(true);
   };
 
   if (user) {
     const { profilePhotoUrl, screenName, name, joinedDate } = user;
     return (
       <div className="w-full inline-flex flex-col items-center relative">
+        <DeleteReview />
         <div className="container-center-card pt-4 sm:pt-10">
           {/* Main contentt */}
           <div className="z-10 Main large-white-card py-2 sm:py-6 px-3.5 sm:px-6">
@@ -86,18 +96,20 @@ export default function ProfilePage() {
               </div>
               <div className="Footer self-stretch pb-4 rounded-[17px]  flex-col justify-center items-start gap-[30px] flex">
                 <div className="ReviewSection self-stretch pt-[30px] flex-col justify-center items-center gap-[15px] flex">
-                  <div className="Header self-stretch border-b pb-4 sm:pb-6 justify-between items-start inline-flex">
-                    <div className="Reviews20">
+                  <Header>
+                    <HeaderName>
                       <span className="title-text">Reviews </span>
                       <span className="text-lighter-text title-text">
                         ({totalCount})
                       </span>
-                    </div>
-                    <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex" />
-                  </div>
+                    </HeaderName>
+                  </Header>
                   <div className="CommentList w-full flex-col justify-center items-start gap-[15px] flex">
                     {reviews.map((review) => (
-                      <ReviewsListItem review={review} />
+                      <ReviewsListItem
+                        onDelete={() => onAttemptDelete(review._id)}
+                        review={review}
+                      />
                     ))}
                     {reviews && totalCount > reviews.length && (
                       <LoadMorePanel onClick={loadNextPage} />

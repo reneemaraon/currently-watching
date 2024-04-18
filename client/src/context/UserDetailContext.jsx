@@ -1,16 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { GET_USER, GET_USER_REVIEWS } from "../api/userApi";
-import { useQuery, useMutation } from "@apollo/client";
-import findCursor from "../utils/getCursorFromList";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { GET_USER, GET_USER_REVIEWS } from '../api/userApi';
+import { useQuery, useMutation } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
 
 const ITEMS_PER_PAGE = 3;
-const SORT_FIELD = "createdAt";
+const SORT_FIELD = 'createdAt';
 
 const userDetailContext = createContext();
 
 export const useUserDetailContext = () => {
   const context = useContext(userDetailContext);
-  if (!context) throw new Error("User Detail Provider is missing");
+  if (!context) throw new Error('User Detail Provider is missing');
   return context;
 };
 
@@ -89,6 +89,22 @@ export const UserDetailProvider = ({ children }) => {
     }
   }, [reviewsData]);
 
+  const removeReviewFromUserReviewList = (id) => {
+    const reviewIndex = userReviews.reviews.findIndex(
+      (review) => review._id === id
+    );
+    if (reviewIndex !== -1) {
+      const updatedReviews = userReviews.reviews.filter(
+        (review) => review._id !== id
+      );
+      setUserReviews({
+        ...userReviews,
+        totalCount: userReviews.totalCount - 1,
+        reviews: updatedReviews,
+      });
+    }
+  };
+
   return (
     <userDetailContext.Provider
       value={{
@@ -98,6 +114,7 @@ export const UserDetailProvider = ({ children }) => {
         userReviews,
         setUserId,
         loadNextPage,
+        removeReviewFromUserReviewList,
       }}
     >
       {children}

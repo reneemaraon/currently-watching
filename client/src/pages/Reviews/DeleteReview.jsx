@@ -6,6 +6,7 @@ import { useToast } from '../../context/ToastContext';
 import CustomButton from '../Common/CustomButton';
 import PopupModal from '../Common/PopupModal';
 import { useShowDetailContext } from '../../context/ShowDetailContext';
+import { useUserDetailContext } from '../../context/UserDetailContext';
 
 const DeleteReview = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const DeleteReview = () => {
 
   const { removeReviewFromList } = useReviewsContext();
   const { removeReviewShowReviews } = useShowDetailContext();
+  const { removeReviewFromUserReviewList } = useUserDetailContext();
 
   const confirmDelete = async () => {
     setShowDeleteModal(false);
@@ -26,6 +28,7 @@ const DeleteReview = () => {
         showToast('Your review was deleted successfully', 'success');
         removeReviewFromList(reviewToDelete);
         removeReviewShowReviews(reviewToDelete);
+        removeReviewFromUserReviewList(reviewToDelete);
         if (id && location.pathname.includes('/reviews')) {
           navigate('/reviews');
         }
