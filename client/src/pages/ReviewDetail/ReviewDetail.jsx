@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import FullPageLoading from '../Common/FullPageLoading';
 import RatingRowStars from './RatingRow';
@@ -14,6 +14,7 @@ import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
 
 export default function ReviewDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { setReview, setReviewId, loading, review } = useReviewDetailContext();
   const { deleteLoading } = useDeleteReviewContext();
 
@@ -25,6 +26,12 @@ export default function ReviewDetail() {
       setReviewId(id);
     }
   }, [id]);
+
+  const goToShow = () => {
+    if (review && review.show) {
+      navigate(`/shows/${review.show._id}`);
+    }
+  };
 
   if (loading) {
     return <FullPageLoading />;
@@ -72,7 +79,13 @@ export default function ReviewDetail() {
               </div>
               <div className="py-2 text-sm font-medium">
                 This user rated{' '}
-                <span className=" text-brand-tq">{review.show.title}</span>:
+                <span
+                  onClick={goToShow}
+                  className="hover:text-brand-tq-hover hover:cursor-pointer text-brand-tq"
+                >
+                  {review.show.title}
+                </span>
+                :
               </div>
               <div className="Right w-full flex-wrap justify-start items-start gap-3 py-2 inline-flex">
                 <RatingRowStars rating={review.actingRating} name="Acting" />

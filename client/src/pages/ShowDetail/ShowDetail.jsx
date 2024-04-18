@@ -64,9 +64,9 @@ const ShowDetail = () => {
                     </div>
                   </div>
                   <div className="ReviewActions justify-start items-start pb-2 gap-1.5 sm:gap-2.5 flex">
-                    <CircularButton>
+                    {/* <CircularButton>
                       <HeartIcon />
-                    </CircularButton>
+                    </CircularButton> */}
                     <CircularButton>
                       <ShareIcon />
                     </CircularButton>

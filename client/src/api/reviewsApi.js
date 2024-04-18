@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
-import axios from "axios";
+import { gql } from '@apollo/client';
+import axios from 'axios';
 
 export const GET_REVIEWS_LIST = gql`
   query ReviewsList($filter: FilterInput) {
@@ -52,6 +52,8 @@ export const GET_REVIEW = gql`
         title
         tmdbPoster
         tmdbBackdrop
+        reviewCount
+        totalAverage
       }
       user {
         _id
@@ -159,13 +161,13 @@ export const DELETE_REVIEW_LIKE_MUTATION = gql`
 `;
 
 export const getReviewsRequest = async (params) =>
-  await axios.get("/api/v1/reviews/");
+  await axios.get('/api/v1/reviews/');
 
 export const getReviewRequest = async (id) =>
-  await axios.get("/api/v1/reviews/" + id);
+  await axios.get('/api/v1/reviews/' + id);
 
 export const postReviewRequest = async (payload) =>
-  await axios.post("/api/v1/reviews/", payload);
+  await axios.post('/api/v1/reviews/', payload);
 
 export const postCommentRequest = async (id, payload) =>
   await axios.post(`/api/v1/reviews/${id}/comments`, payload);
