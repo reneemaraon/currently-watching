@@ -10,10 +10,12 @@ import commaSeparatedString from '../Common/commaSeparate';
 import FullPageLoading from '../Common/FullPageLoading';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
 import ShowReviewsList from './ShowReviewList';
+import { useToast } from '../../context/ToastContext';
 
 const ShowDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const { setShowId, show, loading, showReviews, refreshList } =
     useShowDetailContext();
 
@@ -25,6 +27,18 @@ const ShowDetail = () => {
     setShowId(id);
     refreshList();
   }, [id]);
+
+  const copyPathToClipboard = () => {
+    const fullPath = window.location.href;
+    navigator.clipboard
+      .writeText(fullPath)
+      .then(() => {
+        showToast('Copied link to clipboard', 'info');
+      })
+      .catch((error) => {
+        console.error('Failed to copy path to clipboard:', error);
+      });
+  };
 
   if (loading) {
     return <FullPageLoading />;
@@ -67,7 +81,7 @@ const ShowDetail = () => {
                     {/* <CircularButton>
                       <HeartIcon />
                     </CircularButton> */}
-                    <CircularButton>
+                    <CircularButton onClick={copyPathToClipboard}>
                       <ShareIcon />
                     </CircularButton>
                   </div>

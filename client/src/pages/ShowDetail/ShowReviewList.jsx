@@ -12,7 +12,7 @@ import DeleteReview from '../Reviews/DeleteReview';
 
 const ShowReviewsList = () => {
   const {
-    showReviews: { showReviews },
+    showReviews: { showReviews, totalCount },
     show,
     showReviewsLoading,
     loadNextPage,
@@ -38,7 +38,7 @@ const ShowReviewsList = () => {
         ))}
       {showReviewsLoading && <ListLoading />}
 
-      {showReviews && show.reviewCount > showReviews.length && (
+      {showReviews && totalCount > showReviews.length && (
         <LoadMorePanel onClick={loadNextPage} />
       )}
     </div>
