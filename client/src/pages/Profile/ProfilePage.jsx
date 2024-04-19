@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { Header, HeaderName } from '../Home/Sections/SectionHeader';
 import DeleteReview from '../Reviews/DeleteReview';
 import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
+import ListLoading from '../Common/LoadingList';
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export default function ProfilePage() {
     user,
     setUserId,
     loadNextPage,
+    loadingReviews,
     userReviews: { reviews, totalCount },
   } = useUserDetailContext();
   const { user: loggedInUser } = useAuthContext();
@@ -111,6 +113,7 @@ export default function ProfilePage() {
                         review={review}
                       />
                     ))}
+                    {loadingReviews && <ListLoading />}
                     {reviews && totalCount > reviews.length && (
                       <LoadMorePanel onClick={loadNextPage} />
                     )}

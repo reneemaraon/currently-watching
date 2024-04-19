@@ -36,12 +36,17 @@ const ReviewsListItem = ({ review }) => {
     visualsRating,
     likeCount,
     commentCount,
-    user: { profilePhotoUrl, screenName, name },
+    user: { _id: userId, profilePhotoUrl, screenName, name },
     show: { title: showTitle, tmdbPoster },
   } = review;
 
   const onClickNavigate = () => {
-    navigate(`reviews/${id}`);
+    navigate(`/reviews/${id}`);
+  };
+
+  const onClickUser = (event) => {
+    event.stopPropagation();
+    navigate(`/users/${userId}`);
   };
 
   return (
@@ -69,17 +74,20 @@ const ReviewsListItem = ({ review }) => {
         </div>
       </div>
       <div className="ReviewDetails w-full h-full self-stretch p-4 flex-col justify-start items-start gap-2 inline-flex">
-        <div className="Author self-stretch pl-[5px] py-px justify-between items-start inline-flex">
-          <div className="Profile h-[31px] justify-start items-center gap-[11px] flex">
+        <div
+          onClick={onClickUser}
+          className="rounded-lg hover:cursor-pointer Author self-stretch pl-[5px] py-px justify-between items-start inline-flex"
+        >
+          <div className="Profile h-[31px]  justify-start items-center gap-[11px] flex">
             <ImageWithOpacityTransition
-              styleAttach="ProfilePhoto w-[31px] h-[31px] relative rounded-[40px]"
+              styleAttach="ProfilePhoto w-9 h-9 relative hover:opacity-70 rounded-full"
               src={profilePhotoUrl}
             />
-            <div className="AccDetails flex-col justify-center items-start inline-flex">
-              <div className="TwtDisplayName text-gray-800 text-[13px] font-medium">
+            <div className="AccDetails transition-colors duration-500 group flex-col justify-center items-start inline-flex">
+              <div className="TwtDisplayName line-clamp-1 text-text-dark group-hover:text-brand-dark-purple text-[13px] font-medium">
                 {name}
               </div>
-              <div className="Username text-slate-500 text-[11px] font-normal">
+              <div className="Username group-hover:text-brand-dark-purple text-light-text text-[11px] font-normal">
                 @{screenName}
               </div>
             </div>

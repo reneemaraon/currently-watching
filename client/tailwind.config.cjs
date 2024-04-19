@@ -17,6 +17,8 @@ module.exports = {
         'brand-tq-hover': '#0188A5',
         'brand-gray': '#7E8AA0',
         'brand-gray-light': '#F3F3F4',
+        'brand-lavender': '#CCB4F4',
+        'brand-dark-purple': '#635A9C',
         'main-yellow': '#FFE456',
         'dark-yellow': '#E9B500',
         'light-stroke': '#E2ECEC',

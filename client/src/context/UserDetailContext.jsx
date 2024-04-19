@@ -28,19 +28,20 @@ export const UserDetailProvider = ({ children }) => {
     variables: { id: userId },
   });
 
-  const { data: reviewsData, refetch: refetchReviews } = useQuery(
-    GET_USER_REVIEWS,
-    {
-      variables: {
-        id: userId,
-        filter: {
-          limit: ITEMS_PER_PAGE,
-          cursorField: SORT_FIELD,
-          cursorValue: cursor,
-        },
+  const {
+    loading: loadingReviews,
+    data: reviewsData,
+    refetch: refetchReviews,
+  } = useQuery(GET_USER_REVIEWS, {
+    variables: {
+      id: userId,
+      filter: {
+        limit: ITEMS_PER_PAGE,
+        cursorField: SORT_FIELD,
+        cursorValue: cursor,
       },
-    }
-  );
+    },
+  });
 
   const updateCursor = () => {
     setCursor(findCursor(userReviews.reviews, SORT_FIELD));
@@ -63,7 +64,7 @@ export const UserDetailProvider = ({ children }) => {
   useEffect(() => {
     if (userId) {
       refetch();
-      refetchReviews();
+      refreshList();
     }
   }, [userId]);
 
@@ -114,6 +115,8 @@ export const UserDetailProvider = ({ children }) => {
         userReviews,
         setUserId,
         loadNextPage,
+        refetch,
+        loadingReviews,
         removeReviewFromUserReviewList,
       }}
     >

@@ -49,6 +49,11 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
     navigate(`/shows/${review.show._id}`);
   };
 
+  const onClickUser = (event) => {
+    event.stopPropagation();
+    navigate(`/users/${review.user._id}`);
+  };
+
   const toggleDropdown = (event) => {
     event.stopPropagation();
     setDropdownVisible(!isDropdownVisible);
@@ -119,17 +124,28 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
           </div>
         </div>
       </div>
-      <div className="ReviewDetails relative min-[601px]:h-full w-full max-[600px]:max-h-44 max-[600px]:py-3 py-4 px-3 sm:px-4 flex-col justify-start items-start sm:gap-1 inline-flex grow">
-        <div className="w-full Author justify-between items-start inline-flex">
-          <div className="Profile justify-start grow max-[600px]:items-center items-start gap-2.5 flex">
+      <div className="relative min-[601px]:h-full w-full max-[600px]:max-h-44 max-[600px]:py-3 py-4 px-3 sm:px-4 flex-col justify-start items-start sm:gap-1 inline-flex grow">
+        <div className="w-full justify-between items-start inline-flex">
+          <div className="hover:cursor-pointer justify-start grow max-[600px]:items-center items-start gap-2.5 flex">
             <img
-              className="ProfilePhoto w-5 h-5 sm:w-6 sm:h-6 relative rounded-full"
+              className="ProfilePhoto w-5 h-5 sm:w-6 sm:h-6 hover:opacity-80 relative rounded-full"
+              onClick={onClickUser}
               src={review.user.profilePhotoUrl}
             />
             <span className="max-[600px]:gap-1.5 max-[600px]:flex-col flex text-sm sm:text-base py-1 sm:leading-3 leading-[10px] font-medium">
-              <span className=" mr-1 sm:mr-2">{review.user.name}</span>
+              <span
+                onClick={onClickUser}
+                className="hover:text-brand-dark-purple mr-1 sm:mr-2"
+              >
+                {review.user.name}
+              </span>
               <span className="font-light max-[600px]:gap-1 leading-[10px] sm:leading-3 text-light-text text-[10px] sm:text-xs">
-                <span>@{review.user.screenName}</span>
+                <span
+                  className="hover:text-brand-dark-purple"
+                  onClick={onClickUser}
+                >
+                  @{review.user.screenName}
+                </span>
                 <span className="mx-0.5 min-[600px]:mx-1">&#183;</span>
                 {formatDateTime(review.createdAt)}
               </span>
