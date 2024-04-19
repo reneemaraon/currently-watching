@@ -6,12 +6,14 @@ import { useAuthContext } from '../../context/AuthContext';
 import Dropdown, { Option } from '../Common/Dropdown';
 import DeleteReview from '../Reviews/DeleteReview';
 import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
+import { useToast } from '../../context/ToastContext';
 
 const ReviewActions = () => {
   const [liked, setLiked] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useAuthContext();
+  const { showToast } = useToast();
   const { review, deleteLike, postLike, heartError } = useReviewDetailContext();
   const { setShowDeleteModal, setReviewToDelete } = useDeleteReviewContext();
 
@@ -62,6 +64,19 @@ const ReviewActions = () => {
     }
   };
 
+  const copyPathToClipboard = () => {
+    const baseUrl = window.location.origin;
+    navigator.clipboard
+      .writeText(baseUrl + `/reviews/${review._id}`)
+      .then(() => {
+        showToast('Path to this review is copied to clipboard:', 'info');
+      })
+      .catch((error) => {
+        console.error('Failed to copy path to clipboard:', error);
+      });
+    setDropdownVisible(!isDropdownVisible);
+  };
+
   return (
     <div className="ReviewActions float-right justify-start items-start gap-2 sm:gap-2.5 flex">
       <DeleteReview />
@@ -88,7 +103,7 @@ const ReviewActions = () => {
               <Option
                 key="copy"
                 text="Copy Link"
-                onSelect={() => onAttemptDelete(review._id)}
+                onSelect={() => copyPathToClipboard(review._id)}
               />
             </Dropdown>
           </div>

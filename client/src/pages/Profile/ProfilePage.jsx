@@ -104,7 +104,7 @@ export default function ProfilePage() {
                       </span>
                     </HeaderName>
                   </Header>
-                  <div className="CommentList w-full flex-col justify-center items-start gap-[15px] flex">
+                  <div className="CommentList w-full flex-col justify-start items-center gap-[15px] flex">
                     {reviews.map((review) => (
                       <ReviewsListItem
                         onDelete={() => onAttemptDelete(review._id)}

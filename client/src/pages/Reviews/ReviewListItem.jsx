@@ -8,6 +8,7 @@ import formatDateTime from '../../utils/formatDate';
 import { useAuthContext } from '../../context/AuthContext';
 import Dropdown, { Option } from '../Common/Dropdown';
 import { useEffect, useRef, useState } from 'react';
+import { useToast } from '../../context/ToastContext';
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
@@ -35,6 +36,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useAuthContext();
+  const { showToast } = useToast();
 
   const navigate = useNavigate();
 
@@ -56,6 +58,19 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setDropdownVisible(false);
     }
+  };
+
+  const copyPathToClipboard = () => {
+    const baseUrl = window.location.origin;
+    navigator.clipboard
+      .writeText(baseUrl + `/reviews/${review._id}`)
+      .then(() => {
+        showToast('Path to review is copied to clipboard:', 'info');
+      })
+      .catch((error) => {
+        console.error('Failed to copy path to clipboard:', error);
+      });
+    setDropdownVisible(!isDropdownVisible);
   };
 
   useEffect(() => {
@@ -142,7 +157,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                     <Option
                       key="copy"
                       text="Copy Link"
-                      onSelect={() => onDelete(review._id)}
+                      onSelect={copyPathToClipboard}
                     />
                   </Dropdown>
                 </div>
