@@ -95,11 +95,11 @@
     }
     
     .author-name {
-        @apply text-sm sm:text-base font-medium;
+        @apply text-sm sm:text-base font-medium hover:text-brand-dark-purple;
     }
 
     .author-username {
-        @apply text-xs sm:text-sm text-light-text;
+        @apply text-xs sm:text-sm text-light-text hover:text-brand-dark-purple;
     }
 
     .title-text {
