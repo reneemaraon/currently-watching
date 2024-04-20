@@ -36,7 +36,7 @@ const ShowDetail = () => {
         showToast('Copied link to clipboard', 'info');
       })
       .catch((error) => {
-        console.error('Failed to copy path to clipboard:', error);
+        console.error('Failed to copy path to clipboard', error);
       });
   };
 

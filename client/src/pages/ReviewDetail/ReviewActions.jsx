@@ -69,7 +69,7 @@ const ReviewActions = () => {
     navigator.clipboard
       .writeText(baseUrl + `/reviews/${review._id}`)
       .then(() => {
-        showToast('Path to this review is copied to clipboard:', 'info');
+        showToast('Path to this review is copied to clipboard', 'info');
       })
       .catch((error) => {
         console.error('Failed to copy path to clipboard:', error);
