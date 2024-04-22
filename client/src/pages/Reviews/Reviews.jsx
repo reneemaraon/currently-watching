@@ -13,6 +13,8 @@ import LoadMorePanel from '../Common/LoadMorePagination';
 import ListLoading from '../Common/LoadingList';
 import DeleteReview from './DeleteReview';
 import { Header, HeaderName } from '../Home/Sections/SectionHeader';
+import Icon from '../Common/Icon';
+import { CloseIcon } from '../Common/IconList';
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
@@ -30,6 +32,10 @@ const ReviewsPage = () => {
 
   const handleClick = () => {
     setShowModal(true);
+  };
+
+  const removeShow = () => {
+    setShowId(null);
   };
 
   const startReview = () => {
@@ -56,7 +62,26 @@ const ReviewsPage = () => {
               : 'Choose a drama you wish to write a review for.'}
           </p>
         </div>
-        {show && lastSelected && <CreateReviewShowDetail show={lastSelected} />}
+        {show && (
+          <div className="relative">
+            <button
+              onClick={removeShow}
+              className="transition-colors duration-200 group hover:bg-brand-lavender rounded-full bg-brand-gray-light absolute top-0 right-0 p-2"
+            >
+              <Icon
+                fill="group-hover:stroke-2 text-text-dark group-hover:text-theme-base"
+                sizeRules="h-2.5 w-2.5 sm:h-3 sm:w-3"
+              >
+                <CloseIcon />
+              </Icon>
+            </button>
+            <div className="p-2">
+              {show && lastSelected && (
+                <CreateReviewShowDetail show={lastSelected} />
+              )}
+            </div>
+          </div>
+        )}
         {!show && <SearchBar onItemClick={setShowId} />}
         <CustomButton disabled={show ? false : true} onClick={startReview}>
           Start review
