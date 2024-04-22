@@ -15,6 +15,7 @@ import { Header, HeaderName } from '../Home/Sections/SectionHeader';
 import DeleteReview from '../Reviews/DeleteReview';
 import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
 import ListLoading from '../Common/LoadingList';
+import { useToast } from '../../context/ToastContext';
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ export default function ProfilePage() {
     loadingReviews,
     userReviews: { reviews, totalCount },
   } = useUserDetailContext();
+  const { showToast } = useToast();
   const { user: loggedInUser } = useAuthContext();
   const { setShowDeleteModal, setReviewToDelete } = useDeleteReviewContext();
 
@@ -42,6 +44,18 @@ export default function ProfilePage() {
   const onAttemptDelete = (id) => {
     setReviewToDelete(id);
     setShowDeleteModal(true);
+  };
+
+  const copyPathToClipboard = () => {
+    const fullPath = window.location.href;
+    navigator.clipboard
+      .writeText(fullPath)
+      .then(() => {
+        showToast('Copied link to clipboard', 'success');
+      })
+      .catch((error) => {
+        console.error('Failed to copy path to clipboard', error);
+      });
   };
 
   if (user) {
@@ -90,7 +104,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <div className="ReviewActions justify-start items-center gap-[15px] flex">
-                    <CircularButton>
+                    <CircularButton onClick={copyPathToClipboard}>
                       <ShareIcon />
                     </CircularButton>
                   </div>

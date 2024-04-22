@@ -70,7 +70,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
     navigator.clipboard
       .writeText(baseUrl + `/reviews/${review._id}`)
       .then(() => {
-        showToast('Path to review is copied to clipboard', 'info');
+        showToast('Path to review is copied to clipboard', 'success');
       })
       .catch((error) => {
         console.error('Failed to copy path to clipboard', error);

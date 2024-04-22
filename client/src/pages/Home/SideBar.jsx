@@ -12,11 +12,11 @@ export const NavItem = ({ itemName, path }) => (
         gap-2.5 inline-flex
         group
         hover:bg-brand-lavender
-        hover:bg-opacity-10
+        hover:bg-opacity-5
     "
     to={path || '/'}
   >
-    <p className="group-hover:text-brand-tq-hover text-sm">{itemName}</p>
+    <p className="group-hover:text-brand-dark-purple text-sm">{itemName}</p>
   </Link>
 );
 
