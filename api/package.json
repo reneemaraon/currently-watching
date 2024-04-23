@@ -3,6 +3,7 @@
     "@apollo/server": "^4.10.0",
     "@apollo/subgraph": "^2.7.1",
     "@superfaceai/passport-twitter-oauth2": "^1.2.3",
+    "axios": "^1.6.8",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
@@ -15,6 +16,7 @@
     "graphql-tag": "^2.12.6",
     "http-status-codes": "^2.2.0",
     "mongoose": "^6.9.1",
+    "node-html-parser": "^6.1.13",
     "passport": "^0.6.0",
     "passport-twitter": "^1.0.4",
     "passport-twitter-oauth2": "^2.1.1"

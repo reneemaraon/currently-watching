@@ -68,7 +68,7 @@ const getTmdbShow = async (req, res) => {
 
 const createShow = async (req, res) => {
   const show = await Show.create({ ...req.body });
-  res.status(StatusCodes.CREATED).json({ ...req.body });
+  res.status(StatusCodes.CREATED).json({ show });
 };
 
 const addCast = async (req, res) => {

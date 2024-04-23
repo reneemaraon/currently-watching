@@ -3,6 +3,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const recalculateRatings = require('./cronjobs/showUpdateRatings');
 const updateReviews = require('./cronjobs/updateReviews');
+const removeDuplicates = require('./cronjobs/removeDuplicates');
+const populateDb = require('./cronjobs/populateDb');
 const connectDB = require('./db/connect');
 
 // Logic to perform the job
@@ -11,7 +13,9 @@ async function runJobs() {
     // Call your recalculateRatings function or any other logic here
     await connectDB(process.env.MONGO_URI);
 
-    await recalculateRatings();
+    // await recalculateRatings();
+    // await removeDuplicates();
+    await populateDb();
     // console.log('Recalculated show items  successfully.');
 
     await updateReviews();
