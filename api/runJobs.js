@@ -7,6 +7,7 @@ const removeDuplicates = require('./cronjobs/removeDuplicates');
 const populateDb = require('./cronjobs/populateDb');
 const connectDB = require('./db/connect');
 const updateShows = require('./cronjobs/updateShows');
+const deleteNonKor = require('./cronjobs/deleteNonKr');
 
 // Logic to perform the job
 async function runJobs() {
@@ -19,7 +20,8 @@ async function runJobs() {
     // await populateDb();
     // console.log('Recalculated show items  successfully.');
 
-    await updateShows();
+    // await updateShows();
+    await deleteNonKor();
     // await updateReviews();
     // console.log('Updated review like and comments counts successfully.');
 
