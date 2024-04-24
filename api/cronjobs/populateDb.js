@@ -3,6 +3,7 @@ const { parse } = require('node-html-parser');
 const Actor = require('../models/actor');
 const Show = require('../models/show');
 const { cookies, headers } = require('./headers');
+const { addCast } = require('./addCast');
 
 const GENDERS = ['female', 'male', 'other'];
 
@@ -62,47 +63,7 @@ const popupateDb = async () => {
 
             const createdShow = await Show.create({ showObject });
 
-            for (const castItem of tmdbJson.cast) {
-              var actor = await Actor.findOne({ tmdbId: castItem.id });
-
-              if (!actor) {
-                const actorObject = (
-                  await axios.get(
-                    `https://api.themoviedb.org/3/person/${castItem.id}?api_key=4f7e5720a1935eda7e3414ef894f7b65&language=en-US`
-                  )
-                ).data;
-
-                actor = await Actor.create({
-                  name: actorObject.name,
-                  imdbId: actorObject.imdb_id,
-                  tmdbId: actorObject.id,
-                  profileImage: actorObject.profile_path,
-                  gender: GENDERS[actorObject.gender - 1],
-                  birthday: actorObject.birthday,
-                  homepage: actorObject.homepage,
-                  biography: actorObject.biography,
-                  alsoKnownAs: actorObject.also_known_as,
-                });
-              }
-
-              createdShow.cast.addToSet({
-                actor: actor._id,
-                name: actor.name,
-                character: castItem.character,
-                order: castItem.order,
-              });
-
-              createdShow.save();
-
-              actor.starredIn.addToSet({
-                show: createdShow.id,
-                title: createdShow.title,
-                character: castItem.character,
-                order: castItem.order,
-              });
-
-              actor.save();
-            }
+            await addCast(createdShow._id);
           }
         } else {
           foundCount = foundCount + 1;
