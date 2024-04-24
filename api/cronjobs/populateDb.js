@@ -5,8 +5,6 @@ const Show = require('../models/show');
 const { cookies, headers } = require('./headers');
 const { addCast } = require('./addCast');
 
-const GENDERS = ['female', 'male', 'other'];
-
 const popupateDb = async () => {
   const foundCount = 0;
   const releaseDate = new Date();

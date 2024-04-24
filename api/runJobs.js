@@ -6,6 +6,7 @@ const updateReviews = require('./cronjobs/updateReviews');
 const removeDuplicates = require('./cronjobs/removeDuplicates');
 const populateDb = require('./cronjobs/populateDb');
 const connectDB = require('./db/connect');
+const updateShows = require('./cronjobs/updateShows');
 
 // Logic to perform the job
 async function runJobs() {
@@ -15,13 +16,14 @@ async function runJobs() {
 
     // await recalculateRatings();
     // await removeDuplicates();
-    await populateDb();
+    // await populateDb();
     // console.log('Recalculated show items  successfully.');
 
-    await updateReviews();
-    console.log('Updated review like and comments counts successfully.');
+    await updateShows();
+    // await updateReviews();
+    // console.log('Updated review like and comments counts successfully.');
 
-    console.log('Jobs completed successfully.');
+    // console.log('Jobs completed successfully.');
   } catch (error) {
     console.error('Error running jobs:', error);
   } finally {

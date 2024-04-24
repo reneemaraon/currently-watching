@@ -4,7 +4,7 @@ const { addCast } = require('./addCast');
 
 const fieldMap = {
   title: 'name',
-  overview: 'overview',
+  synopsis: 'overview',
   firstAirDate: 'first_air_date',
   lastAirDate: 'last_air_date',
   genres: 'genres',
@@ -30,10 +30,34 @@ const updateShows = async () => {
 
       for (const [dbField, tmdbKey] of Object.entries(fieldMap)) {
         if (tmdbShow.hasOwnProperty(tmdbKey)) {
-          show[dbField] = tmdbShow[tmdbKey];
+          if (dbField == 'genres') {
+            for (const genre of tmdbShow.genres) {
+              const existingGenreEntry = show.genres.find(
+                (entry) => entry.id == genre.id
+              );
+              if (!existingGenreEntry) {
+                show.genres.addToSet(genre);
+              }
+            }
+          } else if (dbField == 'lastAirDate' || dbField == 'firstAirDate') {
+            if (tmdbShow[tmdbKey] && show[dbField]) {
+              const tmdbDate = new Date(tmdbShow[tmdbKey]);
+              if (show[dbField].getTime() != tmdbDate.getTime()) {
+                show[dbField] = tmdbShow[tmdbKey];
+              }
+            } else {
+              show[dbField] = tmdbShow[tmdbKey];
+            }
+          } else if (dbField == 'originCountry') {
+            show[dbField] = tmdbShow[tmdbKey];
+          } else {
+            if (show[dbField] != tmdbShow[tmdbKey]) {
+              show[dbField] = tmdbShow[tmdbKey];
+            }
+          }
         }
       }
-
+      show.save();
       // update cast
       await addCast(show._id);
     }
