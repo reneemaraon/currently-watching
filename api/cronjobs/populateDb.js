@@ -4,6 +4,8 @@ const Actor = require('../models/actor');
 const Show = require('../models/show');
 const { cookies, headers } = require('./headers');
 
+const GENDERS = ['female', 'male', 'other'];
+
 const popupateDb = async () => {
   const foundCount = 0;
   const releaseDate = new Date();
@@ -25,11 +27,7 @@ const popupateDb = async () => {
       for (const item of items) {
         const imdbId = item.getAttribute('href').split('/')[2];
         const show = await Show.findOne({ imdbId });
-        if (show) {
-          // CHANGE THIS TO !SHOW
-          console.log('SHOW:');
-          //   console.log(show);
-
+        if (!show) {
           const tmdbRequest = await axios.get(
             `https://api.themoviedb.org/3/find/${imdbId}?api_key=4f7e5720a1935eda7e3414ef894f7b65&language=en-US&external_source=imdb_id`
           );
@@ -61,22 +59,60 @@ const popupateDb = async () => {
               originalName: tmdbJson.original_name,
               mediaType: 'TV_SERIES',
             };
-            console.log('showObject');
-            console.log(showObject);
+
+            const createdShow = await Show.create({ showObject });
+
+            for (const castItem of tmdbJson.cast) {
+              var actor = await Actor.findOne({ tmdbId: castItem.id });
+
+              if (!actor) {
+                const actorObject = (
+                  await axios.get(
+                    `https://api.themoviedb.org/3/person/${castItem.id}?api_key=4f7e5720a1935eda7e3414ef894f7b65&language=en-US`
+                  )
+                ).data;
+
+                actor = await Actor.create({
+                  name: actorObject.name,
+                  imdbId: actorObject.imdb_id,
+                  tmdbId: actorObject.id,
+                  profileImage: actorObject.profile_path,
+                  gender: GENDERS[actorObject.gender - 1],
+                  birthday: actorObject.birthday,
+                  homepage: actorObject.homepage,
+                  biography: actorObject.biography,
+                  alsoKnownAs: actorObject.also_known_as,
+                });
+              }
+
+              createdShow.cast.addToSet({
+                actor: actor._id,
+                name: actor.name,
+                character: castItem.character,
+                order: castItem.order,
+              });
+
+              createdShow.save();
+
+              actor.starredIn.addToSet({
+                show: createdShow.id,
+                title: createdShow.title,
+                character: castItem.character,
+                order: castItem.order,
+              });
+
+              actor.save();
+            }
           }
+        } else {
+          foundCount = foundCount + 1;
+          console.log(`Show ${imdbId} is found`);
         }
-        // else {
-        //   foundCount = foundCount + 1;
-        //   console.log(`Show ${imdbId} is not found`);
-        // }
       }
-      //   console.log(response);
     } catch (error) {
       console.log(error);
     }
   }
-  // foundCount = foundCount + 1;
-  // break;
 };
 
 module.exports = popupateDb;
