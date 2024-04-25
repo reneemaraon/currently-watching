@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         'main-bg': '#F1F1F8',
         'theme-base': '#FFFFFF',
+        'theme-negative-base': '#000000',
         'text-dark': '#242C39',
         'light-text': '#676573',
         'lighter-text': '#B6BCC6',

@@ -50,7 +50,7 @@ function App() {
         <div className="fixed bg-main-bg w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
           <ImageWithOpacityTransition
             src="/src/assets/overlay.jpg"
-            styleAttach="blur-2xl opacity-15 w-full overflow-hidden"
+            styleAttach="blur-2xl opacity-25 w-full overflow-hidden"
           />
         </div>
         <SideBar />
