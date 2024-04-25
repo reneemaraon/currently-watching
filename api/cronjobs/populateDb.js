@@ -6,14 +6,16 @@ const { cookies, headers } = require('./headers');
 const { addCast } = require('./addCast');
 
 const popupateDb = async () => {
-  const foundCount = 0;
-  const releaseDate = new Date();
+  var foundCount = 0;
+  var releaseDate = new Date();
 
-  while (foundCount < 10) {
+  while (foundCount < 200) {
     const year = releaseDate.getFullYear();
     const month = releaseDate.getMonth() + 1;
     const day = releaseDate.getDate();
-    const imdbUrl = `https://www.imdb.com/search/title/?title_type=tv_series&release_date=,${year}-${month}-${day}&genres=drama&countries=KR&sort=release_date,desc`;
+    const imdbUrl = `https://www.imdb.com/search/title/?title_type=tv_series&release_date=,${year}-${month}-${day}&countries=KR&sort=release_date,desc`;
+    console.log(imdbUrl);
+    // https://www.imdb.com/search/title/?title_type=tv_series&release_date=2024-04-25,&countries=KR&sort=release_date,desc
 
     try {
       const response = await axios.get(imdbUrl, { headers, cookies });
@@ -32,45 +34,54 @@ const popupateDb = async () => {
           );
           const json_res = tmdbRequest.data;
           if (json_res.tv_results.length == 0) {
-            console.log('no tmdb');
+            console.log(`no tmdb for imdb: ${imdbId}`);
           } else {
             const tmdbId = json_res.tv_results[0].id;
-            console.log(tmdbId);
             const tmdbResponse = await axios.get(
               `https://api.themoviedb.org/3/tv/${tmdbId}?api_key=4f7e5720a1935eda7e3414ef894f7b65&language=en-US`
             );
-            tmdbJson = tmdbResponse.data;
+            const tmdbJson = tmdbResponse.data;
+            if (
+              tmdbJson.languages.includes('ko') &&
+              tmdbJson.origin_country.includes('KR')
+            ) {
+              const showObject = {
+                title: tmdbJson.name,
+                synopsis: tmdbJson.overview,
+                imdbId: imdbId,
+                tmdbId: tmdbId,
+                firstAirDate: tmdbJson.first_air_date,
+                lastAirDate: tmdbJson.last_air_date,
+                genres: tmdbJson.genres,
+                numberOfSeasons: tmdbJson.number_of_seasons,
+                numberOfEpisodes: tmdbJson.number_of_episodes,
+                popularity: tmdbJson.popularity,
+                originCountry: tmdbJson.origin_country,
+                tmdbPoster: tmdbJson.poster_path,
+                tmdbBackdrop: tmdbJson.backdrop_path,
+                originalName: tmdbJson.original_name,
+                mediaType: 'TV_SERIES',
+              };
+              const createdShow = await Show.create(showObject);
 
-            const showObject = {
-              title: tmdbJson.name,
-              synopsis: tmdbJson.overview,
-              imdbId: imdbId,
-              tmdbId: tmdbId,
-              firstAirDate: tmdbJson.first_air_date,
-              lastAirDate: tmdbJson.last_air_date,
-              genres: tmdbJson.genres,
-              numberOfSeasons: tmdbJson.number_of_seasons,
-              numberOfEpisodes: tmdbJson.number_of_episodes,
-              popularity: tmdbJson.popularity,
-              originCountry: tmdbJson.origin_country,
-              tmdbPoster: tmdbJson.poster_path,
-              tmdbBackdrop: tmdbJson.backdrop_path,
-              originalName: tmdbJson.original_name,
-              mediaType: 'TV_SERIES',
-            };
-
-            const createdShow = await Show.create({ showObject });
-
-            await addCast(createdShow._id);
+              await addCast(createdShow._id);
+              releaseDate = tmdbJson.first_air_date
+                ? new Date(tmdbJson.first_air_date)
+                : releaseDate;
+            }
           }
         } else {
           foundCount = foundCount + 1;
-          console.log(`Show ${imdbId} is found`);
+          console.log(show.title);
+          releaseDate = new Date(show.firstAirDate);
+          // console.log(`Show ${imdbId} is found`);
         }
       }
     } catch (error) {
       console.log(error);
+      break;
     }
+    break;
   }
 };
 
