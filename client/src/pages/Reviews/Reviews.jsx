@@ -15,9 +15,11 @@ import DeleteReview from './DeleteReview';
 import { Header, HeaderName } from '../Home/Sections/SectionHeader';
 import Icon from '../Common/Icon';
 import { CloseIcon } from '../Common/IconList';
+import { useAuthContext } from '../../context/AuthContext';
 
 const ReviewsPage = () => {
   const navigate = useNavigate();
+  const { actionRequireLogIn } = useAuthContext();
   const {
     error,
     reviews: { totalCount, reviews },
@@ -102,7 +104,7 @@ const ReviewsPage = () => {
         <HeaderName>Reviews</HeaderName>
         <CustomButton
           size="defaultResize"
-          onClick={handleClick}
+          onClick={actionRequireLogIn(handleClick)}
           styleSet="dark"
         >
           + Add Review

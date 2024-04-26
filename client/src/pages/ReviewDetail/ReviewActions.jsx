@@ -12,7 +12,7 @@ const ReviewActions = () => {
   const [liked, setLiked] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
-  const { user } = useAuthContext();
+  const { user, actionRequireLogIn } = useAuthContext();
   const { showToast } = useToast();
   const { review, deleteLike, postLike, heartError } = useReviewDetailContext();
   const { setShowDeleteModal, setReviewToDelete } = useDeleteReviewContext();
@@ -80,7 +80,7 @@ const ReviewActions = () => {
   return (
     <div className="ReviewActions float-right justify-start items-start gap-2 sm:gap-2.5 flex">
       <DeleteReview />
-      <CircularButton active={liked} onClick={onLikeClick}>
+      <CircularButton active={liked} onClick={actionRequireLogIn(onLikeClick)}>
         <HeartIcon />
       </CircularButton>
       <CircularButton>

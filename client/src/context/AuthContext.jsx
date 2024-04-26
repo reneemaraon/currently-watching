@@ -6,6 +6,7 @@ const AuthContext = React.createContext();
 const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
+  const [authToastMessage, setAuthToastMessage] = useState(false);
   const [user, setUser] = useState(null);
   const saveUser = (user) => {
     setUser(user);
@@ -27,6 +28,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
+    setAuthToastMessage({ message: 'You are logging out', type: 'info' });
     try {
       await axios.post('/api/v1/auth/logout');
       removeUser();
@@ -38,6 +40,20 @@ const AuthProvider = ({ children }) => {
   const loginUser = () => {
     localStorage.setItem('lastPage', location.pathname);
     window.open('http://127.0.0.1:3000/api/v1/auth/twitter/', '_self');
+  };
+
+  const actionRequireLogIn = (onClickButton) => {
+    if (user) {
+      return onClickButton;
+    } else {
+      return () => {
+        setAuthToastMessage({
+          message: 'You must login to do this action',
+          type: 'error',
+        });
+        loginUser();
+      };
+    }
   };
 
   useEffect(() => {
@@ -52,6 +68,8 @@ const AuthProvider = ({ children }) => {
         user,
         logoutUser,
         loginUser,
+        actionRequireLogIn,
+        authToastMessage,
       }}
     >
       {children}

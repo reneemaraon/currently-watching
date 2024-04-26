@@ -6,6 +6,7 @@ import ImageWithOpacityTransition from '../../Common/ImageTransition';
 import commaSeparatedString from '../../Common/commaSeparate';
 import StarIcon from '../../Common/Star';
 import { useHomepageContext } from '../../../context/HomepageContext';
+import ListLoading from '../../Common/LoadingList';
 
 const StarRatingRow = ({ name, rating }) => (
   <div className="justify-start items-start gap-2.5 inline-flex">
@@ -21,6 +22,7 @@ const PopularSection = () => {
   const [active, setActive] = useState(2);
   const {
     shows: { shows },
+    showsLoading,
   } = useHomepageContext();
 
   const renderShowDetails = () => {
@@ -101,6 +103,10 @@ const PopularSection = () => {
       );
     }
   };
+
+  if (showsLoading) {
+    return <ListLoading />;
+  }
   return (
     <div className="w-full inline-flex flex-col">
       <SectionHeader

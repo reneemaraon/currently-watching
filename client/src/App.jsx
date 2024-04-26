@@ -18,6 +18,7 @@ import PopupSidebar from './pages/Home/PopupSidebar';
 import FullPageLoading from './pages/Common/FullPageLoading';
 import ImageWithOpacityTransition from './pages/Common/ImageTransition';
 import LoginCallback from './pages/Callback/LoginCallback';
+import AuthOverlay from './pages/AuthOverlay/AuthOverlay';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -47,6 +48,7 @@ function App() {
   }
   return (
     <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-inter text-gray-800">
+      <AuthOverlay />
       <div className="relative justify-start items-start inline-flex w-screen">
         <div className="fixed bg-main-bg w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
           <ImageWithOpacityTransition

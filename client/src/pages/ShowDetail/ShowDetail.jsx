@@ -11,6 +11,7 @@ import FullPageLoading from '../Common/FullPageLoading';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
 import ShowReviewsList from './ShowReviewList';
 import { useToast } from '../../context/ToastContext';
+import { useAuthContext } from '../../context/AuthContext';
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const ShowDetail = () => {
   const { showToast } = useToast();
   const { setShowId, show, loading, showReviews, refreshList } =
     useShowDetailContext();
+  const { actionRequireLogIn } = useAuthContext();
 
   const goToAddReview = () => {
     navigate(`/shows/${id}/create-review`);
@@ -118,7 +120,7 @@ const ShowDetail = () => {
                   </div>
                   <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex">
                     <CustomButton
-                      onClick={goToAddReview}
+                      onClick={actionRequireLogIn(goToAddReview)}
                       styleSet="dark"
                       size="defaultResize"
                     >
