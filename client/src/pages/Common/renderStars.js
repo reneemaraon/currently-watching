@@ -1,9 +1,7 @@
 const renderStars = (rating, starObject) => {
-  const stars = [];
-  for (let i = 0; i < rating; i++) {
-    stars.push(starObject);
-  }
-  return stars;
+  return Array.from({ length: rating }, (_, index) => ({
+    ...starObject,
+    key: index.toString(), // Unique key for each star
+  }));
 };
-
 export default renderStars;

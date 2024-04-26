@@ -9,7 +9,7 @@ const TrendingShows = () => {
   return (
     <ScrollableList item_count={shows.length} sectionName="New Shows">
       {shows.map((show) => (
-        <ShowCardSmall show={show} />
+        <ShowCardSmall key={show._id} show={show} />
       ))}
     </ScrollableList>
   );

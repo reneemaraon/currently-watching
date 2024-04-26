@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
   const saveUser = (user) => {
@@ -33,6 +35,11 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginUser = () => {
+    localStorage.setItem('lastPage', location.pathname);
+    window.open('http://127.0.0.1:3000/api/v1/auth/twitter/', '_self');
+  };
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -44,6 +51,7 @@ const AuthProvider = ({ children }) => {
         saveUser,
         user,
         logoutUser,
+        loginUser,
       }}
     >
       {children}

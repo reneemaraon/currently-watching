@@ -20,7 +20,7 @@ const LogInButton = ({ login }) => (
 
 const TopNavBar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const { user, loginUser } = useAuthContext();
 
   const onTwitterLogin = async (e) => {
     window.open('http://127.0.0.1:3000/api/v1/auth/twitter/', '_self');
@@ -59,7 +59,7 @@ const TopNavBar = ({ toggleSidebar }) => {
       {user ? (
         <ProfileView authUser={user} />
       ) : (
-        <LogInButton login={onTwitterLogin} />
+        <LogInButton login={loginUser} />
       )}
     </div>
   );

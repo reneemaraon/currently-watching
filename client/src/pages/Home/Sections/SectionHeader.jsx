@@ -24,7 +24,7 @@ const SectionHeader = ({
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
           <button
             disabled={disabledLeft}
-            className={disabledLeft && 'opacity-30'}
+            className={disabledLeft ? 'opacity-30' : ''}
             onClick={arrowLeftFunction}
           >
             <svg
@@ -46,7 +46,7 @@ const SectionHeader = ({
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
           <button
             disabled={disabledRight}
-            className={disabledRight && 'opacity-30'}
+            className={disabledRight ? 'opacity-30' : ''}
             onClick={arrowRightFunction}
           >
             <svg

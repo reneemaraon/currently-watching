@@ -31,6 +31,7 @@ export default function PopularCarousel({ shows, active }) {
         {shows.map((show, i) => (
           <div
             className="card-container"
+            key={show._id}
             style={{
               '--active': i === active ? 1 : 0,
               '--inactive': i === active ? 0 : 1,

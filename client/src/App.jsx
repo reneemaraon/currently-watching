@@ -17,6 +17,7 @@ import { useState, useEffect, useRef } from 'react';
 import PopupSidebar from './pages/Home/PopupSidebar';
 import FullPageLoading from './pages/Common/FullPageLoading';
 import ImageWithOpacityTransition from './pages/Common/ImageTransition';
+import LoginCallback from './pages/Callback/LoginCallback';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -61,6 +62,7 @@ function App() {
           <TopNavBar toggleSidebar={toggleSidebar} />
           <Routes>
             <Route index element={<Home />} />
+            <Route path="/login/callback" element={<LoginCallback />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/my-lists" element={<MyListsPage />} />
