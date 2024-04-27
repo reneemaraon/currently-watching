@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   ErrorToastIcon,
   InfoToastIcon,
   SuccessToastIcon,
   WarningToastIcon,
-} from './IconList';
+} from "./IconList";
 
 const types = {
-  success: 'text-emerald-700',
-  error: 'text-red-500',
-  warning: 'text-amber-500',
-  info: 'text-blue-500',
+  success: "text-emerald-700",
+  error: "text-red-500",
+  warning: "text-amber-500",
+  info: "text-blue-500",
 };
 
 const icons = {
@@ -21,14 +21,14 @@ const icons = {
 };
 
 const ToastMessage = ({ message, type, closeToast }) => {
-  const selectedStyle = types[type] || types['info'];
-  const icon = icons[type] || icons['info'];
+  const selectedStyle = types[type] || types["info"];
+  const icon = icons[type] || icons["info"];
   return (
     <div
-      className={`${selectedStyle}  transition-opacity duration-500 shadow-xl border bg-theme-base flex z-[100] fixed items-center right-0 sm:right-6 top-24 max-[600px]:top-16 max-[550px]:right-4 max-[400px]:right-0 w-full max-w-[350px] p-4 mb-4 rounded-xl `}
+      className={`${selectedStyle}  transition-opacity duration-500 shadow-xl backdrop-blur-sm bg-opacity-60 bg-theme-base flex z-[100] fixed items-center right-0 sm:right-6 top-24 max-[600px]:top-16 max-[550px]:right-4 max-[400px]:right-0 w-full max-w-[350px] p-4 mb-4 rounded-xl `}
       role="alert"
     >
-      <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
+      <div className="inline-flex items-center justify-center opacity-80 flex-shrink-0 w-8 h-8 rounded-lg">
         {icon}
       </div>
       <div className="mx-3 text-sm text-light-text font-medium">{message}</div>

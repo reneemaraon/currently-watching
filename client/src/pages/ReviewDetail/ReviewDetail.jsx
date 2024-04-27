@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import FullPageLoading from '../Common/FullPageLoading';
-import RatingRowStars from './RatingRow';
-import ShowCardSmall from '../Common/ShowCard';
-import CommentsArea from './CommentsArea';
-import { useReviewDetailContext } from '../../context/ReviewDetailContext';
-import HTMLRenderer from './HtmlRenderer';
-import formatDateTime from '../../utils/formatDate';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import ReviewActions from './ReviewActions';
-import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
+import FullPageLoading from "../Common/FullPageLoading";
+import RatingRowStars from "./RatingRow";
+import ShowCardSmall from "../Common/ShowCard";
+import CommentsArea from "./CommentsArea";
+import { useReviewDetailContext } from "../../context/ReviewDetailContext";
+import HTMLRenderer from "./HtmlRenderer";
+import formatDateTime from "../../utils/formatDate";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import ReviewActions from "./ReviewActions";
+import { useDeleteReviewContext } from "../../context/DeleteReviewContext";
 
 export default function ReviewDetail() {
   const { id } = useParams();
@@ -33,6 +33,12 @@ export default function ReviewDetail() {
     }
   };
 
+  const onClickUser = (event) => {
+    if (review && review.user) {
+      navigate(`/users/${review.user._id}`);
+    }
+  };
+
   if (loading) {
     return <FullPageLoading />;
   }
@@ -42,9 +48,9 @@ export default function ReviewDetail() {
       {review && (
         <div
           className={`${
-            review && !deleteLoading ? 'opacity-100' : 'opacity-0'
+            review && !deleteLoading ? "opacity-100" : "opacity-0"
           } ${
-            deleteLoading && 'opacity-50'
+            deleteLoading && "opacity-50"
           } ease-in transition-opacity duration-500 relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden`}
         >
           <ImageWithOpacityTransition
@@ -61,13 +67,19 @@ export default function ReviewDetail() {
                 </div>
                 <div className="Profile justify-start items-start gap-3 inline-flex">
                   <ImageWithOpacityTransition
-                    styleAttach="ProfilePhoto w-8 h-8 relative rounded-full"
+                    onClick={onClickUser}
+                    styleAttach="hover:opacity-80 cursor-pointer w-8 h-8 relative rounded-full"
                     src={review.user.profilePhotoUrl}
                   />
                   <div className="Text flex-col justify-start items-start gap-1 inline-flex">
-                    <div className="NameUsername justify-center items-center gap-2 inline-flex">
+                    <div
+                      onClick={onClickUser}
+                      className="NameUsername justify-center items-center gap-2 inline-flex"
+                    >
                       <div className="author-name">{review.user.name}</div>
-                      <div className="info-text">@{review.user.screenName}</div>
+                      <div className="author-username">
+                        @{review.user.screenName}
+                      </div>
                     </div>
                     <div className="AccDetails justify-start items-center gap-1.5 inline-flex">
                       <div className="info-text">
@@ -78,7 +90,7 @@ export default function ReviewDetail() {
                 </div>
               </div>
               <div className="py-2 text-sm font-medium">
-                This user rated{' '}
+                This user rated{" "}
                 <span
                   onClick={goToShow}
                   className="hover:text-brand-tq-hover hover:cursor-pointer text-brand-tq"

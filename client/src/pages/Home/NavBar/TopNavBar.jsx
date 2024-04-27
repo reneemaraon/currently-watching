@@ -1,11 +1,11 @@
-import React from 'react';
-import { useAuthContext } from '../../../context/AuthContext';
-import ProfileView from './ProfileDropdown';
-import CustomButton from '../../Common/CustomButton';
-import Icon from '../../Common/Icon';
-import { TwitterIcon } from '../../Common/IconList';
-import SearchBar from './SearchBar';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useAuthContext } from "../../../context/AuthContext";
+import ProfileView from "./ProfileDropdown";
+import CustomButton from "../../Common/CustomButton";
+import Icon from "../../Common/Icon";
+import { TwitterIcon } from "../../Common/IconList";
+import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const LogInButton = ({ login }) => (
   <>
@@ -21,10 +21,6 @@ const LogInButton = ({ login }) => (
 const TopNavBar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const { user, loginUser } = useAuthContext();
-
-  const onTwitterLogin = async (e) => {
-    window.open('http://127.0.0.1:3000/api/v1/auth/twitter/', '_self');
-  };
 
   const navigateToShow = (id) => {
     navigate(`shows/${id}`);

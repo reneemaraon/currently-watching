@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-import CircularButton from '../Common/CircleButton';
-import { HeartIcon, OptionsIcon, ShareIcon } from '../Common/IconList';
-import { useReviewDetailContext } from '../../context/ReviewDetailContext';
-import { useAuthContext } from '../../context/AuthContext';
-import Dropdown, { Option } from '../Common/Dropdown';
-import DeleteReview from '../Reviews/DeleteReview';
-import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
-import { useToast } from '../../context/ToastContext';
+import { useState, useEffect, useRef } from "react";
+import CircularButton from "../Common/CircleButton";
+import { HeartIcon, OptionsIcon, ShareIcon } from "../Common/IconList";
+import { useReviewDetailContext } from "../../context/ReviewDetailContext";
+import { useAuthContext } from "../../context/AuthContext";
+import Dropdown, { Option } from "../Common/Dropdown";
+import DeleteReview from "../Reviews/DeleteReview";
+import { useDeleteReviewContext } from "../../context/DeleteReviewContext";
+import { useToast } from "../../context/ToastContext";
 
 const ReviewActions = () => {
   const [liked, setLiked] = useState(false);
@@ -19,7 +19,7 @@ const ReviewActions = () => {
 
   useEffect(() => {
     if (heartError) {
-      showToast('Something went wrong. Please try again.', 'error');
+      showToast("Something went wrong. Please try again.", "error");
       setLiked(!liked);
     }
   }, [heartError]);
@@ -31,9 +31,9 @@ const ReviewActions = () => {
   }, [review]);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -69,10 +69,10 @@ const ReviewActions = () => {
     navigator.clipboard
       .writeText(baseUrl + `/reviews/${review._id}`)
       .then(() => {
-        showToast('Path to this review is copied to clipboard', 'success');
+        showToast("Path to this review is copied to clipboard", "success");
       })
       .catch((error) => {
-        console.error('Failed to copy path to clipboard:', error);
+        console.error("Failed to copy path to clipboard:", error);
       });
     setDropdownVisible(!isDropdownVisible);
   };
@@ -83,9 +83,9 @@ const ReviewActions = () => {
       <CircularButton active={liked} onClick={actionRequireLogIn(onLikeClick)}>
         <HeartIcon />
       </CircularButton>
-      <CircularButton>
+      {/* <CircularButton>
         <ShareIcon />
-      </CircularButton>
+      </CircularButton> */}
       <div className="relative" ref={dropdownRef}>
         <CircularButton active={isDropdownVisible} onClick={toggleDropdown}>
           <OptionsIcon />
