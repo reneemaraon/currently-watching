@@ -1,24 +1,24 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
-import "./App.css";
-import Home from "./pages/Home/HomePage";
-import LoginPage from "./pages/Login/LoginPage";
-import SideBar from "./pages/Home/SideBar";
-import TopNavBar from "./pages/Home/NavBar/TopNavBar";
-import ReviewsPage from "./pages/Reviews/Reviews";
-import CreateReview from "./pages/CreateReview/CreateReview";
+import './App.css';
+import Home from './pages/Home/HomePage';
+import LoginPage from './pages/Login/LoginPage';
+import SideBar from './pages/Home/SideBar';
+import TopNavBar from './pages/Home/NavBar/TopNavBar';
+import ReviewsPage from './pages/Reviews/Reviews';
+import CreateReview from './pages/CreateReview/CreateReview';
 
-import { useAuthContext } from "./context/AuthContext";
-import ReviewDetail from "./pages/ReviewDetail/ReviewDetail";
-import ShowDetail from "./pages/ShowDetail/ShowDetail";
-import ProfilePage from "./pages/Profile/ProfilePage";
-import MyListsPage from "./pages/MyLists/MyLists";
-import { useState, useEffect, useRef } from "react";
-import PopupSidebar from "./pages/Home/PopupSidebar";
-import FullPageLoading from "./pages/Common/FullPageLoading";
-import ImageWithOpacityTransition from "./pages/Common/ImageTransition";
-import LoginCallback from "./pages/Callback/LoginCallback";
-import AuthOverlay from "./pages/AuthOverlay/AuthOverlay";
+import { useAuthContext } from './context/AuthContext';
+import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
+import ShowDetail from './pages/ShowDetail/ShowDetail';
+import ProfilePage from './pages/Profile/ProfilePage';
+import MyListsPage from './pages/MyLists/MyLists';
+import { useState, useEffect, useRef } from 'react';
+import PopupSidebar from './pages/Home/PopupSidebar';
+import FullPageLoading from './pages/Common/FullPageLoading';
+import ImageWithOpacityTransition from './pages/Common/ImageTransition';
+import LoginCallback from './pages/Callback/LoginCallback';
+import AuthOverlay from './pages/AuthOverlay/AuthOverlay';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -37,9 +37,9 @@ function App() {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -49,18 +49,18 @@ function App() {
   return (
     <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-inter text-gray-800">
       <AuthOverlay />
-      <div className="bg-theme-base bg-opacity-50 relative justify-start items-start inline-flex w-screen">
+      <div className="relative justify-start items-start inline-flex w-screen">
         <div className="fixed w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
-          <ImageWithOpacityTransition
+          <img
             src="/src/assets/overlay.jpg"
-            styleAttach="blur-2xl opacity-10 w-full overflow-hidden"
+            className="opacity-20 blur-2xl w-full overflow-hidden"
           />
         </div>
         <SideBar />
         {showSidebar && (
           <PopupSidebar anchor={sidebarRef} toggleSidebar={toggleSidebar} />
         )}
-        <div className="main_body_container relative z-10 xl:pl-60 flex-col w-full justify-start items-center inline-flex">
+        <div className="main_body_container relative min-h-[100vh] z-10 xl:pl-60 flex-col w-full justify-start items-center inline-flex">
           <TopNavBar toggleSidebar={toggleSidebar} />
           <Routes>
             <Route index element={<Home />} />
