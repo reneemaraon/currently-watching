@@ -53,11 +53,11 @@ export default function ReviewDetail() {
             deleteLoading && "opacity-50"
           } ease-in transition-opacity duration-500 relative inline-flex bg-fixed flex-col items-center w-full pb-40 overflow-hidden`}
         >
-          <ImageWithOpacityTransition
-            styleAttach="object-cover absolute h-96 w-full top-0"
+          <img
+            className="object-cover absolute h-54 min-[500px]:h-64 sm:h-80 md:h-96 w-full top-0"
             src={`https://image.tmdb.org/t/p/original${review.show.tmdbBackdrop}`}
           />
-          <div className="container-center-card pt-32 sm:pt-40">
+          <div className="container-center-card max-[400px]:pt-24 pt-32 sm:pt-40">
             {/* Main contentt */}
             <div className="z-10 Main large-white-card p-4 sm:p-6">
               <div className="w-full pb-4 flex-col justify-start items-start gap-3 flex">
@@ -74,7 +74,7 @@ export default function ReviewDetail() {
                   <div className="Text flex-col justify-start items-start gap-1 inline-flex">
                     <div
                       onClick={onClickUser}
-                      className="NameUsername justify-center items-center gap-2 inline-flex"
+                      className="NameUsername justify-start flex-wrap items-center gap-0.5 sm:gap-2 inline-flex"
                     >
                       <div className="author-name">{review.user.name}</div>
                       <div className="author-username">
