@@ -1,13 +1,13 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { GET_SHOWS_LIST } from '../api/showsApi';
-import { GET_REVIEWS_LIST } from '../api/reviewsApi';
-import { useQuery } from '@apollo/client';
+import { createContext, useContext, useEffect, useState } from "react";
+import { GET_GENRES_SHOWS_LIST, GET_SHOWS_LIST } from "../api/showsApi";
+import { GET_REVIEWS_LIST } from "../api/reviewsApi";
+import { useQuery } from "@apollo/client";
 
 const homepageContext = createContext();
 
 export const useHomepageContext = () => {
   const context = useContext(homepageContext);
-  if (!context) throw new Error('Show Provider is missing');
+  if (!context) throw new Error("Show Provider is missing");
   return context;
 };
 
@@ -30,14 +30,17 @@ export const HomepageProvider = ({ children }) => {
     error: showsError,
     data: showsData,
     refetch: refetchResults,
-  } = useQuery(GET_SHOWS_LIST, {
-    variables: { filter: { limit: 10, cursorField: 'popularity' } },
+  } = useQuery(GET_GENRES_SHOWS_LIST, {
+    variables: {
+      filter: { limit: 10, cursorField: "popularity" },
+      excluding: ["Reality"],
+    },
   });
 
   const { data: trendingReviewsData, refetch: refetchTrendingReviews } =
     useQuery(GET_REVIEWS_LIST, {
       variables: {
-        filter: { limit: 10, cursorField: 'likeCount', ascending: false },
+        filter: { limit: 10, cursorField: "likeCount", ascending: false },
       },
     });
 
@@ -48,13 +51,13 @@ export const HomepageProvider = ({ children }) => {
     refetch: refetchNewShows,
   } = useQuery(GET_SHOWS_LIST, {
     variables: {
-      filter: { limit: 10, cursorField: 'firstAirDate', ascending: false },
+      filter: { limit: 10, cursorField: "firstAirDate", ascending: false },
     },
   });
 
   useEffect(() => {
     if (showsData) {
-      setShows(showsData.shows);
+      setShows(showsData.showsOfGenres);
     }
   }, [showsData]);
 

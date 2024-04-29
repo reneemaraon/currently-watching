@@ -39,6 +39,32 @@ const resolvers = {
         cursorNumValue: filter.cursorNumValue,
       };
     },
+    showsOfGenres: async (_, { filter = {}, has = [], excluding = [] }) => {
+      const {
+        searchConditions,
+        cursorConditions,
+        options: { sort, limit },
+      } = generateSearchConditions(filter, ["title"]);
+
+      if (has.length > 0) {
+        searchConditions["genres.name"] = { $in: has };
+      }
+      if (excluding.length > 0) {
+        searchConditions["genres.name"] = { $nin: excluding };
+      }
+
+      let shows = await Show.find({ ...searchConditions, ...cursorConditions })
+        .sort(sort)
+        .limit(limit);
+
+      const count = await Show.find(searchConditions).countDocuments();
+      return {
+        shows,
+        totalCount: count,
+        cursorValue: filter.cursorValue,
+        cursorNumValue: filter.cursorNumValue,
+      };
+    },
     show: async (_, { id }) => {
       let show = await Show.findOne({ _id: id });
       return show;

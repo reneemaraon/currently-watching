@@ -126,6 +126,7 @@ type Query {
   userReviews(id: ID!, filter: FilterInput): ReviewPagination
 
   shows(filter: FilterInput): ShowPagination
+  showsOfGenres(filter: FilterInput, has: [String], excluding: [String]) : ShowPagination
   show(id: ID!): Show
 
   users: [User]
