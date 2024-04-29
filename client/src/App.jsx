@@ -47,20 +47,20 @@ function App() {
     return <FullPageLoading />;
   }
   return (
-    <div className="antialiased flex-col justify-start items-start inline-flex bg-main-bg font-inter text-gray-800">
+    <div className="antialiased flex-col justify-start items-start inline-flex h-auto bg-main-bg font-inter text-gray-800">
       <AuthOverlay />
-      <div className="relative justify-start items-start inline-flex w-screen">
+      <div className="relative justify-start items-start inline-flex h-full w-screen">
         <div className="fixed w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
           <img
             src="/src/assets/overlay.jpg"
-            className="opacity-20 blur-2xl w-full overflow-hidden"
+            className="opacity-10 blur-sm w-full overflow-hidden"
           />
         </div>
         <SideBar />
         {showSidebar && (
           <PopupSidebar anchor={sidebarRef} toggleSidebar={toggleSidebar} />
         )}
-        <div className="main_body_container relative min-h-[100vh] z-10 xl:pl-60 flex-col w-full justify-start items-center inline-flex">
+        <div className="main_body_container relative z-10 min-h-screen xl:pl-60 flex-col w-full justify-start items-center inline-flex">
           <TopNavBar toggleSidebar={toggleSidebar} />
           <Routes>
             <Route index element={<Home />} />
