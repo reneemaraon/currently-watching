@@ -1,11 +1,11 @@
-import axios from "axios";
-import { gql } from "@apollo/client";
+import axios from 'axios';
+import { gql } from '@apollo/client';
 
 export const getShowsRequest = async (params) =>
-  await axios.get("/api/v1/shows");
+  await axios.get('/api/v1/shows');
 
 export const getShowRequest = async (id) =>
-  await axios.get("/api/v1/shows/" + id);
+  await axios.get('/api/v1/shows/' + id);
 
 export const GET_SHOW_REVIEWS = gql`
   query GetShowReviews($id: ID!, $filter: FilterInput) {
@@ -107,10 +107,32 @@ export const GET_GENRES_SHOWS_LIST = gql`
         tmdbPoster
         tmdbBackdrop
         reviewCount
+        genres {
+          name
+        }
         cast {
           _id
           name
           profileImage
+        }
+      }
+    }
+  }
+`;
+
+export const GET_GENRES_SHOWS_LIST_SIMPLE = gql`
+  query GetShows($filter: FilterInput, $has: [String], $excluding: [String]) {
+    showsOfGenres(filter: $filter, has: $has, excluding: $excluding) {
+      totalCount
+      shows {
+        _id
+        title
+        totalAverage
+        tmdbPoster
+        tmdbBackdrop
+        reviewCount
+        genres {
+          name
         }
       }
     }

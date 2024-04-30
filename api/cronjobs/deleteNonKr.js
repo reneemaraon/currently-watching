@@ -1,11 +1,11 @@
-const Actor = require("../models/actor");
-const Show = require("../models/show");
+const Actor = require('../models/actor');
+const Show = require('../models/show');
 
 const IDS = [
-  "662a1d1c1b5028d6a6947875",
-  "662a1eac40912fda023cf5fa",
-  "662a1eba40912fda023cf691",
-  "662a1fdb40912fda023d0bfb",
+  '662a1d1c1b5028d6a6947875',
+  '662a1eac40912fda023cf5fa',
+  '662a1eba40912fda023cf691',
+  '662a1fdb40912fda023d0bfb',
 ];
 
 const match = (input) =>
@@ -26,11 +26,14 @@ const deleteNonKor = async () => {
     const showGenres = show.genres;
 
     // Add each genre to the accumulated list
-    showGenres.forEach((genre) => {
-      if (!allGenres.includes(genre.name)) {
-        allGenres.push(genre.name);
+    for (const genre of showGenres) {
+      // console.log(genre);
+      if (genre.name == 'Drama') {
+        console.log(show.title);
+        break;
+        // allGenres.push(genre.name);
       }
-    });
+    }
   }
 
   console.log(allGenres);

@@ -14,10 +14,10 @@ const Banner = ({ id, image_src }) => {
   return (
     <div
       onClick={onClickBanner}
-      className="card hover:cursor-pointer w-full relative bg-indigo-200 overflow-hidden rounded-[15px] shadow"
+      className="card group hover:cursor-pointer w-full relative bg-indigo-200 overflow-hidden rounded-[15px] shadow"
     >
-      <ImageWithOpacityTransition
-        styleAttach="object-cover w-full"
+      <img
+        className="transition-all object-cover group-hover:scale-[1.01] group-hover:ease-in duration-200 group-hover:opacity-95 w-full"
         src={'https://image.tmdb.org/t/p/w500' + image_src}
       />
     </div>
@@ -41,6 +41,7 @@ export default function PopularCarousel({ shows, active }) {
               pointerEvents: active === i ? 'auto' : 'none',
               opacity: Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
               display: Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
+              filter: `blur(${Math.abs(active - i)}px)`,
             }}
           >
             <Banner

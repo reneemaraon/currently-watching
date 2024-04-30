@@ -1,13 +1,17 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { GET_GENRES_SHOWS_LIST, GET_SHOWS_LIST } from "../api/showsApi";
-import { GET_REVIEWS_LIST } from "../api/reviewsApi";
-import { useQuery } from "@apollo/client";
+import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  GET_GENRES_SHOWS_LIST,
+  GET_GENRES_SHOWS_LIST_SIMPLE,
+  GET_SHOWS_LIST,
+} from '../api/showsApi';
+import { GET_REVIEWS_LIST } from '../api/reviewsApi';
+import { useQuery } from '@apollo/client';
 
 const homepageContext = createContext();
 
 export const useHomepageContext = () => {
   const context = useContext(homepageContext);
-  if (!context) throw new Error("Show Provider is missing");
+  if (!context) throw new Error('Show Provider is missing');
   return context;
 };
 
@@ -24,6 +28,10 @@ export const HomepageProvider = ({ children }) => {
     totalCount: 0,
     shows: [],
   });
+  const [romanceShows, setRomanceShows] = useState({
+    totalCount: 0,
+    shows: [],
+  });
 
   const {
     loading: showsLoading,
@@ -32,15 +40,16 @@ export const HomepageProvider = ({ children }) => {
     refetch: refetchResults,
   } = useQuery(GET_GENRES_SHOWS_LIST, {
     variables: {
-      filter: { limit: 10, cursorField: "popularity" },
-      excluding: ["Reality"],
+      filter: { limit: 10, cursorField: 'popularity' },
+      excluding: ['Reality'],
+      has: ['Drama'],
     },
   });
 
   const { data: trendingReviewsData, refetch: refetchTrendingReviews } =
     useQuery(GET_REVIEWS_LIST, {
       variables: {
-        filter: { limit: 10, cursorField: "likeCount", ascending: false },
+        filter: { limit: 10, cursorField: 'likeCount', ascending: false },
       },
     });
 
@@ -51,7 +60,20 @@ export const HomepageProvider = ({ children }) => {
     refetch: refetchNewShows,
   } = useQuery(GET_SHOWS_LIST, {
     variables: {
-      filter: { limit: 10, cursorField: "firstAirDate", ascending: false },
+      filter: { limit: 10, cursorField: 'firstAirDate', ascending: false },
+    },
+  });
+
+  const {
+    loading: romanceLoading,
+    error: romanceError,
+    data: romanceData,
+    refetch: refetchRomance,
+  } = useQuery(GET_GENRES_SHOWS_LIST_SIMPLE, {
+    variables: {
+      filter: { limit: 20, cursorField: 'popularity' },
+      has: ['Drama', 'Comedy'],
+      excluding: ['Reality', 'Crime'],
     },
   });
 
@@ -60,6 +82,12 @@ export const HomepageProvider = ({ children }) => {
       setShows(showsData.showsOfGenres);
     }
   }, [showsData]);
+
+  useEffect(() => {
+    if (romanceData) {
+      setRomanceShows(romanceData.showsOfGenres);
+    }
+  }, [romanceData]);
 
   useEffect(() => {
     if (newShowsData) {
@@ -82,6 +110,9 @@ export const HomepageProvider = ({ children }) => {
         refetchResults,
         trendingReviews,
         newShows,
+        romanceLoading,
+        romanceError,
+        romanceShows,
       }}
     >
       {children}

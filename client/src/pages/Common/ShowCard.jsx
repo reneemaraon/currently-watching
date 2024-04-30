@@ -12,16 +12,18 @@ const ShowCardSmall = ({ id, show }) => {
   return (
     <div
       onClick={onClickNavigate}
-      className="cursor-pointer overflow-hidden border w-64 shrink-0 bg-theme-base bg-opacity-70 rounded-[17px] flex-col justify-start items-start inline-flex"
+      className="cursor-pointer group hover:bg-opacity-50 overflow-hidden border w-64 shrink-0 bg-theme-base bg-opacity-70 rounded-[17px] flex-col justify-start items-start inline-flex"
     >
-      <ImageWithOpacityTransition
-        styleAttach="Show w-full object-cover h-[135px]"
-        src={
-          show
-            ? `https://image.tmdb.org/t/p/w500${show.tmdbBackdrop}`
-            : 'https://via.placeholder.com/262x135'
-        }
-      />
+      <div className="h-[135px] overflow-hidden">
+        <img
+          className="Show w-full group-hover:scale-[1.02] group-hover:opacity-95 ease-in-out duration-300 object-cover"
+          src={
+            show
+              ? `https://image.tmdb.org/t/p/w500${show.tmdbBackdrop}`
+              : 'https://via.placeholder.com/262x135'
+          }
+        />
+      </div>
       <div className="ShowDetails w-full px-4 py-3 justify-between items-start inline-flex">
         <div className="ShowDetailsText h-full w-40 flex-col justify-center items-start inline-flex">
           <div className="inline-flex gap-1">

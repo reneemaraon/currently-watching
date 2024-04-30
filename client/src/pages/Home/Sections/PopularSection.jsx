@@ -7,12 +7,15 @@ import commaSeparatedString from '../../Common/commaSeparate';
 import StarIcon from '../../Common/Star';
 import { useHomepageContext } from '../../../context/HomepageContext';
 import ListLoading from '../../Common/LoadingList';
+import { useNavigate } from 'react-router-dom';
 
 const StarRatingRow = ({ name, rating }) => (
   <div className="justify-start items-start gap-2.5 inline-flex">
     <div className="text-sm font-medium">{name}</div>
     <div className="justify-start items-center gap-0.5 flex">
-      <div className="text-dark-yellow text-sm font-medium">{rating}</div>
+      <div className="text-dark-yellow important-small-text font-medium">
+        {rating}
+      </div>
       <StarIcon fill="fill-dark-yellow" sizeRules="w-4 h-4" />
     </div>
   </div>
@@ -24,14 +27,24 @@ const PopularSection = () => {
     shows: { shows },
     showsLoading,
   } = useHomepageContext();
+  const navigate = useNavigate();
+
+  const goToShowDetail = () => {
+    navigate(`/shows/${shows[active]._id}`);
+  };
 
   const renderShowDetails = () => {
     const show = shows[active];
     if (shows[active]) {
       return (
         <div className="flex-wrap justify-center max-[500px]:justify-start items-start gap-8 inline-flex">
-          <div className="min-w-[340px] grow shrink basis-0 max-h-[130px] flex-col justify-start items-start gap-2.5 inline-flex">
-            <div className="title-text font-medium">{show.title}</div>
+          <div
+            onClick={goToShowDetail}
+            className="cursor-pointer group min-w-[340px] grow shrink basis-0 max-h-[130px] flex-col justify-start items-start gap-2.5 inline-flex"
+          >
+            <div className="title-text group-hover:text-brand-dark-purple font-medium">
+              {show.title}
+            </div>
 
             <p className="text-light-text text-ellipsis overflow-hidden text-sm self-stretch font-normal leading-[30.60px]">
               {show.synopsis}
@@ -67,10 +80,13 @@ const PopularSection = () => {
                   Overall
                 </div>
                 <div className="justify-start items-center gap-1 flex">
-                  <div className="text-dark-yellow text-base font-medium">
+                  <div className="text-dark-yellow paragraph-text font-medium">
                     {show.totalAverage}
                   </div>
-                  <StarIcon fill="fill-dark-yellow" sizeRules="w-6 h-6" />
+                  <StarIcon
+                    fill="fill-dark-yellow"
+                    sizeRules="h-5 w-5 sm:w-6 sm:h-6"
+                  />
                 </div>
               </div>
               <div className="justify-start items-center gap-1.5 flex">

@@ -1,6 +1,7 @@
-import PopularSection from "./Sections/PopularSection";
-import TrendingSection from "./Sections/TrendingReviewsSection";
-import TrendingShows from "./Sections/TrendingShows";
+import PopularSection from './Sections/PopularSection';
+import RomanceShows from './Sections/RomanceShows';
+import TrendingSection from './Sections/TrendingReviewsSection';
+import TrendingShows from './Sections/TrendingShows';
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <PopularSection />
       <TrendingSection />
       <TrendingShows />
+      <RomanceShows />
     </div>
   );
 }
