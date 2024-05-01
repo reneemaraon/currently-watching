@@ -58,7 +58,7 @@ const PopularSection = () => {
               {show.cast.slice(0, 6).map((castMember) => (
                 <div
                   key={castMember._id}
-                  className="w-10 h-10 shadow overflow-hidden bg-theme-base rounded-full"
+                  className="w-10 h-10 shadow overflow-hidden rounded-full"
                 >
                   <ImageWithOpacityTransition
                     styleAttach="object-cover ease-out"

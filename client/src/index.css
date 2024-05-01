@@ -29,15 +29,19 @@
         perspective: 500px;
         transform-style: preserve-3d;
     }
+
+    .white-bg-hover {
+        @apply bg-theme-base bg-opacity-70 hover:bg-opacity-100
+    }
     
     .card-container {
-        @apply absolute w-full max-w-[500px] blur-[calc(var(--abs-offset))] transition-all duration-[0.3s] ease-[ease-out];
+        @apply absolute w-full max-w-[500px] blur-[calc(var(--abs-offset))] transition-all duration-[0.2s] ease-[ease-out];
         transform: 
         rotateY(calc(var(--offset) * 15deg))
         scaleY(calc(1 + var(--abs-offset) * -0.05))
         scaleX(calc(1 + var(--abs-offset) * 0.05))
-        translateZ(calc(var(--abs-offset) * -20rem))
-        translateY(calc(var(--abs-offset) * 2rem))
+        translateZ(calc(var(--abs-offset) * -30rem))
+        translateY(calc(var(--abs-offset) * 3rem))
         translateX(calc(var(--direction) * -10rem));
     }
     .card {

@@ -19,7 +19,7 @@ const ImageWithOpacityTransition = ({ src, styleAttach }) => {
 
   return (
     <img
-      className={`${styleAttach} ease-in transition-opacity duration-150 ${
+      className={`${styleAttach} ease-in transition-all duration-150 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
       src={src}

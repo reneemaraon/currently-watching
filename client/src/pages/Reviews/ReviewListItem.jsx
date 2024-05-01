@@ -88,8 +88,8 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
   return (
     <div
       onClick={navigateToReview}
-      className={`w-full hover:cursor-pointer hover:bg-opacity-100
-            bg-theme-base bg-opacity-70 rounded-[10px] sm:rounded-[20px] border border-light-stroke justify-start items-start inline-flex
+      className={`w-full hover:cursor-pointer 
+            white-bg-hover rounded-[10px] sm:rounded-[20px] border border-light-stroke justify-start items-start inline-flex
             max-[600px]:flex-col min-[601px]:h-[190px] max-w-[900px]
             group
             ease-in`}

@@ -37,7 +37,7 @@ const ReviewsListItem = ({ review }) => {
     likeCount,
     commentCount,
     user: { _id: userId, profilePhotoUrl, screenName, name },
-    show: { title: showTitle, tmdbPoster },
+    show: { _id: showId, title: showTitle, tmdbPoster },
   } = review;
 
   const onClickNavigate = () => {
@@ -49,26 +49,34 @@ const ReviewsListItem = ({ review }) => {
     navigate(`/users/${userId}`);
   };
 
+  const onClickShow = (event) => {
+    event.stopPropagation();
+    navigate(`/shows/${showId}`);
+  };
+
   return (
     <div
       onClick={onClickNavigate}
       className="
-            ReviewListItem cursor-pointer overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] max-[600px]:w-[320px] w-[450px] h-[260px] bg-theme-base bg-opacity-70 rounded-[20px] border border-slate-200 justify-start items-start inline-flex
+            white-bg-hover group cursor-pointer overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] max-[600px]:w-[320px] w-[450px] h-[260px] rounded-[20px] border justify-start items-start inline-flex
             max-[600px]:min-h-[450px] 
         "
     >
       <div
         className="
-                Show min-w-[180px] max-[600px]:w-full max-[600px]:h-48 h-full relative overflow-hidden self-stretch flex-col justify-start items-center inline-flex
+                min-w-[180px] max-[600px]:w-full max-[600px]:h-48 h-full relative overflow-hidden self-stretch flex-col justify-start items-center inline-flex
                 max-[600px]:min-h-[190px]    
             "
       >
         <ImageWithOpacityTransition
-          styleAttach="object-cover align-center w-full h-full"
+          styleAttach="object-cover align-center w-full h-full group-hover:scale-[1.01]"
           src={`https://image.tmdb.org/t/p/w500${tmdbPoster}`}
         />
         <div className="absolute bottom-0 Title w-full h-[60px] pl-[15px] pr-2.5 pt-2.5 pb-[13px] bg-gradient-to-b from-transparent to-black justify-start items-end gap-2.5 inline-flex">
-          <div className="Title grow shrink overflow-truncate basis-0 text-white text-xs font-semibold">
+          <div
+            onClick={onClickShow}
+            className="Title hover:underline grow shrink overflow-truncate basis-0 text-white text-xs font-semibold"
+          >
             {showTitle}
           </div>
         </div>
@@ -84,10 +92,10 @@ const ReviewsListItem = ({ review }) => {
               src={profilePhotoUrl}
             />
             <div className="AccDetails transition-colors duration-500 group flex-col justify-center items-start inline-flex">
-              <div className="TwtDisplayName line-clamp-1 text-text-dark group-hover:text-brand-dark-purple text-[13px] font-medium">
+              <div className="TwtDisplayName line-clamp-1 text-text-dark hover:text-brand-dark-purple text-[13px] font-medium">
                 {name}
               </div>
-              <div className="Username group-hover:text-brand-dark-purple text-light-text text-[11px] font-normal">
+              <div className="Username hover:text-brand-dark-purple text-light-text text-[11px] font-normal">
                 @{screenName}
               </div>
             </div>
