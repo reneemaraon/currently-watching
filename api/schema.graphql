@@ -74,6 +74,8 @@ type Mutation {
   createComment(reviewId: ID!, commentBody: String!): Comment!
   likeReview(reviewId: ID!): Review!
   deleteLike(reviewId: ID!): Review!
+  watchedShow(showId: ID!): Show!
+  deleteWatch(showId: ID!): Show!
 }
 
 

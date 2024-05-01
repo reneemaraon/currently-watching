@@ -1,30 +1,32 @@
-import stripHtmlTags from '../../utils/stripTags';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../Common/Icon';
-import { CommentIcon, HeartIcon, OptionsIcon } from '../Common/IconList';
-import StarIcon from '../Common/Star';
-import renderStars from '../Common/renderStars';
-import formatDateTime from '../../utils/formatDate';
-import { useAuthContext } from '../../context/AuthContext';
-import Dropdown, { Option } from '../Common/Dropdown';
-import { useEffect, useRef, useState } from 'react';
-import { useToast } from '../../context/ToastContext';
+import stripHtmlTags from "../../utils/stripTags";
+import { useNavigate } from "react-router-dom";
+import Icon from "../Common/Icon";
+import { CommentIcon, HeartIcon, OptionsIcon } from "../Common/IconList";
+import StarIcon from "../Common/Star";
+import renderStars from "../Common/renderStars";
+import formatDateTime from "../../utils/formatDate";
+import { useAuthContext } from "../../context/AuthContext";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useEffect, useRef, useState } from "react";
+import { useToast } from "../../context/ToastContext";
 
 const RatingRow = ({ ratingName, rating }) => {
   const starObject = (
-    <div className="w-4 h-4">
-      <StarIcon />
-    </div>
+    <StarIcon sizeRules="max-[400px]:w-1.5 max-[400px]:h-1.5 w-2 h-2 sm:w-4 sm:h-4" />
   );
   return (
-    <div className="RatingRow pl-[3px] gap-2 justify-between items-center inline-flex">
-      <div className="text-xs font-medium">{ratingName}</div>
+    <div className="RatingRow pl-[3px] max-[400px]:gap-1.5 gap-2 justify-between items-center inline-flex">
+      <div className="max-[400px]:text-[10px] text-xs font-medium">
+        {ratingName}
+      </div>
       <div className="max-[1000px]:hidden Rating justify-center items-center gap-[3px] flex">
         {renderStars(rating, starObject)}
       </div>
-      <div className="min-[1001px]:hidden Rating justify-center items-center gap-[3px] max-[600px]:gap-0 flex">
-        <div className="Number text-xs font-bold">{rating}</div>
-        <div className="w-4 h-4">
+      <div className="min-[1001px]:hidden max-[400px]:gap-[1px] Rating justify-center items-center gap-[3px] max-[600px]:gap-0 flex">
+        <div className="max-[400px]:text-[10px] text-xs font-bold">
+          {rating}
+        </div>
+        <div className="w-3 h-3 sm:w-4 sm:h-4">
           <StarIcon />
         </div>
       </div>
@@ -70,18 +72,18 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
     navigator.clipboard
       .writeText(baseUrl + `/reviews/${review._id}`)
       .then(() => {
-        showToast('Path to review is copied to clipboard', 'success');
+        showToast("Path to review is copied to clipboard", "success");
       })
       .catch((error) => {
-        console.error('Failed to copy path to clipboard', error);
+        console.error("Failed to copy path to clipboard", error);
       });
     setDropdownVisible(!isDropdownVisible);
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -104,7 +106,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
                 
                 max-[600px]:w-full
                 max-[600px]:h-[150px]
-                ${noImage && 'hidden'}
+                ${noImage && "hidden"}
             `}
       >
         <img
@@ -124,8 +126,8 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
           </div>
         </div>
       </div>
-      <div className="relative min-[601px]:h-full w-full max-[600px]:max-h-44 max-[600px]:py-3 py-4 px-3 sm:px-4 flex-col justify-start items-start sm:gap-1 inline-flex grow">
-        <div className="w-full justify-between items-start inline-flex">
+      <div className="relative min-[601px]:h-full w-full max-[600px]:max-h-48 max-[600px]:py-3 py-4 px-3 sm:px-4 flex-col justify-start items-start gap-1 inline-flex grow">
+        <div className="text-nowrap w-full justify-between items-start inline-flex overflow-hidden max-[600px]:min-h-9 min-h-6">
           <div className="hover:cursor-pointer justify-start grow max-[600px]:items-center items-start gap-2.5 flex">
             <img
               className="ProfilePhoto w-5 h-5 sm:w-6 sm:h-6 hover:opacity-80 relative rounded-full"
@@ -181,7 +183,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
             </div>
           </div>
         </div>
-        <div className="max-[400px]:text-sm mt-1 text-base sm:text-l font-medium">
+        <div className="max-[500px]:text-sm max-[500px]:min-h-5 mt-1 text-base min-h-6 line-clamp-1 font-medium">
           {review.title}
         </div>
         <div className="Preview grow text-light-text my-1 max-h-[84px] max-[380px]:text-xs text-sm font-normal overflow-hidden">
@@ -189,7 +191,7 @@ const ReviewsListItem = ({ noImage, review, onDelete }) => {
         </div>
         <div className="Footer w-full pt-1 justify-between items-end gap-4 inline-flex">
           <div className="RatingsCont w-full items-start inline-flex">
-            <div className="Ratings w-full pt-1 justify-start items-end gap-5 max-[900px]:gap-2 flex">
+            <div className="Ratings w-full pt-1 justify-start items-end gap-6 max-[900px]:gap-4 flex">
               <RatingRow rating={review.actingRating} ratingName="Acting" />
               <RatingRow rating={review.plotRating} ratingName="Plot" />
               <RatingRow rating={review.visualsRating} ratingName="Visuals" />

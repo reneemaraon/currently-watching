@@ -109,6 +109,7 @@ export const GET_GENRES_SHOWS_LIST = gql`
         tmdbPoster
         tmdbBackdrop
         reviewCount
+        watchCount
         genres {
           name
         }

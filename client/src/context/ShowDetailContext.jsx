@@ -124,6 +124,22 @@ export const ShowDetailProvider = ({ children }) => {
     }
   };
 
+  const postWatch = async () => {
+    const { data } = await postShowWatchRequest({
+      variables: {
+        showId,
+      },
+    });
+  };
+
+  const deleteWatch = async () => {
+    const { data } = await deleteShowWatchRequest({
+      variables: {
+        showId,
+      },
+    });
+  };
+
   return (
     <showDetailContext.Provider
       value={{
@@ -139,8 +155,8 @@ export const ShowDetailProvider = ({ children }) => {
         loadNextPage,
         refreshList,
         removeReviewShowReviews,
-        postShowWatchRequest,
-        deleteShowWatchRequest,
+        postWatch,
+        deleteWatch,
         watchError,
         deleteWatchError,
       }}

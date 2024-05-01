@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import PopularCarousel from './PopularCarousel';
-import SectionHeader from './SectionHeader';
-import ImageWithOpacityTransition from '../../Common/ImageTransition';
-import commaSeparatedString from '../../Common/commaSeparate';
-import StarIcon from '../../Common/Star';
-import { useHomepageContext } from '../../../context/HomepageContext';
-import ListLoading from '../../Common/LoadingList';
-import { useNavigate } from 'react-router-dom';
+import PopularCarousel from "./PopularCarousel";
+import SectionHeader from "./SectionHeader";
+import ImageWithOpacityTransition from "../../Common/ImageTransition";
+import commaSeparatedString from "../../Common/commaSeparate";
+import StarIcon from "../../Common/Star";
+import { useHomepageContext } from "../../../context/HomepageContext";
+import ListLoading from "../../Common/LoadingList";
+import { useNavigate } from "react-router-dom";
+import Icon from "../../Common/Icon";
+import { WatchIcon } from "../../Common/IconList";
 
 const StarRatingRow = ({ name, rating }) => (
   <div className="justify-start items-start gap-2.5 inline-flex">
@@ -90,25 +92,12 @@ const PopularSection = () => {
                 </div>
               </div>
               <div className="justify-start items-center gap-1.5 flex">
-                <div className="relative">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      className="fill-gray-800"
-                      d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
-                    />
-                    <path
-                      className="fill-gray-800"
-                      fillRule="evenodd"
-                      d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                <Icon sizeRules="w-4 h-4 sm:w-5 sm:h-5" fill="fill-text-dark">
+                  <WatchIcon />
+                </Icon>
+                <div className="text-sm font-medium">
+                  {show.watchCount || "0"}
                 </div>
-                <div className="text-sm font-medium">{show.watched || '0'}</div>
               </div>
             </div>
             <StarRatingRow rating={show.actingAverage} name="Acting" />

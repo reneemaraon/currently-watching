@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import CircularButton from '../Common/CircleButton';
-import { HeartIcon, ShareIcon } from '../Common/IconList';
-import StatContainer from './StatContainer';
-import CustomButton from '../Common/CustomButton';
-import { useShowDetailContext } from '../../context/ShowDetailContext';
-import commaSeparatedString from '../Common/commaSeparate';
-import FullPageLoading from '../Common/FullPageLoading';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import ShowReviewsList from './ShowReviewList';
-import { useToast } from '../../context/ToastContext';
-import { useAuthContext } from '../../context/AuthContext';
+import StatContainer from "./StatContainer";
+import CustomButton from "../Common/CustomButton";
+import { useShowDetailContext } from "../../context/ShowDetailContext";
+import commaSeparatedString from "../Common/commaSeparate";
+import FullPageLoading from "../Common/FullPageLoading";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import ShowReviewsList from "./ShowReviewList";
+import { useAuthContext } from "../../context/AuthContext";
+import ShowActions from "./ShowActions";
 
 const ShowDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { showToast } = useToast();
   const { setShowId, show, loading, showReviews, refreshList } =
     useShowDetailContext();
   const { actionRequireLogIn } = useAuthContext();
@@ -29,18 +26,6 @@ const ShowDetail = () => {
     setShowId(id);
     refreshList();
   }, [id]);
-
-  const copyPathToClipboard = () => {
-    const fullPath = window.location.href;
-    navigator.clipboard
-      .writeText(fullPath)
-      .then(() => {
-        showToast('Copied link to clipboard', 'info');
-      })
-      .catch((error) => {
-        console.error('Failed to copy path to clipboard', error);
-      });
-  };
 
   if (loading) {
     return <FullPageLoading />;
@@ -65,28 +50,19 @@ const ShowDetail = () => {
                       <div className="TheGlory2022 title-text">
                         {show.title}
                       </div>
-                      <div className="subtext">{`${
-                        show.watched ? show.watched : '0'
-                      } watched`}</div>
+                      <div className="subtext">{`${show.watchCount} watched`}</div>
                     </div>
                     <div className="subtext text-brand-tq">
                       {`${show.numberOfSeasons} season${
-                        show.numberOfSeasons > 1 ? 's' : ''
-                      } `}{' '}
-                      | {show.numberOfEpisodes} episodes |{' '}
+                        show.numberOfSeasons > 1 ? "s" : ""
+                      } `}{" "}
+                      | {show.numberOfEpisodes} episodes |{" "}
                       {commaSeparatedString(
                         show.genres.map((genre) => genre.name)
                       )}
                     </div>
                   </div>
-                  <div className="ReviewActions justify-start items-start pb-2 gap-1.5 sm:gap-2.5 flex">
-                    {/* <CircularButton>
-                      <HeartIcon />
-                    </CircularButton> */}
-                    <CircularButton onClick={copyPathToClipboard}>
-                      <ShareIcon />
-                    </CircularButton>
-                  </div>
+                  <ShowActions />
                 </div>
                 <div className="w-full paragraph-text leading-7">
                   {show.synopsis}
@@ -112,7 +88,7 @@ const ShowDetail = () => {
                 <div className="px-2 w-full pb-5 justify-between items-start inline-flex">
                   <div className="inline-flex gap-2">
                     <span className="title-text ">
-                      Reviews{' '}
+                      Reviews{" "}
                       <span className="text-lighter-text ">
                         ({showReviews && showReviews.totalCount})
                       </span>
