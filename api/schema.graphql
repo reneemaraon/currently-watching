@@ -38,6 +38,8 @@ type Show {
   numberOfSeasons: Int!
   numberOfEpisodes: Int!
   popularity: Float!
+  watchCount: Int!
+  watched: Boolean!
 }
 
 type Actor {

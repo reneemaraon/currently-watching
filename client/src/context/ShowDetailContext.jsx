@@ -1,16 +1,21 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { GET_SHOW_REVIEWS, GET_SHOW } from '../api/showsApi';
-import { useQuery } from '@apollo/client';
-import findCursor from '../utils/getCursorFromList';
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  GET_SHOW_REVIEWS,
+  GET_SHOW,
+  POST_SHOW_WATCH_MUTATION,
+  DELETE_SHOW_WATCH_MUTATION,
+} from "../api/showsApi";
+import { useMutation, useQuery } from "@apollo/client";
+import findCursor from "../utils/getCursorFromList";
 
 const ITEMS_PER_PAGE = 10;
-const SORT_FIELD = 'createdAt';
+const SORT_FIELD = "createdAt";
 
 const showDetailContext = createContext();
 
 export const useShowDetailContext = () => {
   const context = useContext(showDetailContext);
-  if (!context) throw new Error('Show Provider is missing');
+  if (!context) throw new Error("Show Provider is missing");
   return context;
 };
 
@@ -37,6 +42,13 @@ export const ShowDetailProvider = ({ children }) => {
       },
     },
   });
+
+  const [postShowWatchRequest, { error: watchError, data: watchedShowData }] =
+    useMutation(POST_SHOW_WATCH_MUTATION);
+
+  const [deleteShowWatchRequest, { error: deleteWatchError }] = useMutation(
+    DELETE_SHOW_WATCH_MUTATION
+  );
 
   const {
     loading,
@@ -127,6 +139,10 @@ export const ShowDetailProvider = ({ children }) => {
         loadNextPage,
         refreshList,
         removeReviewShowReviews,
+        postShowWatchRequest,
+        deleteShowWatchRequest,
+        watchError,
+        deleteWatchError,
       }}
     >
       {children}

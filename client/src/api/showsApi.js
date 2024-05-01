@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { gql } from '@apollo/client';
+import axios from "axios";
+import { gql } from "@apollo/client";
 
 export const getShowsRequest = async (params) =>
-  await axios.get('/api/v1/shows');
+  await axios.get("/api/v1/shows");
 
 export const getShowRequest = async (id) =>
-  await axios.get('/api/v1/shows/' + id);
+  await axios.get("/api/v1/shows/" + id);
 
 export const GET_SHOW_REVIEWS = gql`
   query GetShowReviews($id: ID!, $filter: FilterInput) {
@@ -46,6 +46,8 @@ export const GET_SHOW = gql`
       synopsis
       tmdbPoster
       tmdbBackdrop
+      watchCount
+      watched
       cast {
         _id
         name
@@ -135,6 +137,64 @@ export const GET_GENRES_SHOWS_LIST_SIMPLE = gql`
           name
         }
       }
+    }
+  }
+`;
+
+export const POST_SHOW_WATCH_MUTATION = gql`
+  mutation PostWatch($showId: ID!) {
+    watchedShow(showId: $showId) {
+      _id
+      title
+      synopsis
+      tmdbPoster
+      tmdbBackdrop
+      watchCount
+      watched
+      cast {
+        _id
+        name
+        profileImage
+      }
+      genres {
+        name
+      }
+      numberOfSeasons
+      numberOfEpisodes
+      reviewCount
+      actingAverage
+      plotAverage
+      visualsAverage
+      totalAverage
+    }
+  }
+`;
+
+export const DELETE_SHOW_WATCH_MUTATION = gql`
+  mutation DeleteWatch($showId: ID!) {
+    deleteWatch(showId: $showId) {
+      _id
+      title
+      synopsis
+      tmdbPoster
+      tmdbBackdrop
+      watchCount
+      watched
+      cast {
+        _id
+        name
+        profileImage
+      }
+      genres {
+        name
+      }
+      numberOfSeasons
+      numberOfEpisodes
+      reviewCount
+      actingAverage
+      plotAverage
+      visualsAverage
+      totalAverage
     }
   }
 `;

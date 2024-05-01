@@ -1,15 +1,20 @@
 // resolvers.js
 
-const User = require('./models/user');
-const Show = require('./models/show');
-const Review = require('./models/review');
-const Like = require('./models/like');
-const Comment = require('./models/comment');
+const User = require("./models/user");
+const Show = require("./models/show");
+const Review = require("./models/review");
+const Watch = require("./models/watch");
+const Like = require("./models/like");
+const Comment = require("./models/comment");
 
-const { generateSearchConditions } = require('./utils/search');
-const { processCreateComment } = require('./controllers/comment');
-const { processCreateLike, processDeleteLike } = require('./controllers/like');
-const Actor = require('./models/actor');
+const { generateSearchConditions } = require("./utils/search");
+const { processCreateComment } = require("./controllers/comment");
+const { processCreateLike, processDeleteLike } = require("./controllers/like");
+const Actor = require("./models/actor");
+const {
+  processDeleteWatch,
+  processCreateWatch,
+} = require("./controllers/watch");
 
 const resolvers = {
   Query: {
@@ -26,7 +31,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title']);
+      } = generateSearchConditions(filter, ["title"]);
       let shows = await Show.find({ ...searchConditions, ...cursorConditions })
         .sort(sort)
         .limit(limit);
@@ -44,15 +49,15 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title']);
+      } = generateSearchConditions(filter, ["title"]);
 
       if (has.length > 0) {
-        searchConditions['genres.name'] = { $all: has };
+        searchConditions["genres.name"] = { $all: has };
       }
 
       if (excluding.length > 0) {
-        if (searchConditions['genres.name']) {
-          searchConditions['genres.name'].$nin = excluding;
+        if (searchConditions["genres.name"]) {
+          searchConditions["genres.name"].$nin = excluding;
         }
       }
 
@@ -77,7 +82,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title', 'body']);
+      } = generateSearchConditions(filter, ["title", "body"]);
 
       let reviews = await Review.find({
         ...searchConditions,
@@ -99,7 +104,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title', 'body']);
+      } = generateSearchConditions(filter, ["title", "body"]);
       searchConditions.show = id;
       let reviews = await Review.find({
         ...searchConditions,
@@ -120,7 +125,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['title', 'body']);
+      } = generateSearchConditions(filter, ["title", "body"]);
       searchConditions.user = id;
       let reviews = await Review.find({
         ...searchConditions,
@@ -145,7 +150,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ['commentBody']);
+      } = generateSearchConditions(filter, ["commentBody"]);
       searchConditions.review = id;
       let comments = await Comment.find({
         ...searchConditions,
@@ -190,6 +195,13 @@ const resolvers = {
       );
       return populatedCast;
     },
+    watched: async (parent, args, { user }) => {
+      if (!user) {
+        return false;
+      }
+      const watched = await Watch.find({ show: parent._id, user: user._id });
+      return watched.length > 0;
+    },
   },
   Comment: {
     review: async (parent, args, context) => {
@@ -221,7 +233,7 @@ const resolvers = {
         );
         return newComment;
       } catch (error) {
-        throw new Error('Failed to create comment');
+        throw new Error("Failed to create comment");
       }
     },
     likeReview: async (_, { reviewId }, { user }) => {
@@ -230,7 +242,7 @@ const resolvers = {
         const review = await Review.findById(like.review);
         return review;
       } catch (error) {
-        throw new Error('Failed to like review.');
+        throw new Error("Failed to like review.");
       }
     },
     deleteLike: async (_, { reviewId }, { user }) => {
@@ -239,7 +251,25 @@ const resolvers = {
         const review = await Review.findById(reviewId);
         return review;
       } catch (error) {
-        throw new Error('Failed to unlike review.');
+        throw new Error("Failed to unlike review.");
+      }
+    },
+    watchedShow: async (_, { showId }, { user }) => {
+      try {
+        const watch = await processCreateWatch(showId, user._id);
+        const show = await Show.findById(watch.show);
+        return show;
+      } catch (error) {
+        throw new Error("Failed to watch show.");
+      }
+    },
+    deleteWatch: async (_, { showId }, { user }) => {
+      try {
+        await processDeleteWatch(showId, user._id);
+        const show = await Show.findById(showId);
+        return show;
+      } catch (error) {
+        throw new Error("Failed to remove watch for show.");
       }
     },
   },
