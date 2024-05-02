@@ -49,10 +49,7 @@ const StarInputItem = ({
   );
 };
 
-const StarInput = () => {
-  const { state, setField, setError, loading, error, postReview } =
-    useCreateReviewContext();
-
+const StarInput = ({ state, setField, setError }) => {
   const handleRatingChange = (field, value) => {
     if (value) {
       setError(field, null);

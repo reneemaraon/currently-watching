@@ -19,6 +19,11 @@ const isReviewOwner = async (req, res, next) => {
   }
 };
 
+const isReviewOwnerStandalone = async (user, reviewId) => {
+  const review = await Review.findById(reviewId);
+  return user._id.equals(review.user);
+};
+
 const isCommentOwner = async (req, res, next) => {
   const commentId = req.params.id;
   const comment = await Comment.findById(commentId);
@@ -37,4 +42,4 @@ const isCommentOwner = async (req, res, next) => {
   }
 };
 
-module.exports = { isReviewOwner, isCommentOwner };
+module.exports = { isReviewOwner, isCommentOwner, isReviewOwnerStandalone };

@@ -70,12 +70,21 @@ type Review {
   liked: Boolean!
 }
 
+input ReviewUpdateBody {
+  actingRating: Int
+  plotRating: Int
+  visualsRating: Int
+  body: String
+  title: String
+}
+
 type Mutation {
   createComment(reviewId: ID!, commentBody: String!): Comment!
   likeReview(reviewId: ID!): Review!
   deleteLike(reviewId: ID!): Review!
   watchedShow(showId: ID!): Show!
   deleteWatch(showId: ID!): Show!
+  updateReview(reviewId: ID!, body: ReviewUpdateBody! ): Review! 
 }
 
 

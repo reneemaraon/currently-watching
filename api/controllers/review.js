@@ -87,13 +87,28 @@ const deleteReview = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: 'Deleted' });
 };
 
+const processUpdateReview = async (id, body) => {
+  const includesRatingChange =
+    body.actingRating || body.plotRating || body.visualsRating;
+
+  if (includesRatingChange) {
+    const review = await Review.findById(id);
+    recalculateRatings(review, false);
+  }
+  const updatedReview = await Review.findByIdAndUpdate(id, {
+    $set: body,
+  });
+  if (includesRatingChange) {
+    recalculateRatings(updatedReview, true);
+  }
+  return updateReview;
+};
+
 const updateReview = async (req, res) => {
   try {
     const { id } = req.params;
+    const updatedReview = processUpdateReview(id, req.body);
 
-    const updatedReview = await Review.findByIdAndUpdate(id, {
-      $set: req.body,
-    });
     return res.json(updatedReview);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -133,24 +148,19 @@ const recalculateRatings = async (review, isAddition = true) => {
   const newReviewCount = newCount == 0 ? 1 : newCount;
 
   // Calculate new average ratings
-  const newAverageActing = (
+  const newAverageActing =
     (actingAverage * reviewCount + newActingRating * adjustment) /
-    newReviewCount
-  ).toFixed(1);
-  const newAveragePlot = (
-    (plotAverage * reviewCount + newPlotRating * adjustment) /
-    newReviewCount
-  ).toFixed(1);
-  const newAverageVisuals = (
+    newReviewCount;
+  const newAveragePlot =
+    (plotAverage * reviewCount + newPlotRating * adjustment) / newReviewCount;
+  const newAverageVisuals =
     (visualsAverage * reviewCount + newVisualsRating * adjustment) /
-    newReviewCount
-  ).toFixed(1);
+    newReviewCount;
 
   // Calculate the new total average rating
-  const newTotalAverage = (
+  const newTotalAverage =
     (totalAverage * reviewCount + newOverallRating * adjustment) /
-    newReviewCount
-  ).toFixed(1);
+    newReviewCount;
 
   // Update the Show model with the new ratings
   await Show.findByIdAndUpdate(
@@ -174,4 +184,5 @@ module.exports = {
   getReview,
   updateReview,
   deleteReview,
+  processUpdateReview,
 };

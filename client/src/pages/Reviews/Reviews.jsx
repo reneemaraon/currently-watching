@@ -6,7 +6,7 @@ import { useReviewsContext } from '../../context/ReviewContext';
 import { useState } from 'react';
 import PopupModal from '../Common/PopupModal';
 import SearchBar from '../Home/NavBar/SearchBar';
-import CreateReviewShowDetail from '../CreateReview/components/CreateReviewShowDetail';
+import CreateReviewShowDetail from '../ReviewForm/components/CreateReviewShowDetail';
 import { useSearchContext } from '../../context/SearchContext';
 import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
 import LoadMorePanel from '../Common/LoadMorePagination';
