@@ -33,6 +33,7 @@ const extensions = [
 
 import EditorMenu from './EditorMenu';
 import ErrorMessage from './ErrorMessage';
+import { useEffect } from 'react';
 
 const MainContentEditor = ({ value, setContent, errorMessage }) => {
   const editor = useEditor({

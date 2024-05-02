@@ -1,21 +1,21 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 import {
   GET_SHOW_REVIEWS,
   GET_SHOW,
   POST_SHOW_WATCH_MUTATION,
   DELETE_SHOW_WATCH_MUTATION,
-} from "../api/showsApi";
-import { useMutation, useQuery } from "@apollo/client";
-import findCursor from "../utils/getCursorFromList";
+} from '../api/showsApi';
+import { useMutation, useQuery } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
 
 const ITEMS_PER_PAGE = 10;
-const SORT_FIELD = "createdAt";
+const SORT_FIELD = 'createdAt';
 
 const showDetailContext = createContext();
 
 export const useShowDetailContext = () => {
   const context = useContext(showDetailContext);
-  if (!context) throw new Error("Show Provider is missing");
+  if (!context) throw new Error('Show Provider is missing');
   return context;
 };
 
@@ -151,6 +151,7 @@ export const ShowDetailProvider = ({ children }) => {
         showReviews,
         showReviewsLoading,
         showReviewsError,
+        refetchShow,
         refetchShowReviews,
         loadNextPage,
         refreshList,

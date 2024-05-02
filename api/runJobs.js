@@ -15,13 +15,13 @@ async function runJobs() {
     // Call your recalculateRatings function or any other logic here
     await connectDB(process.env.MONGO_URI);
 
-    // await recalculateRatings();
+    await recalculateRatings();
     // await removeDuplicates();
     // await populateDb();
     // console.log('Recalculated show items  successfully.');
 
     // await updateShows();
-    await deleteNonKor();
+    // await deleteNonKor();
     // await updateReviews();
     // console.log('Updated review like and comments counts successfully.');
 

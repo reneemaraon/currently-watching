@@ -58,10 +58,7 @@ const createReview = async (req, res) => {
     throw new BadRequestError('You have already posted a review for this show');
   }
 
-  const overallRating = (
-    (actingRating + plotRating + visualsRating) /
-    3
-  ).toFixed(1);
+  const overallRating = (actingRating + plotRating + visualsRating) / 3;
   const review = await Review.create({
     ...req.body,
     user: req.user._id,
@@ -91,17 +88,24 @@ const processUpdateReview = async (id, body) => {
   const includesRatingChange =
     body.actingRating || body.plotRating || body.visualsRating;
 
+  const payload = body;
+
   if (includesRatingChange) {
     const review = await Review.findById(id);
-    recalculateRatings(review, false);
+    const { actingRating, plotRating, visualsRating } = { ...review, ...body };
+    payload.overallRating = (actingRating + plotRating + visualsRating) / 3;
+
+    await recalculateRatings(review, false);
   }
   const updatedReview = await Review.findByIdAndUpdate(id, {
-    $set: body,
+    $set: payload,
   });
+
   if (includesRatingChange) {
-    recalculateRatings(updatedReview, true);
+    const review = await Review.findById(id);
+    await recalculateRatings(review, true);
   }
-  return updateReview;
+  return updatedReview;
 };
 
 const updateReview = async (req, res) => {
@@ -163,7 +167,7 @@ const recalculateRatings = async (review, isAddition = true) => {
     newReviewCount;
 
   // Update the Show model with the new ratings
-  await Show.findByIdAndUpdate(
+  const show = await Show.findByIdAndUpdate(
     showId,
     {
       $set: {
@@ -176,6 +180,8 @@ const recalculateRatings = async (review, isAddition = true) => {
     },
     { new: true }
   );
+
+  show.save();
 };
 
 module.exports = {

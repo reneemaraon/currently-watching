@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import CircularButton from "../Common/CircleButton";
-import { HeartIcon, OptionsIcon, ShareIcon } from "../Common/IconList";
-import { useReviewDetailContext } from "../../context/ReviewDetailContext";
-import { useAuthContext } from "../../context/AuthContext";
-import Dropdown, { Option } from "../Common/Dropdown";
-import DeleteReview from "../Reviews/DeleteReview";
-import { useDeleteReviewContext } from "../../context/DeleteReviewContext";
-import { useToast } from "../../context/ToastContext";
+import { useState, useEffect, useRef } from 'react';
+import CircularButton from '../Common/CircleButton';
+import { HeartIcon, OptionsIcon, ShareIcon } from '../Common/IconList';
+import { useReviewDetailContext } from '../../context/ReviewDetailContext';
+import { useAuthContext } from '../../context/AuthContext';
+import Dropdown, { Option } from '../Common/Dropdown';
+import DeleteReview from '../Reviews/DeleteReview';
+import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
+import { useToast } from '../../context/ToastContext';
+import { useNavigate } from 'react-router-dom';
 
 const ReviewActions = () => {
   const [liked, setLiked] = useState(false);
@@ -16,10 +17,11 @@ const ReviewActions = () => {
   const { showToast } = useToast();
   const { review, deleteLike, postLike, heartError } = useReviewDetailContext();
   const { setShowDeleteModal, setReviewToDelete } = useDeleteReviewContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (heartError) {
-      showToast("Something went wrong. Please try again.", "error");
+      showToast('Something went wrong. Please try again.', 'error');
       setLiked(!liked);
     }
   }, [heartError]);
@@ -31,9 +33,9 @@ const ReviewActions = () => {
   }, [review]);
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -69,10 +71,10 @@ const ReviewActions = () => {
     navigator.clipboard
       .writeText(baseUrl + `/reviews/${review._id}`)
       .then(() => {
-        showToast("Path to this review is copied to clipboard", "success");
+        showToast('Path to this review is copied to clipboard', 'success');
       })
       .catch((error) => {
-        console.error("Failed to copy path to clipboard:", error);
+        console.error('Failed to copy path to clipboard:', error);
       });
     setDropdownVisible(!isDropdownVisible);
   };
@@ -98,6 +100,13 @@ const ReviewActions = () => {
                   key="Delete"
                   text="Delete"
                   onSelect={() => onAttemptDelete(review._id)}
+                />
+              )}
+              {user && user._id == review.user._id && (
+                <Option
+                  key="Update"
+                  text="Update"
+                  onSelect={() => navigate('update')}
                 />
               )}
               <Option

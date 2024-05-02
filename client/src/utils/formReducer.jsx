@@ -14,6 +14,9 @@ const formReducer = (state, action) => {
         },
       };
 
+    case 'SET_FORM_VALUES':
+      return action.formValues;
+
     case 'RESET_FORM':
       return action.initialState;
 

@@ -19,6 +19,7 @@ import FullPageLoading from './pages/Common/FullPageLoading';
 import ImageWithOpacityTransition from './pages/Common/ImageTransition';
 import LoginCallback from './pages/Callback/LoginCallback';
 import AuthOverlay from './pages/AuthOverlay/AuthOverlay';
+import UpdateReview from './pages/UpdateReview/UpdateReview';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -66,9 +67,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login/callback" element={<LoginCallback />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/reviews/:id/update" element={<UpdateReview />} />
+            <Route path="/reviews/:id" element={<ReviewDetail />} />
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/my-lists" element={<MyListsPage />} />
-            <Route path="/reviews/:id" element={<ReviewDetail />} />
             <Route path="/shows/:id/create-review" element={<CreateReview />} />
             <Route path="/shows/:id" element={<ShowDetail />} />
             <Route path="/users/:id" element={<ProfilePage />} />

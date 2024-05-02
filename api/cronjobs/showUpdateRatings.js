@@ -3,7 +3,7 @@ const Review = require('../models/review');
 
 const recalculateRatings = async () => {
   try {
-    const shows = await Show.find();
+    const shows = await Show.find({ watchCount: { $gt: 0 } });
 
     for (const show of shows) {
       const reviews = await Review.find({ show: show._id });
@@ -21,10 +21,10 @@ const recalculateRatings = async () => {
       }
 
       const reviewCount = reviews.length == 0 ? 1 : reviews.length;
-      const newActingAverage = (actingTotal / reviewCount).toFixed(1);
-      const newPlotAverage = (plotTotal / reviewCount).toFixed(1);
-      const newVisualsAverage = (visualsTotal / reviewCount).toFixed(1);
-      const newTotalAverage = (totalAverage / reviewCount).toFixed(1);
+      const newActingAverage = actingTotal / reviewCount;
+      const newPlotAverage = plotTotal / reviewCount;
+      const newVisualsAverage = visualsTotal / reviewCount;
+      const newTotalAverage = totalAverage / reviewCount;
 
       // Update the show with new ratings and review count
       await Show.findByIdAndUpdate(

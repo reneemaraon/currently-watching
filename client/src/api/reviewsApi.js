@@ -160,6 +160,70 @@ export const DELETE_REVIEW_LIKE_MUTATION = gql`
   }
 `;
 
+export const UPDATE_REVIEW_MUTATION = gql`
+  mutation UpdateReview($reviewId: ID!, $body: ReviewUpdateBody!) {
+    updateReview(reviewId: $reviewId, body: $body) {
+      _id
+      title
+      body
+      overallRating
+      actingRating
+      plotRating
+      visualsRating
+      createdAt
+      commentCount
+      likeCount
+      liked
+      show {
+        _id
+        title
+        tmdbPoster
+        tmdbBackdrop
+      }
+      user {
+        _id
+        name
+        screenName
+        profilePhotoUrl
+      }
+    }
+  }
+`;
+
+export const GET_REVIEW_TO_UPDATE = gql`
+  query Review($id: ID!) {
+    review(id: $id) {
+      _id
+      title
+      body
+      overallRating
+      actingRating
+      plotRating
+      visualsRating
+      show {
+        _id
+        title
+        tmdbPoster
+        tmdbBackdrop
+        actingAverage
+        plotAverage
+        visualsAverage
+        totalAverage
+        synopsis
+        cast {
+          name
+        }
+      }
+      user {
+        _id
+        name
+        screenName
+        profilePhotoUrl
+      }
+    }
+  }
+`;
+
 export const getReviewsRequest = async (params) =>
   await axios.get('/api/v1/reviews/');
 
