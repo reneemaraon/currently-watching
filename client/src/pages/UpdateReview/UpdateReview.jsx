@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { useToast } from '../../context/ToastContext';
-import { useReviewsContext } from '../../context/ReviewContext';
-import ReviewForm from '../ReviewForm/ReviewForm';
-import { useCreateReviewContext } from '../../context/CreateReviewContext';
-import { useUpdateReviewContext } from '../../context/UpdateReviewContext';
-import { useShowDetailContext } from '../../context/ShowDetailContext';
-import FullPageLoading from '../Common/FullPageLoading';
+import { useToast } from "../../context/ToastContext";
+import { useReviewsContext } from "../../context/ReviewContext";
+import ReviewForm from "../ReviewForm/ReviewForm";
+import { useUpdateReviewContext } from "../../context/UpdateReviewContext";
+import { useShowDetailContext } from "../../context/ShowDetailContext";
+import FullPageLoading from "../Common/FullPageLoading";
 
 const UpdateReview = () => {
   const { id } = useParams();
@@ -28,20 +27,19 @@ const UpdateReview = () => {
   } = useUpdateReviewContext();
 
   const { refreshList } = useReviewsContext();
-
   const { refetchShow } = useShowDetailContext();
 
   const { showToast } = useToast();
 
   useEffect(() => {
     if (updateError) {
-      showToast(updateError, 'error');
+      showToast(updateError, "error");
     }
   }, [updateError]);
 
   useEffect(() => {
     if (updatedReview) {
-      showToast('Your review is successfully updated.', 'success');
+      showToast("Your review is successfully updated.", "success");
       navigate(`/reviews/${updatedReview._id}`);
       setUpdatedReview(null);
       refreshList();
@@ -52,7 +50,7 @@ const UpdateReview = () => {
   useEffect(() => {
     if (error && state.showId) {
       console.log(error);
-      showToast('Something went wrong. Please try again.', 'error');
+      showToast("Something went wrong. Please try again.", "error");
     }
   }, [error]);
 
@@ -61,7 +59,7 @@ const UpdateReview = () => {
   }, [id]);
 
   const handleCancel = () => {
-    navigate('/reviews');
+    navigate("/reviews");
   };
 
   if (updateLoading || loading || !state.body) {
