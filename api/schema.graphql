@@ -70,12 +70,31 @@ type Review {
   liked: Boolean!
 }
 
+type ListItem {
+  order: Int!
+  show: Show!
+}
+
+type List { 
+  _id: ID!
+  user: User!
+  ordered: Boolean!
+  items: [ListItem!]
+  name: String!
+}
+
 input ReviewUpdateBody {
   actingRating: Int
   plotRating: Int
   visualsRating: Int
   body: String
   title: String
+}
+
+input ListCreateBody {
+  name: String
+  ordered: Boolean
+  items: [String]
 }
 
 type Mutation {
@@ -85,6 +104,7 @@ type Mutation {
   watchedShow(showId: ID!): Show!
   deleteWatch(showId: ID!): Show!
   updateReview(reviewId: ID!, body: ReviewUpdateBody! ): Review! 
+  createList(body: ListCreateBody!): List!
 }
 
 
@@ -144,6 +164,9 @@ type Query {
 
   users: [User]
   user(id: ID!): User
+
+  # lists(): [List]
+  list(id: ID!): List
 
 
   reviewComments(id: ID!, filter: FilterInput): CommentPagination

@@ -17,6 +17,8 @@ const {
 } = require('./controllers/watch');
 const { isReviewOwnerStandalone } = require('./middlewares/isOwnerMiddleware');
 const { processUpdateReview } = require('./controllers/review');
+const { processCreateList } = require('./controllers/list');
+const List = require('./models/list');
 
 const resolvers = {
   Query: {
@@ -168,6 +170,10 @@ const resolvers = {
         cursorNumValue: filter.cursorNumValue,
       };
     },
+    list: async (_, { id }) => {
+      let list = await List.findOne({ _id: id });
+      return list;
+    },
   },
   Review: {
     user: async (parent, args, context) => {
@@ -220,6 +226,18 @@ const resolvers = {
       const review = await Review.findById(parent.review);
       return review;
     },
+    user: async (parent, args, context) => {
+      const user = await User.findById(parent.user);
+      return user;
+    },
+  },
+  ListItem: {
+    show: async (parent, args, context) => {
+      const show = await Show.findById(parent.show);
+      return show;
+    },
+  },
+  List: {
     user: async (parent, args, context) => {
       const user = await User.findById(parent.user);
       return user;
@@ -282,6 +300,17 @@ const resolvers = {
         }
       } catch (error) {
         throw new Error('Failed to update review');
+      }
+    },
+    createList: async (_, { body }, { user }) => {
+      try {
+        const newList = await processCreateList({
+          userId: '65b4aed35eba8362e2b674aa',
+          ...body,
+        });
+        return newList;
+      } catch (error) {
+        throw new Error('Failed to create list');
       }
     },
   },
