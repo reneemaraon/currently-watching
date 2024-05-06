@@ -1,15 +1,14 @@
 import {
-  AddIcon,
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from "../Common/IconList";
-import ListItem from "./ListItem";
-import ListOptionButton from "./ListOptionButton";
-import Icon from "../Common/Icon";
-import CustomButton from "../Common/CustomButton";
-import { useState } from "react";
+} from '../Common/IconList';
+import ListItem from './ListItem';
+import ListOptionButton from './ListOptionButton';
+import Icon from '../Common/Icon';
+import CustomButton from '../Common/CustomButton';
+import { useState } from 'react';
 
 const List = ({ list }) => {
   const [showItems, setShowItems] = useState(true);
@@ -21,7 +20,7 @@ const List = ({ list }) => {
   return (
     <div className="List self-stretch flex-col justify-start items-start gap-2.5 flex">
       <div className="ListHeader self-stretch px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-start items-start gap-2.5 inline-flex">
-        <div className="grow title-text font-light">Favorites</div>
+        <div className="grow title-text font-light">{list.name}</div>
         <div className="Actions justify-center items-center gap-1.5 sm:gap-2.5 flex">
           <ListOptionButton>
             <Icon
@@ -50,7 +49,11 @@ const List = ({ list }) => {
         </div>
       </div>
       <div className="List self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex">
-        {showItems && [<ListItem />, <ListItem />].map((item) => item)}
+        {showItems &&
+          list.items &&
+          list.items.map((item) => (
+            <ListItem order={item.order} show={item.show} />
+          ))}
         <div className="cursor-pointer w-full" onClick={toggleShowItems}>
           {showItems ? (
             <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">

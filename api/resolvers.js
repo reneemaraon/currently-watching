@@ -174,6 +174,26 @@ const resolvers = {
       let list = await List.findOne({ _id: id });
       return list;
     },
+    myLists: async (_, { filter = {} }, { user }) => {
+      const {
+        searchConditions,
+        cursorConditions,
+        options: { sort, limit },
+      } = generateSearchConditions(filter);
+
+      const myLists = await List.find({
+        user: user._id,
+        ...searchConditions,
+        ...cursorConditions,
+      })
+        .sort(sort)
+        .limit(limit);
+      const count = await List.find(searchConditions).countDocuments();
+      return {
+        lists: myLists,
+        totalCount: count,
+      };
+    },
   },
   Review: {
     user: async (parent, args, context) => {
@@ -210,6 +230,13 @@ const resolvers = {
       const watched = await Watch.find({ show: parent._id, user: user._id });
       return watched.length > 0;
     },
+    myReview: async (parent, args, { user }) => {
+      if (!user) {
+        return [];
+      }
+      const review = await Review.find({ user: user._id, show: parent._id });
+      return review;
+    },
   },
   Comment: {
     review: async (parent, args, context) => {
@@ -241,6 +268,9 @@ const resolvers = {
     user: async (parent, args, context) => {
       const user = await User.findById(parent.user);
       return user;
+    },
+    items: async (parent, args, context) => {
+      return parent.items;
     },
   },
   Mutation: {

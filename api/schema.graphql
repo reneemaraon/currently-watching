@@ -40,6 +40,7 @@ type Show {
   popularity: Float!
   watchCount: Int!
   watched: Boolean!
+  myReview: [Review]
 }
 
 type Actor {
@@ -79,6 +80,7 @@ type List {
   _id: ID!
   user: User!
   ordered: Boolean!
+  createdAt: DateTime!
   items: [ListItem!]
   name: String!
 }
@@ -151,6 +153,11 @@ type CommentPagination {
   comments: [Comment]
 }
 
+type ListPagination {
+  totalCount: Int!
+  lists: [List]
+}
+
 
 type Query {
   reviews(filter: FilterInput): ReviewPagination
@@ -167,6 +174,7 @@ type Query {
 
   # lists(): [List]
   list(id: ID!): List
+  myLists(filter: FilterInput): ListPagination
 
 
   reviewComments(id: ID!, filter: FilterInput): CommentPagination
