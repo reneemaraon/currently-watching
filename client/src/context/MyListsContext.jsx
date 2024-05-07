@@ -92,7 +92,6 @@ export const MyListsProvider = ({ children }) => {
         myLists,
         loadNextPage,
         refetch,
-        loading,
         refreshList,
         // removeReviewFromUserReviewList,
       }}

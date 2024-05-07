@@ -20,7 +20,8 @@ const MyListsPage = () => {
         </CustomButton>
       </Header>
       <div className="ListArea self-stretch flex-col justify-start items-center gap-11 sm:gap-12 flex">
-        {myLists && myLists.lists.map((list) => <List list={list} />)}
+        {myLists &&
+          myLists.lists.map((list) => <List key={list._id} list={list} />)}
       </div>
     </div>
   );

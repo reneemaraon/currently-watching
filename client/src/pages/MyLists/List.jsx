@@ -1,3 +1,4 @@
+import Draggable from 'react-draggable';
 import {
   ExpandDownIcon,
   MoveDownListIcon,
@@ -7,11 +8,28 @@ import {
 import ListItem from './ListItem';
 import ListOptionButton from './ListOptionButton';
 import Icon from '../Common/Icon';
-import CustomButton from '../Common/CustomButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const List = ({ list }) => {
   const [showItems, setShowItems] = useState(true);
+  const [items, setItems] = useState([]);
+
+  const handleDrag = (draggedIndex, newPosition) => {
+    const newItems = items.slice();
+    const draggedItem = newItems.splice(draggedIndex, 1)[0];
+    newItems.splice(newPosition, 0, draggedItem);
+
+    setItems(
+      newItems.map((item, index) => ({
+        ...item,
+        order: index + 1,
+      }))
+    );
+  };
+
+  useEffect(() => {
+    setItems(list.items);
+  }, []);
 
   const toggleShowItems = () => {
     setShowItems(!showItems);
@@ -50,9 +68,19 @@ const List = ({ list }) => {
       </div>
       <div className="List self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex">
         {showItems &&
-          list.items &&
-          list.items.map((item) => (
-            <ListItem order={item.order} show={item.show} />
+          items.map((item, index) => (
+            <Draggable
+              key={item.order}
+              onStop={(e, data) => {
+                const newPosition = Math.round(data.y / 70); // Assuming each item's height is 50px
+                handleDrag(index, newPosition);
+              }}
+              axis="y"
+              position={{ x: 0, y: item.order - 1 }}
+              grid={[1, 2]} // Snap to grid to ensure smooth dragging
+            >
+              <ListItem order={item.order} show={item.show} />
+            </Draggable>
           ))}
         <div className="cursor-pointer w-full" onClick={toggleShowItems}>
           {showItems ? (
@@ -70,7 +98,7 @@ const List = ({ list }) => {
             <div className="ShowDetailCard w-full h-9 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
               <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
                 <div className="ExpandList20 text-brand-tq text-[10px] sm:text-xs font-normal font-['Inter']">
-                  Expand List (20)
+                  Expand List {list.items.length}
                 </div>
                 <Icon
                   sizeRules="w-3 h-3 sm:w-4 sm:h-4"

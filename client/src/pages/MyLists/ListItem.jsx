@@ -3,10 +3,15 @@ import { BarsIcon } from '../Common/IconList';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
 import StarIcon from '../Common/Star';
 import { getYear } from '../../utils/formatDate';
+import { useEffect } from 'react';
+import { isMarkActive } from '@tiptap/react';
 
-const ListItem = ({ show, order }) => {
+const ListItem = ({ show, order, ...rest }) => {
   return (
-    <div className="ShowDetailCard w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 bg-white bg-opacity-70 rounded-2xl border justify-start items-center inline-flex">
+    <div
+      {...rest}
+      className="bg-white transition-transform ease-out w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex"
+    >
       <div className="RankNumContainer px-5 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex">
         <div className="RankNumber text-base sm:text-lg md:text-2xl font-base md:font-medium leading-none">
           {order}
