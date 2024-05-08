@@ -1,20 +1,25 @@
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from '../Common/IconList';
-import ListItem from './ListItem';
-import ListOptionButton from './ListOptionButton';
-import Icon from '../Common/Icon';
-import { useEffect, useState } from 'react';
+} from "../Common/IconList";
+import ListItem from "./ListItem";
+import ListOptionButton from "./ListOptionButton";
+import Icon from "../Common/Icon";
+import { useEffect, useState } from "react";
+import Insert from "./Insert";
 
 const List = ({ list }) => {
   const [showItems, setShowItems] = useState(true);
   const [items, setItems] = useState([]);
+  const [insertIndex, setInsertIndex] = useState(null);
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragging, setDragging] = useState(false);
 
-  const handleDrag = (draggedIndex, newPosition) => {
+  const handleStop = (draggedIndex, newPosition) => {
+    setDragging(false);
     const newItems = items.slice();
     const draggedItem = newItems.splice(draggedIndex, 1)[0];
     newItems.splice(newPosition, 0, draggedItem);
@@ -25,10 +30,35 @@ const List = ({ list }) => {
         order: index + 1,
       }))
     );
+    setInsertIndex(null);
+    setDraggedIndex(null);
+  };
+
+  const onDragStart = (draggedIndex) => {
+    setDragging(true);
+    const newItems = items.map((item) => {
+      if (item.order == draggedIndex + 1) {
+        return {
+          ...item,
+          selected: true,
+        };
+      }
+      return {
+        ...item,
+        selected: false,
+      };
+    });
+    setItems(newItems);
+    setDraggedIndex(draggedIndex);
   };
 
   useEffect(() => {
-    setItems(list.items);
+    setItems(
+      list.items.map((item) => ({
+        ...item,
+        selected: false,
+      }))
+    );
   }, []);
 
   const toggleShowItems = () => {
@@ -72,16 +102,35 @@ const List = ({ list }) => {
             <Draggable
               key={item.order}
               onStop={(e, data) => {
-                const newPosition = Math.round(data.y / 70); // Assuming each item's height is 50px
-                handleDrag(index, newPosition);
+                const newPosition = index + Math.round(data.y / 70); // Assuming each item's height is 50px
+                handleStop(index, newPosition);
+              }}
+              onStart={() => onDragStart(index)}
+              onDrag={(e, data) => {
+                const newPosition = index + Math.round(data.y / 70); // Assuming each item's height is 50px
+                setInsertIndex(newPosition);
               }}
               axis="y"
               position={{ x: 0, y: item.order - 1 }}
-              grid={[1, 2]} // Snap to grid to ensure smooth dragging
+              // grid={[1, 70]}
             >
-              <ListItem order={item.order} show={item.show} />
+              <ListItem
+                insertVisible={
+                  insertIndex == index &&
+                  !item.selected &&
+                  index < items.length - 1
+                }
+                order={item.order}
+                dragging={dragging}
+                selected={item.selected}
+                show={item.show}
+              />
             </Draggable>
           ))}
+        {items.length - 1 == insertIndex && insertIndex != draggedIndex && (
+          <Insert />
+        )}
+
         <div className="cursor-pointer w-full" onClick={toggleShowItems}>
           {showItems ? (
             <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
