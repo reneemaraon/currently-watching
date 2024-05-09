@@ -1,15 +1,14 @@
-import Draggable from "react-draggable";
+import Draggable from 'react-draggable';
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from "../Common/IconList";
-import ListItem from "./ListItem";
-import ListOptionButton from "./ListOptionButton";
-import Icon from "../Common/Icon";
-import { useEffect, useState } from "react";
-import Insert from "./Insert";
+} from '../Common/IconList';
+import ListItem from './ListItem';
+import ListOptionButton from './ListOptionButton';
+import Icon from '../Common/Icon';
+import { useEffect, useState } from 'react';
 
 const List = ({ list }) => {
   const [showItems, setShowItems] = useState(true);
@@ -52,6 +51,30 @@ const List = ({ list }) => {
     setDraggedIndex(draggedIndex);
   };
 
+  const addDrama = () => {
+    setItems((prevItems) => [
+      ...prevItems,
+      {
+        show: null,
+        order: prevItems.length + 1,
+        selected: false,
+      },
+    ]);
+  };
+
+  const setShowToItem = (order, show) => {
+    const newItems = items.map((item) => {
+      if (item.order == order) {
+        return {
+          ...item,
+          show,
+        };
+      }
+      return item;
+    });
+    setItems(newItems);
+  };
+
   useEffect(() => {
     setItems(
       list.items.map((item) => ({
@@ -91,7 +114,10 @@ const List = ({ list }) => {
               <OptionsIcon />
             </Icon>
           </ListOptionButton>
-          <button className="rounded-full inverse-button-style small-button">
+          <button
+            onClick={addDrama}
+            className="rounded-full inverse-button-style small-button"
+          >
             <div className="font-normal sm:font-medium">+ Add drama</div>
           </button>
         </div>
@@ -115,21 +141,16 @@ const List = ({ list }) => {
               // grid={[1, 70]}
             >
               <ListItem
-                insertVisible={
-                  insertIndex == index &&
-                  !item.selected &&
-                  index < items.length - 1
-                }
+                insertVisible={insertIndex == index && !item.selected}
+                fromTop={draggedIndex < index}
                 order={item.order}
                 dragging={dragging}
                 selected={item.selected}
                 show={item.show}
+                setShowToItem={setShowToItem}
               />
             </Draggable>
           ))}
-        {items.length - 1 == insertIndex && insertIndex != draggedIndex && (
-          <Insert />
-        )}
 
         <div className="cursor-pointer w-full" onClick={toggleShowItems}>
           {showItems ? (
