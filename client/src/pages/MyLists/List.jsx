@@ -1,15 +1,15 @@
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from '../Common/IconList';
-import ListItem from './ListItem';
-import ListOptionButton from './ListOptionButton';
-import Icon from '../Common/Icon';
-import { useEffect, useState } from 'react';
-import { useMyListsContext } from '../../context/MyListsContext';
+} from "../Common/IconList";
+import ListItem from "./ListItem";
+import ListOptionButton from "./ListOptionButton";
+import Icon from "../Common/Icon";
+import { useEffect, useState } from "react";
+import { useMyListsContext } from "../../context/MyListsContext";
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -153,7 +153,8 @@ const List = ({ list }) => {
         </div>
       </div>
       <div className="List self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex">
-        {items &&
+        {showItems &&
+          items &&
           items.map((item, index) => (
             <Draggable
               key={item.order}
@@ -182,7 +183,7 @@ const List = ({ list }) => {
             </Draggable>
           ))}
 
-        <div className="cursor-pointer w-full" onClick={toggleShowItems}>
+        <div className="my-1.5 cursor-pointer w-full" onClick={toggleShowItems}>
           {showItems ? (
             <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
               <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">

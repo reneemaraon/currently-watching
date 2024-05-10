@@ -1,13 +1,13 @@
-import Icon from '../Common/Icon';
-import { BarsIcon, SearchIcon } from '../Common/IconList';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import StarIcon from '../Common/Star';
-import { getYear } from '../../utils/formatDate';
-import { useEffect, useRef, useState } from 'react';
-import { isMarkActive } from '@tiptap/react';
-import Insert from './Insert';
-import { useSearchContext } from '../../context/SearchContext';
-import SearchResultItem from './SearchResultListItem';
+import Icon from "../Common/Icon";
+import { BarsIcon, SearchIcon } from "../Common/IconList";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import StarIcon from "../Common/Star";
+import { getYear } from "../../utils/formatDate";
+import { useEffect, useRef, useState } from "react";
+import { isMarkActive } from "@tiptap/react";
+import Insert from "./Insert";
+import { useSearchContext } from "../../context/SearchContext";
+import SearchResultItem from "./SearchResultListItem";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -60,7 +60,7 @@ const ListItem = ({
 
   const onSearchItemClick = (searchResult) => {
     const { _id: id } = searchResult;
-    setSearchTerm('');
+    setSearchTerm("");
     setShowToItem(order, searchResult);
     setSearchListVisible(false);
   };
@@ -73,9 +73,9 @@ const ListItem = ({
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -83,9 +83,9 @@ const ListItem = ({
     <div
       {...rest}
       className={`w-full ${
-        !dragging && 'transition-transform ease-in-out duration-500'
+        !dragging && "transition-transform ease-in-out duration-500"
       } flex-col inline-flex gap-1 sm:gap-1.5 justify-end ${
-        selected && 'z-[10]'
+        selected && "z-[10]"
       }`}
     >
       {insertVisible && !fromTop && <Insert />}
@@ -139,14 +139,14 @@ const ListItem = ({
                 type="text"
                 className="text-sm sm:text-base grow placeholder-lighter-text leading-tight bg-transparent focus:outline-none"
                 placeholder="Search by Keyword"
-                value={isFocused ? searchTerm : ''}
+                value={isFocused ? searchTerm : ""}
                 onChange={handleInputChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
               <div
                 className={`${
-                  isFocused || isSearchListVisible ? 'block' : 'hidden'
+                  isFocused || isSearchListVisible ? "block" : "hidden"
                 }  py-1 w-full min-w-[400px] overflow-hidden absolute top-10 left-8 z-[90]`}
               >
                 {searchTerm.length > 0 && (
@@ -192,7 +192,7 @@ const ListItem = ({
                 </div>
               </div>
             )}
-            <div className="MoveIcon w-7 h-7 sm:w-9 sm:h-9 justify-center items-center flex">
+            <div className="h-7 sm:h-9 justify-center items-center flex">
               <Icon
                 sizeRules="h-5 w-5 sm:w-7 sm:h-7"
                 fill="stroke-1 stroke-light-text"
