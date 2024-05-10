@@ -107,6 +107,7 @@ type Mutation {
   deleteWatch(showId: ID!): Show!
   updateReview(reviewId: ID!, body: ReviewUpdateBody! ): Review! 
   createList(body: ListCreateBody!): List!
+  updateList(listId: ID!, body: ListCreateBody): List!
 }
 
 

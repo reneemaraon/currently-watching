@@ -13,6 +13,7 @@ export const SEARCH_SHOWS = gql`
         plotAverage
         visualsAverage
         totalAverage
+        reviewCount
         firstAirDate
         cast {
           _id

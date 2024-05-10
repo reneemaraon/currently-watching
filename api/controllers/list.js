@@ -1,7 +1,4 @@
 const List = require('../models/list');
-const Show = require('../models/show');
-const { NotFoundError } = require('../errors');
-const { StatusCodes } = require('http-status-codes');
 
 const processCreateList = async ({
   userId,
@@ -15,6 +12,20 @@ const processCreateList = async ({
     items: items.map((val, index) => ({ show: val, order: index + 1 })),
     ordered,
   });
+
+  return listInstance;
+};
+
+const processUpdateList = async (id, body) => {
+  console.log(body);
+  const updateBody = body;
+  if (body.items) {
+    updateBody.items = body.items.map((val, index) => ({
+      show: val,
+      order: index + 1,
+    }));
+  }
+  const listInstance = await List.findByIdAndUpdate(id, { $set: updateBody });
 
   return listInstance;
 };
@@ -72,4 +83,5 @@ module.exports = {
   //   deleteLike,
   //   processDeleteLike,
   processCreateList,
+  processUpdateList,
 };

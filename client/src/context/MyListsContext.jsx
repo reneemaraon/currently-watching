@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { GET_MY_LISTS } from '../api/listApi';
-import { useQuery } from '@apollo/client';
+import { GET_MY_LISTS, UPDATE_LIST_MUTATION } from '../api/listApi';
+import { useMutation, useQuery } from '@apollo/client';
 import findCursor from '../utils/getCursorFromList';
 
 const ITEMS_PER_PAGE = 3;
@@ -32,6 +32,9 @@ export const MyListsProvider = ({ children }) => {
     },
   });
 
+  const [updateListRequest, { data: updateData, error: updateError }] =
+    useMutation(UPDATE_LIST_MUTATION);
+
   const updateCursor = () => {
     setCursor(findCursor(myLists.lists, SORT_FIELD));
   };
@@ -50,16 +53,40 @@ export const MyListsProvider = ({ children }) => {
     refetch();
   };
 
+  const updateList = async (listId, body) => {
+    await updateListRequest({
+      variables: { listId, body },
+    });
+  };
+
+  useEffect(() => {
+    if (updateData) {
+      console.log(updateData);
+
+      setMyLists((prevList) => {
+        const newLists = prevList.lists.map((list) => {
+          if (list._id == updateData.updateList._id) {
+            return updateData.updateList;
+          }
+          return;
+        });
+
+        return {
+          ...prevList,
+          lists: newLists,
+        };
+      });
+    }
+  }, [updateData]);
+
   useEffect(() => {
     if (data) {
       const { lists: dataLists, totalCount } = data.myLists;
       const { lists: currentLists } = myLists;
-      console.log('helloe');
       if (
         findCursor(currentLists, SORT_FIELD) !=
         findCursor(dataLists, SORT_FIELD)
       ) {
-        console.log('setlist');
         setMyLists((prevLists) => ({
           totalCount,
           lists: [...prevLists.lists, ...dataLists],
@@ -93,6 +120,7 @@ export const MyListsProvider = ({ children }) => {
         loadNextPage,
         refetch,
         refreshList,
+        updateList,
         // removeReviewFromUserReviewList,
       }}
     >

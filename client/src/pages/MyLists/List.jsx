@@ -9,13 +9,48 @@ import ListItem from './ListItem';
 import ListOptionButton from './ListOptionButton';
 import Icon from '../Common/Icon';
 import { useEffect, useState } from 'react';
+import { useMyListsContext } from '../../context/MyListsContext';
+
+const changedItems = (sourceItems, stateItems) => {
+  const stateIds = stateItems
+    .filter((item) => item.show)
+    .map((item) => item.show._id);
+  const sourceIds = sourceItems.map((item) => item.show._id);
+
+  if (sourceIds.length !== stateIds.length) {
+    return true;
+  }
+
+  for (let i = 0; i < sourceIds.length; i++) {
+    if (sourceIds[i] !== stateIds[i]) {
+      return true;
+    }
+  }
+  return false;
+};
 
 const List = ({ list }) => {
   const [showItems, setShowItems] = useState(true);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(null);
   const [insertIndex, setInsertIndex] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragging, setDragging] = useState(false);
+  const { updateList } = useMyListsContext();
+
+  useEffect(() => {
+    setItems(
+      list.items.map((item) => ({
+        ...item,
+        selected: false,
+      }))
+    );
+  }, []);
+
+  useEffect(() => {
+    if (items && changedItems(list.items, items)) {
+      processUpdateList();
+    }
+  }, [items]);
 
   const handleStop = (draggedIndex, newPosition) => {
     setDragging(false);
@@ -31,6 +66,10 @@ const List = ({ list }) => {
     );
     setInsertIndex(null);
     setDraggedIndex(null);
+  };
+
+  const processUpdateList = async () => {
+    await updateList(list._id, { items: items.map((item) => item.show._id) });
   };
 
   const onDragStart = (draggedIndex) => {
@@ -75,15 +114,6 @@ const List = ({ list }) => {
     setItems(newItems);
   };
 
-  useEffect(() => {
-    setItems(
-      list.items.map((item) => ({
-        ...item,
-        selected: false,
-      }))
-    );
-  }, []);
-
   const toggleShowItems = () => {
     setShowItems(!showItems);
   };
@@ -123,7 +153,7 @@ const List = ({ list }) => {
         </div>
       </div>
       <div className="List self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex">
-        {showItems &&
+        {items &&
           items.map((item, index) => (
             <Draggable
               key={item.order}

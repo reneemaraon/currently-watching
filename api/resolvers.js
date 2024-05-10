@@ -17,7 +17,7 @@ const {
 } = require('./controllers/watch');
 const { isReviewOwnerStandalone } = require('./middlewares/isOwnerMiddleware');
 const { processUpdateReview } = require('./controllers/review');
-const { processCreateList } = require('./controllers/list');
+const { processCreateList, processUpdateList } = require('./controllers/list');
 const List = require('./models/list');
 
 const resolvers = {
@@ -341,6 +341,15 @@ const resolvers = {
         return newList;
       } catch (error) {
         throw new Error('Failed to create list');
+      }
+    },
+    updateList: async (_, { listId, body }, { user }) => {
+      try {
+        const newList = await processUpdateList(listId, body);
+        return newList;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Failed to update list');
       }
     },
   },
