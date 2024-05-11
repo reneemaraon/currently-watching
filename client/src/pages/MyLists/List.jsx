@@ -1,15 +1,15 @@
-import Draggable from "react-draggable";
+import Draggable from 'react-draggable';
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from "../Common/IconList";
-import ListItem from "./ListItem";
-import ListOptionButton from "./ListOptionButton";
-import Icon from "../Common/Icon";
-import { useEffect, useState } from "react";
-import { useMyListsContext } from "../../context/MyListsContext";
+} from '../Common/IconList';
+import ListItem from './ListItem';
+import ListOptionButton from './ListOptionButton';
+import Icon from '../Common/Icon';
+import { useEffect, useState } from 'react';
+import { useMyListsContext } from '../../context/MyListsContext';
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -66,6 +66,19 @@ const List = ({ list }) => {
     );
     setInsertIndex(null);
     setDraggedIndex(null);
+  };
+
+  const onDelete = (deleteOrder) => {
+    setItems((prevItems) => {
+      const itemsAfterDelete = prevItems
+        .filter((item) => item.order != deleteOrder)
+        .map((item, index) => ({
+          ...item,
+          order: index + 1,
+        }));
+
+      return itemsAfterDelete;
+    });
   };
 
   const processUpdateList = async () => {
@@ -174,7 +187,8 @@ const List = ({ list }) => {
               <ListItem
                 insertVisible={insertIndex == index && !item.selected}
                 fromTop={draggedIndex < index}
-                order={item.order}
+                order={index + 1}
+                onDelete={onDelete}
                 dragging={dragging}
                 selected={item.selected}
                 show={item.show}

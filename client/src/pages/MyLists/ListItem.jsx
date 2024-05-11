@@ -1,13 +1,19 @@
-import Icon from "../Common/Icon";
-import { BarsIcon, SearchIcon } from "../Common/IconList";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import StarIcon from "../Common/Star";
-import { getYear } from "../../utils/formatDate";
-import { useEffect, useRef, useState } from "react";
-import { isMarkActive } from "@tiptap/react";
-import Insert from "./Insert";
-import { useSearchContext } from "../../context/SearchContext";
-import SearchResultItem from "./SearchResultListItem";
+import Icon from '../Common/Icon';
+import {
+  BarsIcon,
+  DeleteIcon,
+  DragIcon,
+  PencilIcon,
+  SearchIcon,
+} from '../Common/IconList';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import StarIcon from '../Common/Star';
+import { getYear } from '../../utils/formatDate';
+import { useEffect, useRef, useState } from 'react';
+import { isMarkActive } from '@tiptap/react';
+import Insert from './Insert';
+import { useSearchContext } from '../../context/SearchContext';
+import SearchResultItem from './SearchResultListItem';
 
 function debounce(func, delay) {
   let timeoutId;
@@ -27,6 +33,8 @@ const ListItem = ({
   order,
   fromTop,
   setShowToItem,
+  onDelete,
+  onEdit,
   ...rest
 }) => {
   const {
@@ -60,7 +68,7 @@ const ListItem = ({
 
   const onSearchItemClick = (searchResult) => {
     const { _id: id } = searchResult;
-    setSearchTerm("");
+    setSearchTerm('');
     setShowToItem(order, searchResult);
     setSearchListVisible(false);
   };
@@ -73,9 +81,9 @@ const ListItem = ({
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -83,14 +91,14 @@ const ListItem = ({
     <div
       {...rest}
       className={`w-full ${
-        !dragging && "transition-transform ease-in-out duration-500"
+        !dragging && 'transition-transform ease-in-out duration-500'
       } flex-col inline-flex gap-1 sm:gap-1.5 justify-end ${
-        selected && "z-[10]"
+        selected && 'z-[10]'
       }`}
     >
       {insertVisible && !fromTop && <Insert />}
       <div className="bg-theme-base transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">
-        <div className="RankNumContainer px-5 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex">
+        <div className="cursor-pointer group RankNumContainer px-6 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex">
           <div className="RankNumber text-base sm:text-lg md:text-2xl font-base md:font-medium leading-none">
             {order}
           </div>
@@ -106,7 +114,7 @@ const ListItem = ({
           </div>
         )}
 
-        <div className="ShowDetails grow shrink basis-0 self-stretch px-2 sm:px-5 md:px-7 py-[11px] justify-between items-center flex">
+        <div className="ShowDetails pl-2 sm:pl-5 md:pl-7 grow shrink basis-0 self-stretch py-[11px] justify-between items-center flex">
           {show ? (
             <div className="ShowDetailsText flex-col justify-start items-start gap-0.5 sm:gap-1 md:gap-2 inline-flex">
               <div className="Title">
@@ -139,14 +147,14 @@ const ListItem = ({
                 type="text"
                 className="text-sm sm:text-base grow placeholder-lighter-text leading-tight bg-transparent focus:outline-none"
                 placeholder="Search by Keyword"
-                value={isFocused ? searchTerm : ""}
+                value={isFocused ? searchTerm : ''}
                 onChange={handleInputChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
               <div
                 className={`${
-                  isFocused || isSearchListVisible ? "block" : "hidden"
+                  isFocused || isSearchListVisible ? 'block' : 'hidden'
                 }  py-1 w-full min-w-[400px] overflow-hidden absolute top-10 left-8 z-[90]`}
               >
                 {searchTerm.length > 0 && (
@@ -177,9 +185,9 @@ const ListItem = ({
               </div>
             </div>
           )}
-          <div className="Right inline-flex justify-end items-center gap-2 min-[400px]:gap-4 sm:gap-6 md:gap-8">
+          <div className="Right relative px-2 sm:px-5 md:px-7 inline-flex justify-end items-center gap-2 min-[400px]:gap-4 sm:gap-6 md:gap-8">
             {show && (
-              <div className="PersonalRating self-stretch sm:px-1.5 md:px-2.5 justify-end items-center flex">
+              <div className="PersonalRating sm:px-0.5 md:px-1.5 justify-end items-center flex">
                 <div className="RatingsContainer justify-between items-start flex">
                   {show.myReview && show.myReview.length > 0 && (
                     <div className="StarRating h-full rounded-[30px] justify-center items-center gap-1 flex">
@@ -192,14 +200,25 @@ const ListItem = ({
                 </div>
               </div>
             )}
-            <div className="h-7 sm:h-9 justify-center items-center flex">
-              <Icon
-                sizeRules="h-5 w-5 sm:w-7 sm:h-7"
-                fill="stroke-1 stroke-light-text"
+            <div className="inline-flex px-1">
+              <button
+                onClick={() => onDelete(order)}
+                className="group cursor-pointer hover:bg-opacity-80 p-1.5 hover:bg-red-500 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
               >
-                <BarsIcon />
-              </Icon>
+                <Icon
+                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                  fill="opacity-40 group-hover:opacity-100 group-hover:fill-theme-base fill-lighter-text"
+                >
+                  <DeleteIcon />
+                </Icon>
+              </button>
             </div>
+            <Icon
+              fill="cursor-pointer absolute right-1 hover:opacity-70 opacity-20 fill-brand-dark-purple"
+              sizeRules="w-3 h-3 sm:w-5 sm:h-5"
+            >
+              <DragIcon />
+            </Icon>
           </div>
         </div>
       </div>
