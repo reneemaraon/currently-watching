@@ -8,7 +8,7 @@ import {
 import ListItem from './ListItem';
 import ListOptionButton from './ListOptionButton';
 import Icon from '../Common/Icon';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMyListsContext } from '../../context/MyListsContext';
 
 const changedItems = (sourceItems, stateItems) => {
@@ -34,8 +34,19 @@ const List = ({ list }) => {
   const [items, setItems] = useState(null);
   const [insertIndex, setInsertIndex] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
+  const [itemHeight, setItemHeight] = useState(0);
   const [dragging, setDragging] = useState(false);
   const { updateList } = useMyListsContext();
+  const listRef = useRef(null);
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    if (listRef.current && items && items.length > 0 && !itemHeight) {
+      const listHeight = listRef.current.offsetHeight;
+      const heightOneItem = Math.floor(listHeight / items.length);
+      setItemHeight(heightOneItem);
+    }
+  }, [listRef, items]);
 
   useEffect(() => {
     setItems(
@@ -104,14 +115,18 @@ const List = ({ list }) => {
   };
 
   const addDrama = () => {
-    setItems((prevItems) => [
-      ...prevItems,
-      {
-        show: null,
-        order: prevItems.length + 1,
-        selected: false,
-      },
-    ]);
+    if (items.filter((item) => !item.show).length > 0) {
+      searchInputRef.current.focus();
+    } else {
+      setItems((prevItems) => [
+        ...prevItems,
+        {
+          show: null,
+          order: prevItems.length + 1,
+          selected: false,
+        },
+      ]);
+    }
   };
 
   const setShowToItem = (order, show) => {
@@ -165,19 +180,22 @@ const List = ({ list }) => {
           </button>
         </div>
       </div>
-      <div className="List self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex">
+      <div
+        ref={listRef}
+        className="List transition-all self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex"
+      >
         {showItems &&
           items &&
           items.map((item, index) => (
             <Draggable
               key={item.order}
               onStop={(e, data) => {
-                const newPosition = index + Math.round(data.y / 70); // Assuming each item's height is 50px
+                const newPosition = index + Math.round(data.y / itemHeight); // Assuming each item's height is 50px
                 handleStop(index, newPosition);
               }}
               onStart={() => onDragStart(index)}
               onDrag={(e, data) => {
-                const newPosition = index + Math.round(data.y / 70); // Assuming each item's height is 50px
+                const newPosition = index + Math.round(data.y / itemHeight); // Assuming each item's height is 50px
                 setInsertIndex(newPosition);
               }}
               axis="y"
@@ -188,6 +206,7 @@ const List = ({ list }) => {
                 insertVisible={insertIndex == index && !item.selected}
                 fromTop={draggedIndex < index}
                 order={index + 1}
+                searchRef={searchInputRef}
                 onDelete={onDelete}
                 dragging={dragging}
                 selected={item.selected}
@@ -196,36 +215,39 @@ const List = ({ list }) => {
               />
             </Draggable>
           ))}
+      </div>
 
-        <div className="my-1.5 cursor-pointer w-full" onClick={toggleShowItems}>
-          {showItems ? (
-            <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
-              <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
-                <Icon
-                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                  fill="rotate-180 stroke-2 stroke-brand-tq fill-none"
-                >
-                  <ExpandDownIcon />
-                </Icon>
-              </div>
+      <div
+        className="cursor-pointer self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex"
+        onClick={toggleShowItems}
+      >
+        {showItems ? (
+          <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
+            <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
+              <Icon
+                sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                fill="rotate-180 stroke-2 stroke-brand-tq fill-none"
+              >
+                <ExpandDownIcon />
+              </Icon>
             </div>
-          ) : (
-            <div className="ShowDetailCard w-full h-9 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
-              <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
-                <div className="ExpandList20 text-brand-tq text-[10px] sm:text-xs font-normal font-['Inter']">
-                  Expand List {list.items.length}
-                </div>
-                <Icon
-                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                  fill="stroke-2 stroke-brand-tq fill-none"
-                >
-                  <ExpandDownIcon />
-                </Icon>
-                <div className="Icon w-2.5 h-2.5 py-[2.50px] justify-center items-center flex" />
+          </div>
+        ) : (
+          <div className="ShowDetailCard w-full h-9 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
+            <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
+              <div className="ExpandList20 text-brand-tq text-[10px] sm:text-xs font-normal font-['Inter']">
+                Expand List {list.items.length}
               </div>
+              <Icon
+                sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                fill="stroke-2 stroke-brand-tq fill-none"
+              >
+                <ExpandDownIcon />
+              </Icon>
+              <div className="Icon w-2.5 h-2.5 py-[2.50px] justify-center items-center flex" />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -61,8 +61,6 @@ export const MyListsProvider = ({ children }) => {
 
   useEffect(() => {
     if (updateData) {
-      console.log(updateData);
-
       setMyLists((prevList) => {
         const newLists = prevList.lists.map((list) => {
           if (list._id == updateData.updateList._id) {
