@@ -29,7 +29,7 @@ const ListItem = ({
       }`}
     >
       {insertVisible && !fromTop && <Insert />}
-      <div className="bg-theme-base transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">
+      <div className="bg-theme-base relative transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">
         <div className="cursor-pointer group RankNumContainer px-6 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex">
           <div className="RankNumber text-base sm:text-lg md:text-2xl font-base md:font-medium leading-none">
             {order}

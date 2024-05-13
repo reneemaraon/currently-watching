@@ -345,7 +345,8 @@ const resolvers = {
     },
     updateList: async (_, { listId, body }, { user }) => {
       try {
-        const newList = await processUpdateList(listId, body);
+        await processUpdateList(listId, body);
+        const newList = await List.findById(listId);
         return newList;
       } catch (error) {
         console.log(error);

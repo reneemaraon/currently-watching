@@ -7,7 +7,7 @@ const SearchResultItem = ({ searchItem, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="bg-theme-base cursor-pointer hover:bg-main-bg transition py-0.5 px-1 w-full max-w-[600px] max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-md border justify-start items-center inline-flex"
+      className="bg-theme-base cursor-pointer hover:bg-main-bg transition py-0.5 px-1 max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-md border justify-start items-center inline-flex"
     >
       <div className="hidden min-[400px]:block ShowImage md:w-20 h-full px-1 py-1 sm:py-1.5 md:py-2">
         <div className="w-full h-full overflow-hidden rounded-sm sm:rounded-md">

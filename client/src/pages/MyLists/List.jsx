@@ -10,6 +10,7 @@ import ListOptionButton from './ListOptionButton';
 import Icon from '../Common/Icon';
 import { useEffect, useRef, useState } from 'react';
 import { useMyListsContext } from '../../context/MyListsContext';
+import { useDebounce } from 'use-debounce';
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -32,10 +33,13 @@ const changedItems = (sourceItems, stateItems) => {
 const List = ({ list }) => {
   const [showItems, setShowItems] = useState(true);
   const [items, setItems] = useState(null);
+  const [listName, setListName] = useState(null);
   const [insertIndex, setInsertIndex] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [itemHeight, setItemHeight] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [value] = useDebounce(listName, 1000);
+
   const { updateList } = useMyListsContext();
   const listRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -55,7 +59,21 @@ const List = ({ list }) => {
         selected: false,
       }))
     );
+  }, [list.items]);
+
+  useEffect(() => {
+    setListName(list.name);
   }, []);
+
+  const processUpdateListName = async () => {
+    await updateList(list._id, { name: value });
+  };
+
+  useEffect(() => {
+    if (value && value != list.name) {
+      processUpdateListName();
+    }
+  }, [value]);
 
   useEffect(() => {
     if (items && changedItems(list.items, items)) {
@@ -94,6 +112,10 @@ const List = ({ list }) => {
 
   const processUpdateList = async () => {
     await updateList(list._id, { items: items.map((item) => item.show._id) });
+  };
+
+  const handleInputChange = (event) => {
+    setListName(event.target.value);
   };
 
   const onDragStart = (draggedIndex) => {
@@ -148,10 +170,15 @@ const List = ({ list }) => {
 
   return (
     <div className="List self-stretch flex-col justify-start items-start gap-2.5 flex">
-      <div className="ListHeader self-stretch px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-start items-start gap-2.5 inline-flex">
-        <div className="grow title-text font-light">{list.name}</div>
-        <div className="Actions justify-center items-center gap-1.5 sm:gap-2.5 flex">
-          <ListOptionButton>
+      <div className="ListHeader w-full px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-between items-start gap-2.5 inline-flex">
+        <input
+          type="text"
+          className="bg-transparent focus:outline-none grow title-text font-light"
+          onChange={handleInputChange}
+          value={listName}
+        />
+        <div className="Actions grow-1 justify-center items-center gap-1.5 sm:gap-2.5 flex">
+          {/* <ListOptionButton>
             <Icon
               sizeRules="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5"
               fill="stroke-text-dark stroke-[1.5px]"
@@ -166,7 +193,7 @@ const List = ({ list }) => {
             >
               <MoveUpListIcon />
             </Icon>
-          </ListOptionButton>
+          </ListOptionButton> */}
           <ListOptionButton>
             <Icon sizeRules="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5">
               <OptionsIcon />
@@ -176,7 +203,8 @@ const List = ({ list }) => {
             onClick={addDrama}
             className="rounded-full inverse-button-style small-button"
           >
-            <div className="font-normal sm:font-medium">+ Add drama</div>
+            <div className="hidden sm:block font-medium">+ Add drama</div>
+            <div className="block sm:hidden font-sm">+ Add</div>
           </button>
         </div>
       </div>

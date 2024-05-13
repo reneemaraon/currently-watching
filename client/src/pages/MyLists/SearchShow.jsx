@@ -3,16 +3,7 @@ import { useSearchContext } from '../../context/SearchContext';
 import { SearchIcon } from '../Common/IconList';
 import SearchResultItem from './SearchResultListItem';
 import Icon from '../Common/Icon';
-
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  };
-}
+import debounce from '../../utils/debounce';
 
 const SearchInItem = ({ setShowToItem, order, searchRef }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -67,8 +58,8 @@ const SearchInItem = ({ setShowToItem, order, searchRef }) => {
   }, []);
 
   return (
-    <div className="relative grow inline-flex gap-5 ">
-      <Icon fill="fill-none stroke-text-dark" sizeRules="h-7 w-7">
+    <div className="grow inline-flex items-center gap-4 sm:gap-5 ">
+      <Icon fill="fill-none stroke-text-dark" sizeRules="h-4 w-4 sm:h-7 sm:w-7">
         <SearchIcon />
       </Icon>
       <input
@@ -85,12 +76,12 @@ const SearchInItem = ({ setShowToItem, order, searchRef }) => {
       <div
         className={`${
           isFocused || isSearchListVisible ? 'block' : 'hidden'
-        }  py-1 w-full min-w-[400px] overflow-hidden absolute top-10 left-8 z-[300]`}
+        }  py-1 w-full rounded-xl shadow-lg bg-main-bg overflow-hidden absolute top-full left-0 my-2 z-[100]`}
       >
         {searchTerm.length > 0 && (
           <div
             ref={searchListRef}
-            className="inline-flex flex-col gap-1 rounded-md bg-opacity-20 bg-light-stroke p-1"
+            className="inline-flex flex-col gap-1 rounded-md w-full bg-opacity-20 bg-light-stroke p-1"
           >
             {searchResults.length === 0 && (
               <div className="w-full h-[50px] text-sm text-light-text inline-flex px-8 items-center">

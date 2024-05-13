@@ -66,7 +66,7 @@ export const MyListsProvider = ({ children }) => {
           if (list._id == updateData.updateList._id) {
             return updateData.updateList;
           }
-          return;
+          return list;
         });
 
         return {

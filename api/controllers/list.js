@@ -17,7 +17,6 @@ const processCreateList = async ({
 };
 
 const processUpdateList = async (id, body) => {
-  console.log(body);
   const updateBody = body;
   if (body.items) {
     updateBody.items = body.items.map((val, index) => ({
@@ -26,7 +25,7 @@ const processUpdateList = async (id, body) => {
     }));
   }
   const listInstance = await List.findByIdAndUpdate(id, { $set: updateBody });
-
+  await listInstance.save();
   return listInstance;
 };
 
