@@ -1,20 +1,21 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   CREATE_LIST_MUTATION,
   GET_MY_LISTS,
   UPDATE_LIST_MUTATION,
-} from '../api/listApi';
-import { useMutation, useQuery } from '@apollo/client';
-import findCursor from '../utils/getCursorFromList';
+  DELETE_LIST_MUTATION,
+} from "../api/listApi";
+import { useMutation, useQuery } from "@apollo/client";
+import findCursor from "../utils/getCursorFromList";
 
 const ITEMS_PER_PAGE = 10;
-const SORT_FIELD = 'createdAt';
+const SORT_FIELD = "createdAt";
 
 const myListsContext = createContext();
 
 export const useMyListsContext = () => {
   const context = useContext(myListsContext);
-  if (!context) throw new Error('My Lists Provider is missing');
+  if (!context) throw new Error("My Lists Provider is missing");
   return context;
 };
 
@@ -41,6 +42,9 @@ export const MyListsProvider = ({ children }) => {
 
   const [createListRequest] = useMutation(CREATE_LIST_MUTATION);
 
+  const [deleteListRequest, { data: deleteData }] =
+    useMutation(DELETE_LIST_MUTATION);
+
   const updateCursor = () => {
     setCursor(findCursor(myLists.lists, SORT_FIELD));
   };
@@ -65,9 +69,9 @@ export const MyListsProvider = ({ children }) => {
       totalCount: prevList.totalCount + 1,
       lists: [
         {
-          _id: 'temp',
+          _id: "temp",
           items: [],
-          name: '',
+          name: "",
         },
         ...prevList.lists,
       ],
@@ -96,6 +100,12 @@ export const MyListsProvider = ({ children }) => {
   const updateList = async (listId, body) => {
     await updateListRequest({
       variables: { listId, body },
+    });
+  };
+
+  const deleteList = async (listId) => {
+    await deleteListRequest({
+      variables: { listId },
     });
   };
 
@@ -133,21 +143,20 @@ export const MyListsProvider = ({ children }) => {
     }
   }, [data]);
 
-  //   const removeReviewFromUserReviewList = (id) => {
-  //     const reviewIndex = userReviews.reviews.findIndex(
-  //       (review) => review._id === id
-  //     );
-  //     if (reviewIndex !== -1) {
-  //       const updatedReviews = userReviews.reviews.filter(
-  //         (review) => review._id !== id
-  //       );
-  //       setMyLists({
-  //         ...userReviews,
-  //         totalCount: userReviews.totalCount - 1,
-  //         reviews: updatedReviews,
-  //       });
-  //     }
-  //   };
+  useEffect(() => {
+    if (deleteData) {
+      const {
+        deleteList: { _id: id },
+      } = deleteData;
+      const updatedLists = myLists.lists.filter((list) => list._id != id);
+
+      setMyLists({
+        ...myLists,
+        totalCount: myLists.totalCount - 1,
+        lists: updatedLists,
+      });
+    }
+  }, [deleteData]);
 
   return (
     <myListsContext.Provider
@@ -161,7 +170,7 @@ export const MyListsProvider = ({ children }) => {
         updateList,
         addList,
         createList,
-        // removeReviewFromUserReviewList,
+        deleteList,
       }}
     >
       {children}

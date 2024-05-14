@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_MY_LISTS = gql`
   query GetMyLists($filter: FilterInput) {
@@ -8,6 +8,9 @@ export const GET_MY_LISTS = gql`
         createdAt
         name
         _id
+        user {
+          _id
+        }
         items {
           order
           show {
@@ -37,6 +40,9 @@ export const UPDATE_LIST_MUTATION = gql`
       createdAt
       name
       _id
+      user {
+        _id
+      }
       items {
         order
         show {
@@ -65,6 +71,40 @@ export const CREATE_LIST_MUTATION = gql`
       createdAt
       name
       _id
+      user {
+        _id
+      }
+      items {
+        order
+        show {
+          _id
+          title
+          totalAverage
+          reviewCount
+          tmdbPoster
+          tmdbBackdrop
+          firstAirDate
+          myReview {
+            overallRating
+            actingRating
+            plotRating
+            visualsRating
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const DELETE_LIST_MUTATION = gql`
+  mutation DeleteList($listId: ID!) {
+    deleteList(listId: $listId) {
+      createdAt
+      name
+      _id
+      user {
+        _id
+      }
       items {
         order
         show {

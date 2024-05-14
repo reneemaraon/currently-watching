@@ -1,16 +1,17 @@
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from '../Common/IconList';
-import ListItem from './ListItem';
-import ListOptionButton from './ListOptionButton';
-import Icon from '../Common/Icon';
-import { useEffect, useRef, useState } from 'react';
-import { useMyListsContext } from '../../context/MyListsContext';
-import { useDebounce } from 'use-debounce';
+} from "../Common/IconList";
+import ListItem from "./ListItem";
+import ListOptionButton from "./ListOptionButton";
+import Icon from "../Common/Icon";
+import { useEffect, useRef, useState } from "react";
+import { useMyListsContext } from "../../context/MyListsContext";
+import { useDebounce } from "use-debounce";
+import ListActions from "./ListActions";
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -66,7 +67,7 @@ const List = ({ list, index }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    if (list._id != 'temp') {
+    if (list._id != "temp") {
       await updateList(list._id, { name: value });
     } else {
       await createList(index, {
@@ -187,36 +188,7 @@ const List = ({ list, index }) => {
           onChange={handleInputChange}
           value={listName}
         />
-        <div className="Actions grow-1 justify-center items-center gap-1.5 sm:gap-2.5 flex">
-          {/* <ListOptionButton>
-            <Icon
-              sizeRules="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5"
-              fill="stroke-text-dark stroke-[1.5px]"
-            >
-              <MoveDownListIcon />
-            </Icon>
-          </ListOptionButton>
-          <ListOptionButton>
-            <Icon
-              sizeRules="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5"
-              fill="stroke-text-dark stroke-[1.5px]"
-            >
-              <MoveUpListIcon />
-            </Icon>
-          </ListOptionButton> */}
-          <ListOptionButton>
-            <Icon sizeRules="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5">
-              <OptionsIcon />
-            </Icon>
-          </ListOptionButton>
-          <button
-            onClick={addDrama}
-            className="rounded-full inverse-button-style small-button"
-          >
-            <div className="hidden sm:block font-medium">+ Add drama</div>
-            <div className="block sm:hidden font-sm">+ Add</div>
-          </button>
-        </div>
+        <ListActions list={list} />
       </div>
       <div
         ref={listRef}
