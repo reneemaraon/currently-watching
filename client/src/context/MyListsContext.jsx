@@ -1,9 +1,13 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { GET_MY_LISTS, UPDATE_LIST_MUTATION } from '../api/listApi';
+import {
+  CREATE_LIST_MUTATION,
+  GET_MY_LISTS,
+  UPDATE_LIST_MUTATION,
+} from '../api/listApi';
 import { useMutation, useQuery } from '@apollo/client';
 import findCursor from '../utils/getCursorFromList';
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 10;
 const SORT_FIELD = 'createdAt';
 
 const myListsContext = createContext();
@@ -35,6 +39,8 @@ export const MyListsProvider = ({ children }) => {
   const [updateListRequest, { data: updateData, error: updateError }] =
     useMutation(UPDATE_LIST_MUTATION);
 
+  const [createListRequest] = useMutation(CREATE_LIST_MUTATION);
+
   const updateCursor = () => {
     setCursor(findCursor(myLists.lists, SORT_FIELD));
   };
@@ -51,6 +57,40 @@ export const MyListsProvider = ({ children }) => {
     });
     setCursor(null);
     refetch();
+  };
+
+  const addList = () => {
+    setMyLists((prevList) => ({
+      ...prevList,
+      totalCount: prevList.totalCount + 1,
+      lists: [
+        {
+          _id: 'temp',
+          items: [],
+          name: '',
+        },
+        ...prevList.lists,
+      ],
+    }));
+  };
+
+  const createList = async (index, body) => {
+    const response = await createListRequest({
+      variables: body,
+    });
+
+    setMyLists((prevLists) => {
+      const lists = {
+        ...prevLists,
+        lists: prevLists.lists.map((item, i) => {
+          if (i == index) {
+            return response.data.createList;
+          }
+          return item;
+        }),
+      };
+      return lists;
+    });
   };
 
   const updateList = async (listId, body) => {
@@ -119,6 +159,8 @@ export const MyListsProvider = ({ children }) => {
         refetch,
         refreshList,
         updateList,
+        addList,
+        createList,
         // removeReviewFromUserReviewList,
       }}
     >

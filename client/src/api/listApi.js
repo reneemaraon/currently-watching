@@ -58,3 +58,31 @@ export const UPDATE_LIST_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_LIST_MUTATION = gql`
+  mutation CreateList($body: ListCreateBody!) {
+    createList(body: $body) {
+      createdAt
+      name
+      _id
+      items {
+        order
+        show {
+          _id
+          title
+          totalAverage
+          reviewCount
+          tmdbPoster
+          tmdbBackdrop
+          firstAirDate
+          myReview {
+            overallRating
+            actingRating
+            plotRating
+            visualsRating
+          }
+        }
+      }
+    }
+  }
+`;

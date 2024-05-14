@@ -30,7 +30,7 @@ const changedItems = (sourceItems, stateItems) => {
   return false;
 };
 
-const List = ({ list }) => {
+const List = ({ list, index }) => {
   const [showItems, setShowItems] = useState(true);
   const [items, setItems] = useState(null);
   const [listName, setListName] = useState(null);
@@ -40,7 +40,7 @@ const List = ({ list }) => {
   const [dragging, setDragging] = useState(false);
   const [value] = useDebounce(listName, 1000);
 
-  const { updateList } = useMyListsContext();
+  const { updateList, createList } = useMyListsContext();
   const listRef = useRef(null);
   const searchInputRef = useRef(null);
 
@@ -66,7 +66,17 @@ const List = ({ list }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    await updateList(list._id, { name: value });
+    if (list._id != 'temp') {
+      await updateList(list._id, { name: value });
+    } else {
+      await createList(index, {
+        body: {
+          name: value,
+          items: items || [],
+          ordered: true,
+        },
+      });
+    }
   };
 
   useEffect(() => {
