@@ -1,4 +1,4 @@
-const List = require("../models/list");
+const List = require('../models/list');
 
 const processCreateList = async ({
   userId,
@@ -32,7 +32,7 @@ const processUpdateList = async (id, body) => {
 const processDeleteList = async (id) => {
   const list = await List.findOneAndDelete({ _id: id });
   if (!list) {
-    throw new Error("List not found");
+    throw new Error('List not found');
   }
   return list;
 };

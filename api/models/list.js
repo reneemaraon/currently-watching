@@ -31,6 +31,11 @@ const listSchema = new Schema({
   },
 });
 
+listSchema.pre('save', function (next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
 const List = mongoose.model('list', listSchema);
 
 module.exports = List;

@@ -25,8 +25,9 @@ const ListItem = ({
       className={`w-full ${
         !dragging && 'transition-transform ease-in-out duration-500'
       } flex-col inline-flex gap-1 sm:gap-1.5 justify-end ${
-        selected && 'z-[10]'
-      }`}
+        selected && show && 'z-10'
+      }
+      ${!show && 'z-30'}`}
     >
       {insertVisible && !fromTop && <Insert />}
       <div className="bg-theme-base relative transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">

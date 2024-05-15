@@ -76,6 +76,10 @@
         @apply text-text-dark text-xs sm:text-sm font-medium
     }
 
+    .smallest-text {
+        @apply text-text-dark text-[11px] font-medium
+    }
+
     .paragraph-text {
         @apply text-sm sm:text-base
     }

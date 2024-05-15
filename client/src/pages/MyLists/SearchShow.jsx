@@ -75,13 +75,13 @@ const SearchInItem = ({ setShowToItem, order, searchRef }) => {
       />
       <div
         className={`${
-          isFocused || isSearchListVisible ? 'block' : 'hidden'
-        }  py-1 w-full rounded-xl shadow-lg bg-main-bg overflow-hidden absolute top-full left-0 my-2 z-[100]`}
+          !isFocused && !isSearchListVisible && 'hidden'
+        }  py-1 w-full rounded-xl shadow-lg absolute top-full left-0 my-2`}
       >
         {searchTerm.length > 0 && (
           <div
             ref={searchListRef}
-            className="inline-flex flex-col gap-1 rounded-md w-full bg-opacity-20 bg-light-stroke p-1"
+            className="inline-flex flex-col gap-1 rounded-md w-full bg-main-bg p-1"
           >
             {searchResults.length === 0 && (
               <div className="w-full h-[50px] text-sm text-light-text inline-flex px-8 items-center">

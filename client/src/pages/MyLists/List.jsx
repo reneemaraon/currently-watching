@@ -1,17 +1,18 @@
-import Draggable from "react-draggable";
+import Draggable from 'react-draggable';
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from "../Common/IconList";
-import ListItem from "./ListItem";
-import ListOptionButton from "./ListOptionButton";
-import Icon from "../Common/Icon";
-import { useEffect, useRef, useState } from "react";
-import { useMyListsContext } from "../../context/MyListsContext";
-import { useDebounce } from "use-debounce";
-import ListActions from "./ListActions";
+} from '../Common/IconList';
+import ListItem from './ListItem';
+import ListOptionButton from './ListOptionButton';
+import Icon from '../Common/Icon';
+import { useEffect, useRef, useState } from 'react';
+import { useMyListsContext } from '../../context/MyListsContext';
+import { useDebounce } from 'use-debounce';
+import ListActions from './ListActions';
+import formatDateTime from '../../utils/formatDate';
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -67,7 +68,7 @@ const List = ({ list, index }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    if (list._id != "temp") {
+    if (list._id != 'temp') {
       await updateList(list._id, { name: value });
     } else {
       await createList(index, {
@@ -101,6 +102,7 @@ const List = ({ list, index }) => {
     setItems(
       newItems.map((item, index) => ({
         ...item,
+        selected: false,
         order: index + 1,
       }))
     );
@@ -180,15 +182,16 @@ const List = ({ list, index }) => {
   };
 
   return (
-    <div className="List self-stretch flex-col justify-start items-start gap-2.5 flex">
+    <div className="List self-stretch flex-col justify-start items-start gap-2 flex">
       <div className="ListHeader w-full px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-between items-start gap-2.5 inline-flex">
         <input
           type="text"
           className="bg-transparent focus:outline-none grow title-text font-light"
+          placeholder="Enter List name"
           onChange={handleInputChange}
           value={listName}
         />
-        <ListActions list={list} />
+        <ListActions addDrama={addDrama} list={list} />
       </div>
       <div
         ref={listRef}
@@ -226,38 +229,44 @@ const List = ({ list, index }) => {
             </Draggable>
           ))}
       </div>
-
-      <div
-        className="cursor-pointer self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex"
-        onClick={toggleShowItems}
-      >
-        {showItems ? (
-          <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
-            <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
-              <Icon
-                sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                fill="rotate-180 stroke-2 stroke-brand-tq fill-none"
-              >
-                <ExpandDownIcon />
-              </Icon>
-            </div>
-          </div>
-        ) : (
-          <div className="ShowDetailCard w-full h-9 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
-            <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
-              <div className="ExpandList20 text-brand-tq text-[10px] sm:text-xs font-normal font-['Inter']">
-                Expand List {list.items.length}
+      {list.items.length > 0 && (
+        <div
+          className="cursor-pointer self-stretch px-0 sm:px-1 md:px-2.5 flex-col justify-start items-start gap-1 sm:gap-1.5 flex"
+          onClick={toggleShowItems}
+        >
+          {showItems ? (
+            <div className="ShowDetailCard w-full h-5 sm:h-7 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
+              <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
+                <Icon
+                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                  fill="rotate-180 stroke-2 stroke-brand-tq fill-none"
+                >
+                  <ExpandDownIcon />
+                </Icon>
               </div>
-              <Icon
-                sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                fill="stroke-2 stroke-brand-tq fill-none"
-              >
-                <ExpandDownIcon />
-              </Icon>
-              <div className="Icon w-2.5 h-2.5 py-[2.50px] justify-center items-center flex" />
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="ShowDetailCard w-full h-9 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
+              <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
+                <div className="ExpandList20 text-brand-tq text-[10px] sm:text-xs font-normal font-['Inter']">
+                  Expand List {list.items.length}
+                </div>
+                <Icon
+                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                  fill="stroke-2 stroke-brand-tq fill-none"
+                >
+                  <ExpandDownIcon />
+                </Icon>
+                <div className="Icon w-2.5 h-2.5 py-[2.50px] justify-center items-center flex" />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      <div className="text-light-text font-light mx-2 smallest-text">
+        {list.updatedAt &&
+          list.items.length > 0 &&
+          `Saved ${formatDateTime(list.updatedAt)}`}
       </div>
     </div>
   );

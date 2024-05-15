@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import { useMyListsContext } from "../../context/MyListsContext";
-import { OptionsIcon } from "../Common/IconList";
-import ListOptionButton from "./ListOptionButton";
-import Dropdown, { Option } from "../Common/Dropdown";
-import { useAuthContext } from "../../context/AuthContext";
+import { useEffect, useRef, useState } from 'react';
+import { useMyListsContext } from '../../context/MyListsContext';
+import { OptionsIcon } from '../Common/IconList';
+import ListOptionButton from './ListOptionButton';
+import Dropdown, { Option } from '../Common/Dropdown';
+import { useAuthContext } from '../../context/AuthContext';
 
-const ListActions = ({ list }) => {
-  const { addDrama, deleteList } = useMyListsContext();
+const ListActions = ({ list, addDrama }) => {
+  const { deleteList } = useMyListsContext();
   const { user } = useAuthContext();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 

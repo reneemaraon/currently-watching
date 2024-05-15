@@ -81,6 +81,7 @@ type List {
   user: User!
   ordered: Boolean!
   createdAt: DateTime!
+  updatedAt: DateTime!
   items: [ListItem!]
   name: String!
 }
