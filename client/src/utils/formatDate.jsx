@@ -1,7 +1,7 @@
 function formatDateTime(dateTime) {
   const options = {
-    day: '2-digit',
-    month: 'short',
+    day: "2-digit",
+    month: "short",
   };
 
   const currentDate = new Date();
@@ -14,17 +14,17 @@ function formatDateTime(dateTime) {
 
   if (diffInDays > 10) {
     if (targetDate.getFullYear() !== currentDate.getFullYear()) {
-      options.year = 'numeric';
+      options.year = "numeric";
     }
-    return targetDate.toLocaleDateString('en-US', options);
+    return targetDate.toLocaleDateString("en-US", options);
   } else if (diffInDays <= 10 && diffInDays > 0) {
-    return `${diffInDays} day${diffInDays == 1 ? '' : 's'} ago`;
+    return `${diffInDays} day${diffInDays == 1 ? "" : "s"} ago`;
   } else if (diffInHours > 0) {
-    return `${diffInHours} hour${diffInHours == 1 ? '' : 's'} ago`;
+    return `${diffInHours} hour${diffInHours == 1 ? "" : "s"} ago`;
   } else if (diffInMinutes == 0) {
-    return 'seconds ago';
+    return "seconds ago";
   } else {
-    return `${diffInMinutes} minute${diffInMinutes == 1 ? '' : 's'} ago`;
+    return `${diffInMinutes} minute${diffInMinutes == 1 ? "" : "s"} ago`;
   }
 }
 
@@ -37,3 +37,13 @@ export const getYear = (dateTime) => {
 };
 
 export default formatDateTime;
+
+export const getDiffInMinutes = (dateTime) => {
+  const currentDate = new Date();
+  const targetDate = new Date(dateTime);
+
+  const diffInMs = Math.abs(targetDate - currentDate);
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+
+  return diffInMinutes;
+};

@@ -1,18 +1,18 @@
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from '../Common/IconList';
-import ListItem from './ListItem';
-import ListOptionButton from './ListOptionButton';
-import Icon from '../Common/Icon';
-import { useEffect, useRef, useState } from 'react';
-import { useMyListsContext } from '../../context/MyListsContext';
-import { useDebounce } from 'use-debounce';
-import ListActions from './ListActions';
-import formatDateTime from '../../utils/formatDate';
+} from "../Common/IconList";
+import ListItem from "./ListItem";
+import ListOptionButton from "./ListOptionButton";
+import Icon from "../Common/Icon";
+import { useEffect, useRef, useState } from "react";
+import { useMyListsContext } from "../../context/MyListsContext";
+import { useDebounce } from "use-debounce";
+import ListActions from "./ListActions";
+import formatDateTime, { getDiffInMinutes } from "../../utils/formatDate";
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -68,7 +68,7 @@ const List = ({ list, index }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    if (list._id != 'temp') {
+    if (list._id != "temp") {
       await updateList(list._id, { name: value });
     } else {
       await createList(index, {
@@ -268,6 +268,7 @@ const List = ({ list, index }) => {
       <div className="text-light-text font-light mx-3 mt-1 smallest-text">
         {list.updatedAt &&
           list.items.length > 0 &&
+          getDiffInMinutes(list.updatedAt) < 10 &&
           `Saved ${formatDateTime(list.updatedAt)}`}
       </div>
     </div>
