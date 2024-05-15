@@ -5,8 +5,8 @@ import ListOptionButton from './ListOptionButton';
 import Dropdown, { Option } from '../Common/Dropdown';
 import { useAuthContext } from '../../context/AuthContext';
 
-const ListActions = ({ list, addDrama }) => {
-  const { deleteList } = useMyListsContext();
+const ListActions = ({ list, addDrama, index }) => {
+  const { deleteList, deleteListOnIndex } = useMyListsContext();
   const { user } = useAuthContext();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
@@ -31,7 +31,11 @@ const ListActions = ({ list, addDrama }) => {
 
   const onAttemptDelete = async () => {
     setDropdownVisible(false);
-    await deleteList(list._id);
+    if (list._id == 'temp') {
+      deleteListOnIndex(index);
+    } else {
+      await deleteList(list._id);
+    }
   };
 
   return (
@@ -59,7 +63,8 @@ const ListActions = ({ list, addDrama }) => {
         {isDropdownVisible && (
           <div className="absolute cursor-pointer w-40 top-full right-0 mt-1 z-40">
             <Dropdown>
-              {user && user._id == list.user._id && (
+              {((user && list.user && user._id == list.user._id) ||
+                !list.user) && (
                 <Option key="Delete" text="Delete" onSelect={onAttemptDelete} />
               )}
               {/* {user && user._id == review.user._id && (

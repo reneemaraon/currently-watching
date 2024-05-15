@@ -191,7 +191,7 @@ const List = ({ list, index }) => {
           onChange={handleInputChange}
           value={listName}
         />
-        <ListActions addDrama={addDrama} list={list} />
+        <ListActions index={index} addDrama={addDrama} list={list} />
       </div>
       <div className="w-full inline-flex flex-col gap-1.5">
         <div

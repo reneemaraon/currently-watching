@@ -1,21 +1,21 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 import {
   CREATE_LIST_MUTATION,
   GET_MY_LISTS,
   UPDATE_LIST_MUTATION,
   DELETE_LIST_MUTATION,
-} from "../api/listApi";
-import { useMutation, useQuery } from "@apollo/client";
-import findCursor from "../utils/getCursorFromList";
+} from '../api/listApi';
+import { useMutation, useQuery } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
 
 const ITEMS_PER_PAGE = 10;
-const SORT_FIELD = "createdAt";
+const SORT_FIELD = 'createdAt';
 
 const myListsContext = createContext();
 
 export const useMyListsContext = () => {
   const context = useContext(myListsContext);
-  if (!context) throw new Error("My Lists Provider is missing");
+  if (!context) throw new Error('My Lists Provider is missing');
   return context;
 };
 
@@ -69,9 +69,9 @@ export const MyListsProvider = ({ children }) => {
       totalCount: prevList.totalCount + 1,
       lists: [
         {
-          _id: "temp",
+          _id: 'temp',
           items: [],
-          name: "",
+          name: '',
         },
         ...prevList.lists,
       ],
@@ -107,6 +107,13 @@ export const MyListsProvider = ({ children }) => {
     await deleteListRequest({
       variables: { listId },
     });
+  };
+
+  const deleteListOnIndex = (index) => {
+    setMyLists((prevLists) => ({
+      ...prevLists,
+      lists: prevLists.lists.filter((list, i) => index != i),
+    }));
   };
 
   useEffect(() => {
@@ -170,6 +177,7 @@ export const MyListsProvider = ({ children }) => {
         updateList,
         addList,
         createList,
+        deleteListOnIndex,
         deleteList,
       }}
     >
