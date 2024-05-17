@@ -12,7 +12,7 @@ import { useAuthContext } from './context/AuthContext';
 import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
 import ShowDetail from './pages/ShowDetail/ShowDetail';
 import ProfilePage from './pages/Profile/ProfilePage';
-import MyListsPage from './pages/MyLists/MyLists';
+import MyListsPage from './pages/UserLists/UserLists';
 import { useState, useEffect, useRef } from 'react';
 import PopupSidebar from './pages/Home/PopupSidebar';
 import FullPageLoading from './pages/Common/FullPageLoading';
@@ -70,7 +70,7 @@ function App() {
             <Route path="/reviews/:id/update" element={<UpdateReview />} />
             <Route path="/reviews/:id" element={<ReviewDetail />} />
             <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/my-lists" element={<MyListsPage />} />
+            <Route path="/users/:id/lists" element={<MyListsPage />} />
             <Route path="/shows/:id/create-review" element={<CreateReview />} />
             <Route path="/shows/:id" element={<ShowDetail />} />
             <Route path="/users/:id" element={<ProfilePage />} />

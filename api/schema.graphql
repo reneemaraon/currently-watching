@@ -178,6 +178,7 @@ type Query {
   # lists(): [List]
   list(id: ID!): List
   myLists(filter: FilterInput): ListPagination
+  userLists(user: ID!, filter: FilterInput): ListPagination
 
 
   reviewComments(id: ID!, filter: FilterInput): CommentPagination

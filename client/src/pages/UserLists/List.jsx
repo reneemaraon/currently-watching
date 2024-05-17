@@ -1,18 +1,18 @@
-import Draggable from "react-draggable";
+import Draggable from 'react-draggable';
 import {
   ExpandDownIcon,
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
-} from "../Common/IconList";
-import ListItem from "./ListItem";
-import ListOptionButton from "./ListOptionButton";
-import Icon from "../Common/Icon";
-import { useEffect, useRef, useState } from "react";
-import { useMyListsContext } from "../../context/MyListsContext";
-import { useDebounce } from "use-debounce";
-import ListActions from "./ListActions";
-import formatDateTime, { getDiffInMinutes } from "../../utils/formatDate";
+} from '../Common/IconList';
+import ListItem from './ListItem';
+import ListOptionButton from './ListOptionButton';
+import Icon from '../Common/Icon';
+import { useEffect, useRef, useState } from 'react';
+import { useUserListsContext } from '../../context/UserListsContext';
+import { useDebounce } from 'use-debounce';
+import ListActions from './ListActions';
+import formatDateTime, { getDiffInMinutes } from '../../utils/formatDate';
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -42,7 +42,7 @@ const List = ({ list, index }) => {
   const [dragging, setDragging] = useState(false);
   const [value] = useDebounce(listName, 1000);
 
-  const { updateList, createList } = useMyListsContext();
+  const { updateList, createList } = useUserListsContext();
   const listRef = useRef(null);
   const searchInputRef = useRef(null);
 
@@ -68,7 +68,7 @@ const List = ({ list, index }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    if (list._id != "temp") {
+    if (list._id != 'temp') {
       await updateList(list._id, { name: value });
     } else {
       await createList(index, {
@@ -185,6 +185,7 @@ const List = ({ list, index }) => {
     <div className="List self-stretch flex-col justify-start items-start gap-2.5 flex">
       <div className="ListHeader w-full px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-between items-end gap-2.5 inline-flex">
         <input
+          autoFocus={!listName}
           type="text"
           className="bg-transparent focus:outline-none grow title-text font-light"
           placeholder="Enter List name"

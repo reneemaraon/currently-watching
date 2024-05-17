@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useMyListsContext } from '../../context/MyListsContext';
+import { useUserListsContext } from '../../context/UserListsContext';
 import { OptionsIcon } from '../Common/IconList';
 import ListOptionButton from './ListOptionButton';
 import Dropdown, { Option } from '../Common/Dropdown';
 import { useAuthContext } from '../../context/AuthContext';
 
 const ListActions = ({ list, addDrama, index }) => {
-  const { deleteList, deleteListOnIndex } = useMyListsContext();
+  const { deleteList, deleteListOnIndex } = useUserListsContext();
   const { user } = useAuthContext();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);

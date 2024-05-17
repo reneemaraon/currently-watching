@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
   CREATE_LIST_MUTATION,
-  GET_MY_LISTS,
+  GET_USER_LISTS,
   UPDATE_LIST_MUTATION,
   DELETE_LIST_MUTATION,
 } from '../api/listApi';
@@ -11,24 +11,26 @@ import findCursor from '../utils/getCursorFromList';
 const ITEMS_PER_PAGE = 2;
 const SORT_FIELD = 'createdAt';
 
-const myListsContext = createContext();
+const userListsContext = createContext();
 
-export const useMyListsContext = () => {
-  const context = useContext(myListsContext);
-  if (!context) throw new Error('My Lists Provider is missing');
+export const useUserListsContext = () => {
+  const context = useContext(userListsContext);
+  if (!context) throw new Error('User Lists Provider is missing');
   return context;
 };
 
-export const MyListsProvider = ({ children }) => {
-  const [myLists, setMyLists] = useState({
+export const UserListsProvider = ({ children }) => {
+  const [userId, setUserId] = useState(null);
+  const [userLists, setUserLists] = useState({
     totalCount: 0,
     lists: [],
   });
 
   const [cursor, setCursor] = useState(new Date());
 
-  const { loading, data, error, refetch } = useQuery(GET_MY_LISTS, {
+  const { loading, data, error, refetch } = useQuery(GET_USER_LISTS, {
     variables: {
+      user: userId,
       filter: {
         limit: ITEMS_PER_PAGE,
         cursorField: SORT_FIELD,
@@ -46,7 +48,7 @@ export const MyListsProvider = ({ children }) => {
     useMutation(DELETE_LIST_MUTATION);
 
   const updateCursor = () => {
-    setCursor(findCursor(myLists.lists, SORT_FIELD));
+    setCursor(findCursor(userLists.lists, SORT_FIELD));
   };
 
   const loadNextPage = () => {
@@ -55,7 +57,7 @@ export const MyListsProvider = ({ children }) => {
   };
 
   const refreshList = () => {
-    setMyLists({
+    setUserLists({
       totalCount: 0,
       lists: [],
     });
@@ -64,7 +66,7 @@ export const MyListsProvider = ({ children }) => {
   };
 
   const addList = () => {
-    setMyLists((prevList) => ({
+    setUserLists((prevList) => ({
       ...prevList,
       totalCount: prevList.totalCount + 1,
       lists: [
@@ -83,7 +85,7 @@ export const MyListsProvider = ({ children }) => {
       variables: body,
     });
 
-    setMyLists((prevLists) => {
+    setUserLists((prevLists) => {
       const lists = {
         ...prevLists,
         lists: prevLists.lists.map((item, i) => {
@@ -110,7 +112,7 @@ export const MyListsProvider = ({ children }) => {
   };
 
   const deleteListOnIndex = (index) => {
-    setMyLists((prevLists) => ({
+    setUserLists((prevLists) => ({
       ...prevLists,
       lists: prevLists.lists.filter((list, i) => index != i),
     }));
@@ -118,7 +120,7 @@ export const MyListsProvider = ({ children }) => {
 
   useEffect(() => {
     if (updateData) {
-      setMyLists((prevList) => {
+      setUserLists((prevList) => {
         const newLists = prevList.lists.map((list) => {
           if (list._id == updateData.updateList._id) {
             return updateData.updateList;
@@ -136,13 +138,13 @@ export const MyListsProvider = ({ children }) => {
 
   useEffect(() => {
     if (data) {
-      const { lists: dataLists, totalCount } = data.myLists;
-      const { lists: currentLists } = myLists;
+      const { lists: dataLists, totalCount } = data.userLists;
+      const { lists: currentLists } = userLists;
       if (
         findCursor(currentLists, SORT_FIELD) !=
         findCursor(dataLists, SORT_FIELD)
       ) {
-        setMyLists((prevLists) => ({
+        setUserLists((prevLists) => ({
           totalCount,
           lists: [...prevLists.lists, ...dataLists],
         }));
@@ -155,22 +157,22 @@ export const MyListsProvider = ({ children }) => {
       const {
         deleteList: { _id: id },
       } = deleteData;
-      const updatedLists = myLists.lists.filter((list) => list._id != id);
+      const updatedLists = userLists.lists.filter((list) => list._id != id);
 
-      setMyLists({
-        ...myLists,
-        totalCount: myLists.totalCount - 1,
+      setUserLists({
+        ...userLists,
+        totalCount: userLists.totalCount - 1,
         lists: updatedLists,
       });
     }
   }, [deleteData]);
 
   return (
-    <myListsContext.Provider
+    <userListsContext.Provider
       value={{
         error,
         loading,
-        myLists,
+        userLists,
         loadNextPage,
         refetch,
         refreshList,
@@ -179,9 +181,10 @@ export const MyListsProvider = ({ children }) => {
         createList,
         deleteListOnIndex,
         deleteList,
+        setUserId,
       }}
     >
       {children}
-    </myListsContext.Provider>
+    </userListsContext.Provider>
   );
 };

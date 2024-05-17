@@ -1,28 +1,28 @@
 // resolvers.js
 
-const User = require("./models/user");
-const Show = require("./models/show");
-const Review = require("./models/review");
-const Watch = require("./models/watch");
-const Like = require("./models/like");
-const Comment = require("./models/comment");
+const User = require('./models/user');
+const Show = require('./models/show');
+const Review = require('./models/review');
+const Watch = require('./models/watch');
+const Like = require('./models/like');
+const Comment = require('./models/comment');
 
-const { generateSearchConditions } = require("./utils/search");
-const { processCreateComment } = require("./controllers/comment");
-const { processCreateLike, processDeleteLike } = require("./controllers/like");
-const Actor = require("./models/actor");
+const { generateSearchConditions } = require('./utils/search');
+const { processCreateComment } = require('./controllers/comment');
+const { processCreateLike, processDeleteLike } = require('./controllers/like');
+const Actor = require('./models/actor');
 const {
   processDeleteWatch,
   processCreateWatch,
-} = require("./controllers/watch");
-const { isReviewOwnerStandalone } = require("./middlewares/isOwnerMiddleware");
-const { processUpdateReview } = require("./controllers/review");
+} = require('./controllers/watch');
+const { isReviewOwnerStandalone } = require('./middlewares/isOwnerMiddleware');
+const { processUpdateReview } = require('./controllers/review');
 const {
   processCreateList,
   processUpdateList,
   processDeleteList,
-} = require("./controllers/list");
-const List = require("./models/list");
+} = require('./controllers/list');
+const List = require('./models/list');
 
 const resolvers = {
   Query: {
@@ -39,7 +39,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ["title"]);
+      } = generateSearchConditions(filter, ['title']);
       let shows = await Show.find({ ...searchConditions, ...cursorConditions })
         .sort(sort)
         .limit(limit);
@@ -57,15 +57,15 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ["title"]);
+      } = generateSearchConditions(filter, ['title']);
 
       if (has.length > 0) {
-        searchConditions["genres.name"] = { $all: has };
+        searchConditions['genres.name'] = { $all: has };
       }
 
       if (excluding.length > 0) {
-        if (searchConditions["genres.name"]) {
-          searchConditions["genres.name"].$nin = excluding;
+        if (searchConditions['genres.name']) {
+          searchConditions['genres.name'].$nin = excluding;
         }
       }
 
@@ -90,7 +90,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ["title", "body"]);
+      } = generateSearchConditions(filter, ['title', 'body']);
 
       let reviews = await Review.find({
         ...searchConditions,
@@ -112,7 +112,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ["title", "body"]);
+      } = generateSearchConditions(filter, ['title', 'body']);
       searchConditions.show = id;
       let reviews = await Review.find({
         ...searchConditions,
@@ -133,7 +133,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ["title", "body"]);
+      } = generateSearchConditions(filter, ['title', 'body']);
       searchConditions.user = id;
       let reviews = await Review.find({
         ...searchConditions,
@@ -158,7 +158,7 @@ const resolvers = {
         searchConditions,
         cursorConditions,
         options: { sort, limit },
-      } = generateSearchConditions(filter, ["commentBody"]);
+      } = generateSearchConditions(filter, ['commentBody']);
       searchConditions.review = id;
       let comments = await Comment.find({
         ...searchConditions,
@@ -192,9 +192,36 @@ const resolvers = {
       })
         .sort(sort)
         .limit(limit);
-      const count = await List.find(searchConditions).countDocuments();
+      const count = await List.find({
+        user: user._id,
+        ...searchConditions,
+      }).countDocuments();
       return {
         lists: myLists,
+        totalCount: count,
+      };
+    },
+
+    userLists: async (_, { user, filter = {} }) => {
+      const {
+        searchConditions,
+        cursorConditions,
+        options: { sort, limit },
+      } = generateSearchConditions(filter);
+
+      const userLists = await List.find({
+        user,
+        ...searchConditions,
+        ...cursorConditions,
+      })
+        .sort(sort)
+        .limit(limit);
+      const count = await List.find({
+        user,
+        ...searchConditions,
+      }).countDocuments();
+      return {
+        lists: userLists,
         totalCount: count,
       };
     },
@@ -287,7 +314,7 @@ const resolvers = {
         );
         return newComment;
       } catch (error) {
-        throw new Error("Failed to create comment");
+        throw new Error('Failed to create comment');
       }
     },
     likeReview: async (_, { reviewId }, { user }) => {
@@ -296,7 +323,7 @@ const resolvers = {
         const review = await Review.findById(like.review);
         return review;
       } catch (error) {
-        throw new Error("Failed to like review.");
+        throw new Error('Failed to like review.');
       }
     },
     deleteLike: async (_, { reviewId }, { user }) => {
@@ -305,7 +332,7 @@ const resolvers = {
         const review = await Review.findById(reviewId);
         return review;
       } catch (error) {
-        throw new Error("Failed to unlike review.");
+        throw new Error('Failed to unlike review.');
       }
     },
     watchedShow: async (_, { showId }, { user }) => {
@@ -314,7 +341,7 @@ const resolvers = {
         const show = await Show.findById(watch.show);
         return show;
       } catch (error) {
-        throw new Error("Failed to watch show.");
+        throw new Error('Failed to watch show.');
       }
     },
     deleteWatch: async (_, { showId }, { user }) => {
@@ -323,7 +350,7 @@ const resolvers = {
         const show = await Show.findById(showId);
         return show;
       } catch (error) {
-        throw new Error("Failed to remove watch for show.");
+        throw new Error('Failed to remove watch for show.');
       }
     },
     updateReview: async (_, { reviewId, body }, { user }) => {
@@ -333,18 +360,18 @@ const resolvers = {
           return review;
         }
       } catch (error) {
-        throw new Error("Failed to update review");
+        throw new Error('Failed to update review');
       }
     },
     createList: async (_, { body }, { user }) => {
       try {
         const newList = await processCreateList({
-          userId: "65b4aed35eba8362e2b674aa",
+          userId: '65b4aed35eba8362e2b674aa',
           ...body,
         });
         return newList;
       } catch (error) {
-        throw new Error("Failed to create list");
+        throw new Error('Failed to create list');
       }
     },
     updateList: async (_, { listId, body }, { user }) => {
@@ -354,7 +381,7 @@ const resolvers = {
         return newList;
       } catch (error) {
         console.log(error);
-        throw new Error("Failed to update list");
+        throw new Error('Failed to update list');
       }
     },
     deleteList: async (_, { listId }, { user }) => {
@@ -363,7 +390,7 @@ const resolvers = {
         return deletedList;
       } catch (error) {
         console.log(error);
-        throw new Error("Failed to delete list");
+        throw new Error('Failed to delete list');
       }
     },
   },

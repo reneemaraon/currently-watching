@@ -4,7 +4,7 @@ import { ShareIcon, TwitterIcon } from '../Common/IconList';
 import CustomButton from '../Common/CustomButton';
 import Icon from '../Common/Icon';
 import ReviewsListItem from '../Reviews/ReviewListItem';
-import List from '../MyLists/List';
+import List from '../UserLists/List';
 import ImageWithOpacityTransition from '../Common/ImageTransition';
 import LoadMorePanel from '../Common/LoadMorePagination';
 import { useAuthContext } from '../../context/AuthContext';

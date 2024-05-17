@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const GET_MY_LISTS = gql`
-  query GetMyLists($filter: FilterInput) {
-    myLists(filter: $filter) {
+export const GET_USER_LISTS = gql`
+  query GetUserLists($user: ID!, $filter: FilterInput) {
+    userLists(user: $user, filter: $filter) {
       totalCount
       lists {
         createdAt
