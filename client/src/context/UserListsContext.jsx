@@ -8,7 +8,7 @@ import {
 import { useMutation, useQuery } from '@apollo/client';
 import findCursor from '../utils/getCursorFromList';
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 5;
 const SORT_FIELD = 'createdAt';
 
 const userListsContext = createContext();

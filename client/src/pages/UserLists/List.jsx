@@ -4,6 +4,8 @@ import {
   MoveDownListIcon,
   MoveUpListIcon,
   OptionsIcon,
+  PencilIcon,
+  SuccessToastIcon,
 } from '../Common/IconList';
 import ListItem from './ListItem';
 import ListOptionButton from './ListOptionButton';
@@ -38,6 +40,7 @@ const List = ({ list, index }) => {
   const [listName, setListName] = useState(null);
   const [insertIndex, setInsertIndex] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
+  const [activeEditTitle, setActiveEditTitle] = useState(false);
   const [itemHeight, setItemHeight] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [value] = useDebounce(listName, 1000);
@@ -45,6 +48,7 @@ const List = ({ list, index }) => {
   const { updateList, createList } = useUserListsContext();
   const listRef = useRef(null);
   const searchInputRef = useRef(null);
+  const nameInputRef = useRef(null);
 
   useEffect(() => {
     if (listRef.current && items && items.length > 0 && !itemHeight) {
@@ -181,17 +185,49 @@ const List = ({ list, index }) => {
     setShowItems(!showItems);
   };
 
+  const handleOutsideClick = (event) => {
+    if (nameInputRef.current && !nameInputRef.current.contains(event.target)) {
+      setActiveEditTitle(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div className="List self-stretch flex-col justify-start items-start gap-2.5 flex">
-      <div className="ListHeader w-full px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-between items-end gap-2.5 inline-flex">
-        <input
-          autoFocus={!listName}
-          type="text"
-          className="bg-transparent focus:outline-none grow title-text font-light"
-          placeholder="Enter List name"
-          onChange={handleInputChange}
-          value={listName}
-        />
+      <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-between items-end gap-2.5 inline-flex">
+        {activeEditTitle || !listName ? (
+          <div ref={nameInputRef} className="flex grow gap-2">
+            <input
+              type="text"
+              autoFocus
+              className="bg-transparent outline-brand-gray rounded-lg  title-text font-light"
+              placeholder="Enter List name"
+              onChange={handleInputChange}
+              value={listName}
+            />
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <p className="grow title-text font-light">{listName}</p>
+            <button
+              className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+              onClick={() => setActiveEditTitle(true)}
+            >
+              <Icon
+                sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                fill="group-hover:fill-theme-base fill-lighter-text"
+              >
+                <PencilIcon />
+              </Icon>
+            </button>
+          </div>
+        )}
         <ListActions index={index} addDrama={addDrama} list={list} />
       </div>
       <div className="w-full inline-flex flex-col gap-1.5">
