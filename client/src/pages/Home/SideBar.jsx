@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthContext';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const NavItem = ({ itemName, path }) => (
   <Link
@@ -15,16 +15,14 @@ export const NavItem = ({ itemName, path }) => (
         hover:bg-brand-lavender
         hover:bg-opacity-25
     "
-    to={path || '/'}
+    to={path || "/"}
   >
     <p className="group-hover:text-theme-negative-base text-sm">{itemName}</p>
   </Link>
 );
 
 export default function SideBar() {
-  const {
-    user: { _id: id },
-  } = useAuthContext();
+  const { user } = useAuthContext();
   return (
     <div className="hidden xl:inline-flex w-60 border border-zinc-300 fixed top-0 left-0 z-20 h-screen supports-backdrop-blur:bg-theme-base/100 bg-transparent py-5 bg-slate-100 bg-opacity-40 flex-col justify-start items-start gap-[15px]">
       <button className="w-full h-16 px-7 items-center gap-2.5 inline-flex">
@@ -32,7 +30,9 @@ export default function SideBar() {
       </button>
       <NavItem itemName="Home" />
       <NavItem itemName="Reviews" path="/reviews" />
-      <NavItem itemName="My Lists" path={`/users/${id}/lists`} />
+      {user && user._id && (
+        <NavItem itemName="My Lists" path={`/users/${user._id}/lists`} />
+      )}
     </div>
   );
 }

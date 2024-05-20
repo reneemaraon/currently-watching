@@ -1,21 +1,13 @@
-import Draggable from 'react-draggable';
-import {
-  ExpandDownIcon,
-  MoveDownListIcon,
-  MoveUpListIcon,
-  OptionsIcon,
-  PencilIcon,
-  SuccessToastIcon,
-} from '../Common/IconList';
-import ListItem from './ListItem';
-import ListOptionButton from './ListOptionButton';
-import Icon from '../Common/Icon';
-import { useEffect, useRef, useState } from 'react';
-import { useUserListsContext } from '../../context/UserListsContext';
-import { useDebounce } from 'use-debounce';
-import ListActions from './ListActions';
-import formatDateTime, { getDiffInMinutes } from '../../utils/formatDate';
-import { useNavigate } from 'react-router-dom';
+import Draggable from "react-draggable";
+import { ExpandDownIcon, PencilIcon } from "../Common/IconList";
+import ListItem from "./ListItem";
+import Icon from "../Common/Icon";
+import { useEffect, useRef, useState } from "react";
+import { useUserListsContext } from "../../context/UserListsContext";
+import { useDebounce } from "use-debounce";
+import ListActions from "./ListActions";
+import formatDateTime, { getDiffInMinutes } from "../../utils/formatDate";
+import { useNavigate } from "react-router-dom";
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -38,7 +30,7 @@ const changedItems = (sourceItems, stateItems) => {
 const List = ({ list, index }) => {
   const [showItems, setShowItems] = useState(true);
   const [items, setItems] = useState(null);
-  const [listName, setListName] = useState(null);
+  const [listName, setListName] = useState("");
   const [insertIndex, setInsertIndex] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [activeEditTitle, setActiveEditTitle] = useState(false);
@@ -74,7 +66,7 @@ const List = ({ list, index }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    if (list._id != 'temp') {
+    if (list._id != "temp") {
       await updateList(list._id, { name: value });
     } else {
       await createList(index, {
@@ -194,9 +186,9 @@ const List = ({ list, index }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -207,7 +199,6 @@ const List = ({ list, index }) => {
           <div ref={nameInputRef} className="flex grow gap-2">
             <input
               type="text"
-              autoFocus
               className="bg-transparent outline-brand-gray rounded-lg  title-text font-light"
               placeholder="Enter List name"
               onChange={handleInputChange}
@@ -218,7 +209,7 @@ const List = ({ list, index }) => {
           <div className="flex gap-2">
             <p
               onClick={() =>
-                navigate(`/lists/${list._id !== 'temp' ? list._id : ''}`)
+                navigate(`/lists/${list._id !== "temp" ? list._id : ""}`)
               }
               className="cursor-pointer hover:text-brand-dark-purple grow title-text font-light"
             >
@@ -248,7 +239,7 @@ const List = ({ list, index }) => {
             items &&
             items.map((item, index) => (
               <Draggable
-                key={item.order}
+                key={`${item.show ? item.show._id : list.name} ${item.order}`}
                 onStop={(e, data) => {
                   const newPosition = index + Math.round(data.y / itemHeight); // Assuming each item's height is 50px
                   handleStop(index, newPosition);

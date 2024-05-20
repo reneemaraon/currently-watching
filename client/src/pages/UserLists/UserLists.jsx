@@ -1,13 +1,13 @@
-import { useUserListsContext } from '../../context/UserListsContext';
-import CustomButton from '../Common/CustomButton';
-import FullPageLoading from '../Common/FullPageLoading';
-import { Header, HeaderName } from '../Home/Sections/SectionHeader';
-import List from './List';
-import LoadMorePanel from '../Common/LoadMorePagination';
-import ListLoading from '../Common/LoadingList';
-import { useParams } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthContext';
-import { useEffect } from 'react';
+import { useUserListsContext } from "../../context/UserListsContext";
+import CustomButton from "../Common/CustomButton";
+import FullPageLoading from "../Common/FullPageLoading";
+import { Header, HeaderName } from "../Home/Sections/SectionHeader";
+import List from "./List";
+import LoadMorePanel from "../Common/LoadMorePagination";
+import ListLoading from "../Common/LoadingList";
+import { useParams } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 const UserListsPage = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const UserListsPage = () => {
           + Add Custom List
         </CustomButton>
       </Header>
-      <div className="ListArea self-stretch flex-col justify-start items-center gap-11 sm:gap-12 flex">
+      <div className="ListArea w-full flex-col justify-start items-center gap-11 sm:gap-12 flex">
         {userLists &&
           userLists.lists.map((list, index) => (
             <List index={index} key={list._id} list={list} />
