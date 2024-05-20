@@ -20,6 +20,7 @@ import ImageWithOpacityTransition from './pages/Common/ImageTransition';
 import LoginCallback from './pages/Callback/LoginCallback';
 import AuthOverlay from './pages/AuthOverlay/AuthOverlay';
 import UpdateReview from './pages/UpdateReview/UpdateReview';
+import ListDetail from './pages/ListDetail/ListDetail';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -74,6 +75,7 @@ function App() {
             <Route path="/shows/:id/create-review" element={<CreateReview />} />
             <Route path="/shows/:id" element={<ShowDetail />} />
             <Route path="/users/:id" element={<ProfilePage />} />
+            <Route path="/lists/:id" element={<ListDetail />} />
           </Routes>
         </div>
       </div>

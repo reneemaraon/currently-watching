@@ -130,3 +130,35 @@ export const DELETE_LIST_MUTATION = gql`
     }
   }
 `;
+
+export const GET_LIST = gql`
+  query GetList($id: ID!) {
+    list(id: $id) {
+      createdAt
+      updatedAt
+      name
+      _id
+      user {
+        _id
+      }
+      items {
+        order
+        show {
+          _id
+          title
+          totalAverage
+          reviewCount
+          tmdbPoster
+          tmdbBackdrop
+          firstAirDate
+          myReview {
+            overallRating
+            actingRating
+            plotRating
+            visualsRating
+          }
+        }
+      }
+    }
+  }
+`;

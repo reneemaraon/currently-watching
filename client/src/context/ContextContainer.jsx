@@ -12,6 +12,7 @@ import { HomepageProvider } from './HomepageContext';
 import { UserDetailProvider } from './UserDetailContext';
 import { UpdateReviewContext } from './UpdateReviewContext';
 import { UserListsProvider } from './UserListsContext';
+import { ListDetailProvider } from './ListDetailContext';
 
 export const ContextContainer = ({ children }) => (
   <ToastProvider>
@@ -26,7 +27,9 @@ export const ContextContainer = ({ children }) => (
                     <UserDetailProvider>
                       <UpdateReviewContext>
                         <UserListsProvider>
-                          <SearchProvider>{children}</SearchProvider>
+                          <ListDetailProvider>
+                            <SearchProvider>{children}</SearchProvider>
+                          </ListDetailProvider>
                         </UserListsProvider>
                       </UpdateReviewContext>
                     </UserDetailProvider>

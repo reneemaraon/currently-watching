@@ -15,6 +15,7 @@ import { useUserListsContext } from '../../context/UserListsContext';
 import { useDebounce } from 'use-debounce';
 import ListActions from './ListActions';
 import formatDateTime, { getDiffInMinutes } from '../../utils/formatDate';
+import { useNavigate } from 'react-router-dom';
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -44,6 +45,7 @@ const List = ({ list, index }) => {
   const [itemHeight, setItemHeight] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [value] = useDebounce(listName, 1000);
+  const navigate = useNavigate();
 
   const { updateList, createList } = useUserListsContext();
   const listRef = useRef(null);
@@ -214,7 +216,14 @@ const List = ({ list, index }) => {
           </div>
         ) : (
           <div className="flex gap-2">
-            <p className="grow title-text font-light">{listName}</p>
+            <p
+              onClick={() =>
+                navigate(`/lists/${list._id !== 'temp' ? list._id : ''}`)
+              }
+              className="cursor-pointer hover:text-brand-dark-purple grow title-text font-light"
+            >
+              {listName}
+            </p>
             <button
               className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
               onClick={() => setActiveEditTitle(true)}
