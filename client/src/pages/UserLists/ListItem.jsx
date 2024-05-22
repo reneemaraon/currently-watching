@@ -1,10 +1,10 @@
-import Icon from '../Common/Icon';
-import { DeleteIcon, DragIcon } from '../Common/IconList';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import StarIcon from '../Common/Star';
-import { getYear } from '../../utils/formatDate';
-import Insert from './Insert';
-import SearchInItem from './SearchShow';
+import Icon from "../Common/Icon";
+import { DeleteIcon, DragIcon } from "../Common/IconList";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import StarIcon from "../Common/Star";
+import { getYear } from "../../utils/formatDate";
+import Insert from "./Insert";
+import SearchInItem from "./SearchShow";
 
 const ListItem = ({
   dragging,
@@ -16,6 +16,7 @@ const ListItem = ({
   setShowToItem,
   onDelete,
   onEdit,
+  isOwner,
   searchRef,
   ...rest
 }) => {
@@ -23,11 +24,11 @@ const ListItem = ({
     <div
       {...rest}
       className={`w-full ${
-        !dragging && 'transition-transform ease-in-out duration-500'
+        !dragging && "transition-transform ease-in-out duration-500"
       } flex-col inline-flex gap-1 sm:gap-1.5 justify-end ${
-        selected && show && 'z-10'
+        selected && show && "z-10"
       }
-      ${!show && 'z-30'}`}
+      ${!show && "z-30"}`}
     >
       {insertVisible && !fromTop && <Insert />}
       <div className="bg-theme-base relative transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">
@@ -37,11 +38,11 @@ const ListItem = ({
           </div>
         </div>
         {show && (
-          <div className="hidden min-[400px]:block ShowImage md:w-20 h-full px-1 py-1 sm:py-1.5 md:py-2">
-            <div className="w-full h-full overflow-hidden rounded-lg sm:rounded-xl">
+          <div className="hidden min-[400px]:block ShowImage w-24  h-full px-1 py-1 sm:py-1.5 md:py-2">
+            <div className="w-full h-full overflow-hidden rounded sm:rounded-lg">
               <ImageWithOpacityTransition
                 styleAttach="h-full w-full object-cover"
-                src={`https://image.tmdb.org/t/p/w500/${show.tmdbPoster}`}
+                src={`https://image.tmdb.org/t/p/w500/${show.tmdbBackdrop}`}
               />
             </div>
           </div>
@@ -93,25 +94,29 @@ const ListItem = ({
                 </div>
               </div>
             )}
-            <div className="inline-flex px-1">
-              <button
-                onClick={() => onDelete(order)}
-                className="group cursor-pointer hover:bg-opacity-80 p-1.5 hover:bg-red-500 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
-              >
-                <Icon
-                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                  fill="opacity-40 group-hover:opacity-100 group-hover:fill-theme-base fill-lighter-text"
+            {isOwner && (
+              <div className="inline-flex px-1">
+                <button
+                  onClick={() => onDelete(order)}
+                  className="group cursor-pointer hover:bg-opacity-80 p-1.5 hover:bg-red-500 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
                 >
-                  <DeleteIcon />
-                </Icon>
-              </button>
-            </div>
-            <Icon
-              fill="cursor-pointer absolute right-1 hover:opacity-70 opacity-20 fill-brand-dark-purple"
-              sizeRules="w-3 h-3 sm:w-5 sm:h-5"
-            >
-              <DragIcon />
-            </Icon>
+                  <Icon
+                    sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                    fill="opacity-40 group-hover:opacity-100 group-hover:fill-theme-base fill-lighter-text"
+                  >
+                    <DeleteIcon />
+                  </Icon>
+                </button>
+              </div>
+            )}
+            {isOwner && (
+              <Icon
+                fill="cursor-pointer absolute right-1 hover:opacity-70 opacity-20 fill-brand-dark-purple"
+                sizeRules="w-3 h-3 sm:w-5 sm:h-5"
+              >
+                <DragIcon />
+              </Icon>
+            )}
           </div>
         </div>
       </div>

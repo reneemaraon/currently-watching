@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import axios from "axios";
+import React, { useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
@@ -28,9 +28,9 @@ const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
-    setAuthToastMessage({ message: 'You are logging out', type: 'info' });
+    setAuthToastMessage({ message: "You are logging out", type: "info" });
     try {
-      await axios.post('/api/v1/auth/logout');
+      await axios.post("/api/v1/auth/logout");
       removeUser();
     } catch (error) {
       console.log(error);
@@ -38,8 +38,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const loginUser = () => {
-    localStorage.setItem('lastPage', location.pathname);
-    window.open('http://127.0.0.1:3000/api/v1/auth/twitter/', '_self');
+    localStorage.setItem("lastPage", location.pathname);
+    window.open("http://127.0.0.1:3000/api/v1/auth/twitter/", "_self");
   };
 
   const actionRequireLogIn = (onClickButton) => {
@@ -48,12 +48,16 @@ const AuthProvider = ({ children }) => {
     } else {
       return () => {
         setAuthToastMessage({
-          message: 'You must login to do this action',
-          type: 'error',
+          message: "You must login to do this action",
+          type: "error",
         });
         loginUser();
       };
     }
+  };
+
+  const isOwner = (userId) => {
+    return user && user._id == userId;
   };
 
   useEffect(() => {
@@ -70,6 +74,7 @@ const AuthProvider = ({ children }) => {
         loginUser,
         actionRequireLogIn,
         authToastMessage,
+        isOwner,
       }}
     >
       {children}

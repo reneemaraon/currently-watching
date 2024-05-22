@@ -1,20 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-import { useUserListsContext } from '../../context/UserListsContext';
-import { OptionsIcon } from '../Common/IconList';
-import ListOptionButton from './ListOptionButton';
-import Dropdown, { Option } from '../Common/Dropdown';
-import { useAuthContext } from '../../context/AuthContext';
+import { useEffect, useRef, useState } from "react";
+import { useUserListsContext } from "../../context/UserListsContext";
+import { OptionsIcon } from "../Common/IconList";
+import ListOptionButton from "./ListOptionButton";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useAuthContext } from "../../context/AuthContext";
 
 const ListActions = ({ list, addDrama, index }) => {
   const { deleteList, deleteListOnIndex } = useUserListsContext();
+  const { isOwner } = useAuthContext();
   const { user } = useAuthContext();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -31,7 +32,7 @@ const ListActions = ({ list, addDrama, index }) => {
 
   const onAttemptDelete = async () => {
     setDropdownVisible(false);
-    if (list._id == 'temp') {
+    if (list._id == "temp") {
       deleteListOnIndex(index);
     } else {
       await deleteList(list._id);
@@ -83,13 +84,15 @@ const ListActions = ({ list, addDrama, index }) => {
           </div>
         )}
       </div>
-      <button
-        onClick={addDrama}
-        className="rounded-full inverse-button-style small-button"
-      >
-        <div className="hidden sm:block font-medium">+ Add drama</div>
-        <div className="block sm:hidden font-sm">+ Add</div>
-      </button>
+      {isOwner(list.user._id) && (
+        <button
+          onClick={addDrama}
+          className="rounded-full inverse-button-style small-button"
+        >
+          <div className="hidden sm:block font-medium">+ Add drama</div>
+          <div className="block sm:hidden font-sm">+ Add</div>
+        </button>
+      )}
     </div>
   );
 };

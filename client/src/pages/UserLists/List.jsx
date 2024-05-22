@@ -8,6 +8,7 @@ import { useDebounce } from "use-debounce";
 import ListActions from "./ListActions";
 import formatDateTime, { getDiffInMinutes } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -40,6 +41,7 @@ const List = ({ list, index }) => {
   const navigate = useNavigate();
 
   const { updateList, createList } = useUserListsContext();
+  const { isOwner } = useAuthContext();
   const listRef = useRef(null);
   const searchInputRef = useRef(null);
   const nameInputRef = useRef(null);
@@ -215,17 +217,19 @@ const List = ({ list, index }) => {
             >
               {listName}
             </p>
-            <button
-              className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
-              onClick={() => setActiveEditTitle(true)}
-            >
-              <Icon
-                sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                fill="group-hover:fill-theme-base fill-lighter-text"
+            {isOwner(list.user._id) && (
+              <button
+                className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+                onClick={() => setActiveEditTitle(true)}
               >
-                <PencilIcon />
-              </Icon>
-            </button>
+                <Icon
+                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                  fill="group-hover:fill-theme-base fill-lighter-text"
+                >
+                  <PencilIcon />
+                </Icon>
+              </button>
+            )}
           </div>
         )}
         <ListActions index={index} addDrama={addDrama} list={list} />
@@ -239,6 +243,7 @@ const List = ({ list, index }) => {
             items &&
             items.map((item, index) => (
               <Draggable
+                disabled={list.user ? !isOwner(list.user._id) : false}
                 key={`${item.show ? item.show._id : list.name} ${item.order}`}
                 onStop={(e, data) => {
                   const newPosition = index + Math.round(data.y / itemHeight); // Assuming each item's height is 50px
@@ -260,6 +265,7 @@ const List = ({ list, index }) => {
                   searchRef={searchInputRef}
                   onDelete={onDelete}
                   dragging={dragging}
+                  isOwner={!list.user || (list.user && isOwner(list.user._id))}
                   selected={item.selected}
                   show={item.show}
                   setShowToItem={setShowToItem}
