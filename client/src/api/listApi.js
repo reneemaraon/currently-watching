@@ -82,6 +82,9 @@ export const CREATE_LIST_MUTATION = gql`
       _id
       user {
         _id
+        name
+        screenName
+        profilePhotoUrl
       }
       items {
         order
@@ -114,6 +117,9 @@ export const DELETE_LIST_MUTATION = gql`
       _id
       user {
         _id
+        name
+        screenName
+        profilePhotoUrl
       }
       items {
         order
@@ -146,6 +152,9 @@ export const GET_LIST = gql`
       _id
       user {
         _id
+        name
+        screenName
+        profilePhotoUrl
       }
       items {
         order

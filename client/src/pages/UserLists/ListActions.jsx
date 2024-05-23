@@ -4,11 +4,13 @@ import { OptionsIcon } from "../Common/IconList";
 import ListOptionButton from "./ListOptionButton";
 import Dropdown, { Option } from "../Common/Dropdown";
 import { useAuthContext } from "../../context/AuthContext";
+import { useToast } from "../../context/ToastContext";
 
 const ListActions = ({ list, addDrama, index }) => {
   const { deleteList, deleteListOnIndex } = useUserListsContext();
   const { isOwner } = useAuthContext();
   const { user } = useAuthContext();
+  const { showToast } = useToast();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -37,6 +39,19 @@ const ListActions = ({ list, addDrama, index }) => {
     } else {
       await deleteList(list._id);
     }
+  };
+
+  const copyPathToClipboard = () => {
+    const baseUrl = window.location.origin;
+    navigator.clipboard
+      .writeText(baseUrl + `/lists/${list._id}`)
+      .then(() => {
+        showToast("Path to this list is copied to clipboard", "success");
+      })
+      .catch((error) => {
+        console.error("Failed to copy path to clipboard:", error);
+      });
+    setDropdownVisible(false);
   };
 
   return (
@@ -74,12 +89,12 @@ const ListActions = ({ list, addDrama, index }) => {
                   text="Update"
                   onSelect={() => navigate("update")}
                 />
-              )}
+              )} */}
               <Option
                 key="copy"
                 text="Copy Link"
-                onSelect={() => copyPathToClipboard(review._id)}
-              /> */}
+                onSelect={() => copyPathToClipboard()}
+              />
             </Dropdown>
           </div>
         )}
