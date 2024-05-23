@@ -84,7 +84,7 @@ const ListActions = ({ list, addDrama, index }) => {
           </div>
         )}
       </div>
-      {isOwner(list.user._id) && (
+      {(!list.user || isOwner(list.user._id)) && (
         <button
           onClick={addDrama}
           className="rounded-full inverse-button-style small-button"

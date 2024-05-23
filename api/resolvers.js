@@ -393,7 +393,7 @@ const resolvers = {
     },
     deleteList: async (_, { listId }, { user }) => {
       try {
-        if (isListOwnerStandalone(user, listId)) {
+        if (await isListOwnerStandalone(user, listId)) {
           const deletedList = await processDeleteList(listId);
           return deletedList;
         }

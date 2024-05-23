@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_USER_LISTS = gql`
   query GetUserLists($user: ID!, $filter: FilterInput) {
@@ -11,6 +11,9 @@ export const GET_USER_LISTS = gql`
         _id
         user {
           _id
+          name
+          screenName
+          profilePhotoUrl
         }
         items {
           order
@@ -44,6 +47,9 @@ export const UPDATE_LIST_MUTATION = gql`
       _id
       user {
         _id
+        name
+        screenName
+        profilePhotoUrl
       }
       items {
         order

@@ -4,11 +4,11 @@ import ListItem from "./ListItem";
 import Icon from "../Common/Icon";
 import { useEffect, useRef, useState } from "react";
 import { useUserListsContext } from "../../context/UserListsContext";
-import { useDebounce } from "use-debounce";
 import ListActions from "./ListActions";
 import formatDateTime, { getDiffInMinutes } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+import ListAuthor from "./ListAuthor";
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -37,7 +37,6 @@ const List = ({ list, index }) => {
   const [activeEditTitle, setActiveEditTitle] = useState(false);
   const [itemHeight, setItemHeight] = useState(0);
   const [dragging, setDragging] = useState(false);
-  const [value] = useDebounce(listName, 1000);
   const navigate = useNavigate();
 
   const { updateList, createList } = useUserListsContext();
@@ -64,16 +63,25 @@ const List = ({ list, index }) => {
   }, [list.items]);
 
   useEffect(() => {
-    setListName(list.name);
+    if (!activeEditTitle) {
+      setListName(list.name);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!list.name) {
+      setActiveEditTitle(true);
+    }
   }, []);
 
   const processUpdateListName = async () => {
     if (list._id != "temp") {
-      await updateList(list._id, { name: value });
+      await updateList(list._id, { name: listName });
     } else {
+      console.log(listName);
       await createList(index, {
         body: {
-          name: value,
+          name: listName,
           items: items || [],
           ordered: true,
         },
@@ -82,16 +90,21 @@ const List = ({ list, index }) => {
   };
 
   useEffect(() => {
-    if (value && value != list.name) {
-      processUpdateListName();
-    }
-  }, [value]);
-
-  useEffect(() => {
     if (items && changedItems(list.items, items)) {
       processUpdateList();
     }
   }, [items]);
+
+  useEffect(() => {
+    if (
+      !activeEditTitle &&
+      listName &&
+      listName.length > 0 &&
+      listName != list.name
+    ) {
+      processUpdateListName();
+    }
+  }, [activeEditTitle]);
 
   const handleStop = (draggedIndex, newPosition) => {
     setDragging(false);
@@ -196,44 +209,51 @@ const List = ({ list, index }) => {
 
   return (
     <div className="List self-stretch flex-col justify-start items-start gap-2.5 flex">
-      <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 py-1 sm:py-2.5 justify-between items-end gap-2.5 inline-flex">
-        {activeEditTitle || !listName ? (
-          <div ref={nameInputRef} className="flex grow gap-2">
-            <input
-              type="text"
-              className="bg-transparent outline-brand-gray rounded-lg  title-text font-light"
-              placeholder="Enter List name"
-              onChange={handleInputChange}
-              value={listName}
-            />
-          </div>
-        ) : (
-          <div className="flex gap-2">
-            <p
-              onClick={() =>
-                navigate(`/lists/${list._id !== "temp" ? list._id : ""}`)
-              }
-              className="cursor-pointer hover:text-brand-dark-purple grow title-text font-light"
-            >
-              {listName}
-            </p>
-            {isOwner(list.user._id) && (
-              <button
-                className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
-                onClick={() => setActiveEditTitle(true)}
+      <div className="w-full gap-1.5 inline-flex flex-col pb-0.5 sm:pb-1.5">
+        <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 justify-between items-end gap-2.5 inline-flex">
+          {activeEditTitle ||
+          !listName ||
+          (listName && listName.length == 0) ? (
+            <div ref={nameInputRef} className="flex grow gap-2">
+              <input
+                type="text"
+                autoFocus
+                className="bg-transparent outline-brand-gray rounded-lg  title-text font-light"
+                placeholder="Enter List name"
+                onChange={handleInputChange}
+                value={listName}
+              />
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <p
+                onClick={() =>
+                  navigate(`/lists/${list._id !== "temp" ? list._id : ""}`)
+                }
+                className="cursor-pointer hover:text-brand-dark-purple grow title-text font-light"
               >
-                <Icon
-                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                  fill="group-hover:fill-theme-base fill-lighter-text"
+                {listName}
+              </p>
+              {(!list.user || isOwner(list.user._id)) && (
+                <button
+                  className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+                  onClick={() => setActiveEditTitle(true)}
                 >
-                  <PencilIcon />
-                </Icon>
-              </button>
-            )}
-          </div>
-        )}
-        <ListActions index={index} addDrama={addDrama} list={list} />
+                  <Icon
+                    sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                    fill="group-hover:fill-theme-base fill-lighter-text"
+                  >
+                    <PencilIcon />
+                  </Icon>
+                </button>
+              )}
+            </div>
+          )}
+          <ListActions index={index} addDrama={addDrama} list={list} />
+        </div>
+        <ListAuthor list={list} />
       </div>
+
       <div className="w-full inline-flex flex-col gap-1.5">
         <div
           ref={listRef}

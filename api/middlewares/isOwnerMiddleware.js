@@ -27,6 +27,9 @@ const isReviewOwnerStandalone = async (user, reviewId) => {
 
 const isListOwnerStandalone = async (user, listId) => {
   const list = await List.findById(listId);
+  if (!list) {
+    throw new NotFoundError("List not found");
+  }
   return user._id.equals(list.user);
 };
 
