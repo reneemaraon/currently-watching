@@ -73,13 +73,13 @@ const ListHeader = ({ items, list, index, addDrama }) => {
 
   return (
     <div className="w-full gap-1.5 inline-flex flex-col pb-0.5 sm:pb-1.5">
-      <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 justify-between items-end gap-2.5 inline-flex">
+      <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 justify-between inline-flex">
         {activeEditTitle || !listName || (listName && listName.length == 0) ? (
-          <div ref={nameInputRef} className="flex grow gap-2">
+          <div ref={nameInputRef} className="w-auto flex gap-2">
             <input
               type="text"
               autoFocus
-              className="px-2 bg-transparent outline-brand-gray rounded-lg  title-text font-light"
+              className="px-2 bg-transparent outline-brand-dark-purple rounded-lg  title-text font-light"
               placeholder="Enter List name"
               onChange={handleInputChange}
               value={listName}
@@ -97,7 +97,7 @@ const ListHeader = ({ items, list, index, addDrama }) => {
             </p>
             {(!list.user || isOwner(list.user._id)) && (
               <button
-                className="group-hover/headername:opacity-100 opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+                className="opacity-100 sm:group-hover/headername:opacity-100 sm:min-[400px]:opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
                 onClick={() => setActiveEditTitle(true)}
               >
                 <Icon

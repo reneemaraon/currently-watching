@@ -1,28 +1,29 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   CREATE_LIST_MUTATION,
   GET_USER_LISTS,
   UPDATE_LIST_MUTATION,
   DELETE_LIST_MUTATION,
-} from '../api/listApi';
-import { useMutation, useQuery } from '@apollo/client';
-import findCursor from '../utils/getCursorFromList';
+} from "../api/listApi";
+import { useMutation, useQuery } from "@apollo/client";
+import findCursor from "../utils/getCursorFromList";
 
 const ITEMS_PER_PAGE = 5;
-const SORT_FIELD = 'createdAt';
+const SORT_FIELD = "createdAt";
 
 const userListsContext = createContext();
 
 export const useUserListsContext = () => {
   const context = useContext(userListsContext);
-  if (!context) throw new Error('User Lists Provider is missing');
+  if (!context) throw new Error("User Lists Provider is missing");
   return context;
 };
 
 export const UserListsProvider = ({ children }) => {
-  const [userId, setUserId] = useState(null);
+  const [userId, setId] = useState(null);
   const [userLists, setUserLists] = useState({
     totalCount: 0,
+    user: null,
     lists: [],
   });
 
@@ -60,9 +61,22 @@ export const UserListsProvider = ({ children }) => {
     setUserLists({
       totalCount: 0,
       lists: [],
+      user: null,
     });
     setCursor(null);
     refetch();
+  };
+
+  const setUserId = (id) => {
+    if (userId != id) {
+      setUserLists({
+        totalCount: 0,
+        user: null,
+        lists: [],
+      });
+      setCursor(null);
+      setId(id);
+    }
   };
 
   const addList = () => {
@@ -71,9 +85,9 @@ export const UserListsProvider = ({ children }) => {
       totalCount: prevList.totalCount + 1,
       lists: [
         {
-          _id: 'temp',
+          _id: "temp",
           items: [],
-          name: '',
+          name: "",
         },
         ...prevList.lists,
       ],
@@ -145,7 +159,7 @@ export const UserListsProvider = ({ children }) => {
         findCursor(dataLists, SORT_FIELD)
       ) {
         setUserLists((prevLists) => ({
-          totalCount,
+          ...data.userLists,
           lists: [...prevLists.lists, ...dataLists],
         }));
       }

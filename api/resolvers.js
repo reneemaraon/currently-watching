@@ -223,7 +223,9 @@ const resolvers = {
         user,
         ...searchConditions,
       }).countDocuments();
+      const userObject = await User.findById(user);
       return {
+        user: userObject,
         lists: userLists,
         totalCount: count,
       };
@@ -369,7 +371,7 @@ const resolvers = {
     createList: async (_, { body }, { user }) => {
       try {
         const newList = await processCreateList({
-          userId: "65b4aed35eba8362e2b674aa",
+          userId: user._id,
           ...body,
         });
         return newList;

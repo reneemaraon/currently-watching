@@ -11,22 +11,19 @@ const ListAuthor = ({ list }) => {
   if (list.user) {
     return (
       <div className="py-0.5 px-2 Profile justify-start items-start gap-1.5 inline-flex">
-        <div
-          onClick={onClickUser}
-          className="pr-1 font-light small-author-username"
-        >
+        <div onClick={onClickUser} className="pr-1 font-light author-username">
           by{" "}
         </div>
         <ImageWithOpacityTransition
           onClick={onClickUser}
-          styleAttach="hover:opacity-80 cursor-pointer w-4 h-4 relative rounded-full"
+          styleAttach="hover:opacity-80 cursor-pointer w-5 h-5 relative rounded-full"
           src={list.user.profilePhotoUrl}
         />
         <div
           onClick={onClickUser}
           className="NameUsername justify-start flex-wrap items-center gap-0.5 sm:gap-2 inline-flex"
         >
-          <div className="small-author-username">{list.user.screenName}</div>
+          <div className="author-username">{list.user.screenName}</div>
         </div>
       </div>
     );

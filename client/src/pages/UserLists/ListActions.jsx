@@ -102,9 +102,11 @@ const ListActions = ({ list, addDrama, index }) => {
       {(!list.user || isOwner(list.user._id)) && (
         <button
           onClick={addDrama}
-          className="rounded-full inverse-button-style small-button"
+          className="rounded-full inverse-button-style text-nowrap small-button"
         >
-          <div className="hidden sm:block font-medium">+ Add drama</div>
+          <div className="hidden sm:block font-medium text-nowrap">
+            + Add drama
+          </div>
           <div className="block sm:hidden font-sm">+ Add</div>
         </button>
       )}

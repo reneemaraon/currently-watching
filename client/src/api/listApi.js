@@ -3,6 +3,12 @@ import { gql } from "@apollo/client";
 export const GET_USER_LISTS = gql`
   query GetUserLists($user: ID!, $filter: FilterInput) {
     userLists(user: $user, filter: $filter) {
+      user {
+        _id
+        name
+        screenName
+        profilePhotoUrl
+      }
       totalCount
       lists {
         createdAt

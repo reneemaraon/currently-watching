@@ -161,6 +161,12 @@ type ListPagination {
   lists: [List]
 }
 
+type UserListPagination {
+  totalCount: Int!
+  user: User!
+  lists: [List]
+}
+
 
 type Query {
   reviews(filter: FilterInput): ReviewPagination
@@ -178,7 +184,7 @@ type Query {
   # lists(): [List]
   list(id: ID!): List
   myLists(filter: FilterInput): ListPagination
-  userLists(user: ID!, filter: FilterInput): ListPagination
+  userLists(user: ID!, filter: FilterInput): UserListPagination
 
 
   reviewComments(id: ID!, filter: FilterInput): CommentPagination

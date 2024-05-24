@@ -1,11 +1,11 @@
 export const Header = ({ children }) => (
-  <div className="Header w-full px-2 py-2 sm:py-4 justify-center items-center gap-5 inline-flex">
+  <div className="Header w-full px-2 py-2 sm:py-3 justify-center items-center gap-5 inline-flex">
     {children}
   </div>
 );
 
 export const HeaderName = ({ children }) => (
-  <div className="grow shrink basis-0 justify-start items-start gap-2.5 flex">
+  <div className="grow shrink basis-0 items-center gap-2.5 flex">
     <div className="title-text">{children}</div>
   </div>
 );
@@ -24,7 +24,7 @@ const SectionHeader = ({
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
           <button
             disabled={disabledLeft}
-            className={disabledLeft ? 'opacity-30' : 'opacity-100'}
+            className={disabledLeft ? "opacity-30" : "opacity-100"}
             onClick={arrowLeftFunction}
           >
             <svg
@@ -46,7 +46,7 @@ const SectionHeader = ({
         <div className="p-2 rounded-3xl inline-flex justify-center items-center">
           <button
             disabled={disabledRight}
-            className={disabledRight ? 'opacity-30' : 'opacity-100'}
+            className={disabledRight ? "opacity-30" : "opacity-100"}
             onClick={arrowRightFunction}
           >
             <svg
