@@ -1,6 +1,5 @@
 import { useUserListsContext } from "../../context/UserListsContext";
 import CustomButton from "../Common/CustomButton";
-import FullPageLoading from "../Common/FullPageLoading";
 import { Header, HeaderName } from "../Home/Sections/SectionHeader";
 import List from "./List";
 import LoadMorePanel from "../Common/LoadMorePagination";
@@ -8,7 +7,6 @@ import ListLoading from "../Common/LoadingList";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
 
 const UserListsPage = () => {
   const { id } = useParams();

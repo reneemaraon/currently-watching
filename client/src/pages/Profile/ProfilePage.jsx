@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import CircularButton from '../Common/CircleButton';
-import { ShareIcon, TwitterIcon } from '../Common/IconList';
-import CustomButton from '../Common/CustomButton';
-import Icon from '../Common/Icon';
-import ReviewsListItem from '../Reviews/ReviewListItem';
-import List from '../UserLists/List';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import LoadMorePanel from '../Common/LoadMorePagination';
-import { useAuthContext } from '../../context/AuthContext';
-import formatDateTime from '../../utils/formatDate';
-import { useUserDetailContext } from '../../context/UserDetailContext';
-import { useParams } from 'react-router-dom';
-import { Header, HeaderName } from '../Home/Sections/SectionHeader';
-import DeleteReview from '../Reviews/DeleteReview';
-import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
-import ListLoading from '../Common/LoadingList';
-import { useToast } from '../../context/ToastContext';
+import React, { useEffect } from "react";
+import CircularButton from "../Common/CircleButton";
+import { ShareIcon, TwitterIcon } from "../Common/IconList";
+import CustomButton from "../Common/CustomButton";
+import Icon from "../Common/Icon";
+import ReviewsListItem from "../Reviews/ReviewListItem";
+import List from "../UserLists/List";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import LoadMorePanel from "../Common/LoadMorePagination";
+import { useAuthContext } from "../../context/AuthContext";
+import formatDateTime from "../../utils/formatDate";
+import { useUserDetailContext } from "../../context/UserDetailContext";
+import { useParams } from "react-router-dom";
+import { Header, HeaderName } from "../Home/Sections/SectionHeader";
+import DeleteReview from "../Reviews/DeleteReview";
+import { useDeleteReviewContext } from "../../context/DeleteReviewContext";
+import ListLoading from "../Common/LoadingList";
+import { useToast } from "../../context/ToastContext";
+import { useUserListsContext } from "../../context/UserListsContext";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -27,18 +28,24 @@ export default function ProfilePage() {
     userReviews: { reviews, totalCount },
   } = useUserDetailContext();
   const { showToast } = useToast();
-  const { user: loggedInUser } = useAuthContext();
+  const {
+    setUserId: setUserList,
+    loading: listLoading,
+    userLists,
+    loadNextPage: loadNextListPage,
+  } = useUserListsContext();
   const { setShowDeleteModal, setReviewToDelete } = useDeleteReviewContext();
 
   useEffect(() => {
     if (id) {
       setUserId(id);
+      setUserList(id);
     }
   }, [id]);
 
   const openTwitter = () => {
     const { screenName } = user;
-    window.open(`http://twitter.com/${screenName}`, '_blank');
+    window.open(`http://twitter.com/${screenName}`, "_blank");
   };
 
   const onAttemptDelete = (id) => {
@@ -51,10 +58,10 @@ export default function ProfilePage() {
     navigator.clipboard
       .writeText(fullPath)
       .then(() => {
-        showToast('Copied link to clipboard', 'success');
+        showToast("Copied link to clipboard", "success");
       })
       .catch((error) => {
-        console.error('Failed to copy path to clipboard', error);
+        console.error("Failed to copy path to clipboard", error);
       });
   };
 
@@ -110,8 +117,8 @@ export default function ProfilePage() {
                   </div>
                 </div>
               </div>
-              <div className="Footer self-stretch pb-4 rounded-[17px]  flex-col justify-center items-start gap-[30px] flex">
-                <div className="ReviewSection self-stretch pt-[30px] flex-col justify-center items-center gap-[15px] flex">
+              <div className="Footer self-stretch pb-4 rounded-[17px]  flex-col justify-center items-start gap-12 flex">
+                <div className="ReviewSection self-stretch pt-[30px] flex-col justify-center items-center gap-4 flex">
                   <Header>
                     <HeaderName>
                       <span className="title-text">Reviews </span>
@@ -133,25 +140,26 @@ export default function ProfilePage() {
                     )}
                   </div>
                 </div>
-                {/* <div className="Lists w-full flex-col justify-center items-center gap-[15px] flex">
-                  <div className="Header self-stretch border-b pb-4 sm:pb-6 justify-between items-start inline-flex">
-                    <div className="Reviews20">
+                <div className="Lists w-full flex-col justify-center items-center gap-3 flex">
+                  <Header>
+                    <HeaderName>
                       <span className="title-text">Lists </span>
-                      <span className="text-lighter-text title-text">(20)</span>
-                    </div>
-                    <div className="ActionsList w-[146px] justify-end items-start gap-2.5 flex" />
-                  </div>
-                  <List />
-                  <div className="LoadMorePanel self-stretch h-[65px]  flex-col justify-end items-center gap-2.5 flex">
-                    <CustomButton
-                      styleSet="light"
-                      size="defaultResize"
-                      edge="rounded"
-                    >
-                      Load more lists
-                    </CustomButton>
-                  </div>
-                </div> */}
+                      <span className="text-lighter-text title-text">
+                        ({userLists && userLists.totalCount})
+                      </span>
+                    </HeaderName>
+                  </Header>
+                  {userLists &&
+                    userLists.lists.map((list, index) => (
+                      <List index={index} key={list._id} list={list} />
+                    ))}
+                  {listLoading && <ListLoading />}
+                  {!listLoading &&
+                    userLists &&
+                    userLists.lists.length < userLists.totalCount && (
+                      <LoadMorePanel onClick={loadNextListPage} />
+                    )}
+                </div>
               </div>
             </div>
           </div>
