@@ -1,4 +1,4 @@
-import ImageWithOpacityTransition from "./ImageTransition";
+import formatRating from "../../utils/formatRating";
 import StarIcon from "./Star";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ const ShowCardSmall = ({ id, show }) => {
         </div>
         <div className="StarRating w-14 h-14 rounded-full border-2 border-brand-tq justify-center items-center gap-0.5 flex">
           <div className="text-[15px] font-bold leading-[10.50px]">
-            {show.totalAverage.toFixed(1)}
+            {formatRating(show.totalAverage)}
           </div>
           <div className="w-4 h-4">
             <StarIcon />

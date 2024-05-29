@@ -7,6 +7,7 @@ import Insert from "./Insert";
 import SearchInItem from "./SearchShow";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "../Common/Tooltip";
+import formatRating from "../../utils/formatRating";
 
 const ListItem = ({
   dragging,
@@ -116,7 +117,7 @@ const ListItem = ({
                           src={show.myReview[0].user.profilePhotoUrl}
                         />
                         <div className="text-xs sm:text-sm md:text-base font-normal sm:font-medium leading-[10.50px]">
-                          {show.myReview[0].overallRating.toFixed(1)}
+                          {formatRating(show.myReview[0].overallRating)}
                         </div>
                         <StarIcon sizeRules="w-3 h-3 sm:w-4 sm:h-4" />
                       </div>

@@ -1,13 +1,14 @@
-import { useShowDetailContext } from '../../context/ShowDetailContext';
-import Icon from '../Common/Icon';
-import StarIcon from '../Common/Star';
+import { useShowDetailContext } from "../../context/ShowDetailContext";
+import formatRating from "../../utils/formatRating";
+import Icon from "../Common/Icon";
+import StarIcon from "../Common/Star";
 
 const Row = ({ name, value }) => (
   <div className="RatingRow w-full max-w-[150px] px-2.5 py-2 rounded-[5px] border border-slate-200 justify-between items-start inline-flex">
     <div className="Acting important-small-text font-bold">{name}</div>
     <div className="Rating justify-start items-center gap-0.5 flex">
       <div className="text-right important-small-text font-normal">
-        {value || '0'}
+        {value || "0"}
       </div>
       <Icon>
         <StarIcon />
@@ -35,9 +36,9 @@ const StatContainer = () => {
           </div>
         </div>
         <div className="w-full flex-col justify-start items-start gap-3 flex">
-          <Row name="Acting" value={actingAverage} />
-          <Row name="Plot" value={plotAverage} />
-          <Row name="Visuals" value={visualsAverage} />
+          <Row name="Acting" value={formatRating(actingAverage)} />
+          <Row name="Plot" value={formatRating(plotAverage)} />
+          <Row name="Visuals" value={formatRating(visualsAverage)} />
         </div>
       </div>
       <div className="AspectRatings flex-col justify-center items-center gap-2.5 inline-flex">
@@ -49,7 +50,7 @@ const StatContainer = () => {
         <div className="RatingsContainer w-full py-[5px] justify-center items-center gap-2.5 inline-flex">
           <div className="StarRating w-20 h-20 px-2.5 py-5 rounded-[40px] border-2 border-brand-tq justify-center items-center gap-[5px] flex">
             <div className="8 text-black text-xl font-bold leading-[14px]">
-              {totalAverage}
+              {formatRating(totalAverage)}
             </div>
             <Icon>
               <StarIcon />
@@ -58,13 +59,13 @@ const StatContainer = () => {
         </div>
         <div className="From234kReviews w-full text-center">
           <span className="text-gray-800 text-[13px] font-normal leading-normal">
-            from{' '}
+            from{" "}
           </span>
           <span className="text-gray-800 text-[13px] font-bold leading-normal">
             {reviewCount}
           </span>
           <span className="text-gray-800 text-[13px] font-normal leading-normal">
-            {` review${reviewCount > 1 ? 's' : ''}`}
+            {` review${reviewCount > 1 ? "s" : ""}`}
           </span>
         </div>
       </div>

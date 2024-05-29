@@ -1,7 +1,8 @@
-import { getYear } from '../../utils/formatDate';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import StarIcon from '../Common/Star';
-import commaSeparatedString from '../Common/commaSeparate';
+import { getYear } from "../../utils/formatDate";
+import formatRating from "../../utils/formatRating";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import StarIcon from "../Common/Star";
+import commaSeparatedString from "../Common/commaSeparate";
 
 const SearchResultItem = ({ searchItem, onClick }) => {
   return (
@@ -30,7 +31,7 @@ const SearchResultItem = ({ searchItem, onClick }) => {
         </div>
         <div className="StarRating px-3 h-full rounded-[30px] justify-center items-center gap-1 flex">
           <div className="8 text-sm sm:text-base font-normal sm:font-medium leading-[10.50px]">
-            {searchItem.totalAverage}
+            {formatRating(searchItem.totalAverage)}
           </div>
           <StarIcon sizeRules="w-4 h-4" />
         </div>
