@@ -6,6 +6,7 @@ import { getYear } from "../../utils/formatDate";
 import Insert from "./Insert";
 import SearchInItem from "./SearchShow";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "../Common/Tooltip";
 
 const ListItem = ({
   dragging,
@@ -110,17 +111,19 @@ const ListItem = ({
             )}
             {isOwner && (
               <div className="inline-flex px-1">
-                <button
-                  onClick={() => onDelete(order)}
-                  className="group cursor-pointer hover:bg-opacity-80 p-1.5 hover:bg-red-500 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
-                >
-                  <Icon
-                    sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                    fill="opacity-40 group-hover:opacity-100 group-hover:fill-theme-base fill-lighter-text"
+                <Tooltip position="top" text="Delete">
+                  <button
+                    onClick={() => onDelete(order)}
+                    className="group cursor-pointer hover:bg-opacity-80 p-1.5 hover:bg-red-500 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
                   >
-                    <DeleteIcon />
-                  </Icon>
-                </button>
+                    <Icon
+                      sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                      fill="opacity-40 group-hover:opacity-100 group-hover:fill-theme-base fill-lighter-text"
+                    >
+                      <DeleteIcon />
+                    </Icon>
+                  </button>
+                </Tooltip>
               </div>
             )}
             {isOwner && (

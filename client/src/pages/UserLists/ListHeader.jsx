@@ -6,6 +6,7 @@ import ListAuthor from "./ListAuthor";
 import { useAuthContext } from "../../context/AuthContext";
 import { PencilIcon } from "../Common/IconList";
 import Icon from "../Common/Icon";
+import Tooltip from "../Common/Tooltip";
 
 const ListHeader = ({ items, list, index, addDrama }) => {
   const [activeEditTitle, setActiveEditTitle] = useState(false);
@@ -96,17 +97,21 @@ const ListHeader = ({ items, list, index, addDrama }) => {
               {listName}
             </p>
             {(!list.user || isOwner(list.user._id)) && (
-              <button
-                className="w-8 h-8 sm:w-9 sm:h-9 opacity-100 sm:group-hover/headername:opacity-100 sm:min-[400px]:opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
-                onClick={() => setActiveEditTitle(true)}
-              >
-                <Icon
-                  sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                  fill="group-hover:fill-theme-base fill-lighter-text"
-                >
-                  <PencilIcon />
-                </Icon>
-              </button>
+              <div className="h-9">
+                <Tooltip text="Edit list title">
+                  <button
+                    className="w-8 h-8 sm:w-9 sm:h-9 opacity-100 sm:group-hover/headername:opacity-100 sm:min-[400px]:opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+                    onClick={() => setActiveEditTitle(true)}
+                  >
+                    <Icon
+                      sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                      fill="group-hover:fill-theme-base fill-lighter-text"
+                    >
+                      <PencilIcon />
+                    </Icon>
+                  </button>
+                </Tooltip>
+              </div>
             )}
           </div>
         )}
