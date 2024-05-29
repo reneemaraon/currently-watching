@@ -73,7 +73,7 @@ const ListHeader = ({ items, list, index, addDrama }) => {
 
   return (
     <div className="w-full gap-1.5 inline-flex flex-col pb-0.5 sm:pb-1.5">
-      <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 justify-between inline-flex">
+      <div className="group/headername ListHeader w-full px-1 md:px-2 sm:px-4 gap-3 justify-between inline-flex">
         {activeEditTitle || !listName || (listName && listName.length == 0) ? (
           <div ref={nameInputRef} className="w-auto flex gap-2">
             <input
@@ -91,13 +91,13 @@ const ListHeader = ({ items, list, index, addDrama }) => {
               onClick={() =>
                 navigate(`/lists/${list._id !== "temp" ? list._id : ""}`)
               }
-              className="cursor-pointer hover:text-brand-dark-purple grow title-text font-light"
+              className="cursor-pointer hover:text-brand-dark-purple grow line-clamp-2 title-text font-light"
             >
               {listName}
             </p>
             {(!list.user || isOwner(list.user._id)) && (
               <button
-                className="opacity-100 sm:group-hover/headername:opacity-100 sm:min-[400px]:opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+                className="w-8 h-8 sm:w-9 sm:h-9 opacity-100 sm:group-hover/headername:opacity-100 sm:min-[400px]:opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
                 onClick={() => setActiveEditTitle(true)}
               >
                 <Icon

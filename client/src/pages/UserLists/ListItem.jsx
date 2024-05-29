@@ -5,6 +5,7 @@ import StarIcon from "../Common/Star";
 import { getYear } from "../../utils/formatDate";
 import Insert from "./Insert";
 import SearchInItem from "./SearchShow";
+import { useNavigate } from "react-router-dom";
 
 const ListItem = ({
   dragging,
@@ -20,6 +21,11 @@ const ListItem = ({
   searchRef,
   ...rest
 }) => {
+  const navigate = useNavigate();
+  const navigateToShow = () => {
+    navigate(`/shows/${show._id}`);
+  };
+
   return (
     <div
       {...rest}
@@ -32,16 +38,21 @@ const ListItem = ({
     >
       {insertVisible && !fromTop && <Insert />}
       <div className="bg-theme-base relative transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">
-        <div className="cursor-pointer group RankNumContainer px-6 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex">
+        <div
+          className={`${
+            isOwner && "cursor-grab"
+          } group RankNumContainer px-6 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex`}
+        >
           <div className="RankNumber text-base sm:text-lg md:text-2xl font-base md:font-medium leading-none">
             {order}
           </div>
         </div>
         {show && (
           <div className="hidden min-[400px]:block ShowImage w-24  h-full px-1 py-1 sm:py-1.5 md:py-2">
-            <div className="w-full h-full overflow-hidden rounded sm:rounded-lg">
+            <div className="cursor-pointer w-full h-full overflow-hidden rounded sm:rounded-lg">
               <ImageWithOpacityTransition
-                styleAttach="h-full w-full object-cover"
+                onClick={navigateToShow}
+                styleAttach="hover:opacity-90 h-full w-full object-cover"
                 src={`https://image.tmdb.org/t/p/w500/${show.tmdbBackdrop}`}
               />
             </div>
@@ -50,10 +61,13 @@ const ListItem = ({
 
         <div className="ShowDetails pl-2 sm:pl-5 md:pl-7 grow shrink basis-0 self-stretch py-[11px] justify-between items-center flex">
           {show ? (
-            <div className="ShowDetailsText flex-col justify-start items-start gap-0.5 sm:gap-1 md:gap-2 inline-flex">
+            <div
+              onClick={navigateToShow}
+              className="group cursor-pointer ShowDetailsText flex-col justify-start items-start gap-0.5 sm:gap-1 md:gap-2 inline-flex"
+            >
               <div className="Title">
                 <span className="gap-1 text-sm sm:text-base md:text-lg">
-                  <span className="font-normal sm:font-medium md:font-semibold">
+                  <span className="group-hover:text-brand-dark-purple font-normal sm:font-medium md:font-semibold">
                     {show.title}
                     <span className="font-extralight sm:font-light md:font-normal">
                       {` (${getYear(show.firstAirDate)})`}
@@ -79,7 +93,7 @@ const ListItem = ({
               setShowToItem={setShowToItem}
             />
           )}
-          <div className="Right relative px-2 sm:px-5 md:px-7 inline-flex justify-end items-center gap-2 min-[400px]:gap-4 sm:gap-6 md:gap-8">
+          <div className="Right h-full relative px-2 sm:px-5 md:px-7 inline-flex justify-end items-center gap-2 min-[400px]:gap-4 sm:gap-6 md:gap-8">
             {show && (
               <div className="PersonalRating sm:px-0.5 md:px-1.5 justify-end items-center flex">
                 <div className="RatingsContainer justify-between items-start flex">
@@ -110,12 +124,18 @@ const ListItem = ({
               </div>
             )}
             {isOwner && (
-              <Icon
-                fill="cursor-pointer absolute right-1 hover:opacity-70 opacity-20 fill-brand-dark-purple"
-                sizeRules="w-3 h-3 sm:w-5 sm:h-5"
+              <div
+                className={`${
+                  isOwner && "cursor-grab"
+                } absolute right-1 hover:opacity-70 opacity-20 h-full w-6 inline-flex items-center justify-center`}
               >
-                <DragIcon />
-              </Icon>
+                <Icon
+                  fill="fill-brand-dark-purple"
+                  sizeRules="w-3 h-3 sm:w-5 sm:h-5"
+                >
+                  <DragIcon />
+                </Icon>
+              </div>
             )}
           </div>
         </div>

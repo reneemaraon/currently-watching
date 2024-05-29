@@ -55,7 +55,7 @@ const ListActions = ({ list, addDrama, index }) => {
   };
 
   return (
-    <div className="Actions grow-1 justify-center items-center gap-1.5 sm:gap-2.5 flex">
+    <div className="Actions grow-1 justify-center  gap-1.5 sm:gap-2.5 flex">
       {/* <ListOptionButton>
             <Icon
               sizeRules="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5"
