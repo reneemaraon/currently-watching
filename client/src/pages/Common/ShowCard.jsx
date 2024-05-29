@@ -1,12 +1,12 @@
-import ImageWithOpacityTransition from './ImageTransition';
-import StarIcon from './Star';
-import { useNavigate } from 'react-router-dom';
+import ImageWithOpacityTransition from "./ImageTransition";
+import StarIcon from "./Star";
+import { useNavigate } from "react-router-dom";
 
 const ShowCardSmall = ({ id, show }) => {
   const navigate = useNavigate();
 
   const onClickNavigate = () => {
-    navigate(`/shows/${show._id || '1'}`);
+    navigate(`/shows/${show._id || "1"}`);
   };
 
   return (
@@ -20,7 +20,7 @@ const ShowCardSmall = ({ id, show }) => {
           src={
             show
               ? `https://image.tmdb.org/t/p/w500${show.tmdbBackdrop}`
-              : 'https://via.placeholder.com/262x135'
+              : "https://via.placeholder.com/262x135"
           }
         />
       </div>
@@ -28,7 +28,7 @@ const ShowCardSmall = ({ id, show }) => {
         <div className="ShowDetailsText h-full w-40 flex-col justify-center items-start inline-flex">
           <div className="inline-flex gap-1">
             <span className="hover:text-brand-dark-purple text-sm font-medium">
-              {show ? show.title : 'Drama Name'}
+              {show ? show.title : "Drama Name"}
             </span>
           </div>
           <div className="NoOfReviews text-slate-500 text-xs font-medium">
@@ -37,7 +37,7 @@ const ShowCardSmall = ({ id, show }) => {
         </div>
         <div className="StarRating w-14 h-14 rounded-full border-2 border-brand-tq justify-center items-center gap-0.5 flex">
           <div className="text-[15px] font-bold leading-[10.50px]">
-            {show.totalAverage}
+            {show.totalAverage.toFixed(1)}
           </div>
           <div className="w-4 h-4">
             <StarIcon />

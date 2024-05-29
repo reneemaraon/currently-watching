@@ -1,5 +1,5 @@
 export const Header = ({ children }) => (
-  <div className="Header w-full px-2 py-2 sm:py-3 justify-center items-center gap-5 inline-flex">
+  <div className="Header w-full px-0 sm:px-1 py-2 sm:py-3 justify-center items-center gap-5 inline-flex">
     {children}
   </div>
 );

@@ -97,21 +97,19 @@ const ListHeader = ({ items, list, index, addDrama }) => {
               {listName}
             </p>
             {(!list.user || isOwner(list.user._id)) && (
-              <div className="h-9">
-                <Tooltip text="Edit list title">
-                  <button
-                    className="w-8 h-8 sm:w-9 sm:h-9 opacity-100 sm:group-hover/headername:opacity-100 sm:min-[400px]:opacity-0 group cursor-pointer py-1 px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
-                    onClick={() => setActiveEditTitle(true)}
+              <Tooltip text="Edit list title">
+                <button
+                  className="min-[500px]:w-5 min-[500px]:h-5 sm:w-8 sm:h-8 opacity-100 sm:group-hover/headername:opacity-100 sm:min-[500px]:opacity-0 group cursor-pointer min-[500px]:py-1 max-[499px]:pb-1 min-[500px]:px-2 hover:bg-blue-400 hover:rounded-xl transition-all ease-out duration-150 rounded-2xl"
+                  onClick={() => setActiveEditTitle(true)}
+                >
+                  <Icon
+                    sizeRules="w-3 h-3 sm:w-4 sm:h-4"
+                    fill="group-hover:fill-theme-base fill-lighter-text"
                   >
-                    <Icon
-                      sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                      fill="group-hover:fill-theme-base fill-lighter-text"
-                    >
-                      <PencilIcon />
-                    </Icon>
-                  </button>
-                </Tooltip>
-              </div>
+                    <PencilIcon />
+                  </Icon>
+                </button>
+              </Tooltip>
             )}
           </div>
         )}

@@ -35,6 +35,10 @@ export const GET_USER_LISTS = gql`
               overallRating
               actingRating
               plotRating
+              _id
+              user {
+                profilePhotoUrl
+              }
               visualsRating
             }
           }

@@ -5,6 +5,7 @@ import ListOptionButton from "./ListOptionButton";
 import Dropdown, { Option } from "../Common/Dropdown";
 import { useAuthContext } from "../../context/AuthContext";
 import { useToast } from "../../context/ToastContext";
+import Tooltip from "../Common/Tooltip";
 
 const ListActions = ({ list, addDrama, index }) => {
   const { deleteList, deleteListOnIndex } = useUserListsContext();
@@ -73,9 +74,11 @@ const ListActions = ({ list, addDrama, index }) => {
             </Icon>
           </ListOptionButton> */}
       <div className="relative" ref={dropdownRef}>
-        <ListOptionButton active={isDropdownVisible} onClick={toggleDropdown}>
-          <OptionsIcon />
-        </ListOptionButton>
+        <Tooltip text="Options">
+          <ListOptionButton active={isDropdownVisible} onClick={toggleDropdown}>
+            <OptionsIcon />
+          </ListOptionButton>
+        </Tooltip>
         {isDropdownVisible && (
           <div className="absolute cursor-pointer w-40 top-full right-0 mt-1 z-40">
             <Dropdown>

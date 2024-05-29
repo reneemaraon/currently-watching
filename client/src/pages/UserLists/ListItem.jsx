@@ -42,18 +42,23 @@ const ListItem = ({
         <div
           className={`${
             isOwner && "cursor-grab"
-          } group RankNumContainer px-6 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex`}
+          } group RankNumContainer px-5 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex`}
         >
           <div className="RankNumber text-base sm:text-lg md:text-2xl font-base md:font-medium leading-none">
             {order}
           </div>
         </div>
         {show && (
-          <div className="hidden min-[400px]:block ShowImage w-24  h-full px-1 py-1 sm:py-1.5 md:py-2">
+          <div className="hidden min-[400px]:block ShowImage w-12 sm:w-16 md:w-24  h-full px-1 py-1.5 md:py-2">
             <div className="cursor-pointer w-full h-full overflow-hidden rounded sm:rounded-lg">
               <ImageWithOpacityTransition
                 onClick={navigateToShow}
-                styleAttach="hover:opacity-90 h-full w-full object-cover"
+                styleAttach="max-[400px]:hidden hover:opacity-90 h-full w-full object-cover"
+                src={`https://image.tmdb.org/t/p/w500/${show.tmdbPoster}`}
+              />
+              <ImageWithOpacityTransition
+                onClick={navigateToShow}
+                styleAttach="min-[401px]:hidden hover:opacity-90 h-full w-full object-cover"
                 src={`https://image.tmdb.org/t/p/w500/${show.tmdbBackdrop}`}
               />
             </div>
@@ -78,8 +83,8 @@ const ListItem = ({
               </div>
               <div className="sm:inline-flex hidden justify-start items-center gap-1.5">
                 <div className="Score info-text font-medium">Score</div>
-                <div className="Rating self-stretch info-text font-bold justify-start items-center gap-0.5 flex">
-                  {show.totalAverage}
+                <div className="w-full info-text font-bold justify-start items-center gap-0.5 flex">
+                  {show.totalAverage.toFixed(1)}
                   <StarIcon sizeRules="h-3 w-3" />
                 </div>
                 <div className="NoOfReviews text-slate-500 text-[11px] font-normal">
@@ -94,17 +99,28 @@ const ListItem = ({
               setShowToItem={setShowToItem}
             />
           )}
-          <div className="Right h-full relative px-2 sm:px-5 md:px-7 inline-flex justify-end items-center gap-2 min-[400px]:gap-4 sm:gap-6 md:gap-8">
+          <div className="Right h-full relative px-2 sm:px-5 md:px-7 inline-flex justify-end items-center gap-1 min-[400px]:gap-2 sm:gap-6 md:gap-8">
             {show && (
-              <div className="PersonalRating sm:px-0.5 md:px-1.5 justify-end items-center flex">
+              <div className="PersonalRating min-w-16 sm:px-0.5 md:px-1.5 justify-end items-center flex">
                 <div className="RatingsContainer justify-between items-start flex">
                   {show.myReview && show.myReview.length > 0 && (
-                    <div className="StarRating h-full rounded-[30px] justify-center items-center gap-1 flex">
-                      <div className="8 text-sm sm:text-base font-normal sm:font-medium leading-[10.50px]">
-                        {show.myReview[0].overallRating}
+                    <Tooltip text="Author's rating">
+                      <div
+                        onClick={() =>
+                          navigate(`/reviews/${show.myReview[0]._id}`)
+                        }
+                        className="StarRating cursor-pointer h-full rounded-[30px] justify-center items-center gap-1 flex"
+                      >
+                        <ImageWithOpacityTransition
+                          styleAttach="mx-1 hover:opacity-80 cursor-pointer w-3 h-3 sm:w-5 sm:h-5 relative rounded-full"
+                          src={show.myReview[0].user.profilePhotoUrl}
+                        />
+                        <div className="text-xs sm:text-sm md:text-base font-normal sm:font-medium leading-[10.50px]">
+                          {show.myReview[0].overallRating.toFixed(1)}
+                        </div>
+                        <StarIcon sizeRules="w-3 h-3 sm:w-4 sm:h-4" />
                       </div>
-                      <StarIcon sizeRules="w-4 h-4" />
-                    </div>
+                    </Tooltip>
                   )}
                 </div>
               </div>

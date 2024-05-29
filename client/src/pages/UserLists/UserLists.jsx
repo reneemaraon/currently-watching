@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 const UserListsPage = () => {
   const { id } = useParams();
-  const { user } = useAuthContext();
+  const { user, actionRequireLogIn } = useAuthContext();
   const { setUserId, loading, userLists, addList, loadNextPage } =
     useUserListsContext();
   const navigate = useNavigate();
@@ -34,22 +34,29 @@ const UserListsPage = () => {
     <Header>
       <HeaderName>
         {userLists.user && (
-          <div className="h-full inline-flex items-center gap-2">
+          <div className="cursor-pointer h-full inline-flex items-center gap-2">
             <img
-              // onClick={onClickUser}
+              onClick={() => navigate(`/users/${userLists.user._id}`)}
               className="hover:opacity-80 cursor-pointer w-6 h-6 relative rounded-full"
               src={userLists.user.profilePhotoUrl}
             />
             <p className="font-light">
-              <span className="font-medium">{userLists.user.screenName}</span>
+              <span
+                onClick={() => navigate(`/users/${userLists.user._id}`)}
+                className="hover:text-brand-dark-purple font-medium"
+              >
+                {userLists.user.screenName}
+              </span>
               {`'s lists`}
             </p>
           </div>
         )}
       </HeaderName>
-      {user && !loading && (
+      {!loading && (
         <CustomButton
-          onClick={() => navigate(`/users/${user._id}/lists/`)}
+          onClick={actionRequireLogIn(() =>
+            navigate(`/users/${user && user._id}/lists/`)
+          )}
           styleSet="dark"
           size="defaultResize"
         >
@@ -62,7 +69,7 @@ const UserListsPage = () => {
   return (
     <div className="w-full pb-96 max-w-[1200px] px-10 max-[900px]:px-8 max-[600px]:px-5 max-[400px]:px-2 pt-2 sm:pt-8 flex-col justify-start items-center gap-6 sm:gap-8 md:gap-12 inline-flex">
       {user && id == user._id ? renderMyList() : renderUserDetails()}
-      <div className="ListArea w-full flex-col justify-start items-center gap-11 sm:gap-12 flex">
+      <div className="px-0 sm:px-1 w-full flex-col justify-start items-center gap-11 sm:gap-12 flex">
         {userLists &&
           userLists.lists.map((list, index) => (
             <List index={index} key={list._id} list={list} />
