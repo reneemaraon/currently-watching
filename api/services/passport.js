@@ -37,7 +37,7 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-      callbackURL: 'http://127.0.0.1:4000/api/v1/auth/twitter/callback/',
+      callbackURL: `${process.env.CLIENT_HOME_PAGE_URL}/api/v1/auth/twitter/callback/`,
     },
     async (token, tokenSecret, profile, done) => {
       // Find user in User model
