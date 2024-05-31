@@ -15,8 +15,8 @@ import { UserListsProvider } from './UserListsContext';
 import { ListDetailProvider } from './ListDetailContext';
 
 export const ContextContainer = ({ children }) => (
-  <ToastProvider>
-    <AuthProvider>
+  <AuthProvider>
+    <ToastProvider>
       <ShowsProvider>
         <ReviewsProvider>
           <ShowDetailProvider>
@@ -40,6 +40,6 @@ export const ContextContainer = ({ children }) => (
           </ShowDetailProvider>
         </ReviewsProvider>
       </ShowsProvider>
-    </AuthProvider>
-  </ToastProvider>
+    </ToastProvider>
+  </AuthProvider>
 );
