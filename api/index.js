@@ -28,12 +28,10 @@ const typeDefs = gql(
 app.use(
   session({
     secret: process.env.SECRET_KEY,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Use 'None' for cross-origin in production
-      secure: process.env.NODE_ENV === "production",
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
@@ -41,7 +39,7 @@ app.use(
 
 app.use(
   cors({
-    origin: [process.env.CLIENT_HOME_PAGE_URL, process.env.BASE_URL], // allow to server to accept request from different origin
+    origin: process.env.CLIENT_HOME_PAGE_URL, // allow to server to accept request from different origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // allow session cookie from browser to pass through
   })
