@@ -1,6 +1,8 @@
-import axios from 'axios';
-import React, { useContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import axios from "axios";
+import React, { useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
@@ -28,20 +30,21 @@ const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
-    setAuthToastMessage({ message: 'You are logging out', type: 'info' });
+    setAuthToastMessage({ message: "You are logging out", type: "info" });
     try {
-      await axios.post('/api/v1/auth/logout');
+      await axios.post("/api/v1/auth/logout");
       removeUser();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const loginUser = () => {
-    localStorage.setItem('lastPage', location.pathname);
-    const fullPath = window.location.origin;
+  const loginUser = async () => {
+    localStorage.setItem("lastPage", location.pathname);
+    // const fullPath = window.location.origin;
 
-    window.open(`${fullPath}/api/v1/auth/twitter/`, '_self');
+    window.open(`${BASE_URL}/api/v1/auth/twitter/`, "_self");
+    // console.log(response);
   };
 
   const actionRequireLogIn = (onClickButton) => {
@@ -50,8 +53,8 @@ const AuthProvider = ({ children }) => {
     } else {
       return () => {
         setAuthToastMessage({
-          message: 'You must login to do this action',
-          type: 'error',
+          message: "You must login to do this action",
+          type: "error",
         });
         loginUser();
       };
