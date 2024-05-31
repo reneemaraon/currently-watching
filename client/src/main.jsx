@@ -9,7 +9,7 @@ import { ContextContainer } from './context/ContextContainer';
 import './index.css';
 
 const client = new ApolloClient({
-  uri: '/graphql',
+  uri: `${import.meta.env.VITE_API_URL}/graphql`,
   cache: new InMemoryCache(),
 });
 

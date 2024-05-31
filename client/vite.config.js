@@ -15,11 +15,6 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           secure: false,
         },
-        '/graphql': {
-          target: env.VITE_API_URL,
-          changeOrigin: true,
-          secure: false,
-        },
       },
       host: env.VITE_HOST,
     },

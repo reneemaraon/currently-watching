@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import Home from './pages/Home/HomePage';
-import LoginPage from './pages/Login/LoginPage';
 import SideBar from './pages/Home/SideBar';
 import TopNavBar from './pages/Home/NavBar/TopNavBar';
 import ReviewsPage from './pages/Reviews/Reviews';
@@ -21,6 +20,7 @@ import LoginCallback from './pages/Callback/LoginCallback';
 import AuthOverlay from './pages/AuthOverlay/AuthOverlay';
 import UpdateReview from './pages/UpdateReview/UpdateReview';
 import ListDetail from './pages/ListDetail/ListDetail';
+import LoginVerify from './pages/Callback/LoginVerify';
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -67,7 +67,7 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/login/callback" element={<LoginCallback />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login/verify" element={<LoginVerify />} />
             <Route path="/reviews/:id/update" element={<UpdateReview />} />
             <Route path="/reviews/:id" element={<ReviewDetail />} />
             <Route path="/reviews" element={<ReviewsPage />} />

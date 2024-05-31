@@ -1,11 +1,12 @@
-import axios from "axios";
-import { gql } from "@apollo/client";
+import axios from 'axios';
+import { gql } from '@apollo/client';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getShowsRequest = async (params) =>
-  await axios.get("/api/v1/shows");
+  await axios.get(`${BASE_URL}/api/v1/shows`);
 
 export const getShowRequest = async (id) =>
-  await axios.get("/api/v1/shows/" + id);
+  await axios.get(`${BASE_URL}/api/v1/shows/` + id);
 
 export const GET_SHOW_REVIEWS = gql`
   query GetShowReviews($id: ID!, $filter: FilterInput) {
