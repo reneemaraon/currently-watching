@@ -1,7 +1,7 @@
-const passport = require('passport');
-const TwitterStrategy = require('passport-twitter');
-const User = require('../models/user');
-const { Strategy } = require('@superfaceai/passport-twitter-oauth2');
+const passport = require("passport");
+const TwitterStrategy = require("passport-twitter");
+const User = require("../models/user");
+const { Strategy } = require("@superfaceai/passport-twitter-oauth2");
 
 // const keys = require("./keys");
 // const User = require("../models/user");
@@ -28,7 +28,7 @@ passport.deserializeUser((id, done) => {
       done(null, user);
     })
     .catch((e) => {
-      done(new Error('Failed to deserialize an user'));
+      done(new Error("Failed to deserialize an user"));
     });
 });
 
@@ -37,7 +37,7 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-      callbackURL: `${process.env.CLIENT_HOME_PAGE_URL}/api/v1/auth/twitter/callback/`,
+      callbackURL: `${process.env.BASE_URL}/api/v1/auth/twitter/callback/`,
     },
     async (token, tokenSecret, profile, done) => {
       // Find user in User model
