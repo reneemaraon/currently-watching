@@ -33,7 +33,7 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Use 'None' for cross-origin in production
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
