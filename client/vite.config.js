@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
           secure: false,
         },
       },
-      // host: '127.0.0.1',
+      host: env.VITE_HOST,
     },
   };
 });
