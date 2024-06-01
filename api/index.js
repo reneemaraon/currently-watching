@@ -30,13 +30,10 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: false,
-    name: "MyCurrentlyWatchingCookie",
-    proxy: true,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       secure: true,
       sameSite: "none",
-      httpOnly: false,
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
