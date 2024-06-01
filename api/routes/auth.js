@@ -22,14 +22,20 @@ router.get(
   "/twitter/callback",
   (req, res, next) => {
     console.log("OAuth callback invoked");
+    console.log("Session ID:", req.sessionID);
     console.log("Session:", req.session);
     console.log("OAuth token:", req.query.oauth_token);
     console.log("OAuth verifier:", req.query.oauth_verifier);
-    next();
+    console.log("Session oauthRequestToken:", req.session.oauthRequestToken);
+    console.log(
+      "Session oauthRequestTokenSecret:",
+      req.session.oauthRequestTokenSecret
+    );
+
+    passport.authenticate("twitter", {
+      failureRedirect: process.env.CLIENT_HOME_PAGE_URL,
+    });
   },
-  passport.authenticate("twitter", {
-    failureRedirect: process.env.CLIENT_HOME_PAGE_URL,
-  }),
   (req, res) => {
     if (req.user) {
       console.log("OAuth callback successful, user:", req.user);
