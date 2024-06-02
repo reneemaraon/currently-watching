@@ -32,12 +32,9 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      path: "/",
-      domain:
-        process.env.NODE_ENV === "production" ? ".currently-active.live" : "",
-      httpOnly: false,
+      secure: true,
+      sameSite: "none",
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
