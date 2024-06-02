@@ -17,7 +17,7 @@ const session = require("express-session");
 const cors = require("cors");
 
 app.use(express.json());
-// app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 const typeDefs = gql(
   readFileSync("schema.graphql", {
@@ -30,13 +30,11 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: false,
-    name: "MyCurrentlyWatchingCookie",
-    proxy: true,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       secure: true,
       sameSite: "none",
-      httpOnly: false,
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
