@@ -2,17 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-router.get("/twitter", (req, res, next) => {
-  console.log("Starting OAuth flow, saving session...");
-  req.session.save((err) => {
-    if (err) {
-      console.error("Session save error:", err);
-      return next(err);
-    }
-    console.log("Session saved:", req.session);
-    passport.authenticate("twitter")(req, res, next);
-  });
-});
+router.get("/twitter", passport.authenticate("twitter"));
 
 router.get("/showMe", (req, res) => {
   res.status(200).json({ user: req.user });
