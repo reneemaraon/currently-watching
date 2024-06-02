@@ -17,7 +17,7 @@ const session = require("express-session");
 const cors = require("cors");
 
 app.use(express.json());
-// app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 const typeDefs = gql(
   readFileSync("schema.graphql", {
@@ -28,14 +28,14 @@ const typeDefs = gql(
 app.use(
   session({
     secret: process.env.SECRET_KEY,
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      // domain:
-      //   process.env.NODE_ENV === "production" ? "currently-watching.live" : "",
+      domain:
+        process.env.NODE_ENV === "production" ? ".currently-watching.live" : "",
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
