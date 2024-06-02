@@ -1,7 +1,7 @@
-const passport = require("passport");
-const TwitterStrategy = require("passport-twitter");
-const User = require("../models/user");
-const { Strategy } = require("@superfaceai/passport-twitter-oauth2");
+const passport = require('passport');
+const TwitterStrategy = require('passport-twitter');
+const User = require('../models/user');
+const { Strategy } = require('@superfaceai/passport-twitter-oauth2');
 
 // const keys = require("./keys");
 // const User = require("../models/user");
@@ -28,7 +28,7 @@ passport.deserializeUser((id, done) => {
       done(null, user);
     })
     .catch((e) => {
-      done(new Error("Failed to deserialize an user"));
+      done(new Error('Failed to deserialize an user'));
     });
 });
 
@@ -42,19 +42,19 @@ passport.use(
     async (token, tokenSecret, profile, done) => {
       // Find user in User model
 
-      console.log("Inside Twitter Strategy Callback");
-      console.log("Token:", token);
-      console.log("Token Secret:", tokenSecret);
-      console.log("Profile:", profile);
+      console.log('Inside Twitter Strategy Callback');
+      console.log('Token:', token);
+      console.log('Token Secret:', tokenSecret);
+      console.log('Profile:', profile);
 
       // Find user in User model
-      console.log("Looking for user with Twitter ID:", profile._json.id_str);
+      console.log('Looking for user with Twitter ID:', profile._json.id_str);
       const currentUser = await User.findOne({
         twitterId: profile._json.id_str,
       });
 
       if (!currentUser) {
-        console.log("User not found, creating new user");
+        console.log('User not found, creating new user');
         const newUser = await new User({
           name: profile._json.name,
           screenName: profile._json.screen_name,
@@ -64,7 +64,7 @@ passport.use(
         }).save();
 
         if (newUser) {
-          console.log("New user created:", newUser);
+          console.log('New user created:', newUser);
           done(null, newUser);
           return;
         }
