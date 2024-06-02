@@ -28,8 +28,8 @@ const typeDefs = gql(
 app.use(
   session({
     secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Use 'None' for cross-origin in production
