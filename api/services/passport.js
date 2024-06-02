@@ -41,20 +41,11 @@ passport.use(
     },
     async (token, tokenSecret, profile, done) => {
       // Find user in User model
-
-      console.log("Inside Twitter Strategy Callback");
-      console.log("Token:", token);
-      console.log("Token Secret:", tokenSecret);
-      console.log("Profile:", profile);
-
-      // Find user in User model
-      console.log("Looking for user with Twitter ID:", profile._json.id_str);
       const currentUser = await User.findOne({
         twitterId: profile._json.id_str,
       });
 
       if (!currentUser) {
-        console.log("User not found, creating new user");
         const newUser = await new User({
           name: profile._json.name,
           screenName: profile._json.screen_name,
@@ -64,7 +55,6 @@ passport.use(
         }).save();
 
         if (newUser) {
-          console.log("New user created:", newUser);
           done(null, newUser);
           return;
         }
