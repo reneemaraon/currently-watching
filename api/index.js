@@ -17,7 +17,7 @@ const session = require("express-session");
 const cors = require("cors");
 
 app.use(express.json());
-// app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 const typeDefs = gql(
   readFileSync("schema.graphql", {
@@ -34,6 +34,10 @@ app.use(
     cookie: {
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Use 'None' for cross-origin in production
       secure: process.env.NODE_ENV === "production",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? ".currently-watching.live"
+          : null,
       maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
     },
   })
