@@ -1,7 +1,5 @@
-import { gql } from '@apollo/client';
-import axios from 'axios';
-
-const BASE_URL = import.meta.env.VITE_API_URL;
+import { gql } from "@apollo/client";
+import { apiDelete, apiGet, apiPost } from "./apiCall";
 
 export const GET_REVIEWS_LIST = gql`
   query ReviewsList($filter: FilterInput) {
@@ -226,22 +224,18 @@ export const GET_REVIEW_TO_UPDATE = gql`
   }
 `;
 
-export const getReviewsRequest = async (params) =>
-  await axios.get(`${BASE_URL}/api/v1/reviews/`);
+export const getReviewsRequest = async (params) => await apiGet(`/reviews/`);
 
-export const getReviewRequest = async (id) =>
-  await axios.get(`${BASE_URL}/api/v1/reviews/` + id);
+export const getReviewRequest = async (id) => await apiGet(`/reviews/` + id);
 
 export const postReviewRequest = async (payload) =>
-  await axios.post(`${BASE_URL}/api/v1/reviews/`, payload);
+  await apiPost("/reviews", payload);
 
 export const postCommentRequest = async (id, payload) =>
-  await axios.post(`${BASE_URL}/api/v1/reviews/${id}/comments`, payload);
+  await apiPost(`/reviews/${id}/comments`, payload);
 
 export const deleteCommentRequest = async (reviewId, commentId) =>
-  await axios.delete(
-    `${BASE_URL}/api/v1/reviews/${reviewId}/comments/${commentId}`
-  );
+  await apiDelete(`/reviews/${reviewId}/comments/${commentId}`);
 
 export const deleteReviewRequest = async (reviewId) =>
-  await axios.delete(`${BASE_URL}/api/v1/reviews/${reviewId}`);
+  await apiDelete(`/reviews/${reviewId}`);

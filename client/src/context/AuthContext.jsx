@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { apiGet, apiPost } from "../api/apiCall";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = React.createContext();
@@ -21,7 +22,7 @@ const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get(`/api/v1/auth/showMe`);
+      const { data } = await apiGet(`/auth/showMe`);
       saveUser(data.user);
     } catch (error) {
       removeUser();
@@ -32,7 +33,7 @@ const AuthProvider = ({ children }) => {
   const logoutUser = async () => {
     setAuthToastMessage({ message: "You are logging out", type: "info" });
     try {
-      await axios.post("/api/v1/auth/logout");
+      await apiPost("/auth/logout");
       removeUser();
     } catch (error) {
       console.log(error);
