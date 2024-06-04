@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   GET_REVIEW,
   GET_REVIEW_COMMENTS,
@@ -6,18 +6,18 @@ import {
   POST_REVIEW_LIKE_MUTATION,
   DELETE_REVIEW_LIKE_MUTATION,
   deleteCommentRequest,
-} from '../api/reviewsApi';
-import { useQuery, useMutation } from '@apollo/client';
-import findCursor from '../utils/getCursorFromList';
+} from "../api/reviewsApi";
+import { useQuery, useMutation } from "@apollo/client";
+import findCursor from "../utils/getCursorFromList";
 
 const ITEMS_PER_PAGE = 5;
-const SORT_FIELD = 'createdAt';
+const SORT_FIELD = "createdAt";
 
 const reviewDetailContext = createContext();
 
 export const useReviewDetailContext = () => {
   const context = useContext(reviewDetailContext);
-  if (!context) throw new Error('Review Detail Provider is missing');
+  if (!context) throw new Error("Review Detail Provider is missing");
   return context;
 };
 
@@ -29,7 +29,7 @@ export const ReviewDetailProvider = ({ children }) => {
     comments: [],
     totalCount: 0,
   });
-  const [commentBody, setCommentBody] = useState('');
+  const [commentBody, setCommentBody] = useState("");
   const [cursor, setCursor] = useState(new Date());
 
   const [postCommentRequest, { loading: postLoading, error: postError }] =
@@ -79,10 +79,10 @@ export const ReviewDetailProvider = ({ children }) => {
           comments: [newComment, ...prevComments.comments],
         }));
 
-        setCommentBody('');
+        setCommentBody("");
       }
     } catch (error) {
-      console.log('error');
+      console.log("error");
     }
   };
 
@@ -133,7 +133,7 @@ export const ReviewDetailProvider = ({ children }) => {
   useEffect(() => {
     if (reviewId) {
       refetch();
-      refetchComments();
+      refreshList();
     }
   }, [reviewId]);
 
