@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import StatContainer from "./StatContainer";
-import CustomButton from "../Common/CustomButton";
-import { useShowDetailContext } from "../../context/ShowDetailContext";
-import commaSeparatedString from "../Common/commaSeparate";
-import FullPageLoading from "../Common/FullPageLoading";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import ShowReviewsList from "./ShowReviewList";
-import { useAuthContext } from "../../context/AuthContext";
-import ShowActions from "./ShowActions";
+import StatContainer from './StatContainer';
+import CustomButton from '../Common/CustomButton';
+import { useShowDetailContext } from '../../context/ShowDetailContext';
+import commaSeparatedString from '../Common/commaSeparate';
+import FullPageLoading from '../Common/FullPageLoading';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import ShowReviewsList from './ShowReviewList';
+import { useAuthContext } from '../../context/AuthContext';
+import ShowActions from './ShowActions';
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -52,11 +52,11 @@ const ShowDetail = () => {
                       </div>
                       <div className="subtext">{`${show.watchCount} watched`}</div>
                     </div>
-                    <div className="subtext text-brand-tq">
+                    <div className="subtext text-brand-pink">
                       {`${show.numberOfSeasons} season${
-                        show.numberOfSeasons > 1 ? "s" : ""
-                      } `}{" "}
-                      | {show.numberOfEpisodes} episodes |{" "}
+                        show.numberOfSeasons > 1 ? 's' : ''
+                      } `}{' '}
+                      | {show.numberOfEpisodes} episodes |{' '}
                       {commaSeparatedString(
                         show.genres.map((genre) => genre.name)
                       )}
@@ -88,7 +88,7 @@ const ShowDetail = () => {
                 <div className="px-2 w-full pb-5 justify-between items-start inline-flex">
                   <div className="inline-flex gap-2">
                     <span className="title-text ">
-                      Reviews{" "}
+                      Reviews{' '}
                       <span className="text-lighter-text ">
                         ({showReviews && showReviews.totalCount})
                       </span>

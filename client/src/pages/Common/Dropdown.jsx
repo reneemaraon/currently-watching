@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const Option = ({ text, selected, onSelect }) => {
   return (
@@ -7,8 +7,8 @@ export const Option = ({ text, selected, onSelect }) => {
       className="Option w-full h-9 p-2.5 hover:bg-theme-base rounded-lg justify-between items-center inline-flex"
     >
       <div
-        className={`OptionText text-gray-800 text-sm ${
-          selected && "font-semibold"
+        className={`OptionText text-text-dark text-sm ${
+          selected && 'font-semibold'
         }`}
       >
         {text}

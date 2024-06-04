@@ -1,8 +1,8 @@
-import { getYear } from "../../utils/formatDate";
-import formatRating from "../../utils/formatRating";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import StarIcon from "../Common/Star";
-import commaSeparatedString from "../Common/commaSeparate";
+import { getYear } from '../../utils/formatDate';
+import formatRating from '../../utils/formatRating';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import StarIcon from '../Common/Star';
+import commaSeparatedString from '../Common/commaSeparate';
 
 const SearchResultItem = ({ searchItem, onClick }) => {
   return (
@@ -23,7 +23,7 @@ const SearchResultItem = ({ searchItem, onClick }) => {
           <p className="text-sm md:text-base font-medium">
             {`${searchItem.title} (${getYear(searchItem.firstAirDate)})`}
           </p>
-          <p className="text-[12px] text-brand-tq shrink-0 line-clamp-1 pr-4 font-normal">
+          <p className="text-[12px] text-brand-pink shrink-0 line-clamp-1 pr-4 font-normal">
             {commaSeparatedString(
               searchItem.cast.map((cast) => cast.name).slice(0, 3)
             )}

@@ -49,15 +49,15 @@ function App() {
     return <FullPageLoading />;
   }
   return (
-    <div className="antialiased flex-col justify-start items-start inline-flex h-auto bg-main-bg font-inter text-gray-800">
+    <div className="antialiased flex-col justify-start items-start inline-flex h-auto bg-main-bg font-inter text-text-dark">
       <AuthOverlay />
       <div className="relative justify-start items-start inline-flex h-full w-screen">
-        <div className="fixed w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
+        {/* <div className="fixed w-screen h-screen z-0 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
           <img
             src="/src/assets/overlay.jpg"
-            className="opacity-10 blur-sm w-full overflow-hidden"
+            className="opacity-5 blur-sm w-full overflow-hidden"
           />
-        </div>
+        </div> */}
         <SideBar />
         {showSidebar && (
           <PopupSidebar anchor={sidebarRef} toggleSidebar={toggleSidebar} />

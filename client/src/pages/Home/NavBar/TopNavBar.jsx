@@ -1,15 +1,15 @@
-import React from "react";
-import { useAuthContext } from "../../../context/AuthContext";
-import ProfileView from "./ProfileDropdown";
-import CustomButton from "../../Common/CustomButton";
-import Icon from "../../Common/Icon";
-import { TwitterIcon } from "../../Common/IconList";
-import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useAuthContext } from '../../../context/AuthContext';
+import ProfileView from './ProfileDropdown';
+import CustomButton from '../../Common/CustomButton';
+import Icon from '../../Common/Icon';
+import { TwitterIcon } from '../../Common/IconList';
+import SearchBar from './SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 const LogInButton = ({ login }) => (
   <>
-    <CustomButton onClick={login} styleSet="gradient" size="defaultResize">
+    <CustomButton onClick={login} styleSet="primary" size="defaultResize">
       <Icon fill="fill-theme-base" sizeRules="h-5 w-5">
         <TwitterIcon />
       </Icon>

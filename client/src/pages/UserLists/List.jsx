@@ -1,12 +1,12 @@
-import Draggable from "react-draggable";
-import { ExpandDownIcon, PencilIcon } from "../Common/IconList";
-import ListItem from "./ListItem";
-import Icon from "../Common/Icon";
-import { useEffect, useRef, useState } from "react";
-import { useUserListsContext } from "../../context/UserListsContext";
-import formatDateTime, { getDiffInMinutes } from "../../utils/formatDate";
-import { useAuthContext } from "../../context/AuthContext";
-import ListHeader from "./ListHeader";
+import Draggable from 'react-draggable';
+import { ExpandDownIcon, PencilIcon } from '../Common/IconList';
+import ListItem from './ListItem';
+import Icon from '../Common/Icon';
+import { useEffect, useRef, useState } from 'react';
+import { useUserListsContext } from '../../context/UserListsContext';
+import formatDateTime, { getDiffInMinutes } from '../../utils/formatDate';
+import { useAuthContext } from '../../context/AuthContext';
+import ListHeader from './ListHeader';
 
 const changedItems = (sourceItems, stateItems) => {
   const stateIds = stateItems
@@ -198,7 +198,7 @@ const List = ({ list, index }) => {
                 <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
                   <Icon
                     sizeRules="w-2 h-2 sm:w-3 sm:h-3"
-                    fill="rotate-180 stroke-2 stroke-brand-tq fill-none"
+                    fill="rotate-180 stroke-2 stroke-brand-pink fill-none"
                   >
                     <ExpandDownIcon />
                   </Icon>
@@ -207,12 +207,12 @@ const List = ({ list, index }) => {
             ) : (
               <div className="ShowDetailCard w-full h-4 sm:h-6 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
                 <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
-                  <div className="text-brand-tq text-[8px] sm:text-[10px] font-normal font-['Inter']">
+                  <div className="text-brand-pink text-[8px] sm:text-[10px] font-normal font-['Inter']">
                     Expand List {list.items.length}
                   </div>
                   <Icon
                     sizeRules="w-2 h-2 sm:w-3 sm:h-3"
-                    fill="stroke-2 stroke-brand-tq fill-none"
+                    fill="stroke-2 stroke-brand-pink fill-none"
                   >
                     <ExpandDownIcon />
                   </Icon>

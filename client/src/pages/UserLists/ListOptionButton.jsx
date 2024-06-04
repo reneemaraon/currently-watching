@@ -5,7 +5,7 @@ const ListOptionButton = ({ children, active, onClick }) => {
     <button
       onClick={onClick}
       className={`${
-        active ? 'bg-brand-tq' : 'bg-theme-base'
+        active ? 'bg-brand-pink' : 'bg-theme-base'
       } p-1.5 sm:p-2 hover:bg-opacity-90 bg-opacity-60 rounded-full border flex-col justify-center items-center gap-2.5 inline-flex`}
     >
       <Icon

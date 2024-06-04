@@ -124,11 +124,11 @@
     }
 
     .primary-button-style {
-        @apply bg-brand-tq text-white hover:bg-brand-tq-hover;
+        @apply bg-brand-pink text-white hover:bg-brand-pink-hover;
     }
 
     .gradient-button-style {
-        @apply bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-tq text-white hover:from-cyan-700 hover:via-sky-600 hover:to-cyan-600;
+        @apply bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-pink text-white hover:from-cyan-700 hover:via-sky-600 hover:to-cyan-600;
     }
 
     .dark-button-style {
@@ -140,7 +140,7 @@
     }
 
     .inverse-button-style {
-        @apply bg-brand-tq bg-opacity-20 text-brand-tq hover:bg-opacity-30;
+        @apply bg-brand-pink bg-opacity-20 text-brand-pink hover:bg-opacity-30;
     }
 
     .small-button {

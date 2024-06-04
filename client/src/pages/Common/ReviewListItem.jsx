@@ -14,7 +14,7 @@ const RatingRow = ({ ratingName, rating }) => {
   );
   return (
     <div className="RatingRow pl-[3px] gap-6 justify-between items-center inline-flex">
-      <div className="Acting text-gray-800 text-xs font-medium">
+      <div className="Acting text-text-dark text-xs font-medium">
         {ratingName}
       </div>
       <div className="Rating w-[85.09px] justify-start items-center gap-[3px] flex">
