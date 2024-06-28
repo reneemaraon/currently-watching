@@ -63,12 +63,12 @@ const CommentInput = () => {
         onChange={handleInputChange}
       />
 
-      <div className="Action w-full justify-end items-start pr-3 pb-3 inline-flex">
+      <div className="Action w-full justify-end items-start pr-3 py-3 inline-flex">
         <CustomButton
           onClick={onSubmit}
           disabled={commentBody.length == 0}
           edge="rounded"
-          size="smallSize"
+          size="smallResize"
         >
           <span className="font-semibold">Submit</span>
         </CustomButton>

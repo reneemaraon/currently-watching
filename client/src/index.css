@@ -81,7 +81,7 @@
     }
 
     .paragraph-text {
-        @apply text-sm sm:text-base
+        @apply leading-[14px] sm:leading-4 text-sm sm:text-base 
     }
 
     .input-area {
@@ -104,7 +104,7 @@
 
     
     .small-author-name {
-        @apply cursor-pointer text-sm sm:text-base font-medium hover:text-brand-dark-purple;
+        @apply cursor-pointer leading-[14px] sm:leading-4 text-sm sm:text-base font-medium hover:text-brand-dark-purple;
     }
 
     .small-author-username {
@@ -112,15 +112,15 @@
     }
 
     .author-name {
-        @apply cursor-pointer text-sm sm:text-base font-medium hover:text-brand-dark-purple;
+        @apply cursor-pointer leading-[14px] sm:leading-4 text-sm sm:text-base font-medium hover:text-brand-dark-purple;
     }
 
     .author-username {
-        @apply cursor-pointer text-xs sm:text-sm text-light-text hover:text-brand-dark-purple;
+        @apply cursor-pointer leading-[12px] sm:leading-[14px] text-xs sm:text-sm text-light-text hover:text-brand-dark-purple;
     }
 
     .title-text {
-        @apply text-lg leading-5 sm:leading-7 md:leading-8 sm:text-xl md:text-2xl font-medium;
+        @apply text-base leading-5 sm:leading-7 md:leading-8 sm:text-lg md:text-xl font-medium;
     }
 
     .primary-button-style {

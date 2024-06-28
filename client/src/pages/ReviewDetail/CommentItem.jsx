@@ -1,10 +1,10 @@
-import formatDateTime from '../../utils/formatDate';
-import Icon from '../Common/Icon';
-import { OptionsIcon } from '../Common/IconList';
-import Dropdown, { Option } from '../Common/Dropdown';
-import { useState, useRef, useEffect } from 'react';
-import { useAuthContext } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import formatDateTime from "../../utils/formatDate";
+import Icon from "../Common/Icon";
+import { OptionsIcon } from "../Common/IconList";
+import Dropdown, { Option } from "../Common/Dropdown";
+import { useState, useRef, useEffect } from "react";
+import { useAuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Comment = ({ comment, onDelete }) => {
   const navigate = useNavigate();
@@ -32,35 +32,38 @@ const Comment = ({ comment, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
   return (
     <div className="w-full p-4 hover:bg-main-bg hover:bg-opacity-20 bg-theme-base rounded-2xl border border-light-stroke flex-col justify-center items-start gap-4 flex">
-      <div className="CommentHead w-full justify-between items-start inline-flex">
-        <div className=" grow shrink basis-0 justify-start items-center gap-3 sm:gap-4 flex">
+      <div className="CommentHead gap-1 w-full items-start inline-flex">
+        <div className="py-0.5 grow shrink basis-0 justify-start items-start gap-3 sm:gap-4 flex">
           <img
             onClick={onClickUser}
-            className="ProfilePhoto hover:cursor-pointer hover:opacity-70 w-7 h-7 sm:w-8 sm:h-8 rounded-full"
+            className="ProfilePhoto hover:cursor-pointer hover:opacity-70 w-5 h-5 sm:w-6 sm:h-6 rounded-full"
             src={profilePhotoUrl}
           />
-          <div className="Details grow shrink basis-0 flex-col justify-start items-start gap-0.5 inline-flex">
-            <div
-              onClick={onClickUser}
-              className="group w-full justify-start items-center gap-1.5 inline-flex"
-            >
-              <div className="hover:cursor-pointer group-hover:text-brand-dark-purple author-name">
+          <div className="Details grow shrink basis-0 flex-col justify-start items-end gap-1.5 sm:gap-2 inline-flex">
+            <div className="w-full flex-wrap justify-start items-start gap-1.5 inline-flex">
+              <div
+                onClick={onClickUser}
+                className="hover:cursor-pointer hover:text-brand-dark-purple author-name"
+              >
                 {name}
               </div>
-              <div className="hover:cursor-pointer Username group-hover:text-brand-dark-purple info-text">
+              <div
+                onClick={onClickUser}
+                className="hover:cursor-pointer  hover:text-brand-dark-purple author-username"
+              >
                 @{screenName}
               </div>
-            </div>
-            <div className="DatePublished info-text">
-              {formatDateTime(createdAt)}
+              <div className="DatePublished text-lighter-text leading-[12px] text-[10px] sm:text-xs">
+                {formatDateTime(createdAt)}
+              </div>
             </div>
           </div>
         </div>
@@ -68,9 +71,9 @@ const Comment = ({ comment, onDelete }) => {
           <div
             onClick={toggleDropdown}
             ref={dropdownRef}
-            className="relative px-2 justify-center items-center cursor-pointer flex"
+            className="relative px-0.5 sm:px-1 justify-center items-center cursor-pointer flex"
           >
-            <Icon size="h-2 w-2">
+            <Icon size="h-1.5 w-1.5 sm:h-2 sm:w-2">
               <OptionsIcon />
             </Icon>
             {isDropdownVisible && (
@@ -88,7 +91,7 @@ const Comment = ({ comment, onDelete }) => {
         )}
       </div>
       <p className="CommentText w-full text-sm leading-6 font-normal">
-        {commentBody || ''}
+        {commentBody || ""}
       </p>
     </div>
   );

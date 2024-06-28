@@ -1,13 +1,13 @@
 // Import necessary libraries
-require('dotenv').config();
-const mongoose = require('mongoose');
-const recalculateRatings = require('./cronjobs/showUpdateRatings');
-const updateReviews = require('./cronjobs/updateReviews');
-const removeDuplicates = require('./cronjobs/removeDuplicates');
-const populateDb = require('./cronjobs/populateDb');
-const connectDB = require('./db/connect');
-const updateShows = require('./cronjobs/updateShows');
-const deleteNonKor = require('./cronjobs/deleteNonKr');
+require("dotenv").config();
+const mongoose = require("mongoose");
+const recalculateRatings = require("./cronjobs/showUpdateRatings");
+const updateReviews = require("./cronjobs/updateReviews");
+const removeDuplicates = require("./cronjobs/removeDuplicates");
+const populateDb = require("./cronjobs/populateDb");
+const connectDB = require("./db/connect");
+const updateShows = require("./cronjobs/updateShows");
+const deleteNonKor = require("./cronjobs/deleteNonKr");
 
 // Logic to perform the job
 async function runJobs() {
@@ -27,7 +27,7 @@ async function runJobs() {
 
     // console.log('Jobs completed successfully.');
   } catch (error) {
-    console.error('Error running jobs:', error);
+    console.error("Error running jobs:", error);
   } finally {
     // Close the database connection
     mongoose.disconnect();

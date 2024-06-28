@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import PopularCarousel from './PopularCarousel';
-import SectionHeader from './SectionHeader';
-import ImageWithOpacityTransition from '../../Common/ImageTransition';
-import commaSeparatedString from '../../Common/commaSeparate';
-import StarIcon from '../../Common/Star';
-import { useHomepageContext } from '../../../context/HomepageContext';
-import ListLoading from '../../Common/LoadingList';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../../Common/Icon';
-import { WatchIcon } from '../../Common/IconList';
+import PopularCarousel from "./PopularCarousel";
+import SectionHeader from "./SectionHeader";
+import ImageWithOpacityTransition from "../../Common/ImageTransition";
+import commaSeparatedString from "../../Common/commaSeparate";
+import StarIcon from "../../Common/Star";
+import { useHomepageContext } from "../../../context/HomepageContext";
+import ListLoading from "../../Common/LoadingList";
+import { useNavigate } from "react-router-dom";
+import Icon from "../../Common/Icon";
+import { WatchIcon } from "../../Common/IconList";
 
 const StarRatingRow = ({ name, rating }) => (
   <div className="justify-start items-start gap-2.5 inline-flex">
-    <div className="text-sm font-medium">{name}</div>
+    <div className="subtext text-text-dark font-medium">{name}</div>
     <div className="justify-start items-center gap-0.5 flex">
       <div className="text-dark-yellow important-small-text font-medium">
         {rating}
@@ -53,7 +53,7 @@ const PopularSection = () => {
             </p>
           </div>
           <div className="grow shrink min-w-[200px] max-w-[400px] basis-0 flex-col justify-start items-start gap-2.5 inline-flex">
-            <div className="text-base sm:text-lg font-medium leading-[18px]">
+            <div className="paragraph-text text-text-dark font-medium leading-[18px]">
               Cast
             </div>
             <div className="justify-start gap-[-10px] items-start inline-flex">
@@ -69,7 +69,7 @@ const PopularSection = () => {
                 </div>
               ))}
             </div>
-            <div className="self-stretch text-base font-normal leading-6">
+            <div className="paragraph-text self-stretch font-normal leading-6">
               {commaSeparatedString(
                 show.cast.map((cast) => cast.name).slice(0, 3)
               )}
@@ -78,7 +78,7 @@ const PopularSection = () => {
           <div className="w-[271px] p-5 bg-theme-base bg-opacity-70 rounded-xl flex-col justify-start items-start gap-[5px] inline-flex">
             <div className="self-stretch pb-[5px] justify-between items-start inline-flex">
               <div className="justify-start items-center gap-[13px] flex">
-                <div className="text-text-dark text-base font-medium">
+                <div className="text-text-dark paragraph-text font-medium">
                   Overall
                 </div>
                 <div className="justify-start items-center gap-1 flex">
@@ -96,7 +96,7 @@ const PopularSection = () => {
                   <WatchIcon />
                 </Icon>
                 <div className="text-sm font-medium">
-                  {show.watchCount || '0'}
+                  {show.watchCount || "0"}
                 </div>
               </div>
             </div>

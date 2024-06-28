@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { useReviewDetailContext } from '../../context/ReviewDetailContext';
-import LoadingAnimation from '../Common/LoadingAnimation';
-import CommentInput from './CommentInput';
-import Comment from './CommentItem';
-import PopupModal from '../Common/PopupModal';
-import CustomButton from '../Common/CustomButton';
-import { useToast } from '../../context/ToastContext';
-import ListLoading from '../Common/LoadingList';
-import LoadMorePanel from '../Common/LoadMorePagination';
+import { useState } from "react";
+import { useReviewDetailContext } from "../../context/ReviewDetailContext";
+import LoadingAnimation from "../Common/LoadingAnimation";
+import CommentInput from "./CommentInput";
+import Comment from "./CommentItem";
+import PopupModal from "../Common/PopupModal";
+import CustomButton from "../Common/CustomButton";
+import { useToast } from "../../context/ToastContext";
+import ListLoading from "../Common/LoadingList";
+import LoadMorePanel from "../Common/LoadMorePagination";
 
 const CommentsArea = () => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -31,11 +31,11 @@ const CommentsArea = () => {
     try {
       const response = await deleteComment(commentToDelete);
       if (response) {
-        showToast('Your comment was deleted successfully', 'success');
+        showToast("Your comment was deleted successfully", "success");
       }
     } catch (error) {
       console.log(error);
-      showToast(error.response.data.message, 'error');
+      showToast(error.response.data.message, "error");
     }
   };
 
@@ -75,7 +75,7 @@ const CommentsArea = () => {
       <div className="Header w-full pt-2 pb-[15px] justify-between items-start inline-flex">
         <div className="Comments20">
           <span className="title-text">
-            Comments{' '}
+            Comments{" "}
             <span className="text-light-text subheader-text">
               {`(${totalCount})`}
             </span>

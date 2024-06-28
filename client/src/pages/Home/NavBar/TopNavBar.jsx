@@ -1,11 +1,11 @@
-import React from 'react';
-import { useAuthContext } from '../../../context/AuthContext';
-import ProfileView from './ProfileDropdown';
-import CustomButton from '../../Common/CustomButton';
-import Icon from '../../Common/Icon';
-import { TwitterIcon } from '../../Common/IconList';
-import SearchBar from './SearchBar';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useAuthContext } from "../../../context/AuthContext";
+import ProfileView from "./ProfileDropdown";
+import CustomButton from "../../Common/CustomButton";
+import Icon from "../../Common/Icon";
+import { TwitterIcon } from "../../Common/IconList";
+import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const LogInButton = ({ login }) => (
   <>
@@ -27,11 +27,11 @@ const TopNavBar = ({ toggleSidebar }) => {
   };
 
   return (
-    <div className="top_nav z-20 w-full h-20 gap-5 max-[600px]:h-14 px-[50px] max-[600px]:px-6 bg-theme-base bg-opacity-25 backdrop-blur-sm border-b border-light-stroke/[.45] items-center inline-flex sticky top-0">
+    <div className="top_nav z-20 w-full h-20 gap-5 max-[600px]:h-14 px-8 sm:px-10 max-[600px]:px-6 bg-theme-base bg-opacity-25 backdrop-blur-sm border-b border-light-stroke/[.45] items-center inline-flex sticky top-0">
       <div className="left_side grow justify-start items-center gap-[30px] flex">
         <div
           onClick={toggleSidebar}
-          className="xl:hidden move_icon px-1.5 py-1.5 rounded hover:bg-main-bg hover:cursor-pointer"
+          className="xl:hidden move_icon px-0.5 sm:px-1.5 py-1.5 rounded hover:bg-main-bg hover:cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@ const TopNavBar = ({ toggleSidebar }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-5 h-5 sm:w-6 sm:h-6"
           >
             <path
               strokeLinecap="round"

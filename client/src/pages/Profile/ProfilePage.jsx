@@ -82,8 +82,8 @@ export default function ProfilePage() {
                         styleAttach="w-12 h-12 sm:h-16 sm:w-16 md:w-[70px] md:h-[70px] relative rounded-full"
                         src={profilePhotoUrl}
                       />
-                      <div className="Text self-stretch flex-col justify-center items-start gap-0.5 sm:gap-2 inline-flex">
-                        <div className="justify-start gap-2 flex-wrap inline-flex">
+                      <div className="Text self-stretch flex-col justify-center items-start sm:gap-0.5 inline-flex">
+                        <div className="justify-end gap-2 items-end flex-wrap inline-flex">
                           <div className="title-text">{name}</div>
                           <CustomButton
                             onClick={openTwitter}
@@ -104,7 +104,7 @@ export default function ProfilePage() {
                         <div className="paragraph-text text-light-text">
                           @{screenName}
                         </div>
-                        <div className="paragraph-text">
+                        <div className="subtext">
                           Joined {formatDateTime(joinedDate)}
                         </div>
                       </div>
