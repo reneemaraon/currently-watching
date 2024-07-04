@@ -73,6 +73,7 @@ export const GET_SHOWS_LIST = gql`
         _id
         title
         synopsis
+        watched
         tmdbPoster
         actingAverage
         plotAverage
@@ -132,6 +133,7 @@ export const GET_GENRES_SHOWS_LIST_SIMPLE = gql`
         tmdbPoster
         tmdbBackdrop
         reviewCount
+        watched
         genres {
           name
         }

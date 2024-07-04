@@ -54,6 +54,7 @@ export const GET_REVIEW = gql`
         tmdbBackdrop
         reviewCount
         totalAverage
+        watched
       }
       user {
         _id
