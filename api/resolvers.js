@@ -84,6 +84,30 @@ const resolvers = {
         cursorNumValue: filter.cursorNumValue,
       };
     },
+    userWatched: async (_, { id, filter = {} }) => {
+      const {
+        searchConditions,
+        cursorConditions,
+        options: { sort, limit },
+      } = generateSearchConditions(filter, ["title", "body"]);
+      searchConditions.user = id;
+      let watched = await Watch.find({
+        ...searchConditions,
+        ...cursorConditions,
+      })
+        .sort(sort)
+        .limit(limit)
+        .populate("show");
+      const shows = watched.map((entry) => entry.show);
+      const count = await Watch.find(searchConditions).countDocuments();
+
+      return {
+        shows,
+        totalCount: count,
+        cursorValue: filter.cursorValue,
+        cursorNumValue: filter.cursorNumValue,
+      };
+    },
     show: async (_, { id }) => {
       let show = await Show.findOne({ _id: id });
       return show;

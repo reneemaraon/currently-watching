@@ -142,6 +142,26 @@ export const GET_GENRES_SHOWS_LIST_SIMPLE = gql`
   }
 `;
 
+export const GET_USER_WATCHED_LIST_SIMPLE = gql`
+  query GetWatched($id: ID!, $filter: FilterInput) {
+    userWatched(id: $id, filter: $filter) {
+      totalCount
+      shows {
+        _id
+        title
+        totalAverage
+        tmdbPoster
+        tmdbBackdrop
+        reviewCount
+        watched
+        genres {
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const POST_SHOW_WATCH_MUTATION = gql`
   mutation PostWatch($showId: ID!) {
     watchedShow(showId: $showId) {

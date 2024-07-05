@@ -17,6 +17,7 @@ import { useDeleteReviewContext } from "../../context/DeleteReviewContext";
 import ListLoading from "../Common/LoadingList";
 import { useToast } from "../../context/ToastContext";
 import { useUserListsContext } from "../../context/UserListsContext";
+import ShowsWatched from "./ShowsWatched";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -140,6 +141,7 @@ export default function ProfilePage() {
                     )}
                   </div>
                 </div>
+                <ShowsWatched />
                 <div className="Lists w-full flex-col justify-center items-center gap-3 flex">
                   <Header>
                     <HeaderName>

@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 const watchSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "user",
     required: true,
   },
   show: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Show",
+    ref: "show",
     required: true,
   },
   createdAt: {
