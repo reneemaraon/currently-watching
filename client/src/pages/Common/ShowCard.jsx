@@ -50,7 +50,7 @@ const ShowCardSmall = ({ id, show }) => {
     >
       <div
         onClick={watched ? turnOffWatched : onWatchClick}
-        className="group/watch transition-colors duration-200 z-[5] right-0 top-0 absolute bg-main-bg bg-opacity-0 p-2 hover:bg-opacity-100 rounded-bl-2xl"
+        className="group/watch transition-colors duration-00 z-[5] right-0 top-0 absolute bg-main-bg bg-opacity-0 p-2 hover:bg-opacity-100 rounded-bl-2xl"
       >
         {watched ? (
           <Icon
@@ -67,6 +67,11 @@ const ShowCardSmall = ({ id, show }) => {
             <WatchIcon />
           </Icon>
         )}
+        <div className="transition-opacity duration-300 bg-main-bg bg-opacity-90 px-1 rounded group-hover/watch:opacity-100 opacity-0 group-hover/watch:block hidden absolute top-full mt-1 right-1">
+          <span className="text-nowrap text-xs">
+            {watched ? "Watched" : "Mark as watched"}
+          </span>
+        </div>
       </div>
       <div className="h-[135px] overflow-hidden">
         <img
