@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import CircularButton from "../Common/CircleButton";
 import { ShareIcon, TwitterIcon } from "../Common/IconList";
 import CustomButton from "../Common/CustomButton";
+import FullPageLoading from "../Common/FullPageLoading";
 import Icon from "../Common/Icon";
 import ReviewsListItem from "../Reviews/ReviewListItem";
 import List from "../UserLists/List";
@@ -26,6 +27,7 @@ export default function ProfilePage() {
     setUserId,
     loadNextPage,
     loadingReviews,
+    loading,
     userReviews: { reviews, totalCount },
   } = useUserDetailContext();
   const { showToast } = useToast();
@@ -65,6 +67,10 @@ export default function ProfilePage() {
         console.error("Failed to copy path to clipboard", error);
       });
   };
+
+  if (loading) {
+    return <FullPageLoading />;
+  }
 
   if (user) {
     const { profilePhotoUrl, screenName, name, joinedDate } = user;

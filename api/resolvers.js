@@ -96,13 +96,11 @@ const resolvers = {
         ...cursorConditions,
       })
         .sort(sort)
-        .limit(limit)
-        .populate("show");
-      const shows = watched.map((entry) => entry.show);
+        .limit(limit);
       const count = await Watch.find(searchConditions).countDocuments();
 
       return {
-        shows,
+        watched,
         totalCount: count,
         cursorValue: filter.cursorValue,
         cursorNumValue: filter.cursorNumValue,
@@ -312,6 +310,16 @@ const resolvers = {
     review: async (parent, args, context) => {
       const review = await Review.findById(parent.review);
       return review;
+    },
+    user: async (parent, args, context) => {
+      const user = await User.findById(parent.user);
+      return user;
+    },
+  },
+  Watch: {
+    show: async (parent, args, context) => {
+      const show = await Show.findById(parent.show);
+      return show;
     },
     user: async (parent, args, context) => {
       const user = await User.findById(parent.user);

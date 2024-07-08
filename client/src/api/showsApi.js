@@ -146,16 +146,19 @@ export const GET_USER_WATCHED_LIST_SIMPLE = gql`
   query GetWatched($id: ID!, $filter: FilterInput) {
     userWatched(id: $id, filter: $filter) {
       totalCount
-      shows {
-        _id
-        title
-        totalAverage
-        tmdbPoster
-        tmdbBackdrop
-        reviewCount
-        watched
-        genres {
-          name
+      watched {
+        createdAt
+        show {
+          _id
+          title
+          totalAverage
+          tmdbPoster
+          tmdbBackdrop
+          reviewCount
+          watched
+          genres {
+            name
+          }
         }
       }
     }

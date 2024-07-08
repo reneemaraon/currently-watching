@@ -6,11 +6,13 @@ import { SuccessToastIcon, WatchIcon } from "./IconList";
 import StarIcon from "./Star";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 const ShowCardSmall = ({ id, show }) => {
   const [watched, setWatched] = useState(false);
   const navigate = useNavigate();
   const { postWatch, deleteWatch } = useWatchShowContext();
+  const { actionRequireLogIn } = useAuthContext();
   const { showToast } = useToast();
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const ShowCardSmall = ({ id, show }) => {
       className="relative white-bg-hover  cursor-pointer transition duration-300 group overflow-hidden border w-64 shrink-0 rounded-2xl flex-col justify-start items-start inline-flex"
     >
       <div
-        onClick={watched ? turnOffWatched : onWatchClick}
+        onClick={actionRequireLogIn(watched ? turnOffWatched : onWatchClick)}
         className="group/watch transition-colors duration-00 z-[5] right-0 top-0 absolute bg-main-bg bg-opacity-0 p-2 hover:bg-opacity-100 rounded-bl-2xl"
       >
         {watched ? (

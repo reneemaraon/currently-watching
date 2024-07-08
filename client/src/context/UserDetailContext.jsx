@@ -5,6 +5,7 @@ import findCursor from "../utils/getCursorFromList";
 import { GET_USER_WATCHED_LIST_SIMPLE } from "../api/showsApi";
 
 const ITEMS_PER_PAGE = 3;
+const SMALL_ITEMS_PER_PAGE = 5;
 const SORT_FIELD = "createdAt";
 
 const userDetailContext = createContext();
@@ -24,7 +25,7 @@ export const UserDetailProvider = ({ children }) => {
   });
   const [userWatched, setUserWatched] = useState({
     totalCount: 0,
-    shows: [],
+    watched: [],
   });
 
   const [cursor, setCursor] = useState(new Date());
@@ -57,7 +58,7 @@ export const UserDetailProvider = ({ children }) => {
     variables: {
       id: userId,
       filter: {
-        limit: ITEMS_PER_PAGE,
+        limit: SMALL_ITEMS_PER_PAGE,
         cursorField: SORT_FIELD,
         cursorValue: watchedCursor,
       },
@@ -80,6 +81,15 @@ export const UserDetailProvider = ({ children }) => {
     });
     setCursor(null);
     refetchReviews();
+  };
+
+  const updateWatchedCursor = () => {
+    setWatchedCursor(findCursor(userWatched.watched, SORT_FIELD));
+  };
+
+  const loadNextWatchedPage = () => {
+    updateWatchedCursor();
+    refetchWatched();
   };
 
   useEffect(() => {
@@ -113,23 +123,19 @@ export const UserDetailProvider = ({ children }) => {
 
   useEffect(() => {
     if (watchedData) {
-      console.log("hi");
-      console.log(watchedData.userWatched.shows);
-      const { shows: dataShows, totalCount } = watchedData.userWatched;
-      const { shows: currentShows } = userWatched;
-      console.log(findCursor(currentShows, SORT_FIELD));
-      console.log(findCursor(dataShows, SORT_FIELD));
-      setUserWatched((prevWatched) => ({
-        totalCount,
-        shows: [...prevWatched.shows, ...dataShows],
-      }));
-      // if (
-      //   findCursor(currentShows, SORT_FIELD) !=
-      //   findCursor(dataShows, SORT_FIELD)
-      // ) {
-      // }
+      const { watched: dataWatched, totalCount } = watchedData.userWatched;
+      const { watched: currentWatched } = userWatched;
+      if (
+        findCursor(currentWatched, SORT_FIELD) !=
+        findCursor(dataWatched, SORT_FIELD)
+      ) {
+        setUserWatched((prevWatched) => ({
+          totalCount,
+          watched: [...prevWatched.watched, ...dataWatched],
+        }));
+      }
     }
-  }, [reviewsData]);
+  }, [watchedData]);
 
   const removeReviewFromUserReviewList = (id) => {
     const reviewIndex = userReviews.reviews.findIndex(
@@ -158,9 +164,10 @@ export const UserDetailProvider = ({ children }) => {
         loadNextPage,
         refetch,
         loadingReviews,
+        removeReviewFromUserReviewList,
         userWatched,
         loadingWatched,
-        removeReviewFromUserReviewList,
+        loadNextWatchedPage,
       }}
     >
       {children}
