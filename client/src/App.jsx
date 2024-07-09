@@ -1,26 +1,27 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import './App.css';
-import Home from './pages/Home/HomePage';
-import SideBar from './pages/Home/SideBar';
-import TopNavBar from './pages/Home/NavBar/TopNavBar';
-import ReviewsPage from './pages/Reviews/Reviews';
-import CreateReview from './pages/CreateReview/CreateReview';
+import "./App.css";
+import Home from "./pages/Home/HomePage";
+import SideBar from "./pages/Home/SideBar";
+import TopNavBar from "./pages/Home/NavBar/TopNavBar";
+import ReviewsPage from "./pages/Reviews/Reviews";
+import CreateReview from "./pages/CreateReview/CreateReview";
 
-import { useAuthContext } from './context/AuthContext';
-import ReviewDetail from './pages/ReviewDetail/ReviewDetail';
-import ShowDetail from './pages/ShowDetail/ShowDetail';
-import ProfilePage from './pages/Profile/ProfilePage';
-import MyListsPage from './pages/UserLists/UserLists';
-import { useState, useEffect, useRef } from 'react';
-import PopupSidebar from './pages/Home/PopupSidebar';
-import FullPageLoading from './pages/Common/FullPageLoading';
-import ImageWithOpacityTransition from './pages/Common/ImageTransition';
-import LoginCallback from './pages/Callback/LoginCallback';
-import AuthOverlay from './pages/AuthOverlay/AuthOverlay';
-import UpdateReview from './pages/UpdateReview/UpdateReview';
-import ListDetail from './pages/ListDetail/ListDetail';
-import LoginVerify from './pages/Callback/LoginVerify';
+import { useAuthContext } from "./context/AuthContext";
+import ReviewDetail from "./pages/ReviewDetail/ReviewDetail";
+import ShowDetail from "./pages/ShowDetail/ShowDetail";
+import ProfilePage from "./pages/Profile/ProfilePage";
+import MyListsPage from "./pages/UserLists/UserLists";
+import { useState, useEffect, useRef } from "react";
+import PopupSidebar from "./pages/Home/PopupSidebar";
+import FullPageLoading from "./pages/Common/FullPageLoading";
+import ImageWithOpacityTransition from "./pages/Common/ImageTransition";
+import LoginCallback from "./pages/Callback/LoginCallback";
+import AuthOverlay from "./pages/AuthOverlay/AuthOverlay";
+import UpdateReview from "./pages/UpdateReview/UpdateReview";
+import ListDetail from "./pages/ListDetail/ListDetail";
+import LoginVerify from "./pages/Callback/LoginVerify";
+import ShowsPage from "./pages/Shows/Shows";
 
 function App() {
   const { isLoading } = useAuthContext();
@@ -39,9 +40,9 @@ function App() {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -74,6 +75,7 @@ function App() {
             <Route path="/users/:id/lists" element={<MyListsPage />} />
             <Route path="/shows/:id/create-review" element={<CreateReview />} />
             <Route path="/shows/:id" element={<ShowDetail />} />
+            <Route path="/shows" element={<ShowsPage />} />
             <Route path="/users/:id" element={<ProfilePage />} />
             <Route path="/lists/:id" element={<ListDetail />} />
           </Routes>

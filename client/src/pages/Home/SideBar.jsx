@@ -6,7 +6,7 @@ export const NavItem = ({ itemName, onClick, path }) => {
   const { pathname } = useLocation();
 
   return (
-    <button
+    <div
       className={`
         w-full
         h-14
@@ -15,6 +15,7 @@ export const NavItem = ({ itemName, onClick, path }) => {
         items-center
         gap-2.5 inline-flex
         group
+        cursor-pointer
         ${pathname.includes(path) && "bg-brand-lavender bg-opacity-25"}
         hover:bg-brand-lavender
         hover:bg-opacity-25
@@ -22,7 +23,7 @@ export const NavItem = ({ itemName, onClick, path }) => {
       onClick={onClick}
     >
       <p className="group-hover:text-theme-negative-base text-sm">{itemName}</p>
-    </button>
+    </div>
   );
 };
 
@@ -36,6 +37,11 @@ export default function SideBar() {
         <div className="tracking-wide font-bold">Currently Watching</div>
       </button>
       <NavItem itemName="Home" onClick={() => navigate("/")} />
+      <NavItem
+        itemName="Shows"
+        path="/shows"
+        onClick={() => navigate("/shows")}
+      />
       <NavItem
         itemName="Reviews"
         path="/reviews"

@@ -41,9 +41,15 @@ const PopupSidebar = ({ toggleSidebar, anchor }) => {
       </div>
 
       <NavItem onClick={onClickNav("/")} itemName="Home" />
-      <NavItem onClick={onClickNav("/reviews")} itemName="Reviews" />
+      <NavItem onClick={onClickNav("/shows")} path="/shows" itemName="Shows" />
+      <NavItem
+        onClick={onClickNav("/reviews")}
+        path="/reviews"
+        itemName="Reviews"
+      />
       {user && user._id && (
         <NavItem
+          path={`/users/${user._id}/lists`}
           onClick={onClickNav(`/users/${user._id}/lists`)}
           itemName="My Lists"
         />
