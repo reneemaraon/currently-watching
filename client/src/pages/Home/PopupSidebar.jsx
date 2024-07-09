@@ -1,25 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-
-export const NavItem = ({ itemName, onClick }) => {
-  return (
-    <div
-      className="
-            w-full
-            h-14
-            px-10
-            justify-start
-            items-center
-            gap-2.5 inline-flex hover:font-bold
-            cursor-pointer
-        
-        "
-      onClick={onClick}
-    >
-      <p className="text-sm">{itemName}</p>
-    </div>
-  );
-};
+import { NavItem } from "./SideBar";
 
 const PopupSidebar = ({ toggleSidebar, anchor }) => {
   const { user } = useAuthContext();
@@ -35,7 +16,7 @@ const PopupSidebar = ({ toggleSidebar, anchor }) => {
   return (
     <div
       ref={anchor}
-      className="fixed top-0 left-0 inline-flex w-60 border border-zinc-300 z-20 h-screen supports-backdrop-blur:bg-theme-base/100 py-6 bg-slate-100 flex-col justify-start items-start gap-[15px]"
+      className="fixed top-0 left-0 inline-flex w-60 border border-zinc-300 z-20 h-screen supports-backdrop-blur:bg-theme-base/100 py-16 bg-slate-100 flex-col justify-start items-start gap-[15px]"
     >
       <div className="p-4 absolute right-0 top-0">
         <div
