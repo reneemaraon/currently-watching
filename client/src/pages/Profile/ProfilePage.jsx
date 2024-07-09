@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import CircularButton from "../Common/CircleButton";
-import { ShareIcon, TwitterIcon } from "../Common/IconList";
-import CustomButton from "../Common/CustomButton";
-import FullPageLoading from "../Common/FullPageLoading";
-import Icon from "../Common/Icon";
-import ReviewsListItem from "../Reviews/ReviewListItem";
-import List from "../UserLists/List";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import LoadMorePanel from "../Common/LoadMorePagination";
-import { useAuthContext } from "../../context/AuthContext";
-import formatDateTime from "../../utils/formatDate";
-import { useUserDetailContext } from "../../context/UserDetailContext";
-import { useParams } from "react-router-dom";
-import { Header, HeaderName } from "../Home/Sections/SectionHeader";
-import DeleteReview from "../Reviews/DeleteReview";
-import { useDeleteReviewContext } from "../../context/DeleteReviewContext";
-import ListLoading from "../Common/LoadingList";
-import { useToast } from "../../context/ToastContext";
-import { useUserListsContext } from "../../context/UserListsContext";
-import ShowsWatched from "./ShowsWatched";
+import React, { useEffect } from 'react';
+import CircularButton from '../Common/CircleButton';
+import { ShareIcon, TwitterIcon } from '../Common/IconList';
+import CustomButton from '../Common/CustomButton';
+import FullPageLoading from '../Common/FullPageLoading';
+import Icon from '../Common/Icon';
+import ReviewsListItem from '../Reviews/ReviewListItem';
+import List from '../UserLists/List';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import LoadMorePanel from '../Common/LoadMorePagination';
+import { useAuthContext } from '../../context/AuthContext';
+import formatDateTime from '../../utils/formatDate';
+import { useUserDetailContext } from '../../context/UserDetailContext';
+import { useParams } from 'react-router-dom';
+import { Header, HeaderName } from '../Home/Sections/SectionHeader';
+import DeleteReview from '../Reviews/DeleteReview';
+import { useDeleteReviewContext } from '../../context/DeleteReviewContext';
+import ListLoading from '../Common/LoadingList';
+import { useToast } from '../../context/ToastContext';
+import { useUserListsContext } from '../../context/UserListsContext';
+import ShowsWatched from './ShowsWatched';
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -48,7 +48,7 @@ export default function ProfilePage() {
 
   const openTwitter = () => {
     const { screenName } = user;
-    window.open(`http://twitter.com/${screenName}`, "_blank");
+    window.open(`http://twitter.com/${screenName}`, '_blank');
   };
 
   const onAttemptDelete = (id) => {
@@ -61,10 +61,10 @@ export default function ProfilePage() {
     navigator.clipboard
       .writeText(fullPath)
       .then(() => {
-        showToast("Copied link to clipboard", "success");
+        showToast('Copied link to clipboard', 'success');
       })
       .catch((error) => {
-        console.error("Failed to copy path to clipboard", error);
+        console.error('Failed to copy path to clipboard', error);
       });
   };
 
@@ -139,6 +139,7 @@ export default function ProfilePage() {
                       <ReviewsListItem
                         onDelete={() => onAttemptDelete(review._id)}
                         review={review}
+                        key={review._id}
                       />
                     ))}
                     {loadingReviews && <ListLoading />}

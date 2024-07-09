@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUserListsContext } from "../../context/UserListsContext";
-import ListActions from "./ListActions";
-import ListAuthor from "./ListAuthor";
-import { useAuthContext } from "../../context/AuthContext";
-import { PencilIcon } from "../Common/IconList";
-import Icon from "../Common/Icon";
-import Tooltip from "../Common/Tooltip";
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUserListsContext } from '../../context/UserListsContext';
+import ListActions from './ListActions';
+import ListAuthor from './ListAuthor';
+import { useAuthContext } from '../../context/AuthContext';
+import { PencilIcon } from '../Common/IconList';
+import Icon from '../Common/Icon';
+import Tooltip from '../Common/Tooltip';
 
 const ListHeader = ({ items, list, index, addDrama }) => {
   const [activeEditTitle, setActiveEditTitle] = useState(false);
-  const [listName, setListName] = useState("");
+  const [listName, setListName] = useState('');
 
   const { updateList, createList } = useUserListsContext();
   const { isOwner } = useAuthContext();
@@ -31,7 +31,7 @@ const ListHeader = ({ items, list, index, addDrama }) => {
   }, []);
 
   const processUpdateListName = async () => {
-    if (list._id != "temp") {
+    if (list._id != 'temp') {
       await updateList(list._id, { name: listName });
     } else {
       await createList(index, {
@@ -66,9 +66,9 @@ const ListHeader = ({ items, list, index, addDrama }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
@@ -79,7 +79,7 @@ const ListHeader = ({ items, list, index, addDrama }) => {
           <div ref={nameInputRef} className="w-auto flex gap-2">
             <input
               type="text"
-              autoFocus
+              autoFocus={list._id == 'temp' || activeEditTitle}
               className="px-2 bg-transparent outline-brand-dark-purple rounded-lg  title-text font-light"
               placeholder="Enter List name"
               onChange={handleInputChange}
@@ -90,7 +90,7 @@ const ListHeader = ({ items, list, index, addDrama }) => {
           <div className="flex gap-2">
             <p
               onClick={() =>
-                navigate(`/lists/${list._id !== "temp" ? list._id : ""}`)
+                navigate(`/lists/${list._id !== 'temp' ? list._id : ''}`)
               }
               className="cursor-pointer hover:text-brand-dark-purple grow line-clamp-2 title-text font-light"
             >

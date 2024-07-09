@@ -1,9 +1,9 @@
-import { useUserDetailContext } from "../../context/UserDetailContext";
-import { useUserListsContext } from "../../context/UserListsContext";
-import LoadMorePanel from "../Common/LoadMorePagination";
-import ShowCardSmall from "../Common/ShowCard";
-import ListLoading from "../Common/LoadingList";
-import { Header, HeaderName } from "../Home/Sections/SectionHeader";
+import { useUserDetailContext } from '../../context/UserDetailContext';
+import { useUserListsContext } from '../../context/UserListsContext';
+import LoadMorePanel from '../Common/LoadMorePagination';
+import ShowCardSmall from '../Common/ShowCard';
+import ListLoading from '../Common/LoadingList';
+import { Header, HeaderName } from '../Home/Sections/SectionHeader';
 
 const ShowsWatched = () => {
   const { userWatched, loadingWatched, loadNextWatchedPage } =
@@ -21,7 +21,7 @@ const ShowsWatched = () => {
       <div className="w-full inline-flex flex-wrap gap-3">
         {userWatched &&
           userWatched.watched.map((watchItem) => (
-            <ShowCardSmall show={watchItem.show} />
+            <ShowCardSmall key={watchItem.show._id} show={watchItem.show} />
           ))}
       </div>
       {loadingWatched && <ListLoading />}
