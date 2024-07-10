@@ -82,6 +82,7 @@ export const GET_SHOWS_LIST = gql`
         tmdbPoster
         tmdbBackdrop
         reviewCount
+        firstAirDate
         cast {
           _id
           name
