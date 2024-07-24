@@ -1,16 +1,20 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { GET_SHOWS_LIST } from "../api/showsApi";
-import { useQuery } from "@apollo/client";
-import findCursor from "../utils/getCursorFromList";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { GET_SHOWS_LIST_SIMPLE } from '../api/showsApi';
+import { useQuery } from '@apollo/client';
+import findCursor from '../utils/getCursorFromList';
 
 const showContext = createContext();
 
 const ITEMS_PER_PAGE = 24;
-const SORT_FIELD = "firstAirDate";
+const FIELD_TYPES = {
+  firstAirDate: 'date',
+  popularity: 'number',
+  title: 'string',
+};
 
 export const useShowsContext = () => {
   const context = useContext(showContext);
-  if (!context) throw new Error("Show Provider is missing");
+  if (!context) throw new Error('Show Provider is missing');
   return context;
 };
 
@@ -20,19 +24,26 @@ export const ShowsProvider = ({ children }) => {
     shows: [],
   });
   const [cursor, setCursor] = useState(new Date());
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortField, setSortField] = useState('firstAirDate');
+  const [ascending, setAscending] = useState(false);
 
   const {
     loading,
     error,
     data,
     refetch: refetchResults,
-  } = useQuery(GET_SHOWS_LIST, {
+  } = useQuery(GET_SHOWS_LIST_SIMPLE, {
     variables: {
       filter: {
         limit: ITEMS_PER_PAGE,
-        cursorField: SORT_FIELD,
-        cursorValue: cursor,
-        ascending: false,
+        search: searchTerm,
+        cursorField: sortField,
+        cursorValue:
+          sortField == 'firstAirDate' || sortField == 'title' ? cursor : null,
+        cursorNumValue: sortField == 'popularity' ? cursor : null,
+        ascending: ascending,
+        cursorType: FIELD_TYPES[sortField],
       },
     },
   });
@@ -43,8 +54,7 @@ export const ShowsProvider = ({ children }) => {
       const { shows: currentShows } = shows;
 
       if (
-        findCursor(dataShows, SORT_FIELD) !=
-        findCursor(currentShows, SORT_FIELD)
+        findCursor(dataShows, sortField) != findCursor(currentShows, sortField)
       ) {
         setShows((prevShows) => ({
           ...prevShows,
@@ -56,8 +66,8 @@ export const ShowsProvider = ({ children }) => {
   }, [data]);
 
   const updateCursor = () => {
-    console.log(findCursor(shows.shows, SORT_FIELD));
-    setCursor(findCursor(shows.shows, SORT_FIELD));
+    console.log(findCursor(shows.shows, sortField));
+    setCursor(findCursor(shows.shows, sortField));
   };
 
   const loadNextPage = () => {
@@ -65,8 +75,31 @@ export const ShowsProvider = ({ children }) => {
     refetchResults();
   };
 
+  const refreshResults = () => {
+    setShows({
+      totalCount: 0,
+      shows: [],
+    });
+    setCursor(null);
+    // refetchResults();
+  };
+
   return (
-    <showContext.Provider value={{ loading, error, shows, loadNextPage }}>
+    <showContext.Provider
+      value={{
+        refreshResults,
+        loading,
+        error,
+        shows,
+        loadNextPage,
+        searchTerm,
+        setSearchTerm,
+        setSortField,
+        sortField,
+        ascending,
+        setAscending,
+      }}
+    >
       {children}
     </showContext.Provider>
   );

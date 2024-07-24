@@ -32,8 +32,8 @@ type Show {
   totalAverage: Float!
   mediaType: String
   cast: [Actor!]
-  firstAirDate: DateTime!
-  lastAirDate: DateTime!
+  firstAirDate: DateTime
+  lastAirDate: DateTime
   genres: [Genre!]
   numberOfSeasons: Int!
   numberOfEpisodes: Int!

@@ -5,16 +5,7 @@ import Icon from '../../Common/Icon';
 import { SearchIcon } from '../../Common/IconList';
 import SearchResult from './SearchResult';
 import { useSearchContext } from '../../../context/SearchContext';
-
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  };
-}
+import debounce from '../../../utils/debounce';
 
 const SearchBar = ({ onItemClick }) => {
   const {

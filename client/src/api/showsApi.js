@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
-import { apiGet } from "./apiCall";
+import { gql } from '@apollo/client';
+import { apiGet } from './apiCall';
 
 export const getShowsRequest = async (params) => await apiGet(`/shows`);
 
@@ -83,11 +83,31 @@ export const GET_SHOWS_LIST = gql`
         tmdbBackdrop
         reviewCount
         firstAirDate
+        popularity
         cast {
           _id
           name
           profileImage
         }
+      }
+    }
+  }
+`;
+
+export const GET_SHOWS_LIST_SIMPLE = gql`
+  query GetShows($filter: FilterInput) {
+    shows(filter: $filter) {
+      totalCount
+      shows {
+        _id
+        title
+        watched
+        tmdbPoster
+        totalAverage
+        tmdbBackdrop
+        reviewCount
+        firstAirDate
+        popularity
       }
     }
   }

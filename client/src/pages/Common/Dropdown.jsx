@@ -4,15 +4,9 @@ export const Option = ({ text, selected, onSelect }) => {
   return (
     <div
       onClick={onSelect}
-      className="Option w-full h-9 p-2.5 hover:bg-theme-base rounded-lg justify-between items-center inline-flex"
+      className="cursor-pointer w-full h-9 p-2.5 hover:bg-theme-base rounded-lg justify-between items-center inline-flex"
     >
-      <div
-        className={`OptionText text-text-dark text-sm ${
-          selected && 'font-semibold'
-        }`}
-      >
-        {text}
-      </div>
+      <div className={`text-sm text-text-dark`}>{text}</div>
       <div className="CheckContainer justify-between items-center flex">
         {selected && (
           <div className="Icon px-1 py-1 justify-center items-center flex">
@@ -20,7 +14,7 @@ export const Option = ({ text, selected, onSelect }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={3}
+              strokeWidth={1}
               stroke="currentColor"
               className="w-4 h-4"
             >
