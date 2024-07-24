@@ -5,6 +5,8 @@ import LoadMorePanel from "../Common/LoadMorePagination";
 import ListLoading from "../Common/LoadingList";
 import ShowCardSmall from "../Common/ShowCard";
 import { Header, HeaderName } from "../Home/Sections/SectionHeader";
+import Icon from "../Common/Icon";
+import { FunnelIcon } from "../Common/IconList";
 
 const ShowsPage = () => {
   const {
@@ -26,6 +28,12 @@ const ShowsPage = () => {
     <div className="w-full max-w-[1200px] px-10 max-[900px]:px-8 max-[600px]:px-5 max-[400px]:px-2 py-2 sm:py-8 flex-col justify-start items-center gap-6 sm:gap-8 md:gap-12 inline-flex">
       <Header>
         <HeaderName>Shows</HeaderName>
+        <div className="flex gap-2 items-center">
+          <Icon sizeRules="w-4 h-4">
+            <FunnelIcon />
+          </Icon>
+          <div className="subtext">Filter</div>
+        </div>
       </Header>
       <div className="ShowsList w-full inline-flex px-0.5 pb-4 sm:px-2.5 flex-col justify-start items-center gap-5">
         <div className="inline-flex justify-center flex-wrap gap-8">

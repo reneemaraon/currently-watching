@@ -5,7 +5,7 @@ import findCursor from "../utils/getCursorFromList";
 import { GET_USER_WATCHED_LIST_SIMPLE } from "../api/showsApi";
 
 const ITEMS_PER_PAGE = 3;
-const SMALL_ITEMS_PER_PAGE = 8;
+const SMALL_ITEMS_PER_PAGE = 4;
 const SORT_FIELD = "createdAt";
 
 const userDetailContext = createContext();
