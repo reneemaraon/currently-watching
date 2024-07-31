@@ -12,11 +12,11 @@ const CustomButton = ({
     primary: 'bg-brand-pink text-white hover:bg-brand-pink-hover',
     gradient:
       'bg-gradient-to-r from-[#3876BF] via-sky-500 to-brand-pink text-white hover:from-cyan-700 hover:via-sky-600 hover:to-cyan-600',
-    dark: 'bg-text-dark text-theme-base hover:bg-gray-700',
+    dark: 'bg-text-dark text-theme-base hover:bg-gray-800 dark:hover:bg-slate-300 ',
     secondary: 'bg-brand-gray text-theme-base hover:bg-gray-400',
-    inverse: 'bg-brand-pink bg-opacity-20 text-brand-pink hover:bg-opacity-30',
+    inverse: 'bg-brand-pink/20 text-brand-pink hover:bg-brand-pink/30',
     light: 'border bg-brand-gray-light text-text-dark hover:bg-opacity-70',
-    lavender: ' bg-brand-lavender text-theme-base hover:bg-opacity-70',
+    lavender: 'bg-brand-lavender text-white hover:bg-opacity-70',
   };
 
   // Default to 'primary' if the specified style set doesn't exist

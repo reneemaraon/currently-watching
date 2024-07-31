@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -8,21 +9,21 @@ module.exports = {
         inter: ['"Inter"'],
       },
       colors: {
-        'main-bg': '#F6F6F6',
-        'theme-base': '#FFFFFF',
-        'theme-negative-base': '#000000',
-        'text-dark': '#000000',
-        'light-text': '#676573',
-        'lighter-text': '#B6BCC6',
-        'brand-pink': '#AF1381',
-        'brand-pink-hover': '#C91795',
+        'main-bg': 'rgba(var(--main-bg))',
+        'theme-base': 'rgba(var(--theme-base))',
+        'theme-negative-base': 'rgba(var(--theme-negative-base))',
+        'text-dark': 'rgba(var(--text-dark))',
+        'light-text': 'rgba(var(--light-text))',
+        'lighter-text': 'rgba(var(--lighter-text))',
+        'brand-pink': 'rgba(var(--brand-pink))',
+        'brand-pink-hover': 'rgba(var(--brand-pink-hover))',
+        'light-stroke': 'rgba(var(--light-stroke))',
         'brand-gray': '#7E8AA0',
         'brand-gray-light': '#F3F3F4',
         'brand-lavender': '#CCB4F4',
         'brand-dark-purple': '#635A9C',
         'main-yellow': '#FFE456',
         'dark-yellow': '#E9B500',
-        'light-stroke': '#E2ECEC',
         'dark-bg': '#09243F',
         'dark-blue': '#1F1E41',
         'dark-box': '#0C2E4E',

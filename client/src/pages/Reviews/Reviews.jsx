@@ -68,10 +68,10 @@ const ReviewsPage = () => {
           <div className="relative">
             <button
               onClick={removeShow}
-              className="transition-colors duration-200 group hover:bg-brand-lavender rounded-full bg-brand-gray-light absolute top-0 right-0 p-2"
+              className="transition-colors duration-200 group rounded-full hover:bg-brand-lavender bg-theme-negative-base border-light-stroke border absolute top-0 right-0 p-2"
             >
               <Icon
-                fill="group-hover:stroke-2 text-text-dark group-hover:text-theme-base"
+                fill="text-theme-base"
                 sizeRules="h-2.5 w-2.5 sm:h-3 sm:w-3"
               >
                 <CloseIcon />

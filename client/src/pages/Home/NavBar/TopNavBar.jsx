@@ -1,16 +1,16 @@
-import React from "react";
-import { useAuthContext } from "../../../context/AuthContext";
-import ProfileView from "./ProfileDropdown";
-import CustomButton from "../../Common/CustomButton";
-import Icon from "../../Common/Icon";
-import { TwitterIcon } from "../../Common/IconList";
-import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../../../context/AuthContext';
+import ProfileView from './ProfileDropdown';
+import CustomButton from '../../Common/CustomButton';
+import Icon from '../../Common/Icon';
+import { MoonIcon, SunIcon, TwitterIcon } from '../../Common/IconList';
+import SearchBar from './SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 const LogInButton = ({ login }) => (
   <>
     <CustomButton onClick={login} styleSet="primary" size="defaultResize">
-      <Icon fill="fill-theme-base" sizeRules="h-5 w-5">
+      <Icon fill="fill-white" sizeRules="h-5 w-5">
         <TwitterIcon />
       </Icon>
       Login with Twitter
@@ -21,13 +21,32 @@ const LogInButton = ({ login }) => (
 const TopNavBar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const { user, loginUser } = useAuthContext();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark');
+      console.log('adddark');
+    } else {
+      document.body.classList.remove('dark');
+      console.log('remove dark');
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    // Check the system preference
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+    setIsDarkMode(systemPrefersDark);
+  }, []);
 
   const navigateToShow = (id) => {
     navigate(`shows/${id}`);
   };
 
   return (
-    <div className="top_nav z-20 w-full h-20 gap-5 max-[600px]:h-14 px-8 sm:px-10 max-[600px]:px-6 bg-theme-base bg-opacity-25 backdrop-blur-sm border-b border-light-stroke/[.45] items-center inline-flex sticky top-0">
+    <div className="top_nav z-20 w-full h-20 gap-5 max-[600px]:h-14 px-8 sm:px-10 max-[600px]:px-6 bg-theme-base/20 backdrop-blur-sm border-b border-light-stroke/[.45] items-center inline-flex sticky top-0">
       <div className="left_side grow justify-start items-center gap-[30px] flex">
         <div
           onClick={toggleSidebar}
@@ -52,11 +71,39 @@ const TopNavBar = ({ toggleSidebar }) => {
           <SearchBar onItemClick={navigateToShow} />
         </div>
       </div>
-      {user ? (
-        <ProfileView authUser={user} />
-      ) : (
-        <LogInButton login={loginUser} />
-      )}
+      <div className="inline-flex gap-4 items-center">
+        {isDarkMode ? (
+          <div
+            onClick={() => setIsDarkMode(false)}
+            className="group rounded-xl hover:bg-orange-400 p-2 cursor-pointer transition-colors duration-300"
+          >
+            <Icon
+              sizeRules="w-5 h-5"
+              fill="group-hover:fill-white fill-light-text"
+            >
+              <SunIcon />
+            </Icon>
+          </div>
+        ) : (
+          <div
+            onClick={() => setIsDarkMode(true)}
+            className="group rounded-xl hover:bg-blue-950 p-2 cursor-pointer transition-colors duration-300"
+          >
+            <Icon
+              sizeRules="w-5 h-5"
+              fill="group-hover:fill-white fill-light-text"
+            >
+              <MoonIcon />
+            </Icon>
+          </div>
+        )}
+
+        {user ? (
+          <ProfileView authUser={user} />
+        ) : (
+          <LogInButton login={loginUser} />
+        )}
+      </div>
     </div>
   );
 };

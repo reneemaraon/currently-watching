@@ -58,7 +58,7 @@ const ReviewsListItem = ({ review }) => {
     <div
       onClick={onClickNavigate}
       className="
-            white-bg-hover group cursor-pointer overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] max-[600px]:w-[320px] w-[450px] h-[260px] rounded-[20px] border justify-start items-start inline-flex
+            white-bg-hover group cursor-pointer overflow-hidden max-[600px]:flex-col max-[600px]:h-[400px] max-[600px]:w-[320px] w-[450px] h-[260px] rounded-[20px] border-light-stroke border justify-start items-start inline-flex
             max-[600px]:min-h-[450px] 
         "
     >

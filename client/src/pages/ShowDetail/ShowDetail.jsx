@@ -44,7 +44,7 @@ const ShowDetail = () => {
                 />
               </div>
               <div className="ShowDetails min-w-[230px] grow shrink basis-0 px-1 sm:px-3.5 flex-col justify-start items-start gap-3.5 inline-flex">
-                <div className="ShowHeader flex-wrap w-full pb-2 gap-3 border-b justify-start items-start inline-flex">
+                <div className="ShowHeader flex-wrap w-full pb-2 gap-3 border-b border-light-stroke justify-start items-start inline-flex">
                   <div className="TitleGenre grow py-2.5 flex-col justify-start items-start gap-2 inline-flex">
                     <div className="TitleAndViews grow flex-wrap gap-1 sm:gap-2 justify-start items-center inline-flex">
                       <div className="TheGlory2022 title-text">
@@ -84,7 +84,7 @@ const ShowDetail = () => {
               <StatContainer />
             </div>
             <div className="w-full py-[30px] rounded-[17px] flex-col justify-center items-start gap-[50px] flex">
-              <div className="w-full pt-[30px] border-t border-slate-200 flex-col justify-center items-center gap-3.5 flex">
+              <div className="w-full pt-[30px] border-t border-light-stroke flex-col justify-center items-center gap-3.5 flex">
                 <div className="px-2 w-full pb-5 justify-between items-start inline-flex">
                   <div className="inline-flex gap-2">
                     <span className="title-text ">

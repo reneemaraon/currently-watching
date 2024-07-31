@@ -1,13 +1,13 @@
-import Icon from "../Common/Icon";
-import { DeleteIcon, DragIcon } from "../Common/IconList";
-import ImageWithOpacityTransition from "../Common/ImageTransition";
-import StarIcon from "../Common/Star";
-import { getYear } from "../../utils/formatDate";
-import Insert from "./Insert";
-import SearchInItem from "./SearchShow";
-import { useNavigate } from "react-router-dom";
-import Tooltip from "../Common/Tooltip";
-import formatRating from "../../utils/formatRating";
+import Icon from '../Common/Icon';
+import { DeleteIcon, DragIcon } from '../Common/IconList';
+import ImageWithOpacityTransition from '../Common/ImageTransition';
+import StarIcon from '../Common/Star';
+import { getYear } from '../../utils/formatDate';
+import Insert from './Insert';
+import SearchInItem from './SearchShow';
+import { useNavigate } from 'react-router-dom';
+import Tooltip from '../Common/Tooltip';
+import formatRating from '../../utils/formatRating';
 
 const ListItem = ({
   dragging,
@@ -32,17 +32,17 @@ const ListItem = ({
     <div
       {...rest}
       className={`w-full ${
-        !dragging && "transition-transform ease-in-out duration-500"
+        !dragging && 'transition-transform ease-in-out duration-500'
       } flex-col inline-flex gap-1 sm:gap-1.5 justify-end ${
-        selected && show && "z-10"
+        selected && show && 'z-10'
       }
-      ${!show && "z-30"}`}
+      ${!show && 'z-30'}`}
     >
       {insertVisible && !fromTop && <Insert />}
-      <div className="bg-theme-base relative transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border justify-start items-center inline-flex">
+      <div className="bg-theme-base relative transition w-full max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-2xl border-light-stroke border justify-start items-center inline-flex">
         <div
           className={`${
-            isOwner && "cursor-grab"
+            isOwner && 'cursor-grab'
           } group RankNumContainer px-5 sm:px-8 md:px-10 justify-center items-center gap-2.5 flex`}
         >
           <div className="RankNumber text-base sm:text-lg md:text-2xl font-base md:font-medium leading-none">
@@ -135,7 +135,7 @@ const ListItem = ({
                   >
                     <Icon
                       sizeRules="w-3 h-3 sm:w-4 sm:h-4"
-                      fill="opacity-40 group-hover:opacity-100 group-hover:fill-theme-base fill-lighter-text"
+                      fill="opacity-40 group-hover:opacity-100 group-hover:fill-white fill-lighter-text"
                     >
                       <DeleteIcon />
                     </Icon>
@@ -146,7 +146,7 @@ const ListItem = ({
             {isOwner && (
               <div
                 className={`${
-                  isOwner && "cursor-grab"
+                  isOwner && 'cursor-grab'
                 } absolute right-1 hover:opacity-70 opacity-20 h-full w-6 inline-flex items-center justify-center`}
               >
                 <Icon

@@ -5,7 +5,7 @@ import findCursor from '../utils/getCursorFromList';
 
 const showContext = createContext();
 
-const ITEMS_PER_PAGE = 24;
+const ITEMS_PER_PAGE = 48;
 const FIELD_TYPES = {
   firstAirDate: 'date',
   popularity: 'number',
