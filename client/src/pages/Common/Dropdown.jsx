@@ -33,7 +33,7 @@ export const Option = ({ text, selected, onSelect }) => {
 
 export default function Dropdown({ children }) {
   return (
-    <div className="Dropdown w-full p-2.5 bg-zinc-100 rounded-lg shadow border border-light-stroke flex-col justify-center items-center inline-flex">
+    <div className="Dropdown w-full p-2.5 bg-main-bg rounded-lg shadow border border-light-stroke flex-col justify-center items-center inline-flex">
       {children}
     </div>
   );

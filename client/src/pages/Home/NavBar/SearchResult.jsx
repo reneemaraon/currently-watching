@@ -14,7 +14,7 @@ const RatingType = ({ name, rate }) => (
 const SearchResult = ({ searchItem, onClick }) => {
   return (
     <div onClick={onClick} className="w-full inline-flex hover:cursor-pointer">
-      <div className="bg-theme-base bg-opacity-75 hover:bg-opacity-100 max-[500px]:h-[245px] h-[140px] w-full max-w-[800px] overflow-hidden border rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
+      <div className="bg-theme-base/75 hover:bg-theme-base max-[500px]:h-[245px] h-[140px] w-full max-w-[800px] overflow-hidden border border-light-stroke rounded-lg max-[500px]:flex-col justify-start items-start inline-flex">
         <div className="w-1/3 h-full">
           <ImageWithOpacityTransition
             styleAttach="object-cover w-full h-full"

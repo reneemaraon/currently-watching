@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import CustomButton from "../Common/CustomButton";
-import TextareaAutosize from "react-textarea-autosize";
-import { useReviewDetailContext } from "../../context/ReviewDetailContext";
-import { useAuthContext } from "../../context/AuthContext";
+import { useState, useRef } from 'react';
+import CustomButton from '../Common/CustomButton';
+import TextareaAutosize from 'react-textarea-autosize';
+import { useReviewDetailContext } from '../../context/ReviewDetailContext';
+import { useAuthContext } from '../../context/AuthContext';
 
 const CommentInput = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -34,9 +34,9 @@ const CommentInput = () => {
     return (
       <div
         onClick={loginUser}
-        className="p-4 bg-brand-gray-light w-full cursor-pointer rounded-lg border justify-between items-center flex"
+        className="p-4 bg-brand-gray-light/10 w-full cursor-pointer rounded-lg border border-light-stroke justify-between items-center flex"
       >
-        <p className="text-xs sm:text-sm text-brand-dark-purple">
+        <p className="text-xs sm:text-sm text-text-dark ">
           Log in to leave a comment
         </p>
         <CustomButton styleSet="lavender" size="smallResize">
@@ -50,8 +50,8 @@ const CommentInput = () => {
     <div
       onClick={focusInput}
       className={`${
-        isFocused && "border-brand-gray"
-      } CommentInput w-full cursor-text rounded-lg border flex-col justify-start items-start flex`}
+        isFocused && 'border-lighter-text'
+      } CommentInput w-full cursor-text rounded-lg border border-light-stroke flex-col justify-start items-start flex`}
     >
       <TextareaAutosize
         placeholder="What are your thoughts on this review?"

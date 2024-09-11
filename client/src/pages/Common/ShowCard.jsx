@@ -48,11 +48,11 @@ const ShowCardSmall = ({ id, show }) => {
   return (
     <div
       onClick={onClickNavigate}
-      className="relative white-bg-hover  cursor-pointer transition duration-300 group overflow-hidden border w-64 shrink-0 rounded-2xl flex-col justify-start items-start inline-flex"
+      className="relative white-bg-hover cursor-pointer transition duration-300 group overflow-hidden border-light-stroke border w-52 sm:w-64 shrink-0 rounded-lg flex-col justify-start items-start inline-flex"
     >
       <div
         onClick={actionRequireLogIn(watched ? turnOffWatched : onWatchClick)}
-        className="group/watch transition-colors duration-00 z-[5] right-0 top-0 absolute bg-main-bg bg-opacity-0 p-2 hover:bg-opacity-100 rounded-bl-2xl"
+        className="group/watch transition-colors duration-00 z-[5] right-0 top-0 absolute p-2 hover:bg-main-bg rounded-bl-2xl"
       >
         {watched ? (
           <Icon
@@ -64,7 +64,7 @@ const ShowCardSmall = ({ id, show }) => {
         ) : (
           <Icon
             sizeRules="w-5 h-5"
-            fill="opacity-80 group-hover/watch:text-brand-pink text-main-bg"
+            fill="group-hover/watch:text-brand-pink text-main-bg/80"
           >
             <WatchIcon />
           </Icon>
@@ -75,7 +75,7 @@ const ShowCardSmall = ({ id, show }) => {
           </span>
         </div>
       </div>
-      <div className="h-[135px] overflow-hidden">
+      <div className="h-28 sm:h-[135px] overflow-hidden">
         <img
           className="Show w-full group-hover:scale-[1.02] group-hover:opacity-90 ease-in-out duration-300 object-cover"
           src={
@@ -85,22 +85,22 @@ const ShowCardSmall = ({ id, show }) => {
           }
         />
       </div>
-      <div className="ShowDetails w-full h-20 px-4 py-3 justify-between items-center inline-flex">
+      <div className="ShowDetails w-full h-16 sm:h-20 px-4 py-3 justify-between items-center inline-flex">
         <div className="ShowDetailsText flex-col justify-center gap-1 items-start inline-flex">
           <div className="inline-flex gap-1">
-            <span className="hover:text-brand-dark-purple text-sm font-medium">
+            <span className="hover:text-brand-dark-purple text-text-dark subtext font-medium">
               {show ? show.title : 'Drama Name'}
             </span>
           </div>
-          <div className="NoOfReviews text-light-text text-xs font-medium">
+          <div className="NoOfReviews text-light-text small-author-username font-medium">
             {show.reviewCount} reviews
           </div>
         </div>
-        <div className="StarRating w-12 h-12 rounded-xl justify-center items-center bg-main-bg gap-0.5 flex">
-          <div className="text-[15px] font-bold leading-[10.50px]">
+        <div className="StarRating w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl justify-center items-center bg-main-bg gap-0.5 flex">
+          <div className="paragraph-text font-medium sm:font-semibold leading-[10.50px]">
             {formatRating(show.totalAverage)}
           </div>
-          <div className="w-4 h-4">
+          <div className="h-3 w-3 sm:w-4 sm:h-4">
             <StarIcon />
           </div>
         </div>

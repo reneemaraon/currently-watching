@@ -80,7 +80,7 @@ export default function ProfilePage() {
         <div className="container-center-card pt-4 sm:pt-10">
           {/* Main contentt */}
           <div className="z-10 Main large-white-card py-2 sm:py-6 px-3.5 sm:px-6">
-            <div className="ReviewWriteContainer w-full bg-white rounded-[15px]  flex-col justify-start items-start gap-2.5 inline-flex">
+            <div className="ReviewWriteContainer w-full rounded-[15px]  flex-col justify-start items-start gap-2.5 inline-flex">
               <div className="TitleLine w-full pt-2.5 items-start inline-flex">
                 <div className="w-full sm:px-2 md:px-4 items-start flex">
                   <div className="ProfileDetails grow pb-[15px] flex-col justify-start items-start gap-[15px] inline-flex">

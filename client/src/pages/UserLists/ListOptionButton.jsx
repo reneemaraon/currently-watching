@@ -5,8 +5,10 @@ const ListOptionButton = ({ children, active, onClick }) => {
     <button
       onClick={onClick}
       className={`${
-        active ? 'bg-brand-pink' : 'bg-theme-base'
-      } p-1.5 sm:p-2 hover:bg-opacity-90 bg-opacity-60 rounded-full border flex-col justify-center items-center gap-2.5 inline-flex`}
+        active
+          ? 'bg-brand-pink/60 hover:bg-brand-pink/80'
+          : 'bg-theme-base/60 hover:bg-theme-base/80'
+      } p-1.5 sm:p-2 rounded-full border border-light-stroke flex-col justify-center items-center gap-2.5 inline-flex`}
     >
       <Icon
         fill={!active && 'fill-transparent'}

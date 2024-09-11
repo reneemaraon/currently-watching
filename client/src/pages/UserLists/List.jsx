@@ -194,7 +194,7 @@ const List = ({ list, index }) => {
             onClick={toggleShowItems}
           >
             {showItems ? (
-              <div className="opacity-50 hover:opacity-100 w-full h-4 sm:h-6 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-slate-200 justify-start items-center inline-flex">
+              <div className="opacity-50 hover:opacity-100 w-full h-4 sm:h-6 bg-theme-base bg-opacity-70 rounded-b-xl rounded-t-lg border border-light-stroke justify-start items-center inline-flex">
                 <div className="Expand grow shrink basis-0 self-stretch justify-center items-center flex">
                   <Icon
                     sizeRules="w-2 h-2 sm:w-3 sm:h-3"
@@ -205,7 +205,7 @@ const List = ({ list, index }) => {
                 </div>
               </div>
             ) : (
-              <div className="ShowDetailCard w-full h-4 sm:h-6 bg-white bg-opacity-20 rounded-[10px] border border-slate-200 justify-start items-center inline-flex">
+              <div className="ShowDetailCard w-full h-4 sm:h-6 bg-white bg-opacity-20 rounded-[10px] border border-light-stroke justify-start items-center inline-flex">
                 <div className="Expand grow shrink basis-0 self-stretch px-10 justify-center items-center gap-2 flex">
                   <div className="text-brand-pink text-[8px] sm:text-[10px] font-normal font-['Inter']">
                     Expand List {list.items.length}

@@ -1,0 +1,51 @@
+/* src/styles/variables.css */
+:root {
+    --main-bg: 244, 244, 244;
+    --theme-base: 255, 255, 255; /* #FFFFFF */
+    --theme-negative-base: 0, 0, 0; /* #000000 */
+    --text-dark: 0, 0, 0; /* #000000 */
+    --light-text: 103, 101, 115; /* #676573 */
+    --lighter-text: 182, 188, 198; /* #B6BCC6 */
+    --brand-pink: 175, 19, 129; /* #AF1381 */
+    --brand-pink-hover: 201, 23, 149; /* #C91795 */
+    --brand-gray: 126, 138, 160; /* #7E8AA0 */
+    --brand-gray-light: 243, 243, 244; /* #F3F3F4 */
+    --brand-lavender: 204, 180, 244; /* #CCB4F4 */
+    --brand-dark-purple: 99, 90, 156; /* #635A9C */
+    --main-yellow: 255, 228, 86; /* #FFE456 */
+    --dark-yellow: 233, 181, 0; /* #E9B500 */
+    --light-stroke: 226, 236, 236; /* #E2ECEC */
+    --dark-bg: 9, 36, 63; /* #09243F */
+    --dark-blue: 31, 30, 65; /* #1F1E41 */
+    --dark-box: 12, 46, 78; /* #0C2E4E */
+    --light-blue: 0, 212, 255; /* #00D4FF */
+    --hv-light-blue: 27, 156, 183; /* #1B9CB7 */
+    --lighter-blue: 201, 244, 255; /* #C9F4FF */
+    --gray-border: 88, 88, 88; /* #585858 */
+  }
+  
+  body.dark {
+    --main-bg: 32, 35, 40; /* #000000 */
+    --theme-base: 18, 18, 18; /* #1E1E1E */
+    --theme-negative-base: 255, 255, 255; /* #F4F4F4 */
+    --text-dark: 245, 245, 245; /* #FFFFFF */
+    --light-text: 182, 188, 198; /* #B6BCC6 */
+    --lighter-text: 230, 230, 250; /* #676573 */
+    --brand-pink: 244, 114, 182; /* #F472B6 */
+    --brand-pink-hover: 236, 72, 153; /* #EC4899 */
+    --brand-gray: 243, 243, 244; /* #F3F3F4 */
+    --brand-gray-light: 126, 138, 160; /* #7E8AA0 */
+    --brand-lavender: 204, 180, 244; /* #CCB4F4 */
+    --brand-dark-purple: 99, 90, 156; /* #635A9C */
+    --main-yellow: 255, 228, 86; /* #FFE456 */
+    --dark-yellow: 233, 181, 0; /* #E9B500 */
+    --light-stroke: 60, 55, 65; /* #E2ECEC */
+    --dark-bg: 30, 30, 30; /* #1E1E1E */
+    --dark-blue: 31, 30, 65; /* #1F1E41 */
+    --dark-box: 12, 46, 78; /* #0C2E4E */
+    --light-blue: 0, 212, 255; /* #00D4FF */
+    --hv-light-blue: 27, 156, 183; /* #1B9CB7 */
+    --lighter-blue: 201, 244, 255; /* #C9F4FF */
+    --gray-border: 88, 88, 88; /* #585858 */
+  }
+  

@@ -140,7 +140,7 @@
     }
 
     .inverse-button-style {
-        @apply bg-brand-pink bg-opacity-20 text-brand-pink hover:bg-opacity-30;
+        @apply bg-brand-pink/20 text-brand-pink hover:bg-brand-pink/30;
     }
 
     .small-button {

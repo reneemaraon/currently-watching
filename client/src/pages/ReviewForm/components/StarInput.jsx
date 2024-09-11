@@ -21,7 +21,7 @@ const StarInputItem = ({
   const [hover, setHover] = useState(0);
   return (
     <div className="inline-flex flex-col w-full">
-      <div className="w-full flex-wrap px-3.5 py-4 min-[500px]:py-2 gap-4 rounded-[10px] border border-slate-200 justify-between items-center inline-flex">
+      <div className="w-full flex-wrap px-3.5 py-4 min-[500px]:py-2 gap-4 rounded-[10px] border border-light-stroke justify-between items-center inline-flex">
         <div className="w-full min-w-[200px] grow shrink basis-0 pr-2.5 flex-col justify-end items-start gap-[3px] inline-flex">
           <div className="text-sm md:text-base font-bold">{name}</div>
           <div className="info-text font-normal">{helperText}</div>

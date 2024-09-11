@@ -1,10 +1,10 @@
-import formatDateTime from "../../utils/formatDate";
-import Icon from "../Common/Icon";
-import { OptionsIcon } from "../Common/IconList";
-import Dropdown, { Option } from "../Common/Dropdown";
-import { useState, useRef, useEffect } from "react";
-import { useAuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import formatDateTime from '../../utils/formatDate';
+import Icon from '../Common/Icon';
+import { OptionsIcon } from '../Common/IconList';
+import Dropdown, { Option } from '../Common/Dropdown';
+import { useState, useRef, useEffect } from 'react';
+import { useAuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Comment = ({ comment, onDelete }) => {
   const navigate = useNavigate();
@@ -32,14 +32,14 @@ const Comment = ({ comment, onDelete }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
   return (
-    <div className="w-full p-4 hover:bg-main-bg hover:bg-opacity-20 bg-theme-base rounded-2xl border border-light-stroke flex-col justify-center items-start gap-4 flex">
+    <div className="w-full p-4 hover:bg-main-bg/20 bg-theme-base rounded-2xl border border-light-stroke flex-col justify-center items-start gap-4 flex">
       <div className="CommentHead gap-1 w-full items-start inline-flex">
         <div className="py-0.5 grow shrink basis-0 justify-start items-start gap-3 sm:gap-4 flex">
           <img
@@ -91,7 +91,7 @@ const Comment = ({ comment, onDelete }) => {
         )}
       </div>
       <p className="CommentText w-full text-sm leading-6 font-normal">
-        {commentBody || ""}
+        {commentBody || ''}
       </p>
     </div>
   );
