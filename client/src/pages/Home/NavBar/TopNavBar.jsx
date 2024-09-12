@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthContext } from '../../../context/AuthContext';
-import ProfileView from './ProfileDropdown';
-import CustomButton from '../../Common/CustomButton';
-import Icon from '../../Common/Icon';
-import { MoonIcon, SunIcon, TwitterIcon } from '../../Common/IconList';
-import SearchBar from './SearchBar';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../../../context/AuthContext";
+import ProfileView from "./ProfileDropdown";
+import CustomButton from "../../Common/CustomButton";
+import Icon from "../../Common/Icon";
+import { MoonIcon, SunIcon, TwitterIcon } from "../../Common/IconList";
+import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const LogInButton = ({ login }) => (
   <>
@@ -25,18 +25,16 @@ const TopNavBar = ({ toggleSidebar }) => {
 
   useEffect(() => {
     if (isDarkMode) {
-      document.body.classList.add('dark');
-      console.log('adddark');
+      document.body.classList.add("dark");
     } else {
-      document.body.classList.remove('dark');
-      console.log('remove dark');
+      document.body.classList.remove("dark");
     }
   }, [isDarkMode]);
 
   useEffect(() => {
     // Check the system preference
     const systemPrefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
+      "(prefers-color-scheme: dark)"
     ).matches;
     setIsDarkMode(systemPrefersDark);
   }, []);

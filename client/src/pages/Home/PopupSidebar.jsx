@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthContext';
-import { NavItem } from './SideBar';
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
+import { NavItem } from "./SideBar";
 
 const PopupSidebar = ({ toggleSidebar, anchor }) => {
   const { user } = useAuthContext();
@@ -16,7 +16,7 @@ const PopupSidebar = ({ toggleSidebar, anchor }) => {
   return (
     <div
       ref={anchor}
-      className="fixed top-0 left-0 inline-flex w-60 border border-light-stroke z-20 h-screen supports-backdrop-blur:bg-theme-base/100 py-16 bg-slate-100 flex-col justify-start items-start gap-[15px]"
+      className="fixed top-0 left-0 inline-flex w-60 border border-light-stroke z-20 h-screen supports-backdrop-blur:bg-theme-base/100 py-16 bg-main-bg flex-col justify-start items-start gap-[15px]"
     >
       <div className="p-4 absolute right-0 top-0">
         <div
@@ -40,10 +40,10 @@ const PopupSidebar = ({ toggleSidebar, anchor }) => {
         </div>
       </div>
 
-      <NavItem onClick={onClickNav('/')} itemName="Home" />
-      <NavItem onClick={onClickNav('/shows')} path="/shows" itemName="Shows" />
+      <NavItem onClick={onClickNav("/")} itemName="Home" />
+      <NavItem onClick={onClickNav("/shows")} path="/shows" itemName="Shows" />
       <NavItem
-        onClick={onClickNav('/reviews')}
+        onClick={onClickNav("/reviews")}
         path="/reviews"
         itemName="Reviews"
       />
