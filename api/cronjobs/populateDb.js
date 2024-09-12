@@ -1,19 +1,22 @@
-const axios = require('axios');
-const { parse } = require('node-html-parser');
-const Actor = require('../models/actor');
-const Show = require('../models/show');
-const { cookies, headers } = require('./headers');
-const { addCast } = require('./addCast');
+const axios = require("axios");
+const { parse } = require("node-html-parser");
+const Actor = require("../models/actor");
+const Show = require("../models/show");
+const { cookies, headers } = require("./headers");
+const { addCast } = require("./addCast");
 
 const popupateDb = async () => {
   var foundCount = 0;
+  var processedCount = 0;
   var releaseDate = new Date();
 
   while (foundCount < 200) {
     const year = releaseDate.getFullYear();
     const month = releaseDate.getMonth() + 1;
     const day = releaseDate.getDate();
-    const imdbUrl = `https://www.imdb.com/search/title/?title_type=tv_series&release_date=,${year}-${month}-${day}&countries=KR&sort=release_date,desc`;
+    const imdbUrl =
+      "https://www.imdb.com/search/title/?title_type=tv_series&release_date=2024-07-01,2025-01-01&genres=romance&countries=KR&sort=release_date,desc";
+    // const imdbUrl = `https://www.imdb.com/search/title/?title_type=tv_series&countries=KR&sort=release_date,desc`;
     console.log(imdbUrl);
     // https://www.imdb.com/search/title/?title_type=tv_series&release_date=2024-04-25,&countries=KR&sort=release_date,desc
 
@@ -22,11 +25,14 @@ const popupateDb = async () => {
       const htmlText = response.data;
       const root = parse(htmlText);
 
-      const showList = root.querySelector('ul.detailed-list-view');
-      const items = showList.querySelectorAll('a.ipc-lockup-overlay');
-
+      const showList = root.querySelector("ul.detailed-list-view");
+      const items = showList.querySelectorAll("a.ipc-lockup-overlay");
+      console.log("items.length()");
+      console.log(items.length);
       for (const item of items) {
-        const imdbId = item.getAttribute('href').split('/')[2];
+        console.log(processedCount);
+        processedCount = processedCount + 1;
+        const imdbId = item.getAttribute("href").split("/")[2];
         const show = await Show.findOne({ imdbId });
         if (!show) {
           const tmdbRequest = await axios.get(
@@ -42,8 +48,8 @@ const popupateDb = async () => {
             );
             const tmdbJson = tmdbResponse.data;
             if (
-              tmdbJson.languages.includes('ko') &&
-              tmdbJson.origin_country.includes('KR')
+              tmdbJson.languages.includes("ko") &&
+              tmdbJson.origin_country.includes("KR")
             ) {
               const showObject = {
                 title: tmdbJson.name,
@@ -60,7 +66,7 @@ const popupateDb = async () => {
                 tmdbPoster: tmdbJson.poster_path,
                 tmdbBackdrop: tmdbJson.backdrop_path,
                 originalName: tmdbJson.original_name,
-                mediaType: 'TV_SERIES',
+                mediaType: "TV_SERIES",
               };
               const createdShow = await Show.create(showObject);
 

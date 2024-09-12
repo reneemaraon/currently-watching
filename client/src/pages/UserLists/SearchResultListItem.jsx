@@ -1,14 +1,14 @@
-import { getYear } from '../../utils/formatDate';
-import formatRating from '../../utils/formatRating';
-import ImageWithOpacityTransition from '../Common/ImageTransition';
-import StarIcon from '../Common/Star';
-import commaSeparatedString from '../Common/commaSeparate';
+import { getYear } from "../../utils/formatDate";
+import formatRating from "../../utils/formatRating";
+import ImageWithOpacityTransition from "../Common/ImageTransition";
+import StarIcon from "../Common/Star";
+import commaSeparatedString from "../Common/commaSeparate";
 
 const SearchResultItem = ({ searchItem, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="bg-theme-base cursor-pointer hover:bg-theme-base/50 hover:border-brand-lavender transition py-0.5 px-1 max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-md border justify-start items-center inline-flex"
+      className="bg-theme-base border-light-stroke cursor-pointer hover:bg-theme-base/50 hover:border-brand-lavender transition py-0.5 px-1 max-[400px]:h-14 h-16 sm:h-[70px] md:h-20 rounded-md border justify-start items-center inline-flex"
     >
       <div className="hidden min-[400px]:block ShowImage md:w-20 h-full px-1 py-1 sm:py-1.5 md:py-2">
         <div className="w-full h-full overflow-hidden rounded-sm sm:rounded-md">

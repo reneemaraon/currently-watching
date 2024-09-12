@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const showSchema = new Schema({
   title: { type: String, required: true },
   synopsis: { type: String, default: "" },
-  imdbId: { type: String, required: true, unique: true },
+  imdbId: { type: String },
   tmdbId: { type: String, required: true, unique: true },
   posterUrl: { type: String },
   firstAirDate: Date,
